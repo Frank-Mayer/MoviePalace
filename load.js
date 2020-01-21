@@ -48,9 +48,9 @@ if (window.location.hash.length > 0) {
     listView();
 
     if(history.pushState) {
-        history.pushState(null, null, 'finished');
+        history.pushState(null, null, '#finished');
     }
     else {
-        location.hash = 'finished';
+        location.hash = '#finished';
     }
 }
