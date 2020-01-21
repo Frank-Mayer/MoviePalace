@@ -70,6 +70,14 @@
   .column {
     float: left;
     width: 50%;
+    height: 116px;
+    background-color: var(--accent);
+    border-radius: 8px;
+    margin-bottom: 8px;
+    margin-right: 8px;
+    padding: 4px;
+    overflow-wrap: normal;
+    overflow: hidden;
     color: var(--main);
   }
   
