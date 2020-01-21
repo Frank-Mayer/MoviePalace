@@ -1,4 +1,4 @@
-var hash = window.location.hash;
+var hash = "";
 var list = "";
 var lib;
 var newRow = true;
@@ -25,24 +25,28 @@ function addToList (e) {
     newRow = (!newRow);
 }
 
-if (hash.indexOf('#')==0) {
-    hash = decodeURI(hash.substr(1));
+function update () {
+    window.location.hash = encodeURI(JSON.stringify(lib));
+}
+
+/***********************************************************************************/
+if (window.location.hash.length > 0) {
+    hash = window.location.hash;
+    if (hash.indexOf('#')==0) {
+        hash = decodeURI(hash.substr(1));
+    }
+    
     lib = JSON.parse(hash);
     for(var i = 0; i < lib.length; i++) {
         addToList(lib[i]);
     }
+    
     if ( list.split("<div").length > list.split("</div>").length ) {
         list = list+'</div>';
     }
+    
     document.getElementById("list-view").innerHTML = list;
+    
+    listView();
 }
-else {
-}
-
-listView();
-
-//history.pushState("", document.title, window.location.pathname + window.location.search);
-
-function update () {
-    window.location.hash = encodeURI(JSON.stringify(lib));
-}
+    

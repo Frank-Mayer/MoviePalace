@@ -70,7 +70,7 @@
   .column {
     float: left;
     width: 50%;
-    padding: 10px;
+    color: var(--main);
   }
   
   /* Clear floats after the columns */
@@ -79,6 +79,7 @@
     display: table;
     clear: both;
   }
+
   /* Style the buttons */
   .btn {
     border: none;

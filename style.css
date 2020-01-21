@@ -84,14 +84,14 @@ input {
 #list-view {
     overflow-y: scroll;
     position: fixed;
-    top: 150px;
-    bottom: 40px;
-    left: 0px;
-    right: 0px;
+    top: 135px;
+    bottom: 58px;
+    left: 8px;
+    right: 8px;
 }
 
 .toolbar {
-    height: 40px;
+    height: 50px;
     background-color: var(--accent);
     width: 100%;
     position: fixed;
