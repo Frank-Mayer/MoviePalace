@@ -55,3 +55,16 @@ function gridView() {
     document.getElementById("btn_list").className = "btn active";
     document.getElementById("btn_grid").className = "btn";
 }
+
+
+document.addEventListener('backbutton', function(){
+    if(true) {
+        alert("backBlocked");
+     return false;
+    }
+    else //nothing is visible, exit the app
+    {
+        alert("backallowed");
+      navigator.app.exitApp();
+    }
+  });
