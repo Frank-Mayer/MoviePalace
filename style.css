@@ -121,3 +121,11 @@ input#search {
 svg, svg * {
     fill: var(--main);
 }
+
+iframe {
+    display: block;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    scrolling: no;
+}
