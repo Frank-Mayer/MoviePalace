@@ -4,7 +4,7 @@
 
 :root {
     --main: black;
-    --accent: #EDF5E1;
+    --accent: white;
     --accent1: #212121;
     --accent2: #05386B;
     --accent3: #5CDB95;
@@ -35,6 +35,10 @@ p, nobr, h1, h2, h3, a, button, td, th, input, * {
 input {
     border: none;
     background-color: transparent;
+}
+
+input#search {
+    width: calc(100% - 40px);
 }
 
 .finder td {
