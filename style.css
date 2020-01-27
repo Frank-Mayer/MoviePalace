@@ -12,7 +12,7 @@
     --accent1: #212121;
     --accent2: #05386B;
     --accent3: #5CDB95;
-    --blurOverlay: rgba(0, 0, 0, 0.25);
+    --blurOverlay: rgba(255, 255, 255, 0.12);
 	--font: 'Oxygen', 'Ubuntu', 'IBM Plex Sans', 'Assistant', sans-serif;
 }
 
@@ -116,4 +116,8 @@ input#search {
     bottom: 0px;
     left: 0px;
     right: 0px;
+}
+
+svg, svg * {
+    fill: var(--main);
 }
