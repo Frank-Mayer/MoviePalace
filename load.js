@@ -4,6 +4,11 @@ var lib;
 var newRow = true;
 var letter = "";
 var justFav = false;
+// var speed = Number(getUrlParam('speed','500'));
+const queryString = window.location.search;
+console.log(queryString);
+new URLSearchParams(queryString);
+console.log(urlParams.get('speed'));
 
 function CreateList() {
     document.getElementById("list-view").innerHTML = "";
@@ -54,7 +59,7 @@ function addToList (e) {
         list += '<div class="row">';
     }
     list += '<div class="column" onClick="detailView(\''+escapeHtml(JSON.stringify(e))+'\')">';
-    list += '<table>';
+    list += '<table width="100%" height="100%">';
     list += '<tr>';
     list += '<td>';
     list += '<img src="'+e.cover+'" class="cover">';
@@ -81,6 +86,40 @@ function addLetter (e) {
     list += '</div>';
 }
 
+function getUrlVars() {
+    var vars = {};
+    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+        vars[key] = value;
+    });
+    return vars;
+}
+
+function getUrlParam(parameter, defaultvalue){
+    var urlparameter = defaultvalue;
+    if(window.location.href.indexOf(parameter) > -1){
+        urlparameter = getUrlVars()[parameter];
+        }
+    return urlparameter;
+}
+
+function send (str) {
+    if(history.pushState) {
+        history.pushState(null, null, '#'+str);
+    }
+    else {
+        location.hash = '#'+str;
+    }
+
+    setTimeout(function() {
+        if(history.pushState) {
+            history.pushState(null, null, '#null');
+        }
+        else {
+            location.hash = '#null';
+        }
+        }, speed);
+}
+
 /***********************************************************************************/
 
 if (window.location.hash.length > 0) {
@@ -100,12 +139,6 @@ if (window.location.hash.length > 0) {
     });
 
     CreateList();
-    
 
-    if(history.pushState) {
-        history.pushState(null, null, '#null');
-    }
-    else {
-        location.hash = '#nul';
-    }
+    send("msg:finished loading");
 }
