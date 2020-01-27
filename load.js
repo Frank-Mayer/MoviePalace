@@ -4,11 +4,12 @@ var lib;
 var newRow = true;
 var letter = "";
 var justFav = false;
-// var speed = Number(getUrlParam('speed','500'));
-const queryString = window.location.search;
-console.log(queryString);
-new URLSearchParams(queryString);
-console.log(urlParams.get('speed'));
+var urlParams = new URLSearchParams(window.location.search);
+var speed = Number(urlParams.get('speed'));
+if (!speed > 0) {
+    speed  = 500;
+}
+var theme = Number(urlParams.get('theme'));
 
 function CreateList() {
     document.getElementById("list-view").innerHTML = "";
@@ -45,11 +46,11 @@ function fillList(item) {
 
 function escapeHtml(unsafe) {
     return unsafe
-         .replace(/&/g, "&amp;")
-         .replace(/</g, "&lt;")
-         .replace(/>/g, "&gt;")
-         .replace(/"/g, "&quot;")
-         .replace(/'/g, "&#039;");
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
  }
 
 
