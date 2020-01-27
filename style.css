@@ -2,6 +2,10 @@
 	display: none; 
 }
 
+::selection {
+    background: transparent;
+}
+
 :root {
     --main: black;
     --accent: white;
