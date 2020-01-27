@@ -12,7 +12,7 @@
     --accent1: #212121;
     --accent2: #05386B;
     --accent3: #5CDB95;
-    --blurOverlay: rgba(255, 255, 255, 0.125);
+    --blurOverlay: rgba(0, 0, 0, 0.25);
 	--font: 'Oxygen', 'Ubuntu', 'IBM Plex Sans', 'Assistant', sans-serif;
 }
 
@@ -95,12 +95,17 @@ input#search {
 }
 
 #list-view {
+    background-color: var(--accent1);
     overflow-y: scroll;
     position: fixed;
     height: calc(100% - 189px);
     left: 0;
     right: 0;
     margin: 0;
+}
+
+#list-view .column, #list-view .letter, .floating div {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .toolbar {

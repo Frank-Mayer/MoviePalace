@@ -76,8 +76,8 @@ function addLetter (e) {
         list +='</div>';
         newRow = true;
     }
-    list += '<div class="letter" style="background-color: var(--accent); text-align: center;">';
-    list += '<p style="color: var(--main)">'+e+'</p>';
+    list += '<div class="letter" style="background-color: var(--main); text-align: center;">';
+    list += '<p style="color: var(--accent)">'+e+'</p>';
     list += '</div>';
 }
 
