@@ -5,7 +5,6 @@ function search (q) {
 }
 
 function doBlur () {
-    console.log("blur");
     document.getElementById('finder').style.filter = 'blur(4px)';
     document.getElementById('finder').style.WebkitFilter = 'blur(4px)';
     document.getElementById('btnContainer').style.filter = 'blur(4px)';
@@ -17,7 +16,6 @@ function doBlur () {
 }
 
 function unblur () {
-    console.log("unblur");
     document.getElementById('finder').style.filter = 'blur(0)';
     document.getElementById('finder').style.WebkitFilter = 'blur(0)';
     document.getElementById('btnContainer').style.filter = 'blur(0)';
@@ -30,12 +28,12 @@ function unblur () {
 
 // Get the elements with class="column"
 var elements = document.getElementsByClassName("column");
-
-// Declare a loop variable
+var listMode = true;
 var i = 0;
 
 // List View
 function listView() {
+    listMode = true;
     for (i = 0; i < elements.length; i++) {
         elements[i].style.width = "calc(100% - 16px)";
         elements[i].style.marginLeft = "8px";
@@ -47,6 +45,7 @@ function listView() {
 
 // Grid View
 function gridView() {
+    listMode = false;
     for (i = 0; i < elements.length; i++) {
         elements[i].style.width = "calc(50% - 12px)";
         elements[i].style.marginLeft = "8px";
@@ -67,4 +66,12 @@ document.addEventListener('backbutton', function(){
         alert("backallowed");
       navigator.app.exitApp();
     }
-  });
+});
+
+function detailView (e) {
+    var details = JSON.parse(e);
+    doBlur();
+    document.getElementById('detailView').style.transform = 'translateX(0)';
+    document.getElementById('detailCover').src = details.cover;
+    document.getElementById('detailTitle').value = details.title;
+}

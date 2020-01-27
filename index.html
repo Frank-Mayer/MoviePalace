@@ -52,9 +52,27 @@
                         </td>
                         <td style="text-align: right;">
                             <label class="switch">
-                                <input type="checkbox" unchecked>
+                                <input id="favSwitch" type="checkbox" unchecked onchange="CreateList();">
                                 <span class="slider round"></span>
                             </label>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div id="detailView" class="floating">
+            <div style="position: fixed; left: 0px; right: 0px; top: 0px; bottom: 0px; background-color: transparent; border-radius: 0; z-index: 1;" onclick="document.getElementById('detailView').style.transform = 'translateX(200%)'; unblur()"></div>
+            <div style="z-index: 2;">
+                <b>Details</b>
+                <br><br>
+                <table width="100%">
+                    <tr>
+                        <td>
+                            <img src="" class="cover" id="detailCover">
+                        </td>
+                        <td style="text-align: right;">
+                            <input type="text" class="txtInput" id="detailTitle" autocomplete="on" placeholder="Titel" oninput="search(document.getElementById('search').value);">
                         </td>
                     </tr>
                 </table>

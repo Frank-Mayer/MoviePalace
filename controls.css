@@ -18,7 +18,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: var(--main);
+  background-color: var(--accent);
   -webkit-transition: .4s;
   transition: .4s;
 }
@@ -30,7 +30,7 @@
   width: 26px;
   left: 4px;
   bottom: 4px;
-  background-color: var(--accent);
+  background-color: var(--main);
   -webkit-transition: .4s;
   transition: .4s;
 }
@@ -114,4 +114,12 @@ input:checked + .slider:before {
 
 #letter p {
   color: var(--main);
+}
+
+/***********************************************************************************************************/
+
+.txtInput {
+  background-color: var(--accent);
+  border-radius: 16px;
+  padding: 8px;
 }

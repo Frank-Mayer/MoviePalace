@@ -12,6 +12,7 @@
     --accent1: #212121;
     --accent2: #05386B;
     --accent3: #5CDB95;
+    --blurOverlay: rgba(255, 255, 255, 0.125);
 	--font: 'Oxygen', 'Ubuntu', 'IBM Plex Sans', 'Assistant', sans-serif;
 }
 
@@ -45,6 +46,12 @@ input#search {
     width: calc(100% - 40px);
 }
 
+.cover {
+    height: 100px;
+    width: 70px;
+    background-color: white;
+}
+
 .finder td {
     background-color: var(--accent);
     color: var(--main);
@@ -65,7 +72,7 @@ input#search {
 }
 
 .floating {
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: var(--blurOverlay);
     position: fixed;
     Transform: translateX(200%);
     left: 0px;
@@ -76,10 +83,10 @@ input#search {
 
 .floating div {
     padding: 16px;
-    background-color: var(--accent);
+    background-color: var(--main);
     border: none;
     border-radius: 16px;
-    color: var(--main);
+    color: var(--accent);
     position: fixed;
     left: 10%;
     right: 10%;
@@ -90,7 +97,9 @@ input#search {
 #list-view {
     overflow-y: scroll;
     position: fixed;
-    height: calc(100% - 187px);
+    height: calc(100% - 189px);
+    left: 0;
+    right: 0;
     margin: 0;
 }
 
