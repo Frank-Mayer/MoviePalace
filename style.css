@@ -4,8 +4,10 @@
 
 :root {
     --main: black;
-    --accent: whitesmoke;
+    --accent: #EDF5E1;
     --accent1: #212121;
+    --accent2: #05386B;
+    --accent3: #5CDB95;
 	--font: 'Oxygen', 'Ubuntu', 'IBM Plex Sans', 'Assistant', sans-serif;
 }
 
@@ -28,10 +30,6 @@ p, nobr, h1, h2, h3, a, button, td, th, input, * {
     font-family: var(--font);
     font-size: 16px;
     text-rendering: geometricPrecision;
-}
-
-h3 {
-    color: red;
 }
 
 input {
@@ -59,9 +57,9 @@ input {
 }
 
 .floating {
-    visibility: collapse;
     background-color: rgba(0, 0, 0, 0.5);
     position: fixed;
+    Transform: translateX(200%);
     left: 0px;
     right: 0px;
     top: 0px;

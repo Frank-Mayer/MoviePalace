@@ -25,7 +25,7 @@
                     <td width="28px" style="text-align: center;">
                         <svg style="height: 24px; width: 24px;" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve"><g><g><path d="M395.107,40.711l-256-12.826L0,243.174l116.893,228.116l256,12.826L512,268.826L395.107,40.711z M375.623,70.865l92.334,180.188l-202.215-10.131L173.409,60.735L375.623,70.865z M35.857,244.969L145.738,74.914l92.334,180.188L128.19,425.159L35.857,244.969z M356.52,452.164l-202.215-10.131l109.881-170.057l202.215,10.131L356.52,452.164z"/></g></g><g><g><circle cx="324.93" cy="151.75" r="18.14"/></g></g><g><g><circle cx="243.22" cy="401.69" r="18.14"/></g></g><g><g><circle cx="375.19" cy="328.45" r="18.14"/></g></g><g><g><circle cx="137.51" cy="173.43" r="18.14"/></g></g><g><g><circle cx="87.59" cy="249.81" r="18.14"/></g></g><g><g><circle cx="179.31" cy="256.03" r="18.14"/></g></g><g><g><circle cx="130.95" cy="328.45" r="18.14"/></g></g></svg>
                     </td>
-                    <td onclick="open('filter')">
+                    <td onclick="document.getElementById('filter').style.transform = 'translateX(0)'">
                         &#160;Filter&#160;
                     </td>
                 </tr>
@@ -42,8 +42,9 @@
             </div>
         </div>
 
-        <div id="filter" class="floating" onclick="close('filter')">
-            <div>
+        <div id="filter" class="floating">
+            <div style="position: fixed; left: 0px; right: 0px; top: 0px; bottom: 0px; background-color: transparent; border-radius: 0; z-index: 1;" onclick="document.getElementById('filter').style.transform = 'translateX(200%)'"></div>
+            <div style="z-index: 2;">
                 <b>Filter</b>
                 <table width="100%">
                     <tr>

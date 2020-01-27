@@ -4,14 +4,6 @@ function search (q) {
     query = q;
 }
 
-function open (id) {
-    document.getElementById(id).style.visibility = "visible";
-}
-
-function close (id) {
-    document.getElementById(id).style.visibility = "collapse";
-}
-
 // Get the elements with class="column"
 var elements = document.getElementsByClassName("column");
 
