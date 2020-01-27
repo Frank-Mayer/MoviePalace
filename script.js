@@ -4,6 +4,30 @@ function search (q) {
     query = q;
 }
 
+function doBlur () {
+    console.log("blur");
+    document.getElementById('finder').style.filter = 'blur(4px)';
+    document.getElementById('finder').style.WebkitFilter = 'blur(4px)';
+    document.getElementById('btnContainer').style.filter = 'blur(4px)';
+    document.getElementById('btnContainer').style.WebkitFilter = 'blur(4px)';
+    document.getElementById('list-view').style.filter = 'blur(4px)';
+    document.getElementById('list-view').style.WebkitFilter = 'blur(4px)';
+    document.getElementById('toolbar').style.filter = 'blur(4px)';
+    document.getElementById('toolbar').style.WebkitFilter = 'blur(4px)';
+}
+
+function unblur () {
+    console.log("unblur");
+    document.getElementById('finder').style.filter = 'blur(0)';
+    document.getElementById('finder').style.WebkitFilter = 'blur(0)';
+    document.getElementById('btnContainer').style.filter = 'blur(0)';
+    document.getElementById('btnContainer').style.WebkitFilter = 'blur(0)';
+    document.getElementById('list-view').style.filter = 'blur(0)';
+    document.getElementById('list-view').style.WebkitFilter = 'blur(0)';
+    document.getElementById('toolbar').style.filter = 'blur(0)';
+    document.getElementById('toolbar').style.WebkitFilter = 'blur(0)';
+}
+
 // Get the elements with class="column"
 var elements = document.getElementsByClassName("column");
 
