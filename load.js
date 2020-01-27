@@ -2,27 +2,38 @@ var hash = "";
 var list = "";
 var lib;
 var newRow = true;
+var letter = "";
 
 function addToList (e) {
     if (newRow) {
-        list = list+'<div class="row">';
+        list += '<div class="row">';
     }
-    list = list+'<div class="column">';
-    list = list+'<table>';
-    list = list+'<tr>';
-    list = list+'<td>';
-    list = list+'<img src="'+e.cover+'" height="100" width="70">';
-    list = list+'</td>';
-    list = list+'<td>';
-    list = list+'<b>'+e.title+'</b><br>';
-    list = list+'<nobr>Some text..</nobr>';
-    list = list+'</td>';
-    list = list+'</table>';
-    list = list+'</div>';
+    list += '<div class="column">';
+    list += '<table>';
+    list += '<tr>';
+    list += '<td>';
+    list += '<img src="'+e.cover+'" height="100" width="70">';
+    list += '</td>';
+    list += '<td>';
+    list += '<b>'+e.title+'</b><br>';
+    list += '<nobr>Some text..</nobr>';
+    list += '</td>';
+    list += '</table>';
+    list += '</div>';
     if (!newRow) {
-        list = list+'</div>';
+        list +='</div>';
     }
     newRow = (!newRow);
+}
+
+function addLetter (e) {
+    if (!newRow) {
+        list +='</div>';
+        newRow = true;
+    }
+    list += '<div class="letter" style="background-color: var(--accent); text-align: center;">';
+    list += '<p style="color: var(--main)">'+e+'</p>';
+    list += '</div>';
 }
 
 /***********************************************************************************/
@@ -35,12 +46,24 @@ if (window.location.hash.length > 0) {
     }
     
     lib = JSON.parse(hash);
-    for(var i = 0; i < lib.length; i++) {
-        addToList(lib[i]);
+    lib.sort((a,b) => {
+        if(a["title"] > b["title"]) return 1;
+        if(a["title"] < b["title"]) return -1;
+        return 0;
+    });
+
+    lib.forEach(element => fillList(element));
+    function fillList(item) {
+        var title = item["title"];
+        if (letter != title[0]) {
+            letter = title[0];
+            addLetter(letter);
+        }
+        addToList(item);
     }
     
     if ( list.split("<div").length > list.split("</div>").length ) {
-        list = list+'</div>';
+        list += '</div>';
     }
     
     document.getElementById("list-view").innerHTML = list;
