@@ -8,12 +8,13 @@
 
 :root {
     --main: black;
-    --accent: white;
+    --accent: #FFFFFF;
     --accent1: #212121;
     --accent2: #05386B;
     --accent3: #5CDB95;
-    --blurOverlay: rgba(255, 255, 255, 0.12);
-	--font: 'Oxygen', 'Ubuntu', 'IBM Plex Sans', 'Assistant', sans-serif;
+    --blurOverlay: rgba(0, 0, 0, 0.12);
+    --font: 'Oxygen', 'Ubuntu', 'IBM Plex Sans', 'Assistant', sans-serif;
+    --typeVis: visible;
 }
 
 html, body {
@@ -27,7 +28,8 @@ html, body {
 	-webkit-user-select: none;
 	-o-user-select: none;
 	scroll-behavior: smooth;
-	scrollbar-width: none;
+    scrollbar-width: none;
+    background-color: white;
 }
 
 p, nobr, h1, h2, h3, a, button, td, th, input, * {
@@ -44,12 +46,14 @@ input {
 
 input#search {
     width: calc(100% - 40px);
+    color: var(--main) !important;
 }
 
 .cover {
     height: 100px;
     width: 70px;
-    background-color: white;
+    background-color: transparent;
+    border: 0;
 }
 
 .finder td {
@@ -83,10 +87,10 @@ input#search {
 
 .floating div {
     padding: 16px;
-    background-color: var(--main);
+    background-color: white;
     border: none;
     border-radius: 16px;
-    color: var(--accent);
+    color: black;
     position: fixed;
     left: 10%;
     right: 10%;
@@ -98,7 +102,7 @@ input#search {
     background-color: var(--accent1);
     overflow-y: scroll;
     position: fixed;
-    height: calc(100% - 189px);
+    height: calc(100% - 185px);
     left: 0;
     right: 0;
     margin: 0;
@@ -122,10 +126,8 @@ svg, svg * {
     fill: var(--main);
 }
 
-iframe {
-    display: block;
-    padding: 0;
-    margin: 0;
-    overflow: hidden;
-    scrolling: no;
+svg.typeIcon, svg.typeIcon * {
+    fill: var(--accent);
+    width: 55px;
+    visibility: var(--typeVis);
 }

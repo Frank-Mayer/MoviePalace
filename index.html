@@ -15,27 +15,29 @@
     <body>
 
         <div id="alpha">
-            <table id="finder" class="finder" width="100%" cellspacing="8px">
-                <tr>
-                    <td>
-                        <nobr>&#160;</nobr>
-                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 513.28 513.28" style="enable-background:new 0 0 513.28 513.28;" xml:space="preserve" width="512px" height="512px"><g><g> <g> <path d="M495.04,404.48L410.56,320c15.36-30.72,25.6-66.56,25.6-102.4C436.16,97.28,338.88,0,218.56,0S0.96,97.28,0.96,217.6 s97.28,217.6,217.6,217.6c35.84,0,71.68-10.24,102.4-25.6l84.48,84.48c25.6,25.6,64,25.6,89.6,0 C518.08,468.48,518.08,430.08,495.04,404.48z M218.56,384c-92.16,0-166.4-74.24-166.4-166.4S126.4,51.2,218.56,51.2 s166.4,74.24,166.4,166.4S310.72,384,218.56,384z" data-original="#000000" class="active-path" fill="#000000"/> </g> </g></g> </svg>
-                        <input type="text" id="search" autocomplete="on" placeholder="Suchen" oninput="search(document.getElementById('search').value);">
-                    </td>
-                    <td width="45px" height="45px" style="text-align: center; padding: 0, 8px;">
-                        <svg style="height: 24px; width: 24px;" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve"><g><g><path d="M395.107,40.711l-256-12.826L0,243.174l116.893,228.116l256,12.826L512,268.826L395.107,40.711z M375.623,70.865l92.334,180.188l-202.215-10.131L173.409,60.735L375.623,70.865z M35.857,244.969L145.738,74.914l92.334,180.188L128.19,425.159L35.857,244.969z M356.52,452.164l-202.215-10.131l109.881-170.057l202.215,10.131L356.52,452.164z"/></g></g><g><g><circle cx="324.93" cy="151.75" r="18.14"/></g></g><g><g><circle cx="243.22" cy="401.69" r="18.14"/></g></g><g><g><circle cx="375.19" cy="328.45" r="18.14"/></g></g><g><g><circle cx="137.51" cy="173.43" r="18.14"/></g></g><g><g><circle cx="87.59" cy="249.81" r="18.14"/></g></g><g><g><circle cx="179.31" cy="256.03" r="18.14"/></g></g><g><g><circle cx="130.95" cy="328.45" r="18.14"/></g></g></svg>
-                    </td>
-                    <td onclick="doBlur(); document.getElementById('filter').style.transform = 'translateX(0)';">
-                        &#160;Filter&#160;
-                    </td>
-                </tr>
-            </table>
-            <br>
-            <div id="btnContainer" style="margin-left: 8px;">
-                <button class="btn" onclick="listView()" id="btn_list"><i class="fa fa-bars"></i> List</button> 
-                <button class="btn active" onclick="gridView()" id="btn_grid"><i class="fa fa-th-large"></i> Grid</button>
+            <div style="background-color: var(--main); box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); z-index: 10000;">
+                <table id="finder" class="finder" width="100%" cellspacing="8px">
+                    <tr>
+                        <td>
+                            <nobr>&#160;</nobr>
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 513.28 513.28" style="enable-background:new 0 0 513.28 513.28;" xml:space="preserve" width="512px" height="512px"><g><g> <g> <path d="M495.04,404.48L410.56,320c15.36-30.72,25.6-66.56,25.6-102.4C436.16,97.28,338.88,0,218.56,0S0.96,97.28,0.96,217.6 s97.28,217.6,217.6,217.6c35.84,0,71.68-10.24,102.4-25.6l84.48,84.48c25.6,25.6,64,25.6,89.6,0 C518.08,468.48,518.08,430.08,495.04,404.48z M218.56,384c-92.16,0-166.4-74.24-166.4-166.4S126.4,51.2,218.56,51.2 s166.4,74.24,166.4,166.4S310.72,384,218.56,384z" data-original="#000000" class="active-path" fill="#000000"/> </g> </g></g> </svg>
+                            <input type="text" id="search" autocomplete="on" placeholder="Suchen" oninput="search(document.getElementById('search').value);">
+                        </td>
+                        <td width="45px" height="45px" style="text-align: center; padding: 0, 8px;">
+                            <svg style="height: 24px; width: 24px;" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve"><g><g><path d="M395.107,40.711l-256-12.826L0,243.174l116.893,228.116l256,12.826L512,268.826L395.107,40.711z M375.623,70.865l92.334,180.188l-202.215-10.131L173.409,60.735L375.623,70.865z M35.857,244.969L145.738,74.914l92.334,180.188L128.19,425.159L35.857,244.969z M356.52,452.164l-202.215-10.131l109.881-170.057l202.215,10.131L356.52,452.164z"/></g></g><g><g><circle cx="324.93" cy="151.75" r="18.14"/></g></g><g><g><circle cx="243.22" cy="401.69" r="18.14"/></g></g><g><g><circle cx="375.19" cy="328.45" r="18.14"/></g></g><g><g><circle cx="137.51" cy="173.43" r="18.14"/></g></g><g><g><circle cx="87.59" cy="249.81" r="18.14"/></g></g><g><g><circle cx="179.31" cy="256.03" r="18.14"/></g></g><g><g><circle cx="130.95" cy="328.45" r="18.14"/></g></g></svg>
+                        </td>
+                        <td onclick="doBlur(); document.getElementById('filter').style.transform = 'translateX(0)';">
+                            &#160;Filter&#160;
+                        </td>
+                    </tr>
+                </table>
+                <br>
+                <div id="btnContainer" style="margin-left: 8px;">
+                    <button class="btn" onclick="listView()" id="btn_list"><i class="fa fa-bars"></i> List</button> 
+                    <button class="btn active" onclick="gridView()" id="btn_grid"><i class="fa fa-th-large"></i> Grid</button>
+                </div>
+                <br>
             </div>
-            <br>
             <div id="list-view"></div>
             <div id="toolbar" class="toolbar">
                 <table width="100%" style="padding-top: 5px; padding-bottom: 5px;">
@@ -76,6 +78,20 @@
                             </label>
                         </td>
                     </tr>
+                    <tr>
+                        <td>
+                            Sortierung
+                        </td>
+                        <td style="text-align: right;">
+                                <select width="100%" class="select-css">
+                                    <option value="alpha">Alphabetisch</option>
+                                    <option value="new">Neueste zuerst</option>
+                                    <option value="old">Älteste zuerst</option>
+                                    <option value="seen much">Meistgesehen</option>
+                                    <option value="seen less">Seltenst gesehen</option>
+                                </select>
+                        </td>
+                    </tr>
                 </table>
             </div>
         </div>
@@ -98,6 +114,15 @@
             </div>
         </div>
 
+        <div id="wishlistView" class="floating">
+            <div style="position: fixed; left: 0px; right: 0px; top: 0px; bottom: 0px; background-color: transparent; border-radius: 0; z-index: 1;" onclick="document.getElementById('wishlistView').style.transform = 'translateX(200%)'; unblur()"></div>
+            <div style="z-index: 2;">
+                <b>Wunschliste</b>
+                <br><br>
+                <div id="wishList-view"></div>
+            </div>
+        </div>
+
         <div id="settingsView" class="floating">
             <div style="position: fixed; left: 0px; right: 0px; top: 0px; bottom: 0px; background-color: transparent; border-radius: 0; z-index: 1;" onclick="document.getElementById('settingsView').style.transform = 'translateX(200%)'; unblur()"></div>
             <div style="z-index: 2;">
@@ -107,6 +132,7 @@
             </div>
         </div>
 
+        <script type="text/javascript" src="./lib.js"></script>
         <script type="text/javascript" src="./load.js"></script>
 
     </body>

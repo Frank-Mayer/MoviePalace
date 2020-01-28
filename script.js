@@ -5,14 +5,14 @@ function search (q) {
 }
 
 function doBlur () {
-    document.getElementById('finder').style.filter = 'blur(4px)';
-    document.getElementById('finder').style.WebkitFilter = 'blur(4px)';
-    document.getElementById('btnContainer').style.filter = 'blur(4px)';
-    document.getElementById('btnContainer').style.WebkitFilter = 'blur(4px)';
-    document.getElementById('list-view').style.filter = 'blur(4px)';
-    document.getElementById('list-view').style.WebkitFilter = 'blur(4px)';
-    document.getElementById('toolbar').style.filter = 'blur(4px)';
-    document.getElementById('toolbar').style.WebkitFilter = 'blur(4px)';
+    document.getElementById('finder').style.filter = 'blur(2px)';
+    document.getElementById('finder').style.WebkitFilter = 'blur(2px)';
+    document.getElementById('btnContainer').style.filter = 'blur(2px)';
+    document.getElementById('btnContainer').style.WebkitFilter = 'blur(2px)';
+    document.getElementById('list-view').style.filter = 'blur(2px)';
+    document.getElementById('list-view').style.WebkitFilter = 'blur(2px)';
+    document.getElementById('toolbar').style.filter = 'blur(2px)';
+    document.getElementById('toolbar').style.WebkitFilter = 'blur(2px)';
 }
 
 function unblur () {
@@ -41,6 +41,7 @@ function listView() {
     }
     document.getElementById("btn_grid").className = "btn active";
     document.getElementById("btn_list").className = "btn";
+    document.documentElement.style.setProperty('--typeVis', "visible");
 }
 
 // Grid View
@@ -53,6 +54,7 @@ function gridView() {
     }
     document.getElementById("btn_list").className = "btn active";
     document.getElementById("btn_grid").className = "btn";
+    document.documentElement.style.setProperty('--typeVis', "collapse");
 }
 
 
