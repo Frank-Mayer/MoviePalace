@@ -78,20 +78,20 @@
                             </label>
                         </td>
                     </tr>
-                    <tr>
+                    <!-- <tr>
                         <td>
                             Sortierung
                         </td>
                         <td style="text-align: right;">
-                                <select width="100%" class="select-css">
-                                    <option value="alpha">Alphabetisch</option>
-                                    <option value="new">Neueste zuerst</option>
-                                    <option value="old">Älteste zuerst</option>
-                                    <option value="seen much">Meistgesehen</option>
-                                    <option value="seen less">Seltenst gesehen</option>
-                                </select>
+                            <select width="100%" id="sortSelect" onchange="sort(document.getElementById('sortSelect').value)">
+                                <option value="alpha">Alphabetisch</option>
+                                <option value="new">Neueste zuerst</option>
+                                <option value="old">Älteste zuerst</option>
+                                <option value="seen much">Meistgesehen</option>
+                                <option value="seen less">Seltenst gesehen</option>
+                            </select>
                         </td>
-                    </tr>
+                    </tr> -->
                 </table>
             </div>
         </div>
@@ -107,7 +107,18 @@
                             <img src="" class="cover" id="detailCover">
                         </td>
                         <td style="text-align: right;">
-                            <input type="text" class="txtInput" id="detailTitle" autocomplete="on" placeholder="Titel" oninput="search(document.getElementById('search').value);">
+                            <input type="text" class="txtInput" id="detailTitle" autocomplete="on" placeholder="Titel">
+                            <br><br>
+                            <input type="text" class="txtInput" id="detailGroup" autocomplete="on" placeholder="Gruppenname">
+                            <br><br>
+                            <select id="detailStatus" width="100%">
+                                <option value="0">Verfügbar</option>
+                                <option value="1">Verliehen</option>
+                            </select>
+                            <br><br>
+                            <button class="fab" onclick="saveDetails()">
+                                <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="m453.332031 512h-394.664062c-32.363281 0-58.667969-26.304688-58.667969-58.667969v-394.664062c0-32.363281 26.304688-58.667969 58.667969-58.667969h330.835937c21.054688 0 41.683594 8.535156 56.554688 23.445312l42.496094 42.496094c15.125 15.125 23.445312 35.222656 23.445312 56.574219v330.816406c0 32.363281-26.304688 58.667969-58.667969 58.667969zm-394.664062-480c-14.699219 0-26.667969 11.96875-26.667969 26.667969v394.664062c0 14.699219 11.96875 26.667969 26.667969 26.667969h394.664062c14.699219 0 26.667969-11.96875 26.667969-26.667969v-330.816406c0-12.820313-4.992188-24.871094-14.058594-33.941406l-42.496094-42.496094c-8.9375-8.957031-21.289062-14.078125-33.941406-14.078125zm0 0"/><path d="m325.332031 149.332031h-224c-8.832031 0-16-7.167969-16-16v-117.332031c0-8.832031 7.167969-16 16-16s16 7.167969 16 16v101.332031h192v-101.332031c0-8.832031 7.167969-16 16-16s16 7.167969 16 16v117.332031c0 8.832031-7.167969 16-16 16zm0 0"/><path d="m256 416c-52.929688 0-96-43.070312-96-96s43.070312-96 96-96 96 43.070312 96 96-43.070312 96-96 96zm0-160c-35.285156 0-64 28.714844-64 64s28.714844 64 64 64 64-28.714844 64-64-28.714844-64-64-64zm0 0"/></svg>
+                            </button>
                         </td>
                     </tr>
                 </table>
@@ -128,7 +139,7 @@
             <div style="z-index: 2;">
                 <b>Einstellungen</b>
                 <br><br>
-                <div>Icons made by <a href="https://www.flaticon.com/authors/becris" title="Becris">Becris</a> and <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a></div>
+                <div>Icons made by <a href="https://www.flaticon.com/authors/becris" title="Becris">Becris</a>, <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> and <a href="https://www.flaticon.com/authors/pixel-perfect" title="Pixel perfect">Pixel perfect</a></div>
             </div>
         </div>
 

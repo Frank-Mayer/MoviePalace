@@ -9,8 +9,8 @@ var speed = Number(urlParams.get('speed'));
 if (!(speed > 0)) {
     speed  = 1000;
 }
+
 var theme = urlParams.get('theme');
-console.log(theme)
 switch (theme) {
     case "dark":
         document.documentElement.style.setProperty('--main', "black");
@@ -51,7 +51,14 @@ function fillList(item) {
         var title = item["title"];
         if (letter != title[0]) {
             letter = title[0];
-            addLetter(letter);
+            try {
+                if (document.getElementById('sortSelect').value == "alpha") {
+                    addLetter(letter);
+                }
+            }
+            catch {
+                addLetter(letter);
+            }
         }
         addToList(item);
     }
@@ -113,6 +120,7 @@ function addLetter (e) {
 }
 
 function send (str) {
+    console.log(str);
     if(history.pushState) {
         history.pushState(null, null, '#'+str);
     }
@@ -136,6 +144,74 @@ function SortAlpha() {
             return 1;
         if (a["title"] < b["title"])
             return -1;
+        return 0;
+    });
+}
+
+function SortNew() {
+    lib.sort((a, b) => {
+        if (a["date"] > b["date"])
+            return 1;
+        if (a["date"] < b["date"])
+            return -1;
+
+        if (a["title"] > b["title"])
+            return 1;
+        if (a["title"] < b["title"])
+            return -1;
+        return 0;
+    });
+}
+
+function SortOld() {
+    lib.sort((a, b) => {
+        if (a["date"] < b["date"])
+            return 1;
+        if (a["date"] > b["date"])
+            return -1;
+
+        if (a["title"] > b["title"])
+            return 1;
+        if (a["title"] < b["title"])
+            return -1;
+        return 0;
+    });
+}
+
+function SortSeenMuch() {
+    console.log("seen much")
+    lib.sort((a, b) => {
+        try {
+        if (Number(a["watchcount"]) > Number(b["watchcount"]))
+            return 1;
+        if (Number(a["watchcount"]) < Number(b["watchcount"]))
+            return -1;
+        }
+        catch {
+            console.error("error watchcount")
+        if (a["title"] > b["title"])
+            return 1;
+        if (a["title"] < b["title"])
+            return -1;
+        }
+        return 0;
+    });
+}
+
+function SortSeenLess() {
+    lib.sort((a, b) => {
+        try {
+        if (a["watchcount"] < b["watchcount"])
+            return 1;
+        if (a["watchcount"] > b["watchcount"])
+            return -1;
+        }
+        catch {
+        if (a["title"] > b["title"])
+            return 1;
+        if (a["title"] < b["title"])
+            return -1;
+        }
         return 0;
     });
 }

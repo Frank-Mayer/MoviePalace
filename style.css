@@ -92,8 +92,8 @@ input#search {
     border-radius: 16px;
     color: black;
     position: fixed;
-    left: 10%;
-    right: 10%;
+    left: 5%;
+    right: 5%;
     top: 25%;
     bottom: 25%;
 }

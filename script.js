@@ -57,23 +57,44 @@ function gridView() {
     document.documentElement.style.setProperty('--typeVis', "collapse");
 }
 
-
-document.addEventListener('backbutton', function(){
-    if(true) {
-        alert("backBlocked");
-     return false;
-    }
-    else //nothing is visible, exit the app
-    {
-        alert("backallowed");
-      navigator.app.exitApp();
-    }
-});
+var details;
 
 function detailView (e) {
-    var details = JSON.parse(e);
+    details = JSON.parse(e);
     doBlur();
-    document.getElementById('detailView').style.transform = 'translateX(0)';
     document.getElementById('detailCover').src = details.cover;
     document.getElementById('detailTitle').value = details.title;
+    if (details.group) {document.getElementById('detailGroup').value = details.group;}
+    else {document.getElementById('detailGroup').value = ""}
+    document.getElementById('detailStatus').value = details.status;
+    document.getElementById('detailView').style.transform = 'translateX(0)';
+}
+
+function saveDetails () {
+    details.title = document.getElementById('detailTitle').value;
+    details.group = document.getElementById('detailGroup').value;
+    details.status = document.getElementById('detailStatus').value;
+    send("update::"+JSON.stringify(details));
+    document.getElementById('detailView').style.transform = 'translateX(200%)'; unblur()
+}
+
+function sort (value) {
+    switch (value) {
+        case "alpha":
+            SortAlpha();
+            break;
+        case "new":
+            SortNew();
+            break;
+        case "old":
+            SortOld();
+            break;
+        case "seen much":
+            SortSeenMuch();
+            break;
+        case "seen less":
+            SortSeenLess();
+            break;
+    }
+    CreateList();
 }
