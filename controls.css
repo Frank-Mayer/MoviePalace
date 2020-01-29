@@ -98,10 +98,6 @@ input:checked + .slider:before {
   color: var(--main);
 }
 
-.btn:hover {
-  background-color: #ddd;
-}
-
 .btn.active {
   background-color: var(--accent);
 }
