@@ -83,7 +83,7 @@ function addToList (e) {
     list += '<table width="100%" height="100%">';
     list += '<tr>';
     list += '<td>';
-    list += '<img src="'+e.cover+'" class="cover">';
+    list += '<img src="'+encodeURI(e.cover)+'" class="cover">';
     list += '</td>';
     list += '<td style="width: 50%; text-align: left;">';
     list += '<b style="font-size: 14px;">'+e.title+'</b><br>';

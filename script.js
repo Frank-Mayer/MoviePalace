@@ -62,7 +62,7 @@ var details;
 function detailView (e) {
     details = JSON.parse(e);
     doBlur();
-    document.getElementById('detailCover').src = details.cover;
+    document.getElementById('detailCover').src = encodeURI(details.cover);
     document.getElementById('detailTitle').value = details.title;
     if (details.group) {document.getElementById('detailGroup').value = details.group;}
     else {document.getElementById('detailGroup').value = ""}
