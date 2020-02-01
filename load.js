@@ -119,7 +119,7 @@ function addLetter (e) {
     list += '</div>';
 }
 
-function send (head, mody) {
+function send (head, body) {
     var str = head+'::'+body;
     console.log(str);
     if(history.pushState) {
@@ -248,4 +248,4 @@ lib = JSON.parse(JSON.stringify(lib).replace('"true"', 'true').replace('"false"'
 SortAlpha();
 CreateList();
 loadWishlist();
-send("msg:finished loading");
+send("msg","finished loading");

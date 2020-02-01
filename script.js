@@ -74,7 +74,7 @@ function saveDetails () {
     details.title = document.getElementById('detailTitle').value;
     details.group = document.getElementById('detailGroup').value;
     details.status = document.getElementById('detailStatus').value;
-    send("update::"+JSON.stringify(details));
+    send("update",JSON.stringify(details));
     document.getElementById('detailView').style.transform = 'translateX(200%)'; unblur()
 }
 
