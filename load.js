@@ -119,7 +119,8 @@ function addLetter (e) {
     list += '</div>';
 }
 
-function send (str) {
+function send (head, mody) {
+    var str = head+'::'+body;
     console.log(str);
     if(history.pushState) {
         history.pushState(null, null, '#'+str);
