@@ -1,3 +1,22 @@
+var today = new Date();
+function generateID () {
+    return String(today.getFullYear())+String((Number(today.getMonth())+1))+String(today.getDate())+String(today.getHours())+String(today.getMinutes())+String(today.getSeconds())+String(today.getMilliseconds());
+}
+var details = new Object;
+function resetDetails () {
+    details = {
+        "cover": "",
+        "date": String(String(today.getDate())+"."+String(today.getMonth())+"."+String(today.getFullYear())),
+        "typ": "1",
+        "fav": "false",
+        "watchcount": "0",
+        "id": generateID(),
+        "title": "",
+        "group":"",
+        "status": "0"
+    }
+} resetDetails();
+
 var query = "";
 var list = "";
 var wishList = "";
@@ -5,6 +24,7 @@ var lib;
 var newRow = true;
 var letter = "";
 var justFav = false;
+var create = false;
 var urlParams = new URLSearchParams(window.location.search);
 var speed = Number(urlParams.get('speed'));
 if (!(speed > 0)) {

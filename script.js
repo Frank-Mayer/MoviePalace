@@ -51,12 +51,12 @@ function gridView() {
     document.documentElement.style.setProperty('--typeVis', "collapse");
 }
 
-var details;
 function detailsID () {
     return (decodeURI(details.id));
 }
 
 function detailView (e) {
+    resetDetails();
     details = JSON.parse(e);
     doBlur();
     document.getElementById('detailCover').src = details.cover;
@@ -71,11 +71,16 @@ function saveDetails () {
     details.title = document.getElementById('detailTitle').value;
     details.group = document.getElementById('detailGroup').value;
     details.status = document.getElementById('detailStatus').value;
-    send("update",JSON.stringify(details));
+    if (create) {
+        send("insert",JSON.stringify(details));
+        document.getElementById("del").style.visibility = "visible";
+    }
+    else {
+        send("update",JSON.stringify(details));
+    }
+    create = false;
     document.getElementById('detailView').style.transform = 'translateX(200%)';
     unblur();
-
-    alert(JSON.stringify(details.title))
 
     //Update View
     document.getElementById(detailsID()+"-title").innerHTML = details.title;
@@ -115,4 +120,17 @@ function sort (value) {
             break;
     }
     CreateList();
+}
+
+function createDialog () {
+    resetDetails();
+    document.getElementById("detailViewHeader").innerHTML = "Hinzufügen";
+    document.getElementById("del").style.visibility = "collapse";
+    document.getElementById('detailCover').src = "";
+    document.getElementById('detailTitle').value = "";
+    document.getElementById('detailGroup').value = "";
+    document.getElementById('detailStatus').value = 0;
+    doBlur();
+    create = true;
+    document.getElementById('detailView').style.transform = 'translateX(0)';
 }

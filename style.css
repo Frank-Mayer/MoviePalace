@@ -54,6 +54,8 @@ input#search {
     width: 70px;
     background-color: transparent;
     border: 0;
+    background-image: url("./placeholder.gif");
+    background-size: cover;
 }
 
 .finder td {
