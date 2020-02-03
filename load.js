@@ -47,7 +47,11 @@ function CreateList() {
 }
 
 function fillList(item) {
-    if (item.title.toLowerCase().includes(query.toLowerCase()) || query=="") {
+    var group = "";
+    if (typeof item.group !== 'undefined') {
+        group = item.group;
+    }
+    if (query=="" || item.title.toLowerCase().includes(query.toLowerCase()) || group.includes(query.toLowerCase())) {
         var make = (item.fav == true || justFav == false);
         if (make == true) {
             var title = item["title"];

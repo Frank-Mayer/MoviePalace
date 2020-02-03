@@ -95,14 +95,14 @@ input#search {
     overflow-y: scroll;
 }
 
-@media only screen and (max-height: 350px) {
+@media only screen and (max-height: 400px) {
     .floating div {
         top: 0px;
         bottom: 0px;
     }
 }
 
-@media only screen and (min-height: 350px) {
+@media only screen and (min-height: 400px) {
     .floating div {
         top: calc(50% - 175px);
     }

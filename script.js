@@ -77,10 +77,24 @@ function saveDetails () {
 
     alert(JSON.stringify(details.title))
 
-    console.log(detailsID())
     //Update View
     document.getElementById(detailsID()+"-title").innerHTML = details.title;
     document.getElementById(detailsID()+"-cover").src = details.cover;
+}
+
+function del () {
+    //details.finder; detailsID();
+    for( var i = 0; i < lib.length; i++){ 
+        if (lib[i].id == detailsID()) {
+            lib.splice(i, 1); 
+            break;
+        }
+    }
+    send("delete",JSON.stringify(details));
+    document.getElementById('detailView').style.transform = 'translateX(200%)';
+    unblur();
+    SortAlpha();
+    CreateList();
 }
 
 function sort (value) {
