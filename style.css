@@ -29,7 +29,7 @@ html, body {
 	-o-user-select: none;
 	scroll-behavior: smooth;
     scrollbar-width: none;
-    background-color: white;
+    background-color: var(--main);
 }
 
 p, nobr, h1, h2, h3, a, button, td, th, input, * {
