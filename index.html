@@ -109,8 +109,7 @@
                 <table width="100%">
                     <tr>
                         <td>
-                            <img src="" class="cover" id="detailCover" onclick="document.getElementById('cover-input').click();">
-                            <input id="cover-input" type="file" name="name" style="display: none; visibility: collapse;" accept="image/*" onchange='document.getElementById("bearb").innerHTML=(document.getElementById("cover-input").value)'>
+                            <img src="" class="cover" id="detailCover" onclick="document.getElementById('fileSelector').style.transform = 'translateX(0)'">
                         </td>
                         <td style="text-align: right;">
                             <input type="text" class="txtInput" id="detailTitle" autocomplete="on" placeholder="Titel">
@@ -131,6 +130,13 @@
                         </td>
                     </tr>
                 </table>
+            </div>
+        </div>
+
+        <div id="fileSelector" class="floating">
+            <div style="position: fixed; left: 0px; right: 0px; top: 0px; bottom: 0px; background-color: transparent; border-radius: 0; z-index: 1;" onclick="document.getElementById('fileSelector').style.transform = 'translateX(200%)'"></div>
+            <div style="z-index: 2;">
+                <iframe height="350px" width="100%" src="file:///C:/Users/Frank"></iframe>
             </div>
         </div>
 
