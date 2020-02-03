@@ -28,7 +28,7 @@ function unblur () {
 
 // Get the elements with class="column"
 var elements = document.getElementsByClassName("column");
-var listMode = true;
+var listMode = (screen.availWidth < 500);
 var i = 0;
 
 // List View
@@ -58,14 +58,17 @@ function gridView() {
 }
 
 var details;
+function detailsID () {
+    return (decodeURI(details.id));
+}
 
 function detailView (e) {
     details = JSON.parse(e);
     doBlur();
-    document.getElementById('detailCover').src = encodeURI(details.cover);
-    document.getElementById('detailTitle').value = details.title;
-    if (details.group) {document.getElementById('detailGroup').value = details.group;}
-    else {document.getElementById('detailGroup').value = ""}
+    document.getElementById('detailCover').src = details.cover;
+    document.getElementById('detailTitle').value = decodeURI(details.title);
+    if (details.group) { document.getElementById('detailGroup').value = decodeURI(details.group); }
+    else { document.getElementById('detailGroup').value = ""; }
     document.getElementById('detailStatus').value = details.status;
     document.getElementById('detailView').style.transform = 'translateX(0)';
 }
@@ -75,7 +78,15 @@ function saveDetails () {
     details.group = document.getElementById('detailGroup').value;
     details.status = document.getElementById('detailStatus').value;
     send("update",JSON.stringify(details));
-    document.getElementById('detailView').style.transform = 'translateX(200%)'; unblur()
+    document.getElementById('detailView').style.transform = 'translateX(200%)';
+    unblur();
+
+    alert(JSON.stringify(details.title))
+
+    console.log(detailsID())
+    //Update View
+    document.getElementById(detailsID()+"-title").innerHTML = details.title;
+    document.getElementById(detailsID()+"-cover").src = details.cover;
 }
 
 function sort (value) {
