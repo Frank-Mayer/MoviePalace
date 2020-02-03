@@ -248,4 +248,3 @@ lib = JSON.parse(JSON.stringify(lib).replace('"true"', 'true').replace('"false"'
 SortAlpha();
 CreateList();
 loadWishlist();
-send("msg","finished loading");

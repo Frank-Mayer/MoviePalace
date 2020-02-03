@@ -7,8 +7,6 @@ function search (q) {
 function doBlur () {
     document.getElementById('finder').style.filter = 'blur(2px)';
     document.getElementById('finder').style.WebkitFilter = 'blur(2px)';
-    document.getElementById('btnContainer').style.filter = 'blur(2px)';
-    document.getElementById('btnContainer').style.WebkitFilter = 'blur(2px)';
     document.getElementById('list-view').style.filter = 'blur(2px)';
     document.getElementById('list-view').style.WebkitFilter = 'blur(2px)';
     document.getElementById('toolbar').style.filter = 'blur(2px)';
@@ -18,8 +16,6 @@ function doBlur () {
 function unblur () {
     document.getElementById('finder').style.filter = 'blur(0)';
     document.getElementById('finder').style.WebkitFilter = 'blur(0)';
-    document.getElementById('btnContainer').style.filter = 'blur(0)';
-    document.getElementById('btnContainer').style.WebkitFilter = 'blur(0)';
     document.getElementById('list-view').style.filter = 'blur(0)';
     document.getElementById('list-view').style.WebkitFilter = 'blur(0)';
     document.getElementById('toolbar').style.filter = 'blur(0)';
@@ -39,8 +35,6 @@ function listView() {
         elements[i].style.marginLeft = "8px";
         elements[i].style.marginRight = "8px";
     }
-    document.getElementById("btn_grid").className = "btn active";
-    document.getElementById("btn_list").className = "btn";
     document.documentElement.style.setProperty('--typeVis', "visible");
 }
 
@@ -52,8 +46,6 @@ function gridView() {
         elements[i].style.marginLeft = "8px";
         elements[i].style.marginRight = "0px";
     }
-    document.getElementById("btn_list").className = "btn active";
-    document.getElementById("btn_grid").className = "btn";
     document.documentElement.style.setProperty('--typeVis', "collapse");
 }
 
