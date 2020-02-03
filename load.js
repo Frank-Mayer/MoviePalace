@@ -1,3 +1,4 @@
+var query = "";
 var list = "";
 var wishList = "";
 var lib;
@@ -46,21 +47,23 @@ function CreateList() {
 }
 
 function fillList(item) {
-    var make = (item.fav == true || justFav == false);
-    if (make == true) {
-        var title = item["title"];
-        if (letter != title[0]) {
-            letter = title[0];
-            try {
-                if (document.getElementById('sortSelect').value == "alpha") {
+    if (item.title.toLowerCase().includes(query.toLowerCase()) || query=="") {
+        var make = (item.fav == true || justFav == false);
+        if (make == true) {
+            var title = item["title"];
+            if (letter != title[0]) {
+                letter = title[0];
+                try {
+                    if (document.getElementById('sortSelect').value == "alpha") {
+                        addLetter(letter);
+                    }
+                }
+                catch {
                     addLetter(letter);
                 }
             }
-            catch {
-                addLetter(letter);
-            }
+            addToList(item);
         }
-        addToList(item);
     }
 }
 
@@ -71,9 +74,7 @@ function escapeHtml(unsafe) {
         .replace(/>/g, "&gt;")
         .replace(/"/g, "&quot;")
         .replace(/'/g, "&#039;");
- }
-
-
+}
 
 function addToList (e) {
     var id = e.id;

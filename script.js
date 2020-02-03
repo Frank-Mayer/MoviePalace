@@ -1,7 +1,7 @@
-var query = "";
-
 function search (q) {
     query = q;
+    SortAlpha();
+    CreateList();
 }
 
 function doBlur () {
