@@ -83,7 +83,6 @@ function saveDetails () {
 }
 
 function del () {
-    //details.finder; detailsID();
     for( var i = 0; i < lib.length; i++){ 
         if (lib[i].id == detailsID()) {
             lib.splice(i, 1); 
