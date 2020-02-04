@@ -69,9 +69,11 @@ function CreateList() {
 function fillList(item) {
     var group = "";
     if (typeof item.group !== 'undefined') {
-        group = item.group;
     }
-    if (query=="" || item.title.toLowerCase().includes(query.toLowerCase()) || group.includes(query.toLowerCase())) {
+    else {
+        item.group = item.title
+    }
+    if (query=="" || item.title.toLowerCase().includes(query.toLowerCase()) || item.group.includes(query.toLowerCase())) {
         var make = (item.fav == true || justFav == false);
         if (make == true) {
             var title = item["title"];
@@ -243,17 +245,17 @@ function SortSeenLess() {
 }
 
 function addToWishList (e) {
-    list += '<div onClick="detailView(\''+escapeHtml(JSON.stringify(e))+'\')">';
-    list += '<table width="100%" height="100%">';
-    list += '<tr>';
-    list += '<td>';
-    list += '<svg width="20px" height="20px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512.001 512.001" xml:space="preserve"><g><g><path d="M505.922,476.567L285.355,256L505.92,35.435c8.106-8.105,8.106-21.248,0-29.354c-8.105-8.106-21.248-8.106-29.354,0L256.001,226.646L35.434,6.081c-8.105-8.106-21.248-8.106-29.354,0c-8.106,8.105-8.106,21.248,0,29.354L226.646,256L6.08,476.567c-8.106,8.106-8.106,21.248,0,29.354c8.105,8.105,21.248,8.106,29.354,0l220.567-220.567l220.567,220.567c8.105,8.105,21.248,8.106,29.354,0S514.028,484.673,505.922,476.567z"/></g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g></svg>';
-    list += '</td>';
-    list += '<td style="width: 100%; text-align: left;">';
-    list += '<b style="font-size: 18px;">'+e.title+'</b><br>';
-    list += '</td>';
-    list += '</table>';
-    list += '</div>';
+    wishList += '<div>';
+    wishList += '<table width="100%" height="100%">';
+    wishList += '<tr>';
+    wishList += '<td>';
+    wishList += '<svg width="20px" height="20px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512.001 512.001" xml:space="preserve"><g><g><path d="M505.922,476.567L285.355,256L505.92,35.435c8.106-8.105,8.106-21.248,0-29.354c-8.105-8.106-21.248-8.106-29.354,0L256.001,226.646L35.434,6.081c-8.105-8.106-21.248-8.106-29.354,0c-8.106,8.105-8.106,21.248,0,29.354L226.646,256L6.08,476.567c-8.106,8.106-8.106,21.248,0,29.354c8.105,8.105,21.248,8.106,29.354,0l220.567-220.567l220.567,220.567c8.105,8.105,21.248,8.106,29.354,0S514.028,484.673,505.922,476.567z"/></g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g></svg>';
+    wishList += '</td>';
+    wishList += '<td style="width: 100%; text-align: left;">';
+    wishList += '<b style="font-size: 18px;">'+e.title+'</b><br>';
+    wishList += '</td>';
+    wishList += '</table>';
+    wishList += '</div>';
 }
 
 function loadWishlist () {
@@ -264,12 +266,11 @@ function loadWishlist () {
         wishList += '</div>';
     }
     
-    document.getElementById("wishList-view").innerHTML = list;
+    document.getElementById("wishList-view").innerHTML = wishList;
 }
 
 /***********************************************************************************/
 
-lib = JSON.parse(JSON.stringify(lib).replace('"true"', 'true').replace('"false"', 'false'));
 SortAlpha();
 CreateList();
 loadWishlist();

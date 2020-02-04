@@ -97,6 +97,17 @@ input#search {
     overflow-y: scroll;
 }
 
+#wishList-view, #wishList-view div {
+    padding: unset;
+    background-color: unset;
+    border-color: unset;
+    border: none;
+    border-radius: 0;
+    position: unset;
+    overflow: hidden;
+    box-shadow: none;
+}
+
 @media only screen and (max-height: 400px) {
     .floating div {
         top: 0px;
