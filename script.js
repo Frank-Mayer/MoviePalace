@@ -79,8 +79,6 @@ function saveDetails () {
 
             if (request.status >= 200 && request.status < 300) {
                 details.cover = (data.items[0].image.thumbnailLink);
-                console.log(data.items[0].image.thumbnailLink)
-                console.log(details.cover)
             }
             else {
                 RandomApiKey();
@@ -151,4 +149,18 @@ function createDialog () {
     doBlur();
     create = true;
     document.getElementById('detailView').style.transform = 'translateX(0)';
+}
+
+function eventFire(el, etype){
+    if (el.fireEvent) {
+      el.fireEvent('on' + etype);
+    } else {
+      var evObj = document.createEvent('Events');
+      evObj.initEvent(etype, true, false);
+      el.dispatchEvent(evObj);
+    }
+  }
+
+function random () {
+    eventFire(document.getElementById(lib[Math.floor(Math.random() * lib.length)].id), 'click');
 }
