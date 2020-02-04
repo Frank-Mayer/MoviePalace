@@ -72,19 +72,37 @@ function saveDetails () {
     details.group = document.getElementById('detailGroup').value;
     details.status = document.getElementById('detailStatus').value;
     if (create) {
-        send("insert",JSON.stringify(details));
-        document.getElementById("del").style.visibility = "visible";
+        var request = new XMLHttpRequest();
+        request.open('GET', googleApi.query(details.title+" Movie Cover"), true);
+        request.onload = function () {
+            var data = JSON.parse(this.response);
+
+            if (request.status >= 200 && request.status < 300) {
+                details.cover = (data.items[0].image.thumbnailLink);
+                console.log(data.items[0].image.thumbnailLink)
+                console.log(details.cover)
+            }
+            else {
+                RandomApiKey();
+                console.error(JSON.stringify(data))
+                details.cover = '../cover/'+details.title+'.jpg';
+            }
+            lib.push(details);
+            document.getElementById("del").style.visibility = "visible";
+            SortAlpha();
+            CreateList();
+            send("insert",JSON.stringify(details));
+        }
+        request.send();
     }
     else {
         send("update",JSON.stringify(details));
+        document.getElementById(detailsID()+"-title").innerHTML = details.title;
+        document.getElementById(detailsID()+"-cover").src = details.cover;
     }
     create = false;
     document.getElementById('detailView').style.transform = 'translateX(200%)';
     unblur();
-
-    //Update View
-    document.getElementById(detailsID()+"-title").innerHTML = details.title;
-    document.getElementById(detailsID()+"-cover").src = details.cover;
 }
 
 function del () {
