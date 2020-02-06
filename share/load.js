@@ -1,5 +1,5 @@
 var urlParams = new URLSearchParams(window.location.search);
-var obj = urlParams.get('obj');
+var obj = urlParams.get('obj').replace("+","%2B");
 var titleEl = document.getElementById("title");
 var coverEl = document.getElementById("cover");
 var backgroundEl = document.getElementById("background");
