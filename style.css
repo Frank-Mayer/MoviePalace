@@ -77,6 +77,17 @@ input#search {
     fill: var(--main);
 }
 
+#wishList-view, #wishList-view div {
+    padding: unset;
+    background-color: unset;
+    border-color: unset;
+    border: none;
+    border-radius: 0;
+    position: unset;
+    overflow: hidden;
+    box-shadow: none;
+}
+
 .floating {
     background-color: var(--blurOverlay);
     position: fixed;
@@ -87,7 +98,17 @@ input#search {
     bottom: 0px;
 }
 
-.floating div {
+.floating .floatingChild1 {
+    position: fixed; left: 0px;
+    right: 0px;
+    top: 0px;
+    bottom: 0px;
+    background-color: transparent;
+    border-radius: 0;
+    z-index: 1;
+}
+
+.floating .floatingChild2 {
     padding: 16px;
     background-color: white;
     border: none;
@@ -95,17 +116,6 @@ input#search {
     color: black;
     position: fixed;
     overflow-y: scroll;
-}
-
-#wishList-view, #wishList-view div {
-    padding: unset;
-    background-color: unset;
-    border-color: unset;
-    border: none;
-    border-radius: 0;
-    position: unset;
-    overflow: hidden;
-    box-shadow: none;
 }
 
 @media only screen and (max-height: 400px) {
