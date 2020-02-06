@@ -7,7 +7,7 @@ function resetDetails () {
     details = {
         "cover": "",
         "date": String(String(today.getDate())+"."+String(today.getMonth())+"."+String(today.getFullYear())),
-        "typ": "1",
+        "typ": "0",
         "fav": "false",
         "watchcount": "0",
         "id": generateID(),
@@ -67,13 +67,19 @@ function CreateList() {
 }
 
 function fillList(item) {
-    var group = "";
-    if (typeof item.group !== 'undefined') {
+    var constructThisItem = false;
+    if (query == "") {
+        constructThisItem = true;
     }
-    else {
-        item.group = item.title
+    else if (item.title.toLowerCase().includes(query)) {
+        constructThisItem = true
     }
-    if (query=="" || item.title.toLowerCase().includes(query.toLowerCase()) || item.group.includes(query.toLowerCase())) {
+    else if (typeof item.group !== 'undefined') {
+        if (item.group.toLowerCase().includes(query)) {
+            constructThisItem = true;
+        }
+    }
+    if (constructThisItem) {
         var make = (item.fav == true || justFav == false);
         if (make == true) {
             var title = item["title"];

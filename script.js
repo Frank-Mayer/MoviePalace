@@ -1,5 +1,5 @@
 function search (q) {
-    query = q;
+    query = q.toLowerCase();
     SortAlpha();
     CreateList();
 }
@@ -63,14 +63,16 @@ function detailView (e) {
     document.getElementById('detailTitle').value = decodeURI(details.title);
     if (details.group) { document.getElementById('detailGroup').value = decodeURI(details.group); }
     else { document.getElementById('detailGroup').value = ""; }
-    document.getElementById('detailStatus').value = details.status;
+    document.getElementById('detailStatus').value = Number(details.status);
+    document.getElementById('detailTyp').value = Number(details.typ);
     document.getElementById('detailView').style.transform = 'translateX(0)';
 }
 
 function saveDetails () {
-    details.title = document.getElementById('detailTitle').value;
-    details.group = document.getElementById('detailGroup').value;
-    details.status = document.getElementById('detailStatus').value;
+    details.title = String(document.getElementById('detailTitle').value);
+    details.group = String(document.getElementById('detailGroup').value);
+    details.status = String(document.getElementById('detailStatus').value);
+    details.typ = String(document.getElementById('detailTyp').value);
     if (create) {
         try {
             var request = new XMLHttpRequest();
@@ -101,9 +103,15 @@ function saveDetails () {
         }
     }
     else {
+        for (var i = 0; lib.length; i++) {
+            if (lib[i].id == details.id) {
+                lib[i] = details;
+                break;
+            }
+        }
+        SortAlpha();
+        CreateList();
         send("update",JSON.stringify(details));
-        document.getElementById(detailsID()+"-title").innerHTML = details.title;
-        document.getElementById(detailsID()+"-cover").src = details.cover;
     }
     create = false;
     document.getElementById('detailView').style.transform = 'translateX(200%)';
@@ -153,6 +161,7 @@ function createDialog () {
     document.getElementById('detailTitle').value = "";
     document.getElementById('detailGroup').value = "";
     document.getElementById('detailStatus').value = 0;
+    document.getElementById('detailTyp').value = 0;
     doBlur();
     create = true;
     document.getElementById('detailView').style.transform = 'translateX(0)';
@@ -170,4 +179,30 @@ function eventFire(el, etype){
 
 function random () {
     eventFire(document.getElementById(lib[Math.floor(Math.random() * lib.length)].id), 'click');
+}
+
+function findCover (img, searchQuery) {
+    var ret = "";
+    try {
+        var request = new XMLHttpRequest();
+        request.open('GET', googleApi.query(searchQuery+" Movie Cover"), true);
+        request.onload = function () {
+            var data = JSON.parse(this.response);
+
+            if (request.status >= 200 && request.status < 300) {
+                ret = (data.items[0].image.thumbnailLink);
+                img.src = ret;
+            }
+            else {
+                RandomApiKey();
+                console.error(data);
+                img.src = "";
+            }
+        }
+        request.send();
+    }
+    catch (e) {
+        console.error(e);
+        img.src = "";
+    }
 }

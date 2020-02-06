@@ -110,16 +110,21 @@
                 <table width="100%">
                     <tr>
                         <td>
-                            <img src="" class="cover" id="detailCover" onclick='send("cover_select",JSON.stringify(details))'>
+                            <img src="" class="cover" id="detailCover" onclick='this.src = findCover(document.getElementById("detailCover"), document.getElementById("detailTitle").value)'>
                         </td>
                         <td style="text-align: right;">
                             <input type="text" class="txtInput" id="detailTitle" autocomplete="on" placeholder="Titel">
                             <br><br>
                             <input type="text" class="txtInput" id="detailGroup" autocomplete="on" placeholder="Gruppenname">
                             <br><br>
-                            <select id="detailStatus" width="100%">
+                            <select id="detailStatus" style="transform: translateX(10px);" width="100%">
                                 <option value="0">Verfügbar</option>
                                 <option value="1">Verliehen</option>
+                            </select>
+                            <br>
+                            <select id="detailTyp" style="transform: translateX(10px);" width="100%">
+                                <option value="0">Blu-ray Disc</option>
+                                <option value="1">DVD</option>
                             </select>
                             <br><br>
                             <button class="fab" id="del" onclick="del()">
