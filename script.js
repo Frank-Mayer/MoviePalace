@@ -208,3 +208,10 @@ function findCover (img, searchQuery) {
         details.cover = "";
     }
 }
+
+function share () {
+    var cry = (CryptoJS.AES.encrypt((details.title), "Secret Passphrase")).toLocaleString();
+    send("shareMovieExt",(encodeURI(cry)));
+    // var win = window.open('https://frank-mayer.github.io/MoviePalace/share?obj='+encodeURI(cry), '_blank');
+    // win.focus();
+}

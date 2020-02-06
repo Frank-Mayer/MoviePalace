@@ -1,0 +1,92 @@
+::-webkit-scrollbar { 
+	display: none; 
+}
+
+::selection {
+    background: transparent;
+}
+
+:root {
+    --main: black;
+    --accent: #FFFFFF;
+    --accent1: #212121;
+    --accent2: #05386B;
+    --accent3: #5CDB95;
+    --font: 'Oxygen', 'Ubuntu', 'IBM Plex Sans', 'Assistant', sans-serif;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background-color: var(--main);
+	user-select: none;
+	-moz-user-select: none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	-o-user-select: none;
+	scroll-behavior: smooth;
+    scrollbar-width: none;
+    background-color: var(--main);
+}
+
+p, nobr, h1, h2, h3, a, button, td, th, input, * {
+    text-decoration: 0;
+    font-family: var(--font);
+    font-size: 16px;
+    text-rendering: geometricPrecision;
+    color: var(--main);
+}
+
+h1 {
+    font-size: 32px;
+}
+
+#background {
+    position: fixed;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    height: 100%;
+    filter: blur(16px);
+    -webkit-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+}
+
+.panel {
+    position: fixed;
+    padding: 16px;
+    background-color: var(--accent);
+    border-radius: 16px;
+    text-align: center;
+}
+
+@media only screen and (max-height: 400px) {
+    .panel {
+        top: 0px;
+        bottom: 0px;
+    }
+}
+
+@media only screen and (min-height: 400px) {
+    .panel {
+        top: calc(50% - 200px);
+        bottom: calc(50% - 200px);
+        overflow-y: scroll;
+    }
+}
+
+@media only screen and (max-width: 300px) {
+    .panel {
+        left: 0px;
+        right: 0px;
+    }
+}
+
+@media only screen and (min-width: 300px) {
+    .panel {
+        left: calc(50% - 150px);
+        right: calc(50% - 150px);
+    }
+}

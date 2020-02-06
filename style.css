@@ -179,3 +179,15 @@ svg.typeIcon, svg.typeIcon * {
     width: 55px;
     visibility: var(--typeVis);
 }
+
+.topTools p {
+    color: var(--accent);
+    text-align: left;
+}
+
+.topTools td {
+    text-align: left;
+    width: calc(50% - 16px);
+    margin: 0;
+    padding: 8px;
+}
