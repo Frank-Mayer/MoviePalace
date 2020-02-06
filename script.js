@@ -192,6 +192,7 @@ function findCover (img, searchQuery) {
             if (request.status >= 200 && request.status < 300) {
                 ret = (data.items[0].image.thumbnailLink);
                 img.src = ret;
+                details.cover = ret;
             }
             else {
                 RandomApiKey();
@@ -204,5 +205,6 @@ function findCover (img, searchQuery) {
     catch (e) {
         console.error(e);
         img.src = "";
+        details.cover = "";
     }
 }
