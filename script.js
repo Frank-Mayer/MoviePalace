@@ -211,6 +211,7 @@ function findCover (img, searchQuery) {
 
 function share () {
     var cry = (CryptoJS.AES.encrypt((details.title), "Secret Passphrase")).toLocaleString();
+    cry = cry.replace("+","%2B")
     send("shareMovieExt",(encodeURI(cry)));
     // var win = window.open('https://frank-mayer.github.io/MoviePalace/share?obj='+encodeURI(cry), '_blank');
     // win.focus();
