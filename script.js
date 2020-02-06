@@ -56,6 +56,8 @@ function detailsID () {
 }
 
 function detailView (e) {
+    document.getElementById("del").style.visibility = "visible";
+    document.getElementById("share").style.visibility = "visible";
     resetDetails();
     details = JSON.parse(e);
     doBlur();
@@ -90,6 +92,7 @@ function saveDetails () {
                 }
                 lib.push(details);
                 document.getElementById("del").style.visibility = "visible";
+                document.getElementById("share").style.visibility = "visible";
                 SortAlpha();
                 CreateList();
                 send("insert",JSON.stringify(details));
@@ -157,6 +160,7 @@ function createDialog () {
     resetDetails();
     document.getElementById("detailViewHeader").innerHTML = "Hinzufügen";
     document.getElementById("del").style.visibility = "collapse";
+    document.getElementById("share").style.visibility = "collapse";
     document.getElementById('detailCover').src = "";
     document.getElementById('detailTitle').value = "";
     document.getElementById('detailGroup').value = "";
