@@ -5,8 +5,7 @@ var coverEl = document.getElementById("cover");
 var backgroundEl = document.getElementById("background");
 var buyEl = document.getElementById("buy");
 
-obj = decodeURI(obj).replace("%2B", "+").replace(" ", "+");
-console.log(obj);
+obj = decodeURI(obj);
 var decrypted = CryptoJS.AES.decrypt(obj, "Secret Passphrase");
 var title = (decrypted.toString(CryptoJS.enc.Utf8))
 console.log(title)
