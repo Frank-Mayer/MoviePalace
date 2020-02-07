@@ -217,9 +217,7 @@ function findCover (img, searchQuery) {
 }
 
 function share () {
-    var cry = encodeURI((CryptoJS.AES.encrypt((details.title), "Secret Passphrase")).toLocaleString());
-    cry = cry.split('+').join('%2B');
-    cry = cry.split('=').join('%3D');
-    cry = cry.split('/').join('%2F');
+    var cry = encodeURI(btoa(details.title));
+    console.log(cry)
     send("shareMovieExt",cry);
 }

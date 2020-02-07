@@ -62,17 +62,17 @@ h1 {
     text-align: center;
 }
 
-@media only screen and (max-height: 400px) {
+@media only screen and (max-height: 420px) {
     .panel {
         top: 0px;
         bottom: 0px;
     }
 }
 
-@media only screen and (min-height: 400px) {
+@media only screen and (min-height: 420px) {
     .panel {
-        top: calc(50% - 200px);
-        bottom: calc(50% - 200px);
+        top: calc(50% - 210px);
+        bottom: calc(50% - 210px);
         overflow-y: scroll;
     }
 }
