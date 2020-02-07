@@ -71,6 +71,9 @@ function detailView (e) {
 }
 
 function saveDetails () {
+    if (create) {
+        resetDetails();
+    }
     details.title = String(document.getElementById('detailTitle').value);
     details.group = String(document.getElementById('detailGroup').value);
     details.status = String(document.getElementById('detailStatus').value);
