@@ -217,7 +217,7 @@ function findCover (img, searchQuery) {
 }
 
 function share () {
-    var cry = encodeURI(btoa(details.title));
+    var cry = encodeURI(btoa(JSON.stringify(details)));
     console.log(cry)
     send("shareMovieExt",cry);
 }
