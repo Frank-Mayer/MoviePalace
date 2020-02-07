@@ -1,11 +1,12 @@
 var urlParams = new URLSearchParams(window.location.search);
-var obj = urlParams.get('obj').replace("+","%2B");
+var obj = urlParams.get('obj');
 var titleEl = document.getElementById("title");
 var coverEl = document.getElementById("cover");
 var backgroundEl = document.getElementById("background");
 var buyEl = document.getElementById("buy");
 
-obj = decodeURI(obj);
+console.log(obj)
+
 var decrypted = CryptoJS.AES.decrypt(obj, "Secret Passphrase");
 var title = (decrypted.toString(CryptoJS.enc.Utf8))
 console.log(title)

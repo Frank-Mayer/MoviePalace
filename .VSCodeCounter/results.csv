@@ -1,0 +1,15 @@
+filename, language, CSS, JSON, JavaScript, HTML, CSV, comment, blank, total
+c:\Users\Frank\source\repos\MoviePalace\controls.css, CSS, 142, 0, 0, 0, 0, 8, 27, 177
+c:\Users\Frank\source\repos\MoviePalace\crypto-js.min.js, JavaScript, 0, 0, 2, 0, 0, 1, 0, 3
+c:\Users\Frank\source\repos\MoviePalace\google.cse.js, JavaScript, 0, 0, 38, 0, 0, 1, 4, 43
+c:\Users\Frank\source\repos\MoviePalace\htmlEncodingTable.json, JSON, 0, 81, 0, 0, 0, 0, 0, 81
+c:\Users\Frank\source\repos\MoviePalace\index.html, HTML, 0, 0, 0, 156, 0, 24, 8, 188
+c:\Users\Frank\source\repos\MoviePalace\lib.js, JavaScript, 0, 0, 5, 0, 0, 0, 0, 5
+c:\Users\Frank\source\repos\MoviePalace\load.js, JavaScript, 0, 0, 258, 0, 0, 1, 24, 283
+c:\Users\Frank\source\repos\MoviePalace\project.csv, CSV, 0, 0, 0, 0, 1, 0, 0, 1
+c:\Users\Frank\source\repos\MoviePalace\script.js, JavaScript, 0, 0, 202, 0, 0, 6, 18, 226
+c:\Users\Frank\source\repos\MoviePalace\share\index.html, HTML, 0, 0, 0, 23, 0, 0, 0, 23
+c:\Users\Frank\source\repos\MoviePalace\share\load.js, JavaScript, 0, 0, 32, 0, 0, 0, 4, 36
+c:\Users\Frank\source\repos\MoviePalace\share\style.css, CSS, 81, 0, 0, 0, 0, 0, 12, 93
+c:\Users\Frank\source\repos\MoviePalace\style.css, CSS, 168, 0, 0, 0, 0, 0, 25, 193
+Total, -, 391, 81, 537, 179, 1, 41, 122, 1352
