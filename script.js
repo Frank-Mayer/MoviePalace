@@ -150,6 +150,14 @@ function delWish (e) {
     send('delete','wishlist',JSON.stringify(e));
 }
 
+function addWishToDB () {
+    var e = {
+        "title": document.getElementById("addWish").value
+    }
+    send("insert","wishlist",JSON.stringify(e));
+    document.getElementById("addWish").value = '';
+}
+
 function sort (value) {
     switch (value) {
         case "alpha":
