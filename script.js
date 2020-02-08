@@ -5,12 +5,12 @@ function search (q) {
 }
 
 function doBlur () {
-    document.getElementById('finder').style.filter = 'blur(2px)';
-    document.getElementById('finder').style.WebkitFilter = 'blur(2px)';
-    document.getElementById('list-view').style.filter = 'blur(2px)';
-    document.getElementById('list-view').style.WebkitFilter = 'blur(2px)';
-    document.getElementById('toolbar').style.filter = 'blur(2px)';
-    document.getElementById('toolbar').style.WebkitFilter = 'blur(2px)';
+    document.getElementById('finder').style.filter = 'blur(4px)';
+    document.getElementById('finder').style.WebkitFilter = 'blur(4px)';
+    document.getElementById('list-view').style.filter = 'blur(4px)';
+    document.getElementById('list-view').style.WebkitFilter = 'blur(4px)';
+    document.getElementById('toolbar').style.filter = 'blur(4px)';
+    document.getElementById('toolbar').style.WebkitFilter = 'blur(4px)';
 }
 
 function unblur () {
