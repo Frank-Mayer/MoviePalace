@@ -83,7 +83,7 @@ function fillList(item) {
         }
     }
     if (constructThisItem) {
-        var make = (item.fav == true || justFav == false);
+        var make = (item.fav == "true" || justFav == false);
         if (make == true) {
             var title = item["title"];
             if (letter != title[0]) {
