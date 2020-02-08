@@ -36,7 +36,7 @@ function listView() {
         elements[i].style.marginRight = "8px";
     }
     document.getElementById('gridSwitch').checked = false;
-    //document.documentElement.style.setProperty('--typeVis', "visible");
+    document.documentElement.style.setProperty('--typeVis', "visible");
 }
 
 // Grid View
@@ -48,7 +48,7 @@ function gridView() {
         elements[i].style.marginRight = "0px";
     }
     document.getElementById('gridSwitch').checked = true;
-    //document.documentElement.style.setProperty('--typeVis', "collapse");
+    document.documentElement.style.setProperty('--typeVis', "collapse");
 }
 
 function detailsID () {

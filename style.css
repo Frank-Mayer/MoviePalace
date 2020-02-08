@@ -7,8 +7,8 @@
 }
 
 :root {
-    --main: black;
-    --accent: #FFFFFF;
+    --main: #121212;
+    --accent: whitesmoke;
     --accent1: #212121;
     --accent2: #05386B;
     --accent3: #5CDB95;
@@ -147,6 +147,8 @@ input#search {
 }
 
 #list-view {
+    background: var(--accent1);
+    background: linear-gradient(10deg, var(--accent1) 0%, var(--accent1) 20%, var(--accent2) 95%, var(--accent2) 100%); 
     background-color: var(--accent1);
     overflow-y: scroll;
     position: fixed;
@@ -172,6 +174,7 @@ input#search {
 }
 
 .ToolbarSubtitle {
+    color: var(--main);
     padding: 0;
     margin: 0;
     transform: translateY(-5px);

@@ -14,7 +14,7 @@
     <body>
 
         <div id="alpha">
-            <div style="background-color: var(--main); box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); z-index: 10000;">
+            <div style="background-color: var(--main); z-index: 10000; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
                 <table id="finder" class="finder" width="100%" cellspacing="8px">
                     <tr>
                         <td>
@@ -90,7 +90,7 @@
                         </td>
                         <td style="text-align: right;">
                             <label class="switch">
-                                <input id="gridSwitch" type="checkbox" unchecked onchange="if(document.getElementById('gridSwitch').checked){gridView()}else{listView()}">
+                                <input id="gridSwitch" type="checkbox" unchecked onchange="if(document.getElementById('gridSwitch').checked){gridView()}else{listView()};CreateList();">
                                 <span class="slider round"></span>
                             </label>
                         </td>
