@@ -138,6 +138,18 @@ function del () {
     CreateList();
 }
 
+function delWish (e) {
+    e = JSON.parse(e);
+    for (var i=0; i<wishlist.length; i++){
+        if (wishlist[i].title == e.title) {
+            wishlist.splice(i, 1); 
+            break;
+        }
+    }
+    loadWishlist();
+    send('delete','wishlist',JSON.stringify(e));
+}
+
 function sort (value) {
     switch (value) {
         case "alpha":

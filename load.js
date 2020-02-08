@@ -262,7 +262,7 @@ function SortSeenLess() {
 }
 
 function addToWishList (e) {
-    wishList += '<div id="'+e.title+'" onclick="send(\'delete\',\'wishlist\',\''+escapeHtml(JSON.stringify(e))+'\');">';
+    wishList += '<div id="'+e.title+'" onclick="delWish(\''+escapeHtml(JSON.stringify(e))+'\');">';wishlist.
     wishList += '<table width="100%" height="100%">';
     wishList += '<tr>';
     wishList += '<td>';
