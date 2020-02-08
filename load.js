@@ -160,8 +160,11 @@ function addLetter (e) {
     list += '</div>';
 }
 
-function send (head, body) {
-    var str = head+'::'+body;
+function send (head, table, body) {
+    if (table == "") {
+        table = "-";
+    }
+    var str = head+'::'+table+'::'+body;
     console.log(str);
     if(history.pushState) {
         history.pushState(null, null, '#'+str);

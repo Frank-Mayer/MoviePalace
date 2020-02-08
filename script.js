@@ -98,14 +98,14 @@ function saveDetails () {
                 document.getElementById("share").style.visibility = "visible";
                 SortAlpha();
                 CreateList();
-                send("insert",JSON.stringify(details));
+                send("insert","lib",JSON.stringify(details));
             }
             request.send();
         }
         catch (e) {
             console.error(e);
             details.cover = '../cover/'+details.title+'.jpg';
-            send("insert",JSON.stringify(details));
+            send("insert","lib",JSON.stringify(details));
         }
     }
     else {
@@ -117,7 +117,7 @@ function saveDetails () {
         }
         SortAlpha();
         CreateList();
-        send("update",JSON.stringify(details));
+        send("update","lib",JSON.stringify(details));
     }
     create = false;
     document.getElementById('detailView').style.transform = 'translateX(200%)';
@@ -131,7 +131,7 @@ function del () {
             break;
         }
     }
-    send("delete",JSON.stringify(details));
+    send("delete","lib",JSON.stringify(details));
     document.getElementById('detailView').style.transform = 'translateX(200%)';
     unblur();
     SortAlpha();
@@ -218,5 +218,5 @@ function findCover (img, searchQuery) {
 
 function share () {
     var cry = encodeURI(btoa(JSON.stringify(details)));
-    send("shareMovieExt",cry);
+    send("shareMovieExt","",cry);
 }
