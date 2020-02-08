@@ -37,6 +37,8 @@ function listView() {
     }
     document.getElementById('gridSwitch').checked = false;
     document.documentElement.style.setProperty('--typeVis', "visible");
+    SortAlpha();
+    CreateList();
 }
 
 // Grid View
