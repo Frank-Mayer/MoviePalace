@@ -47,7 +47,7 @@ switch (theme) {
     case "dark":
         document.documentElement.style.setProperty('--main', "#121212");
         document.documentElement.style.setProperty('--accent', "whitesmoke");
-        document.documentElement.style.setProperty('--accent1', "#212123");
+        document.documentElement.style.setProperty('--accent1', "#333333");
         document.documentElement.style.setProperty('--accent2', "#05385B");
         break;
 }

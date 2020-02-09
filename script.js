@@ -100,7 +100,9 @@ function saveDetails () {
 
                 if (request.status >= 200 && request.status < 300) {
                     if (Number(data.searchInformation.totalResults) > 0) {
-                        details.cover = (data.items[0].link);
+                        console.log(data)
+                        details.cover = (data.items[0].image.thumbnailLink);
+                        details.coverHR = (data.items[0].link);
                     }
                 }
                 else {
