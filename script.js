@@ -181,7 +181,7 @@ function sort() {
             SortSeenLess();
             break;
     }
-    
+
 }
 
 function createDialog () {
@@ -248,4 +248,8 @@ function share () {
     var cry = encodeURI(btoa(JSON.stringify(details)));
     send("shareMovieExt","",cry);
     document.getElementById('detailView').style.transform = 'translateX(200%)'; unblur()
+}
+
+function changeTheme() {
+    send("settings","theme",document.getElementById("themeSelect").value);
 }

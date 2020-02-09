@@ -42,8 +42,9 @@ switch (theme) {
         document.documentElement.style.setProperty('--accent1', "#DDD");
         document.documentElement.style.setProperty('--accent2', "#EEE");
         break;
-    case "dark":
     default:
+        theme = "dark";
+    case "dark":
         document.documentElement.style.setProperty('--main', "#121212");
         document.documentElement.style.setProperty('--accent', "whitesmoke");
         document.documentElement.style.setProperty('--accent1', "#212123");
@@ -287,7 +288,7 @@ function loadWishlist () {
 }
 
 /***********************************************************************************/
-
+document.getElementById("themeSelect").value = theme;
 sort();
 CreateList();
 loadWishlist();
