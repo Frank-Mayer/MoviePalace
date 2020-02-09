@@ -29,7 +29,11 @@ html, body {
 	-o-user-select: none;
 	scroll-behavior: smooth;
     scrollbar-width: none;
-    background-color: var(--main);
+    background: var(--accent1);
+    background: -moz-linear-gradient(-30deg, var(--accent1) 0%, var(--accent2) 100%);
+    background: -webkit-linear-gradient(-30deg, var(--accent1) 0%, var(--accent2) 100%);
+    background: linear-gradient(-30deg, var(--accent1) 0%, var(--accent2) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#020024",endColorstr="#00d4ff",GradientType=1); 
 }
 
 p, nobr, h1, h2, h3, a, button, td, th, input, * {
