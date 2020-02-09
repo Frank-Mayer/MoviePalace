@@ -58,6 +58,9 @@ function CreateList() {
     newRow = true;
     letter = "";
     justFav = document.getElementById('favSwitch').checked;
+    if (document.getElementById('sortSelect').value != "alpha") {
+        list +='<p></p>';
+    }
     lib.forEach(element => fillList(element));
     if ( ((list.match(/'<div'/g) || []).length) > ((list.match(/'<\/div>'/g) || []).length) ) {
         list += '</div>';
@@ -196,9 +199,9 @@ function SortAlpha() {
 
 function SortNew() {
     lib.sort((a, b) => {
-        if (a["date"] > b["date"])
-            return 1;
         if (a["date"] < b["date"])
+            return 1;
+        if (a["date"] > b["date"])
             return -1;
 
         if (a["title"] > b["title"])
@@ -211,9 +214,9 @@ function SortNew() {
 
 function SortOld() {
     lib.sort((a, b) => {
-        if (a["date"] < b["date"])
-            return 1;
         if (a["date"] > b["date"])
+            return 1;
+        if (a["date"] < b["date"])
             return -1;
 
         if (a["title"] > b["title"])
@@ -225,16 +228,14 @@ function SortOld() {
 }
 
 function SortSeenMuch() {
-    console.log("seen much")
     lib.sort((a, b) => {
         try {
-        if (Number(a["watchcount"]) > Number(b["watchcount"]))
+        if (a["watchcount"] < b["watchcount"])
             return 1;
-        if (Number(a["watchcount"]) < Number(b["watchcount"]))
+        if (a["watchcount"] > b["watchcount"])
             return -1;
         }
         catch {
-            console.error("error watchcount")
         if (a["title"] > b["title"])
             return 1;
         if (a["title"] < b["title"])
@@ -247,12 +248,13 @@ function SortSeenMuch() {
 function SortSeenLess() {
     lib.sort((a, b) => {
         try {
-        if (a["watchcount"] < b["watchcount"])
+        if (Number(a["watchcount"]) > Number(b["watchcount"]))
             return 1;
-        if (a["watchcount"] > b["watchcount"])
+        if (Number(a["watchcount"]) < Number(b["watchcount"]))
             return -1;
         }
         catch {
+            console.error("error watchcount")
         if (a["title"] > b["title"])
             return 1;
         if (a["title"] < b["title"])
@@ -286,6 +288,6 @@ function loadWishlist () {
 
 /***********************************************************************************/
 
-SortAlpha();
+sort();
 CreateList();
 loadWishlist();

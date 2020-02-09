@@ -1,6 +1,6 @@
 function search (q) {
     query = q.toLowerCase();
-    SortAlpha();
+    sort();
     CreateList();
 }
 
@@ -99,7 +99,7 @@ function saveDetails () {
                 lib.push(details);
                 document.getElementById("del").style.visibility = "visible";
                 document.getElementById("share").style.visibility = "visible";
-                SortAlpha();
+                sort();
                 CreateList();
                 send("insert","lib",JSON.stringify(details));
             }
@@ -118,7 +118,7 @@ function saveDetails () {
                 break;
             }
         }
-        SortAlpha();
+        sort();
         CreateList();
         send("update","lib",JSON.stringify(details));
     }
@@ -137,7 +137,7 @@ function del () {
     send("delete","lib",JSON.stringify(details));
     document.getElementById('detailView').style.transform = 'translateX(200%)';
     unblur();
-    SortAlpha();
+    sort();
     CreateList();
 }
 
@@ -163,8 +163,8 @@ function addWishToDB () {
     document.getElementById("addWish").value = '';
 }
 
-function sort (value) {
-    switch (value) {
+function sort() {
+    switch (document.getElementById('sortSelect').value) {
         case "alpha":
             SortAlpha();
             break;
@@ -181,7 +181,7 @@ function sort (value) {
             SortSeenLess();
             break;
     }
-    CreateList();
+    
 }
 
 function createDialog () {
