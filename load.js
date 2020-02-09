@@ -2,7 +2,6 @@ var today = new Date();
 function generateID () {
     today = new Date();
     var nid = String(today.getFullYear())+String((Number(today.getMonth())+1))+String(today.getDate())+String(today.getHours())+String(today.getMinutes())+String(today.getSeconds())+String(today.getMilliseconds());
-    console.log("ID Gen: "+nid);
     return (nid);
 }
 var details = new Object;

@@ -174,12 +174,11 @@ input#search {
 }
 
 #list-view {
-    background: var(--accent1);
-    background: linear-gradient(-40deg, var(--accent1) 0%, var(--accent1) 20%, var(--accent2) 95%, var(--accent2) 100%); 
-    background-color: var(--accent1);
+    background-color: transparent;
     overflow-y: scroll;
     position: fixed;
-    height: calc(100% - 165px);
+    height: calc(100% - 147px);
+    top: 97px;
     left: 0;
     right: 0;
     margin: 0;
