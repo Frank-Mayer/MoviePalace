@@ -14,7 +14,7 @@
     <body>
 
         <div id="alpha">
-            <div style="background-color: var(--main); z-index: 10000; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+            <div style="background-color: var(--main); z-index: 10000; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" id="topToolHead">
                 <table id="finder" class="finder" width="100%" cellspacing="8px">
                     <tr>
                         <td>
@@ -30,7 +30,7 @@
                         </td>
                     </tr>
                 </table>
-                <p style="color: var(--accent);">
+                <p style="color: var(--accent);" id="movieCounterP">
                     <nobr>&#160;&#160;</nobr>
                     <nobr>Gesammte Filme: </nobr>
                     <nobr id="movieCounter">0</nobr>
@@ -196,9 +196,25 @@
         <div id="settingsView" class="floating">
             <div class="floatingChild1" onclick="document.getElementById('settingsView').style.transform = 'translateX(200%)'; unblur()"></div>
             <div class="floatingChild2" style="z-index: 2;">
-                <b>Einstellungen</b>
+                <b>Mehr</b>
                 <br><br>
-                <div style="box-shadow: none;">Icons von "Becris", "Freepik", and "Pixel perfect" vom flaticon.com</div>
+                <div style="box-shadow: none;">
+                    <b>
+                        Drittanbieter
+                    </b>
+                    <p>
+                        Gehosted bei GitHub Pages
+                    </p>
+                    <p>
+                        Icons von "Becris", "Freepik", und "Pixel perfect" von flaticon.com
+                    </p>
+                    <p>
+                        Fonts von Google
+                    </p>
+                    <p>
+                        Entwickler: Frank Mayer
+                    </p>
+                </div>
             </div>
         </div>
 
