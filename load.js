@@ -52,6 +52,7 @@ switch (theme) {
 }
 
 function CreateList() {
+    document.getElementById("movieCounter").innerHTML = lib.length;
     document.getElementById("list-view").innerHTML = "";
     list = "";
     newRow = true;
