@@ -56,6 +56,7 @@ function detailsID () {
 }
 
 function detailView (e) {
+    console.log(e)
     document.getElementById("del").style.visibility = "visible";
     document.getElementById("share").style.visibility = "visible";
     resetDetails();
@@ -65,20 +66,31 @@ function detailView (e) {
     document.getElementById('detailTitle').value = decodeURI(details.title);
     if (details.group) { document.getElementById('detailGroup').value = decodeURI(details.group); }
     else { document.getElementById('detailGroup').value = ""; }
+    if (details.episode) { document.getElementById('detailGroupEp').value = decodeURI(details.episode); }
+    else { document.getElementById('detailGroupEp').value = ""; }
     document.getElementById('detailStatus').value = Number(details.status);
     document.getElementById('detailTyp').value = Number(details.typ);
     document.getElementById('detailView').style.transform = 'translateX(0)';
 }
+
+const capitalize = (s) => {
+    if (typeof s !== 'string') return ''
+    return s.charAt(0).toUpperCase() + s.slice(1)
+  }
 
 function saveDetails () {
     if (create) {
         details.id = generateID();
         // resetDetails();
     }
-    details.title = String(document.getElementById('detailTitle').value);
-    details.group = String(document.getElementById('detailGroup').value);
+    details.title = capitalize(String(document.getElementById('detailTitle').value));
+    details.group = capitalize(String(document.getElementById('detailGroup').value));
+    details.episode = String(document.getElementById('detailGroupEp').value);
     details.status = String(document.getElementById('detailStatus').value);
     details.typ = String(document.getElementById('detailTyp').value);
+    details.sort = details.group+details.episode+details.title;
+    console.log(details.sort)
+
     if (create) {
         try {
             var request = new XMLHttpRequest();
@@ -167,6 +179,9 @@ function sort() {
     switch (document.getElementById('sortSelect').value) {
         case "alpha":
             SortAlpha();
+            break;
+        case "group":
+            SortGroup();
             break;
         case "new":
             SortNew();

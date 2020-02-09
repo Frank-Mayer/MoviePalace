@@ -106,6 +106,7 @@
                         <td style="text-align: right;">
                             <select width="100%" id="sortSelect" onchange="sort();CreateList();">
                                 <option value="alpha">Alphabetisch</option>
+                                <option value="group">Gruppen</option>
                                 <option value="new">Neueste zuerst</option>
                                 <option value="old">Älteste zuerst</option>
                                 <option value="seen much">Meistgesehen</option>
@@ -122,26 +123,39 @@
             <div class="floatingChild2" style="z-index: 2;">
                 <b id="detailViewHeader">Bearbeiten</b>
                 <br><br>
-                <table width="100%">
+                <table width="98%">
                     <tr>
                         <td>
                             <img src="" class="cover" id="detailCover" onclick='this.src = findCover(document.getElementById("detailCover"), document.getElementById("detailTitle").value)'>
                         </td>
-                        <td style="text-align: right;">
+                        <td style="text-align: right; transform: translateX(-5px);">
                             <input type="text" class="txtInput" id="detailTitle" autocomplete="on" placeholder="Titel">
                             <br><br>
-                            <input type="text" class="txtInput" id="detailGroup" autocomplete="on" placeholder="Gruppenname">
-                            <br><br>
-                            <select id="detailStatus" style="transform: translateX(10px);" width="100%">
+                            <table>
+                                <tr>
+                                    <td>
+                                        <input type="text" class="txtInput" id="detailGroup" autocomplete="on" placeholder="Gruppe">
+                                    </td>
+                                    <td>
+                                        <input type="number" class="txtInput" id="detailGroupEp" placeholder="Folge">
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+                <table width="100%">
+                    <tr>
+                        <td>
+                            <select id="detailStatus" width="100%">
                                 <option value="0">Verfügbar</option>
                                 <option value="1">Verliehen</option>
                             </select>
                             <br>
-                            <select id="detailTyp" style="transform: translateX(10px);" width="100%">
+                            <select id="detailTyp" width="100%">
                                 <option value="0">Blu-ray Disc</option>
                                 <option value="1">DVD</option>
                             </select>
-                            <br><br>
                         </td>
                     </tr>
                 </table>

@@ -15,6 +15,7 @@ function resetDetails () {
         "id": generateID(),
         "title": "",
         "group":"",
+        "episode":"",
         "status": "0"
     }
 } resetDetails();
@@ -94,17 +95,31 @@ function fillList(item) {
             constructThisItem = false;
         }
     }
+    if (((typeof item.group === 'undefined') || item.group=="") && (document.getElementById('sortSelect').value == "group")) {
+        constructThisItem = false;
+    }
     if (constructThisItem) {
-        var title = item["title"];
-        if (letter != title[0]) {
-            letter = title[0];
-            try {
-                if (document.getElementById('sortSelect').value == "alpha") {
+        if (document.getElementById('sortSelect').value == "alpha") {
+            var title = item["title"];
+            if (letter.toUpperCase() != title[0].toUpperCase()) {
+                letter = title[0].toUpperCase();
+                try {
                     addLetter(letter);
                 }
+                catch {
+                }
             }
-            catch {
-                addLetter(letter);
+        }
+        if (document.getElementById('sortSelect').value == "group") {
+            console.log(item);
+            var title = item["group"];
+            if (letter.toUpperCase() != title[0].toUpperCase()) {
+                letter = title[0].toUpperCase();
+                try {
+                    addLetter(letter);
+                }
+                catch {
+                }
             }
         }
         addToList(item);
@@ -192,6 +207,16 @@ function SortAlpha() {
         if (a["title"] > b["title"])
             return 1;
         if (a["title"] < b["title"])
+            return -1;
+        return 0;
+    });
+}
+
+function SortGroup() {
+    lib.sort((a, b) => {
+        if ((a["group"]+a["episode"]) > (b["group"]+b["episode"]))
+            return 1;
+        if ((a["group"]+a["episode"]) < (b["group"]+b["episode"]))
             return -1;
         return 0;
     });
