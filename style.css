@@ -76,6 +76,10 @@ input#search {
     border: 0;
     background-image: url("./placeholder.gif");
     background-size: cover;
+    border: none;
+    border-radius: 4px;
+    filter: grayscale(10%);
+    -webkit-backdrop-filter: grayscale(10%);
 }
 
 .finder td {
@@ -138,16 +142,19 @@ input#search {
     overflow-y: scroll;
 }
 
-@media only screen and (max-height: 400px) {
+@media only screen and (max-height: 510px) {
     .floating div {
         top: 0px;
         bottom: 0px;
     }
 }
 
-@media only screen and (min-height: 400px) {
-    .floating div {
-        bottom: calc(50% - 175px);
+@media only screen and (min-height: 510px) {
+    .floating .floatingChild2 {
+        position: absolute;
+        top: 50%;
+        -ms-transform: translateY(-50%);
+        transform: translateY(-50%);
     }
 }
 
