@@ -111,7 +111,6 @@ function fillList(item) {
             }
         }
         if (document.getElementById('sortSelect').value == "group") {
-            console.log(item);
             var title = item["group"];
             if (letter.toUpperCase() != title[0].toUpperCase()) {
                 letter = title[0].toUpperCase();

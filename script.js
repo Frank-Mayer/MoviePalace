@@ -56,7 +56,6 @@ function detailsID () {
 }
 
 function detailView (e) {
-    console.log(e)
     document.getElementById("del").style.visibility = "visible";
     document.getElementById("share").style.visibility = "visible";
     resetDetails();
@@ -89,7 +88,6 @@ function saveDetails () {
     details.status = String(document.getElementById('detailStatus').value);
     details.typ = String(document.getElementById('detailTyp').value);
     details.sort = details.group+details.episode+details.title;
-    console.log(details.sort)
 
     if (create) {
         try {
@@ -100,7 +98,6 @@ function saveDetails () {
 
                 if (request.status >= 200 && request.status < 300) {
                     if (Number(data.searchInformation.totalResults) > 0) {
-                        console.log(data)
                         details.cover = (data.items[0].image.thumbnailLink);
                         details.coverHR = (data.items[0].link);
                     }
@@ -239,7 +236,6 @@ function findCover (img, searchQuery) {
             var data = JSON.parse(this.response);
 
             if (request.status >= 200 && request.status < 300) {
-                console.log(data.items[0].link)
                 if (Number(data.searchInformation.totalResults) > 0) {
                     ret = (data.items[0].link).replace("http://", "https://");
                 }

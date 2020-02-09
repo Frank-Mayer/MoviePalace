@@ -5,7 +5,6 @@ var googleApi = {
     altUrl: 'https://www.googleapis.com/customsearch/v1/siterestrict?',
     query(q) {
         var _url = (this.altUrl+'key='+this.key+'&cx='+this.cx+'&q='+encodeURI(q)+'&num=1&searchType=image');
-        // console.log(_url);
         return (_url);
     }
 }
