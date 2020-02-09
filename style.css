@@ -179,7 +179,7 @@ input#search {
     background-color: var(--accent1);
     overflow-y: scroll;
     position: fixed;
-    height: calc(100% - 110px);
+    height: calc(100% - 165px);
     left: 0;
     right: 0;
     margin: 0;

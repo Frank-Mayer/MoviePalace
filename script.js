@@ -72,7 +72,8 @@ function detailView (e) {
 
 function saveDetails () {
     if (create) {
-        resetDetails();
+        details.id = generateID();
+        // resetDetails();
     }
     details.title = String(document.getElementById('detailTitle').value);
     details.group = String(document.getElementById('detailGroup').value);
@@ -86,7 +87,9 @@ function saveDetails () {
                 var data = JSON.parse(this.response);
 
                 if (request.status >= 200 && request.status < 300) {
-                    details.cover = (data.items[0].image.thumbnailLink);
+                    if (Number(data.searchInformation.totalResults) > 0) {
+                        details.cover = (data.items[0].link);
+                    }
                 }
                 else {
                     RandomApiKey();
@@ -219,7 +222,10 @@ function findCover (img, searchQuery) {
             var data = JSON.parse(this.response);
 
             if (request.status >= 200 && request.status < 300) {
-                ret = (data.items[0].image.thumbnailLink);
+                console.log(data.items[0].link)
+                if (Number(data.searchInformation.totalResults) > 0) {
+                    ret = (data.items[0].link).replace("http://", "https://");
+                }
                 img.src = ret;
                 details.cover = ret;
             }
