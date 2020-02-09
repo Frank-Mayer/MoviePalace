@@ -183,8 +183,8 @@ input#search {
     right: 0;
     margin: 0;
     background-color: var(--accent1);
-    background: -webkit-linear-gradient(-30deg, var(--accent1) 0%, var(--accent2) 100%);
-    background: linear-gradient(-30deg, var(--accent1) 0%, var(--accent2) 100%);
+    background: -webkit-linear-gradient(-30deg, var(--accent1) 0%, var(--accent1) 30%, var(--accent2) 100%);
+    background: linear-gradient(-30deg, var(--accent1) 0%, var(--accent1) 30%, var(--accent2) 100%);
     background-repeat: no-repeat;
 }
 
