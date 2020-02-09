@@ -147,7 +147,7 @@ input#search {
 
 @media only screen and (min-height: 400px) {
     .floating div {
-        top: calc(50% - 175px);
+        bottom: calc(50% - 175px);
     }
 }
 
@@ -168,7 +168,7 @@ input#search {
 
 #list-view {
     background: var(--accent1);
-    background: linear-gradient(10deg, var(--accent1) 0%, var(--accent1) 20%, var(--accent2) 95%, var(--accent2) 100%); 
+    background: linear-gradient(-40deg, var(--accent1) 0%, var(--accent1) 20%, var(--accent2) 95%, var(--accent2) 100%); 
     background-color: var(--accent1);
     overflow-y: scroll;
     position: fixed;

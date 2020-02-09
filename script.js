@@ -154,6 +154,8 @@ function addWishToDB () {
     var e = {
         "title": document.getElementById("addWish").value
     }
+    wishlist.push(e);
+    loadWishlist();
     send("insert","wishlist",JSON.stringify(e));
     document.getElementById("addWish").value = '';
 }
