@@ -45,9 +45,9 @@
                     </tr>
                 </table> -->
             </div>
-            <input type="range" id="alphabetScroll" name="alphabetScroll" orient="vertical" min="1" max="11">
+            <!-- <input type="range" id="alphabetScroll" name="alphabetScroll" orient="vertical" min="1" max="11"> -->
             <table style="color: white;" id="alphabet"></table>
-            <div id="list-view" onscroll="console.log(getScrollPercent())"></div>
+            <div id="list-view"></div>
             <div id="toolbar" class="toolbar">
                 <table width="100%" style="padding-top: 5px; padding-bottom: 5px;">
                     <tr>
@@ -76,7 +76,7 @@
 
         <div id="filter" class="floating">
             <div class="floatingChild1" onclick="document.getElementById('filter').style.transform = 'translateX(200%)'; unblur()"></div>
-            <div class="floatingChild2" style="z-index: 2;">
+            <div class="floatingChild2">
                 <b>Filter</b>
                 <table width="100%">
                     <tr>
@@ -122,7 +122,7 @@
 
         <div id="detailView" class="floating">
             <div class="floatingChild1" onclick="document.getElementById('detailView').style.transform = 'translateX(200%)'; unblur()"></div>
-            <div class="floatingChild2" style="z-index: 2;">
+            <div class="floatingChild2">
                 <b id="detailViewHeader">Bearbeiten</b>
                 <br><br>
                 <table width="98%">
@@ -154,7 +154,7 @@
                             </button>
                         </td>
                         <td>
-                            <input type="number" class="txtInput" id="detailWatchCounter" value="0" placeholder="Zähler" onchange="details.watchcount = this.value; console.log(this.value);">
+                            <input type="number" class="txtInput" id="detailWatchCounter" value="0" placeholder="Zähler" onchange="details.watchcount = this.value;">
                         </td>
                         <td><br /></td>
                         <td><br /></td>
@@ -206,7 +206,7 @@
 
         <div id="wishlistView" class="floating">
             <div class="floatingChild1" onclick="document.getElementById('wishlistView').style.transform = 'translateX(200%)'; unblur()"></div>
-            <div class="floatingChild2" style="z-index: 2;">
+            <div class="floatingChild2">
                 <b>Wunschliste</b>
                 <br><br>
                 <div id="wishList-view"></div>
@@ -231,7 +231,7 @@
 
         <div id="settingsView" class="floating">
             <div class="floatingChild1" onclick="document.getElementById('settingsView').style.transform = 'translateX(200%)'; unblur()"></div>
-            <div class="floatingChild2" style="z-index: 2;">
+            <div class="floatingChild2">
                 <b>Mehr</b>
                 <br><br>
                 <div style="box-shadow: none;">
@@ -270,7 +270,7 @@
         <script type="text/javascript" src="./google.cse.js"></script>
         <script type="text/javascript" src="./load.js"></script>
         <script>
-            blur();
+            doBlur();
         </script>
     </body>
 </html>

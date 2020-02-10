@@ -4,6 +4,8 @@ function search (q) {
     CreateList();
 }
 
+var blur = false;
+
 function doBlur () {
     document.getElementById('topToolHead').style.filter = 'blur(4px)';
     document.getElementById('topToolHead').style.WebkitFilter = 'blur(4px)';
@@ -11,6 +13,9 @@ function doBlur () {
     document.getElementById('list-view').style.WebkitFilter = 'blur(4px)';
     document.getElementById('toolbar').style.filter = 'blur(4px)';
     document.getElementById('toolbar').style.WebkitFilter = 'blur(4px)';
+    document.getElementById('alphabet').style.filter = 'blur(4px)';
+    document.getElementById('alphabet').style.WebkitFilter = 'blur(4px)';
+    blur = true;
 }
 
 function unblur () {
@@ -20,6 +25,9 @@ function unblur () {
     document.getElementById('list-view').style.WebkitFilter = 'blur(0)';
     document.getElementById('toolbar').style.filter = 'blur(0)';
     document.getElementById('toolbar').style.WebkitFilter = 'blur(0)';
+    document.getElementById('alphabet').style.filter = 'blur(0)';
+    document.getElementById('alphabet').style.WebkitFilter = 'blur(0)';
+    blur = false;
 }
 
 // Get the elements with class="column"
@@ -288,10 +296,12 @@ function watchAdd() {
 
 function getScrollPercent() {
     var containeR = document.getElementById("list-view");
-    var scrollPercentage = 100 * containeR.scrollTop / (containeR.scrollHeight-containeR.clientHeight); 
-    return (scrollPercentage);
+    var scrollPercentage = 100 * containeR.scrollTop / (containeR.scrollHeight-containeR.clientHeight);
+    return scrollPercentage;
 }
 
 function scrollToLetter(letter) {
-    alert(letter);
+    if (!blur) {
+        document.getElementById(letter).scrollIntoView({behavior: "smooth"});
+    }
 }

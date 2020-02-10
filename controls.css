@@ -201,8 +201,16 @@ select option {
 /***********************************************************************************************************/
 
 #alphabetScroll, #alphabet {
+    text-align: right;
     position: absolute;
     right: 0;
-    top: 100px;
-    z-index: 10000;
+    top: 90px;
+    z-index: 1;
+    width: 25px;
+}
+
+.alphabeticalScrollLetter {
+    width: 100%;
+    z-index: 1;
+    /* background-color: red; */
 }
