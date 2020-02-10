@@ -181,7 +181,7 @@ function addLetter (e) {
     list += '</div>';
 
     if (query == "") {
-        document.getElementById("alphabet").innerHTML += '<tr onmousemove="scrollToLetter(this.innerText)" id="scroll'+e+'"class="alphabeticalScrollLetter" ><td>'+e+'</td></tr>';
+        document.getElementById("alphabet").innerHTML += '<tr onmousemove="scrollToLetter(this.innerText)" id="scroll'+e+'" class="alphabeticalScrollLetter"><td class="alphabeticalScrollLetterTxt">'+e+'</td></tr>';
         // document.getElementById("alphabetScroll").max++;
     }
 }
@@ -326,8 +326,19 @@ loadWishlist();
 var updateAlphabeticalScroll = setInterval (()=>{
     var alphaLetters = document.getElementsByClassName("alphabeticalScrollLetter");
     var alphaScrollLetterheight = Number(document.getElementById("list-view").offsetHeight - 30) / Number(alphaLetters.length)
+    var fs = 0;
+    if (alphaLetters.length > 15) {
+        fs = 14;
+    }
+    else if (alphaLetters.length > 20) {
+        fs = 10;
+    }
+    else {
+        fs = 16;
+    }
     for (var i=0; i<alphaLetters.length; i++) {
         alphaLetters[i].style.height = String(alphaScrollLetterheight)+"px";
+        document.getElementsByClassName("alphabeticalScrollLetterTxt")[i].style.fontSize = String(fs)+"px";
     }
     // document.getElementById("alphabetScroll").style.height = document.getElementById("list-view").offsetHeight+"px";
     }, 500);
