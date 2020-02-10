@@ -176,7 +176,7 @@ function addLetter (e) {
         list +='</div>';
         newRow = true;
     }
-    list += '<div id="'+e+'" style="background-color: var(--main); text-align: center;">';
+    list += '<div class="letter" id="'+e+'" style="background-color: var(--main); text-align: center;">';
     list += '<p style="color: var(--accent)">'+e+'</p>';
     list += '</div>';
 
@@ -296,15 +296,26 @@ function SortSeenLess() {
 }
 
 function addToWishList (e) {
-    wishList += '<div id="'+e.title+'" onclick="delWish(\''+escapeHtml(JSON.stringify(e))+'\');">';wishlist.
+    wishList += '<div id="'+e.title+'">';wishlist.
     wishList += '<table width="100%" height="100%">';
     wishList += '<tr>';
     wishList += '<td>';
-    wishList += '<svg style="fill: black" width="20px" height="20px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512.001 512.001" xml:space="preserve"><g><g><path d="M505.922,476.567L285.355,256L505.92,35.435c8.106-8.105,8.106-21.248,0-29.354c-8.105-8.106-21.248-8.106-29.354,0L256.001,226.646L35.434,6.081c-8.105-8.106-21.248-8.106-29.354,0c-8.106,8.105-8.106,21.248,0,29.354L226.646,256L6.08,476.567c-8.106,8.106-8.106,21.248,0,29.354c8.105,8.105,21.248,8.106,29.354,0l220.567-220.567l220.567,220.567c8.105,8.105,21.248,8.106,29.354,0S514.028,484.673,505.922,476.567z"/></g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g></svg>';
+    wishList += '<svg onclick="delWish(\''+escapeHtml(JSON.stringify(e))+'\');" style="fill: black" width="20px" height="20px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512.001 512.001" xml:space="preserve"><g><g><path d="M505.922,476.567L285.355,256L505.92,35.435c8.106-8.105,8.106-21.248,0-29.354c-8.105-8.106-21.248-8.106-29.354,0L256.001,226.646L35.434,6.081c-8.105-8.106-21.248-8.106-29.354,0c-8.106,8.105-8.106,21.248,0,29.354L226.646,256L6.08,476.567c-8.106,8.106-8.106,21.248,0,29.354c8.105,8.105,21.248,8.106,29.354,0l220.567-220.567l220.567,220.567c8.105,8.105,21.248,8.106,29.354,0S514.028,484.673,505.922,476.567z"/></g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g></svg>';
+    wishList += '</td><td>';
+    wishList += '<nobr>&#160;</nobr>';
+    wishList += '</td><td>';
+    wishList += '<svg onclick="boughtWish(\''+escapeHtml(JSON.stringify(e))+'\');" style="fill: black" width="20px" height="20px" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="m453.332031 512h-394.664062c-32.363281 0-58.667969-26.304688-58.667969-58.667969v-394.664062c0-32.363281 26.304688-58.667969 58.667969-58.667969h330.835937c21.054688 0 41.683594 8.535156 56.554688 23.445312l42.496094 42.496094c15.125 15.125 23.445312 35.222656 23.445312 56.574219v330.816406c0 32.363281-26.304688 58.667969-58.667969 58.667969zm-394.664062-480c-14.699219 0-26.667969 11.96875-26.667969 26.667969v394.664062c0 14.699219 11.96875 26.667969 26.667969 26.667969h394.664062c14.699219 0 26.667969-11.96875 26.667969-26.667969v-330.816406c0-12.820313-4.992188-24.871094-14.058594-33.941406l-42.496094-42.496094c-8.9375-8.957031-21.289062-14.078125-33.941406-14.078125zm0 0"/><path d="m325.332031 149.332031h-224c-8.832031 0-16-7.167969-16-16v-117.332031c0-8.832031 7.167969-16 16-16s16 7.167969 16 16v101.332031h192v-101.332031c0-8.832031 7.167969-16 16-16s16 7.167969 16 16v117.332031c0 8.832031-7.167969 16-16 16zm0 0"/><path d="m256 416c-52.929688 0-96-43.070312-96-96s43.070312-96 96-96 96 43.070312 96 96-43.070312 96-96 96zm0-160c-35.285156 0-64 28.714844-64 64s28.714844 64 64 64 64-28.714844 64-64-28.714844-64-64-64zm0 0"/></svg>';
+    wishList += '</td><td>';
+    wishList += '<nobr>&#160;</nobr>';
+    wishList += '</td><td>';
+    wishList += '<svg onclick="shareWish(\''+escapeHtml(JSON.stringify(e))+'\');" style="fill: black" width="20px" height="20px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 551.13 551.13"><g><path d="m465.016 172.228h-51.668v34.446h34.446v310.011h-344.457v-310.011h34.446v-34.446h-51.669c-9.52 0-17.223 7.703-17.223 17.223v344.456c0 9.52 7.703 17.223 17.223 17.223h378.902c9.52 0 17.223-7.703 17.223-17.223v-344.456c0-9.52-7.703-17.223-17.223-17.223z" data-original="#000000" class="active-path" data-old_color="#000000" fill="#FFFFFF"/><path d="m258.342 65.931v244.08h34.446v-244.08l73.937 73.937 24.354-24.354-115.514-115.514-115.514 115.514 24.354 24.354z" data-original="#000000" class="active-path" data-old_color="#000000" fill="#FFFFFF"/></g> </svg>';
+    wishList += '</td><td>';
+    wishList += '<nobr>&#160;</nobr>';
     wishList += '</td>';
     wishList += '<td style="width: 100%; text-align: left;">';
     wishList += '<b style="font-size: 18px;">'+e.title+'</b><br>';
     wishList += '</td>';
+    wishList += '</tr>';
     wishList += '</table>';
     wishList += '</div>';
 }
@@ -318,6 +329,7 @@ function loadWishlist () {
 }
 
 /***********************************************************************************/
+
 document.getElementById("themeSelect").value = theme;
 sort();
 CreateList();

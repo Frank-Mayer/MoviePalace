@@ -177,6 +177,38 @@ function delWish (e) {
     send('delete','wishlist',JSON.stringify(e));
 }
 
+function boughtWish (e) {
+    e = JSON.parse(e);
+    document.getElementById('wishlistView').style.transform = 'translateX(200%)';
+    createDialog();
+    details.title=e["title"];
+    document.getElementById("detailTitle").value = details.title;
+    document.getElementById("confetti").style.visibility = "visible";
+    setTimeout(()=>{document.getElementById("confetti").style.visibility = "collapse";},2000);
+    delWish(e);
+}
+
+function shareWish (e) {
+    e = JSON.parse(e);
+    var request = new XMLHttpRequest();
+    request.open('GET', googleApi.query(details.title+" Movie Cover"), true);
+    request.onload = function () {
+        var data = JSON.parse(this.response);
+        if (request.status >= 200 && request.status < 300) {
+            if (Number(data.searchInformation.totalResults) > 0) {
+                e.cover = (data.items[0].link).replace("http://", "https://");
+                var cry = encodeURI(btoa(JSON.stringify(e)));
+                send("shareMovieExt",e.title,cry);
+            }
+        }
+        else {
+            RandomApiKey();
+            console.error(data);
+        }
+    }
+    request.send();
+}
+
 function addWishToDB () {
     var e = {
         "title": document.getElementById("addWish").value
@@ -220,6 +252,7 @@ function createDialog () {
     document.getElementById('detailCover').src = "";
     document.getElementById('detailTitle').value = "";
     document.getElementById('detailGroup').value = "";
+    document.getElementById('detailGroupEp').value = "";
     document.getElementById('detailStatus').value = 0;
     document.getElementById('detailTyp').value = 0;
     doBlur();
@@ -272,7 +305,7 @@ function findCover (img, searchQuery) {
 
 function share () {
     var cry = encodeURI(btoa(JSON.stringify(details)));
-    send("shareMovieExt","",cry);
+    send("shareMovieExt",details.title,cry);
     document.getElementById('detailView').style.transform = 'translateX(200%)'; unblur()
 }
 

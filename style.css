@@ -133,7 +133,7 @@ input#search {
 }
 
 .floatingChild2 {
-    z-index: 10;
+    z-index: 100;
 }
 
 .floating .floatingChild2 {
