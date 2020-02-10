@@ -205,6 +205,7 @@ select option {
     position: absolute;
     right: 0;
     top: 80px;
+    bottom: 50px;
     z-index: 1;
     width: 25px;
     background: -webkit-linear-gradient(90deg, transparent 0%, var(--main) 90%, var(--main) 100%);

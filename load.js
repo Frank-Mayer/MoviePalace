@@ -181,7 +181,7 @@ function addLetter (e) {
     list += '</div>';
 
     if (query == "") {
-        document.getElementById("alphabet").innerHTML += '<tr ontouchmove="scrollToLetter(this.innerText)" id="scroll'+e+'"class="alphabeticalScrollLetter" ><td>'+e+'</td></tr>';
+        document.getElementById("alphabet").innerHTML += '<tr onmousemove="scrollToLetter(this.innerText)" id="scroll'+e+'"class="alphabeticalScrollLetter" ><td>'+e+'</td></tr>';
         // document.getElementById("alphabetScroll").max++;
     }
 }
