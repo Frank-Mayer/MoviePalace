@@ -78,13 +78,6 @@ function CreateList() {
     else {
         gridView();
     }
-
-    var alphaLetters = document.getElementsByClassName("alphabeticalScrollLetter");
-    var alphaScrollLetterheight = Number(document.getElementById("list-view").offsetHeight) / Number(alphaLetters.length)
-    for (var i=0; i<alphaLetters.length; i++) {
-        alphaLetters[i].style.height = String(alphaScrollLetterheight)+"px";
-    }
-    // document.getElementById("alphabetScroll").style.height = document.getElementById("list-view").offsetHeight+"px";
 }
 
 function fillList(item) {
@@ -188,7 +181,7 @@ function addLetter (e) {
     list += '</div>';
 
     if (query == "") {
-        document.getElementById("alphabet").innerHTML += '<tr onmouseover="scrollToLetter(this.innerText)" id="letter'+e+'"class="alphabeticalScrollLetter" ><td>'+e+'</td></tr>';
+        document.getElementById("alphabet").innerHTML += '<tr onmouseover="scrollToLetter(this.innerText)" id="scroll'+e+'"class="alphabeticalScrollLetter" ><td>'+e+'</td></tr>';
         // document.getElementById("alphabetScroll").max++;
     }
 }
@@ -329,3 +322,12 @@ document.getElementById("themeSelect").value = theme;
 sort();
 CreateList();
 loadWishlist();
+
+var updateAlphabeticalScroll = setInterval (()=>{
+    var alphaScrollLetterheight = Number(document.getElementById("list-view").offsetHeight) / Number(alphaLetters.length)
+    var alphaLetters = document.getElementsByClassName("alphabeticalScrollLetter");
+    for (var i=0; i<alphaLetters.length; i++) {
+        alphaLetters[i].style.height = String(alphaScrollLetterheight)+"px";
+    }
+    // document.getElementById("alphabetScroll").style.height = document.getElementById("list-view").offsetHeight+"px";
+    }, 500);
