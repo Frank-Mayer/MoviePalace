@@ -187,11 +187,10 @@ function addLetter (e) {
     list += '<p style="color: var(--accent)">'+e+'</p>';
     list += '</div>';
 
-    if (document.getElementById("alphabet").innerHTML.length>0) {
-        document.getElementById("alphabet").innerHTML += "\n";
+    if (query == "") {
+        document.getElementById("alphabet").innerHTML += '<tr onmouseover="scrollToLetter(this.innerText)" id="letter'+e+'"class="alphabeticalScrollLetter" ><td>'+e+'</td></tr>';
+        // document.getElementById("alphabetScroll").max++;
     }
-    document.getElementById("alphabet").innerHTML += '<tr onmouseover="scrollToLetter(this.innerText)" id="letter'+e+'"class="alphabeticalScrollLetter" ><td>'+e+'</td></tr>';
-    // document.getElementById("alphabetScroll").max++;
 }
 
 function send (head, table, body) {
