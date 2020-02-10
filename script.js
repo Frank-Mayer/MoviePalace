@@ -108,8 +108,7 @@ function saveDetails () {
 
                 if (request.status >= 200 && request.status < 300) {
                     if (Number(data.searchInformation.totalResults) > 0) {
-                        details.cover = (data.items[0].image.thumbnailLink);
-                        details.coverHR = (data.items[0].link);
+                        details.cover = (data.items[0].link);
                     }
                 }
                 else {
@@ -124,7 +123,7 @@ function saveDetails () {
                 sort();
                 CreateList();
                 send("insert","lib",JSON.stringify(details));
-                document.getElementById(details.id).scrollIntoView();
+                document.getElementById(details.id).scrollIntoView({behavior: "smooth"});
             }
             request.send();
         }
@@ -132,7 +131,7 @@ function saveDetails () {
             console.error(e);
             details.cover = '../cover/'+details.title+'.jpg';
             send("insert","lib",JSON.stringify(details));
-            document.getElementById(details.id).scrollIntoView();
+            document.getElementById(details.id).scrollIntoView({behavior: "smooth"});
         }
     }
     else {
@@ -145,7 +144,7 @@ function saveDetails () {
         sort();
         CreateList();
         send("update","lib",JSON.stringify(details));
-        document.getElementById(details.id).scrollIntoView();
+        document.getElementById(details.id).scrollIntoView({behavior: "smooth"});
     }
     create = false;
     document.getElementById('detailView').style.transform = 'translateX(200%)';
@@ -244,7 +243,6 @@ function random () {
 
 function findCover (img, searchQuery) {
     var ret = "";
-    var ret1 = "";
     try {
         var request = new XMLHttpRequest();
         request.open('GET', googleApi.query(searchQuery+" Movie Cover"), true);
@@ -253,10 +251,8 @@ function findCover (img, searchQuery) {
             if (request.status >= 200 && request.status < 300) {
                 if (Number(data.searchInformation.totalResults) > 0) {
                     ret = (data.items[0].link).replace("http://", "https://");
-                    ret1 = (data.items[0].image.thumbnailLink).replace("http://", "https://");
-                    img.src = ret1;
-                    details.coverHR = ret;
-                    details.cover = ret1;
+                    img.src = ret;
+                    details.cover = ret;
                 }
             }
             else {
