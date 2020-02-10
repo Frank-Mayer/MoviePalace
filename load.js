@@ -253,18 +253,18 @@ function SortOld() {
 
 function SortSeenMuch() {
     lib.sort((a, b) => {
-        try {
-        if (a["watchcount"] < b["watchcount"])
-            return 1;
-        if (a["watchcount"] > b["watchcount"])
-            return -1;
+        var aw = Number(a["watchcount"]);
+        if (isNaN(aw)) {
+            aw = 0;
         }
-        catch {
-        if (a["title"] > b["title"])
-            return 1;
-        if (a["title"] < b["title"])
-            return -1;
+        var bw = Number(b["watchcount"]);
+        if (isNaN(bw)) {
+            aw = 0;
         }
+        if (aw < bw)
+            return 1;
+        if (aw > bw)
+            return -1;
         return 0;
     });
 }
@@ -272,9 +272,9 @@ function SortSeenMuch() {
 function SortSeenLess() {
     lib.sort((a, b) => {
         try {
-        if (Number(a["watchcount"]) > Number(b["watchcount"]))
+        if (Number(aw) > Number(bw))
             return 1;
-        if (Number(a["watchcount"]) < Number(b["watchcount"]))
+        if (Number(aw) < Number(bw))
             return -1;
         }
         catch {

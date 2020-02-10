@@ -58,6 +58,7 @@ function detailsID () {
 function detailView (e) {
     document.getElementById("del").style.visibility = "visible";
     document.getElementById("share").style.visibility = "visible";
+    document.getElementById("watchCountEditor").style.visibility = "visible";
     resetDetails();
     details = JSON.parse(e);
     doBlur();
@@ -111,6 +112,7 @@ function saveDetails () {
                 lib.push(details);
                 document.getElementById("del").style.visibility = "visible";
                 document.getElementById("share").style.visibility = "visible";
+                document.getElementById("watchCountEditor").style.visibility = "visible";
                 sort();
                 CreateList();
                 send("insert","lib",JSON.stringify(details));
@@ -204,6 +206,7 @@ function createDialog () {
     document.getElementById("detailViewHeader").innerHTML = "Hinzufügen";
     document.getElementById("del").style.visibility = "collapse";
     document.getElementById("share").style.visibility = "collapse";
+    document.getElementById("watchCountEditor").style.visibility = "collapse";
     document.getElementById('detailCover').src = "";
     document.getElementById('detailTitle').value = "";
     document.getElementById('detailGroup').value = "";
@@ -230,18 +233,20 @@ function random () {
 
 function findCover (img, searchQuery) {
     var ret = "";
+    var ret1 = "";
     try {
         var request = new XMLHttpRequest();
         request.open('GET', googleApi.query(searchQuery+" Movie Cover"), true);
         request.onload = function () {
             var data = JSON.parse(this.response);
-
             if (request.status >= 200 && request.status < 300) {
                 if (Number(data.searchInformation.totalResults) > 0) {
                     ret = (data.items[0].link).replace("http://", "https://");
+                    ret1 = (data.items[0].image.thumbnailLink).replace("http://", "https://");
+                    img.src = ret1;
+                    details.coverHR = ret;
+                    details.cover = ret1;
                 }
-                img.src = ret;
-                details.cover = ret;
             }
             else {
                 RandomApiKey();
