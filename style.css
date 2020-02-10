@@ -234,3 +234,9 @@ svg.typeIcon, svg.typeIcon * {
     margin: 0;
     padding: 8px;
 }
+
+#movieCounterP {
+    color: var(--accent);
+    -webkit-transform: translateY(-10px);
+    transform: translateY(-10px);
+}
