@@ -53,6 +53,9 @@ switch (theme) {
 }
 
 function CreateList() {
+    document.getElementById("alphabet").innerHTML = '';
+    document.getElementById("alphabetScroll").max = 0;
+
     document.getElementById("movieCounter").innerHTML = lib.length;
     document.getElementById("list-view").innerHTML = "";
     list = "";
@@ -176,6 +179,12 @@ function addLetter (e) {
     list += '<div class="letter" style="background-color: var(--main); text-align: center;">';
     list += '<p style="color: var(--accent)">'+e+'</p>';
     list += '</div>';
+
+    if (document.getElementById("alphabet").innerHTML.length>0) {
+        document.getElementById("alphabet").innerHTML += "\n";
+    }
+    document.getElementById("alphabet").innerHTML += '<tr onmouseover="scrollToLetter(\''+e+'\')"><td>'+e+'</td></tr>';
+    document.getElementById("alphabetScroll").max++;
 }
 
 function send (head, table, body) {

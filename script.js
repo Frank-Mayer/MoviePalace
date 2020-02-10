@@ -116,6 +116,7 @@ function saveDetails () {
                 sort();
                 CreateList();
                 send("insert","lib",JSON.stringify(details));
+                document.getElementById(details.id).scrollIntoView();
             }
             request.send();
         }
@@ -123,6 +124,7 @@ function saveDetails () {
             console.error(e);
             details.cover = '../cover/'+details.title+'.jpg';
             send("insert","lib",JSON.stringify(details));
+            document.getElementById(details.id).scrollIntoView();
         }
     }
     else {
@@ -135,6 +137,7 @@ function saveDetails () {
         sort();
         CreateList();
         send("update","lib",JSON.stringify(details));
+        document.getElementById(details.id).scrollIntoView();
     }
     create = false;
     document.getElementById('detailView').style.transform = 'translateX(200%)';
@@ -281,4 +284,14 @@ function watchSub() {
 function watchAdd() {
     details.watchcount = String(Number(details.watchcount) + 1);
     document.getElementById("detailWatchCounter").value = details.watchcount;
+}
+
+function getScrollPercent() {
+    var containeR = document.getElementById("list-view");
+    var scrollPercentage = 100 * containeR.scrollTop / (containeR.scrollHeight-containeR.clientHeight); 
+    return (scrollPercentage);
+}
+
+function scrollToLetter(letter) {
+    alert(letter);
 }

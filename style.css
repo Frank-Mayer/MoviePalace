@@ -177,6 +177,7 @@ input#search {
     background-color: transparent;
     overflow-y: scroll;
     position: fixed;
+    /* height: 100%; */
     height: calc(100% - 147px);
     top: 97px;
     left: 0;

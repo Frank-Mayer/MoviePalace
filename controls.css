@@ -197,3 +197,12 @@ select option {
     width: 26px;
     height: 26px;
 }
+
+/***********************************************************************************************************/
+
+#alphabetScroll, #alphabet {
+    position: absolute;
+    right: 0;
+    top: 100px;
+    z-index: 10000;
+}
