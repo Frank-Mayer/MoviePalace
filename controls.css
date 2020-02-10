@@ -204,8 +204,7 @@ select option {
     text-align: right;
     position: absolute;
     right: 0;
-    top: 80px;
-    bottom: 50px;
+    bottom: 50px !important;
     z-index: 1;
     width: 25px;
     background: -webkit-linear-gradient(90deg, transparent 0%, var(--main) 90%, var(--main) 100%);
@@ -214,7 +213,7 @@ select option {
 
 .alphabeticalScrollLetter {
     width: 100%;
-    z-index: 1;
+    z-index: 500000;
     color: var(--accent);
     /* background-color: red; */
 }

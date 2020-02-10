@@ -325,7 +325,7 @@ loadWishlist();
 
 var updateAlphabeticalScroll = setInterval (()=>{
     var alphaLetters = document.getElementsByClassName("alphabeticalScrollLetter");
-    var alphaScrollLetterheight = Number(document.getElementById("list-view").offsetHeight) / Number(alphaLetters.length)
+    var alphaScrollLetterheight = Number(document.getElementById("list-view").offsetHeight - 30) / Number(alphaLetters.length)
     for (var i=0; i<alphaLetters.length; i++) {
         alphaLetters[i].style.height = String(alphaScrollLetterheight)+"px";
     }
