@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
     <head>
 		<title>MoviePalace</title>
@@ -141,6 +141,26 @@
                                     </td>
                                 </tr>
                             </table>
+                        </td>
+                    </tr>
+                </table>
+                <table width="100%">
+                    <tr>
+                        <td>
+                            <button class="fab" id="watchSub" onclick="watchSub()">
+                                <p>-</p>
+                            </button>
+                        </td>
+                        <td>
+                            <input type="number" class="txtInput" id="detailWatchCounter" value="0" placeholder="Zähler" onchange="details.watchcount = this.value; console.log(this.value);">
+                        </td>
+                        <td><br /></td>
+                        <td><br /></td>
+                        <td><br /></td>
+                        <td>
+                            <button class="fab" id="watchAdd" onclick="watchAdd()">
+                                <p>+</p>
+                            </button>
                         </td>
                     </tr>
                 </table>

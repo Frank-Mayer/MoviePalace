@@ -69,6 +69,7 @@ function detailView (e) {
     else { document.getElementById('detailGroupEp').value = ""; }
     document.getElementById('detailStatus').value = Number(details.status);
     document.getElementById('detailTyp').value = Number(details.typ);
+    document.getElementById("detailWatchCounter").value = details.watchcount;
     document.getElementById('detailView').style.transform = 'translateX(0)';
 }
 
@@ -265,4 +266,14 @@ function share () {
 
 function changeTheme() {
     send("settings","theme",document.getElementById("themeSelect").value);
+}
+
+function watchSub() {
+    details.watchcount = String(Number(details.watchcount) - 1);
+    document.getElementById("detailWatchCounter").value = details.watchcount;
+}
+
+function watchAdd() {
+    details.watchcount = String(Number(details.watchcount) + 1);
+    document.getElementById("detailWatchCounter").value = details.watchcount;
 }
