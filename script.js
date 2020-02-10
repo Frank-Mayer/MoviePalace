@@ -191,7 +191,7 @@ function boughtWish (e) {
 function shareWish (e) {
     e = JSON.parse(e);
     var request = new XMLHttpRequest();
-    request.open('GET', googleApi.query(details.title+" Movie Cover"), true);
+    request.open('GET', googleApi.query(e.title+" Movie Cover"), true);
     request.onload = function () {
         var data = JSON.parse(this.response);
         if (request.status >= 200 && request.status < 300) {
