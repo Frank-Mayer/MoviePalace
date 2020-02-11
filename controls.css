@@ -217,3 +217,11 @@ select option {
     color: var(--accent);
     /* background-color: red; */
 }
+
+/***********************************************************************************************************/
+
+.wishlistButton, .wishlistButton * {
+    fill: #121212;
+    width: 25px;
+    height: 25px;
+}
