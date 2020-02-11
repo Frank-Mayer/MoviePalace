@@ -32,6 +32,11 @@ html, body {
     background-color: var(--main);
 }
 
+#alpha {
+    overflow: -moz-hidden-unscrollable;
+    overflow: hidden;
+}
+
 p, nobr, h1, h2, h3, a, button, td, th, input, * {
     text-decoration: 0;
     font-family: var(--font);
@@ -116,17 +121,17 @@ input#search {
     background-color: var(--blurOverlay);
     position: fixed;
     Transform: translateX(200%);
-    left: 0px;
-    right: 0px;
-    top: 0px;
-    bottom: 0px;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
 }
 
 .floating .floatingChild1 {
-    position: fixed; left: 0px;
-    right: 0px;
-    top: 0px;
-    bottom: 0px;
+    position: fixed; left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
     background-color: transparent;
     border-radius: 0;
     z-index: 2;
@@ -148,8 +153,8 @@ input#search {
 
 @media only screen and (max-height: 400px) {
     .floating div {
-        top: 0px;
-        bottom: 0px;
+        top:0;
+        bottom:0;
     }
 }
 
@@ -164,8 +169,8 @@ input#search {
 
 @media only screen and (max-width: 300px) {
     .floating div {
-        left: 0px;
-        right: 0px;
+        left:0;
+        right:0;
         overflow-x: scroll;
     }
 }
@@ -202,9 +207,9 @@ input#search {
     background-color: var(--accent);
     width: 100%;
     position: fixed;
-    bottom: 0px;
-    left: 0px;
-    right: 0px;
+    bottom:0;
+    left:0;
+    right:0;
     padding-bottom: 4px;
 }
 
