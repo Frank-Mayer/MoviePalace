@@ -28,6 +28,7 @@ function unblur () {
     document.getElementById('alphabet').style.filter = 'blur(0)';
     document.getElementById('alphabet').style.WebkitFilter = 'blur(0)';
     blur = false;
+    document.getElementById("detailFavSwitch").checked = false;
 }
 
 // Get the elements with class="column"
@@ -64,12 +65,14 @@ function detailsID () {
 }
 
 function detailView (e) {
+    document.getElementById("detailFavSwitchP").style.visibility = "visible";
     document.getElementById("del").style.visibility = "visible";
     document.getElementById("share").style.visibility = "visible";
     document.getElementById("watchCountEditor").style.visibility = "visible";
     resetDetails();
     details = JSON.parse(e);
     doBlur();
+    document.getElementById("detailFavSwitch").checked = (details.fav == "true");
     document.getElementById('detailCover').src = details.cover;
     document.getElementById('detailTitle').value = decodeURI(details.title);
     if (details.group) { document.getElementById('detailGroup').value = decodeURI(details.group); }
@@ -98,6 +101,12 @@ function saveDetails () {
     details.status = String(document.getElementById('detailStatus').value);
     details.typ = String(document.getElementById('detailTyp').value);
     details.sort = details.group+details.episode+details.title;
+    if (document.getElementById("detailFavSwitch").checked) {
+        details.fav = "true";
+    }
+    else {
+        details.fav = "false";
+    }
 
     if (create) {
         try {
@@ -117,6 +126,7 @@ function saveDetails () {
                     details.cover = '../cover/'+details.title+'.jpg';
                 }
                 lib.push(details);
+                document.getElementById("detailFavSwitchP").style.visibility = "visible";
                 document.getElementById("del").style.visibility = "visible";
                 document.getElementById("share").style.visibility = "visible";
                 document.getElementById("watchCountEditor").style.visibility = "visible";
@@ -249,6 +259,7 @@ function sort() {
 function createDialog () {
     resetDetails();
     document.getElementById("detailViewHeader").innerHTML = "Hinzufügen";
+    document.getElementById("detailFavSwitchP").style.visibility = "collapse";
     document.getElementById("del").style.visibility = "collapse";
     document.getElementById("share").style.visibility = "collapse";
     document.getElementById("watchCountEditor").style.visibility = "collapse";
