@@ -35,6 +35,8 @@ html, body {
 #alpha {
     overflow: -moz-hidden-unscrollable;
     overflow: hidden;
+    position: absolute;
+    top: 0; bottom: 0; left: 0; right: 0;
 }
 
 p, nobr, h1, h2, h3, a, button, td, th, input, * {
