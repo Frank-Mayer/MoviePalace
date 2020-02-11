@@ -71,7 +71,6 @@ function detailView (e) {
     document.getElementById("watchCountEditor").style.visibility = "visible";
     resetDetails();
     details = JSON.parse(e);
-    doBlur();
     document.getElementById("detailFavSwitch").checked = (details.fav == "true");
     document.getElementById('detailCover').src = details.cover;
     document.getElementById('detailTitle').value = decodeURI(details.title);
@@ -82,6 +81,7 @@ function detailView (e) {
     document.getElementById('detailStatus').value = Number(details.status);
     document.getElementById('detailTyp').value = Number(details.typ);
     document.getElementById("detailWatchCounter").value = details.watchcount;
+    doBlur();
     document.getElementById('detailView').style.transform = 'translateX(0)';
 }
 
