@@ -209,12 +209,11 @@ input#search {
     height: 50px;
     background-color: var(--accent);
     width: 100%;
-    position: fixed;
+    position: absolute;
     bottom:0;
     left:0;
     right:0;
     padding-bottom: 4px;
-    position: fixed;
 }
 
 .ToolbarSubtitle {
