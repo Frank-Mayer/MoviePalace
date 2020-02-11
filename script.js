@@ -263,7 +263,7 @@ function createDialog () {
     document.getElementById("del").style.visibility = "collapse";
     document.getElementById("share").style.visibility = "collapse";
     document.getElementById("watchCountEditor").style.visibility = "collapse";
-    document.getElementById('detailCover').src = "";
+    document.getElementById('detailCover').src = "./placeholder.gif";
     document.getElementById('detailTitle').value = "";
     document.getElementById('detailGroup').value = "";
     document.getElementById('detailGroupEp').value = "";
