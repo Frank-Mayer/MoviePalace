@@ -297,7 +297,6 @@ function SortSeenLess() {
 
 function addToWishList (e) {
     var strE = escapeHtml(JSON.stringify(e));
-    console.log(strE)
     wishList += '<div id="'+e.title+'">';
     wishList += '<table width="100%" height="100%">';
     wishList += '<tr>';
