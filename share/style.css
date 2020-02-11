@@ -49,9 +49,9 @@ h1 {
     left: 0px;
     right: 0px;
     height: 100%;
-    filter: blur(16px);
-    -webkit-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(100px);
+    -webkit-filter: blur(100px);
+    filter: blur(100px);
 }
 
 .panel {
