@@ -200,10 +200,11 @@ select option {
 
 /***********************************************************************************************************/
 
-#alphabetScroll, #alphabet {
+#alphabet {
     text-align: right;
     position: fixed;
     right: 0;
+    height: calc(100% - 145px) !important;
     bottom: 50px !important;
     z-index: 1;
     width: 25px;

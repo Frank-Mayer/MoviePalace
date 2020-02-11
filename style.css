@@ -259,3 +259,11 @@ svg.typeIcon, svg.typeIcon * {
     -webkit-transform: translateY(-10px);
     transform: translateY(-10px);
 }
+
+#topToolHead {
+    background-color: var(--main);
+    z-index: 10000;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
