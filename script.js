@@ -185,8 +185,8 @@ function boughtWish (e) {
     createDialog();
     details.title=e["title"];
     document.getElementById("detailTitle").value = details.title;
-    document.getElementById("confetti").style.visibility = "visible";
-    setTimeout(()=>{document.getElementById("confetti").style.visibility = "collapse";},2000);
+    startConfetti();
+    setTimeout(()=>{stopConfetti();},3000);
     delWish(e);
 }
 
