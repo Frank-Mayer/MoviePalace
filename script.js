@@ -166,7 +166,9 @@ function del () {
 }
 
 function delWish (e) {
-    e = JSON.parse(e);
+    if (typeof e == 'string') {
+        e = JSON.parse(e);
+    }
     for (var i=0; i<wishlist.length; i++){
         if (wishlist[i].title == e.title) {
             wishlist.splice(i, 1); 
