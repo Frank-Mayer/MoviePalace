@@ -36,7 +36,7 @@ html, body {
     overflow: -moz-hidden-unscrollable;
     overflow: hidden;
     position: absolute;
-    height: 90%;
+    height: 100%;
     top: 0; bottom: 0; left: 0; right: 0;
 }
 
@@ -90,7 +90,7 @@ input#search {
     -webkit-backdrop-filter: grayscale(10%);
 }
 
-.finder td {
+#finder td {
     background-color: var(--accent);
     color: var(--main);
     border: none;
@@ -98,14 +98,14 @@ input#search {
     padding: 8px;
 }
 
-.finder td svg {
+#finder td svg {
     fill: var(--main);
     height: 16px;
     width: 16px;
     transform: translateY(2px);
 }
 
-.finder td svg * {
+#finder td svg * {
     fill: var(--main);
 }
 
@@ -214,6 +214,7 @@ input#search {
     left:0;
     right:0;
     padding-bottom: 4px;
+    position: fixed;
 }
 
 .ToolbarSubtitle {

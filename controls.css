@@ -202,7 +202,7 @@ select option {
 
 #alphabetScroll, #alphabet {
     text-align: right;
-    position: absolute;
+    position: fixed;
     right: 0;
     bottom: 50px !important;
     z-index: 1;
@@ -224,4 +224,15 @@ select option {
     fill: #121212;
     width: 25px;
     height: 25px;
+}
+
+/***********************************************************************************************************/
+
+#finder, #movieCounterP {
+    overflow: hidden;
+    position:fixed;
+}
+
+#movieCounterP {
+    top: 60px;
 }
