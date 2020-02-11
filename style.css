@@ -209,7 +209,7 @@ input#search {
     height: 50px;
     background-color: var(--accent);
     width: 100%;
-    position: absolute;
+    position: fixed;
     bottom:0;
     left:0;
     right:0;
@@ -249,6 +249,7 @@ svg.typeIcon, svg.typeIcon * {
 }
 
 #movieCounterP {
+    position: fixed;
     color: var(--accent);
     -webkit-transform: translateY(-10px);
     transform: translateY(-10px);
