@@ -90,12 +90,17 @@ input#search {
     -webkit-backdrop-filter: grayscale(10%);
 }
 
+#finder {
+    position: fixed;
+}
+
 #finder td {
     background-color: var(--accent);
     color: var(--main);
     border: none;
     border-radius: 25px;
     padding: 8px;
+    position: static;
 }
 
 #finder td svg {
