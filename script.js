@@ -191,6 +191,7 @@ function boughtWish (e) {
 }
 
 function shareWish (e) {
+    console.log(e)
     e = JSON.parse(e);
     var request = new XMLHttpRequest();
     request.open('GET', googleApi.query(e.title+" Movie Cover"), true);
