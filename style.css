@@ -3,7 +3,8 @@
 }
 
 ::selection {
-    background: transparent;
+    background: var(--accent3);
+    color: var(--accent1);
 }
 
 :root {
