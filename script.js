@@ -100,7 +100,7 @@ function saveDetails () {
     details.episode = String(document.getElementById('detailGroupEp').value);
     details.status = String(document.getElementById('detailStatus').value);
     details.typ = String(document.getElementById('detailTyp').value);
-    details.sort = details.group+details.episode+details.title;
+    details.alpha = createAlphaSeachString(details);
     if (document.getElementById("detailFavSwitch").checked) {
         details.fav = "true";
     }
@@ -201,7 +201,6 @@ function boughtWish (e) {
 }
 
 function shareWish (e) {
-    console.log(e)
     e = JSON.parse(e);
     var request = new XMLHttpRequest();
     request.open('GET', googleApi.query(e.title+" Movie Cover"), true);
@@ -235,6 +234,9 @@ function addWishToDB () {
 function sort() {
     switch (document.getElementById('sortSelect').value) {
         case "alpha":
+            for (var i=0; i<lib.length; i++) {
+                lib[i].alpha = (createAlphaSeachString(lib[i]));
+            }
             SortAlpha();
             break;
         case "group":

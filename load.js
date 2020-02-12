@@ -103,7 +103,7 @@ function fillList(item) {
     }
     if (constructThisItem) {
         if (document.getElementById('sortSelect').value == "alpha") {
-            var title = item["title"];
+            var title = item["alpha"];
             if (letter.toUpperCase() != title[0].toUpperCase()) {
                 letter = title[0].toUpperCase();
                 try {
@@ -211,9 +211,9 @@ function send (head, table, body) {
 
 function SortAlpha() {
     lib.sort((a, b) => {
-        if (a["title"] > b["title"])
+        if (a["alpha"] > b["alpha"])
             return 1;
-        if (a["title"] < b["title"])
+        if (a["alpha"] < b["alpha"])
             return -1;
         return 0;
     });
@@ -327,6 +327,15 @@ function loadWishlist () {
     wishlist.forEach(element => addToWishList(element));
     
     document.getElementById("wishList-view").innerHTML = wishList;
+}
+
+function createAlphaSeachString (libEl) {
+    if (libEl.group !== undefined && libEl.group != "") {
+        return String(libEl.group+libEl.episode);
+    }
+    else {
+        return String(libEl.title)
+    }
 }
 
 /***********************************************************************************/
