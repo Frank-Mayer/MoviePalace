@@ -1,11 +1,13 @@
 var colorPref = [
     {
+        "light":"true",
         "main":"#F5F5F5",
         "accent":"#242424",
         "accent1":"#DDDDDD",
         "accent2":"#EEEEEE"
     },
     {
+        "light":"false",
         "main":"#121212",
         "accent":"#F5F5F5",
         "accent1":"#333333",
