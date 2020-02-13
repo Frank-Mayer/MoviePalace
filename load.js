@@ -35,20 +35,22 @@ if (!(speed > 0)) {
 }
 
 var theme = urlParams.get('theme');
+var quitAsk = urlParams.get('quitAsk');
+
 switch (theme) {
     case "light":
-        document.documentElement.style.setProperty('--main', "whitesmoke");
-        document.documentElement.style.setProperty('--accent', "#242424");
-        document.documentElement.style.setProperty('--accent1', "#DDD");
-        document.documentElement.style.setProperty('--accent2', "#EEE");
+        document.documentElement.style.setProperty('--main', colorPref[0].main);
+        document.documentElement.style.setProperty('--accent', colorPref[0].accent);
+        document.documentElement.style.setProperty('--accent1', colorPref[0].accent1);
+        document.documentElement.style.setProperty('--accent2', colorPref[0].accent2);
         break;
     default:
         theme = "dark";
     case "dark":
-        document.documentElement.style.setProperty('--main', "#121212");
-        document.documentElement.style.setProperty('--accent', "whitesmoke");
-        document.documentElement.style.setProperty('--accent1', "#333333");
-        document.documentElement.style.setProperty('--accent2', "#05385B");
+        document.documentElement.style.setProperty('--main', colorPref[1].main);
+        document.documentElement.style.setProperty('--accent', colorPref[1].accent);
+        document.documentElement.style.setProperty('--accent1', colorPref[1].accent1);
+        document.documentElement.style.setProperty('--accent2', colorPref[1].accent2);
         break;
 }
 
@@ -341,6 +343,8 @@ function createAlphaSeachString (libEl) {
 /***********************************************************************************/
 
 document.getElementById("themeSelect").value = theme;
+document.getElementById("quitAskSwitch").checked = (quitAsk === "true");
+
 sort();
 CreateList();
 loadWishlist();

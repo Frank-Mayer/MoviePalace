@@ -249,6 +249,17 @@
                                 </select>
                             </td>
                         </tr>
+                        <tr>
+                            <td>
+                                Frage vor schließen
+                            </td>
+                            <td style="text-align: right;">
+                                <label class="switch">
+                                    <input id="quitAskSwitch" type="checkbox" unchecked onchange='send("settings","quitAsk",String(this.checked));'>
+                                    <span class="slider round"></span>
+                                </label>
+                            </td>
+                        </tr>
                     </table>
                     <p>
                         Entwickler: Frank Mayer
@@ -269,8 +280,9 @@
             </div>
         </div>
         <img src="./confetti.gif" id="confetti" style="visibility: collapse; position: absolute;  top: 0; left: 0; right: 0; bottom: 0; height: 100%; width: 100%; z-index: 10000;">
-        <script type="text/javascript" src="./google.cse.js"></script>
-        <script type="text/javascript" src="./load.js"></script>
+        <script src="./google.cse.js"></script>
+        <script src="./colorPref.js"></script>
+        <script src="./load.js"></script>
         <script src="./confetti.min.js"></script>
         <script>
             doBlur();
