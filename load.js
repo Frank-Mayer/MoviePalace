@@ -38,6 +38,7 @@ var theme = urlParams.get('theme');
 var quitAsk = urlParams.get('quitAsk');
 
 switch (theme) {
+    case "light":
     case "1":
         document.documentElement.style.setProperty('--main', colorPref[0].main);
         document.documentElement.style.setProperty('--accent', colorPref[0].accent);
@@ -45,6 +46,7 @@ switch (theme) {
         document.documentElement.style.setProperty('--accent2', colorPref[0].accent2);
         break;
     default:
+    case "dark":
         theme = "0";
     case "0":
         document.documentElement.style.setProperty('--main', colorPref[1].main);
