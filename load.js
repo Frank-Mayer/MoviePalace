@@ -368,5 +368,4 @@ var updateAlphabeticalScroll = setInterval (()=>{
         alphaLetters[i].style.height = String(alphaScrollLetterheight)+"px";
         document.getElementsByClassName("alphabeticalScrollLetterTxt")[i].style.fontSize = String(fs)+"px";
     }
-    // document.getElementById("alphabetScroll").style.height = document.getElementById("list-view").offsetHeight+"px";
     }, 500);

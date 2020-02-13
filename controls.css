@@ -208,15 +208,18 @@ select option {
     bottom: 50px !important;
     z-index: 1;
     width: 25px;
-    background: -webkit-linear-gradient(90deg, transparent 0%, var(--main) 90%, var(--main) 100%);
-    background: linear-gradient(90deg, transparent 0%, var(--main) 90%, var(--main) 100%);
+    background: -webkit-linear-gradient(90deg, transparent 0%, var(--main) 75%, var(--main) 100%);
+    background: linear-gradient(90deg, transparent 0%, var(--main) 75%, var(--main) 100%);
 }
 
 .alphabeticalScrollLetter {
     width: 100%;
     z-index: 500000;
     color: var(--accent);
-    /* background-color: red; */
+}
+
+.alphabeticalScrollLetter {
+    position: static;
 }
 
 /***********************************************************************************************************/
