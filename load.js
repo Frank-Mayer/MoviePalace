@@ -325,7 +325,19 @@ function addToWishList (e) {
     wishList += '</div>';
 }
 
+function switchWishlistButton(){
+    if (wishlist.length > 0 && document.getElementById("addWish").value==="") {
+        document.getElementById("addWishToDB").style.display = "none";
+        document.getElementById("shareFullWishList").style.display = "block";
+    }
+    else {
+        document.getElementById("addWishToDB").style.display = "block";
+        document.getElementById("shareFullWishList").style.display = "none";
+    }
+}
+
 function loadWishlist () {
+    switchWishlistButton();
     document.getElementById("wishList-view").innerHTML = "";
     wishList = "";
     wishlist.forEach(element => addToWishList(element));

@@ -353,4 +353,18 @@ function scrollToLetter(letter) {
     if (!blur) {
         document.getElementById(letter).scrollIntoView({behavior: "smooth"});
     }
+    else {
+        var floatingChild1 = document.getElementsByClassName("floatingChild1");
+        for (var i=0; i<floatingChild1.length; i++) {
+            eventFire(floatingChild1[i], 'click');
+        }
+    }
+}
+
+function shareFullWishList() {
+    var strShareFullWishList = '🎬 Meine Wunschliste';
+    for (var i=0; i<wishlist.length; i++) {
+        strShareFullWishList += ('\n'+'•'+wishlist[i].title)
+    }
+    send("sharePlainText","",encodeURI(strShareFullWishList));
 }
