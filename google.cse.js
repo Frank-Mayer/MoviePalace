@@ -4,7 +4,7 @@ var googleApi = {
     url: 'https://www.googleapis.com/customsearch/v1?',
     altUrl: 'https://www.googleapis.com/customsearch/v1/siterestrict?',
     query(q) {
-        var _url = (this.altUrl+'key='+this.key+'&cx='+this.cx+'&q='+encodeURI(q)+'&num=10&searchType=image');
+        var _url = (this.altUrl+'key='+this.key+'&cx='+this.cx+'&q='+encodeURI(q)+'&num=5&searchType=image');
         return (_url);
     }
 }

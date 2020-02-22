@@ -240,3 +240,13 @@ svg.typeIcon, svg.typeIcon * {
     top: 0;
     width: 100%;
 }
+
+#coverSelector td {
+    width: 30%;
+    overflow-x: hidden;
+}
+
+#coverSelector {
+    overflow-x: scroll;
+    width: 100%;
+}

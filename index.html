@@ -120,7 +120,7 @@
                 <table width="98%">
                     <tr>
                         <td>
-                            <img src="" class="cover" id="detailCover" onclick='this.src = findCover(document.getElementById("detailCover"), document.getElementById("detailTitle").value)'>
+                            <img src="" class="cover" id="detailCover" onclick='findCover()'>
                         </td>
                         <td style="text-align: right; transform: translateX(-5px);">
                             <input type="text" class="txtInput" id="detailTitle" autocomplete="on" placeholder="Titel">
@@ -135,6 +135,42 @@
                                     </td>
                                 </tr>
                             </table>
+                        </td>
+                    </tr>
+                </table>
+                <table width="100%" style="text-align: center;" id="coverSelector">
+                    <tr>
+                        <td>
+                            <img src="" id="coverSelect1" class="cover" onclick='document.getElementById("detailCover").src=this.src; details.cover=this.src; document.getElementById("coverSelector").style.display = "none";'>
+                        </td>
+                        <td>
+                            <img src="" id="coverSelect2" class="cover" onclick='document.getElementById("detailCover").src=this.src; details.cover=this.src; document.getElementById("coverSelector").style.display = "none";'>
+                        </td>
+                        <td>
+                            <img src="" id="coverSelect3" class="cover" onclick='document.getElementById("detailCover").src=this.src; details.cover=this.src; document.getElementById("coverSelector").style.display = "none";'>
+                        </td>
+                        <td>
+                            <img src="" id="coverSelect4" class="cover" onclick='document.getElementById("detailCover").src=this.src; details.cover=this.src; document.getElementById("coverSelector").style.display = "none";'>
+                        </td>
+                        <td>
+                            <img src="" id="coverSelect5" class="cover" onclick='document.getElementById("detailCover").src=this.src; details.cover=this.src; document.getElementById("coverSelector").style.display = "none";'>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p id="coverSelect1Src" style="font-size: 12px;"></p>
+                        </td>
+                        <td>
+                            <p id="coverSelect2Src" style="font-size: 12px;"></p>
+                        </td>
+                        <td>
+                            <p id="coverSelect3Src" style="font-size: 12px;"></p>
+                        </td>
+                        <td>
+                            <p id="coverSelect4Src" style="font-size: 12px;"></p>
+                        </td>
+                        <td>
+                            <p id="coverSelect5Src" style="font-size: 12px;"></p>
                         </td>
                     </tr>
                 </table>

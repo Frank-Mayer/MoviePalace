@@ -85,6 +85,7 @@ function detailView (e) {
     document.getElementById('detailStatus').value = Number(details.status);
     document.getElementById('detailTyp').value = Number(details.typ);
     document.getElementById("detailWatchCounter").value = details.watchcount;
+    document.getElementById("coverSelector").style.display = "none";
     doBlur();
     document.getElementById('detailView').style.transform = 'translateX(0)';
 }
@@ -96,8 +97,8 @@ const capitalize = (s) => {
 
 function saveDetails () {
     if (create) {
+        resetDetails();
         details.id = generateID();
-        // resetDetails();
     }
     details.title = capitalize(String(document.getElementById('detailTitle').value));
     details.group = capitalize(String(document.getElementById('detailGroup').value));
@@ -113,39 +114,41 @@ function saveDetails () {
     }
 
     if (create) {
-        try {
-            var request = new XMLHttpRequest();
-            request.open('GET', googleApi.query(details.title+" Movie Cover"), true);
-            request.onload = function () {
-                var data = JSON.parse(this.response);
+        if (details.cover === "") {
+            try {
+                var request = new XMLHttpRequest();
+                request.open('GET', googleApi.query(details.title+" Movie Cover"), true);
+                request.onload = function () {
+                    var data = JSON.parse(this.response);
 
-                if (request.status >= 200 && request.status < 300) {
-                    if (Number(data.searchInformation.totalResults) > 0) {
-                        details.cover = (data.items[0].link);
+                    if (request.status >= 200 && request.status < 300) {
+                        if (Number(data.searchInformation.totalResults) > 0) {
+                            details.cover = (data.items[0].link);
+                        }
                     }
+                    else {
+                        RandomApiKey();
+                        console.error(data);
+                        details.cover = '../cover/'+details.title+'.jpg';
+                    }
+                    lib.push(details);
+                    document.getElementById("detailFavSwitchP").style.visibility = "visible";
+                    document.getElementById("del").style.visibility = "visible";
+                    document.getElementById("share").style.visibility = "visible";
+                    document.getElementById("watchCountEditor").style.visibility = "visible";
+                    sort();
+                    CreateList();
+                    send("insert","lib",JSON.stringify(details));
+                    document.getElementById(details.id).scrollIntoView({behavior: "smooth"});
                 }
-                else {
-                    RandomApiKey();
-                    console.error(data);
-                    details.cover = '../cover/'+details.title+'.jpg';
-                }
-                lib.push(details);
-                document.getElementById("detailFavSwitchP").style.visibility = "visible";
-                document.getElementById("del").style.visibility = "visible";
-                document.getElementById("share").style.visibility = "visible";
-                document.getElementById("watchCountEditor").style.visibility = "visible";
-                sort();
-                CreateList();
+                request.send();
+            }
+            catch (e) {
+                console.error(e);
+                details.cover = '../cover/'+details.title+'.jpg';
                 send("insert","lib",JSON.stringify(details));
                 document.getElementById(details.id).scrollIntoView({behavior: "smooth"});
             }
-            request.send();
-        }
-        catch (e) {
-            console.error(e);
-            details.cover = '../cover/'+details.title+'.jpg';
-            send("insert","lib",JSON.stringify(details));
-            document.getElementById(details.id).scrollIntoView({behavior: "smooth"});
         }
     }
     else {
@@ -275,6 +278,7 @@ function createDialog () {
     document.getElementById('detailGroupEp').value = "";
     document.getElementById('detailStatus').value = 0;
     document.getElementById('detailTyp').value = 0;
+    document.getElementById("coverSelector").style.display = "none";
     doBlur();
     create = true;
     document.getElementById('detailView').style.transform = 'translateX(0)';
@@ -291,35 +295,49 @@ function eventFire(el, etype){
   }
 
 function random () {
-    eventFire(document.getElementById(lib[Math.floor(Math.random() * lib.length)].id), 'click');
+    eventFire(document.getElementById(lib[Math.floor(Math.random() * (lib.length-1))].id), 'click');
 }
 
-function findCover (img, searchQuery) {
-    var ret = "";
+function findCover () {
     try {
+        document.getElementById("coverSelector").style.display = "none";
+        document.getElementById("coverSelect1").src = "";
+        document.getElementById("coverSelect2").src = "";
+        document.getElementById("coverSelect3").src = "";
+
         var request = new XMLHttpRequest();
-        request.open('GET', googleApi.query(searchQuery+" Movie Cover"), true);
+        request.open('GET', googleApi.query(document.getElementById("detailTitle").value+" Movie Cover"), true);
         request.onload = function () {
             var data = JSON.parse(this.response);
             if (request.status >= 200 && request.status < 300) {
                 if (Number(data.searchInformation.totalResults) > 0) {
-                    ret = (data.items[Math.floor(Math.random() * 11)].link).replace("http://", "https://");
-                    img.src = ret;
-                    details.cover = ret;
+                    console.log(data.items[0].displayLink)
+                    document.getElementById("coverSelect1").src = (data.items[0].link).replace("http://", "https://");
+                    document.getElementById("coverSelect2").src = (data.items[1].link).replace("http://", "https://");
+                    document.getElementById("coverSelect3").src = (data.items[2].link).replace("http://", "https://");
+                    document.getElementById("coverSelect4").src = (data.items[3].link).replace("http://", "https://");
+                    document.getElementById("coverSelect5").src = (data.items[4].link).replace("http://", "https://");
+
+                    document.getElementById("coverSelect1Src").innerHTML = (data.items[0].displayLink);
+                    document.getElementById("coverSelect2Src").innerHTML = (data.items[1].displayLink);
+                    document.getElementById("coverSelect3Src").innerHTML = (data.items[2].displayLink);
+                    document.getElementById("coverSelect4Src").innerHTML = (data.items[3].displayLink);
+                    document.getElementById("coverSelect5Src").innerHTML = (data.items[4].displayLink);
+                    
+                    document.getElementById("coverSelector").style.display = "block";
                 }
             }
             else {
                 RandomApiKey();
                 console.error(data);
-                img.src = "";
+                document.getElementById("coverSelector").style.display = "none";
             }
         }
         request.send();
     }
     catch (e) {
         console.error(e);
-        img.src = "";
-        details.cover = "";
+        document.getElementById("coverSelector").style.display = "none";
     }
 }
 
