@@ -363,8 +363,6 @@ function share () {
     var detailsComp = new Object;
     detailsComp.title=details.title;
     detailsComp.cover=details.cover;
-    console.log(details)
-    console.log(detailsComp)
     var cry = encodeURI(btoa(JSON.stringify(detailsComp)));
     send("shareMovieExt",details.title,cry);
     document.getElementById('detailView').style.transform = 'translateX(200%)'; unblur()

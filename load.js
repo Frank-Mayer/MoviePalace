@@ -2,7 +2,6 @@ var today = new Date();
 function generateID () {
     today = new Date();
     var nid = String(today.getFullYear())+String((Number(today.getMonth())+1))+String(today.getDate())+String(today.getHours())+String(today.getMinutes())+String(today.getSeconds())+String(today.getMilliseconds());
-    console.log("new id: "+nid)
     return (nid);
 }
 var details = new Object;
@@ -204,27 +203,13 @@ function addLetter (e) {
     }
 }
 
+var sendArr = JSON.parse('[]');
 function send (head, table, body) {
     if (table == "") {
         table = "-";
     }
     var str = head+'::'+table+'::'+body;
-    console.log(str);
-    if(history.pushState) {
-        history.pushState(null, null, '#'+str);
-    }
-    else {
-        location.hash = '#'+str;
-    }
-
-    setTimeout(function() {
-        if(history.pushState) {
-            history.pushState(null, null, '#null');
-        }
-        else {
-            location.hash = '#null';
-        }
-        }, speed);
+    sendArr.push(str)
 }
 
 function SortAlpha() {
@@ -406,3 +391,34 @@ function updateDialogSizeFc () {
 var updateDialogSize = setInterval (()=>{
     updateDialogSizeFc();
 }, 500);
+
+var updateDialogSize = setInterval (()=>{
+    if (sendArr.length > 0) {
+        var str = sendArr[0];
+        sendArr.shift();
+        console.log(str);
+        if(history.pushState) {
+            history.pushState(null, null, '#'+str);
+        }
+        else {
+            location.hash = '#'+str;
+        }
+
+        setTimeout(function() {
+            if(history.pushState) {
+                history.pushState(null, null, '#null');
+            }
+            else {
+                location.hash = '#null';
+            }
+        }, speed);
+    }
+    else {
+        if(history.pushState) {
+            history.pushState(null, null, '#null');
+        }
+        else {
+            location.hash = '#null';
+        }
+    }
+}, speed);
