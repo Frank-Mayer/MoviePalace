@@ -151,6 +151,17 @@ function saveDetails () {
                 document.getElementById(details.id).scrollIntoView({behavior: "smooth"});
             }
         }
+        else {
+            lib.push(details);
+            document.getElementById("detailFavSwitchP").style.visibility = "visible";
+            document.getElementById("del").style.visibility = "visible";
+            document.getElementById("share").style.visibility = "visible";
+            document.getElementById("watchCountEditor").style.visibility = "visible";
+            sort();
+            CreateList();
+            send("insert","lib",JSON.stringify(details));
+            document.getElementById(details.id).scrollIntoView({behavior: "smooth"});
+        }
     }
     else {
         for (var i = 0; lib.length; i++) {
