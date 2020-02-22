@@ -73,6 +73,7 @@ function detailsID () {
 }
 
 function detailView (e) {
+    create = false;
     document.getElementById("detailFavSwitchP").style.visibility = "visible";
     document.getElementById("del").style.visibility = "visible";
     document.getElementById("share").style.visibility = "visible";
@@ -100,10 +101,6 @@ const capitalize = (s) => {
   }
 
 function saveDetails () {
-    if (create) {
-        resetDetails();
-        details.id = generateID();
-    }
     details.title = capitalize(String(document.getElementById('detailTitle').value));
     details.group = capitalize(String(document.getElementById('detailGroup').value));
     details.episode = String(document.getElementById('detailGroupEp').value);
