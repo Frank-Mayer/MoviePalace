@@ -303,7 +303,7 @@ function findCover (img, searchQuery) {
             var data = JSON.parse(this.response);
             if (request.status >= 200 && request.status < 300) {
                 if (Number(data.searchInformation.totalResults) > 0) {
-                    ret = (data.items[0].link).replace("http://", "https://");
+                    ret = (data.items[Math.floor(Math.random() * 11)].link).replace("http://", "https://");
                     img.src = ret;
                     details.cover = ret;
                 }

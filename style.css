@@ -10,6 +10,7 @@
 :root {
     --main: #121212;
     --accent: #f5f5f5;
+    --accent-transp: #f5f5f5;
     --accent1: #333333;
     --accent2: #05386B;
     --accent3: #5CDB95;
@@ -153,7 +154,7 @@ input#search {
     right: 24px;
     bottom: 24px;
     padding: 16px;
-    background-color: #F5F5F5;
+    background-color: #F5F5F5E8;
     border: none;
     border-radius: 16px;
     color: #212121;
@@ -162,17 +163,11 @@ input#search {
     position: absolute;
 }
 
-@media only screen and (max-height: 400px) {
-    .floating .floatingChild2 {
-        top: 24px;
-    }
-}
-
 #list-view {
     background-color: transparent;
     overflow-y: scroll;
     position: fixed;
-    height: calc(100% - 147px);
+    height: calc(100% - 97px);
     top: 97px;
     left: 0;
     right: 0;
@@ -189,7 +184,9 @@ input#search {
 
 .toolbar {
     height: 50px;
-    background-color: var(--accent);
+    background-color: var(--accent-transp);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
     width: 100%;
     position: fixed;
     bottom:0;

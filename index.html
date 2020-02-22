@@ -101,6 +101,14 @@
                         </td>
                     </tr>
                 </table>
+                <hr>
+                <table width="100%" class="dialog_control">
+                    <tr>
+                        <td>
+                            <button onclick="document.getElementById('filter').style.transform = 'translateX(200%)'; unblur()"><b>OK</b></button>
+                        </td>
+                    </tr>
+                </table>
             </div>
         </div>
 
@@ -131,6 +139,11 @@
                     </tr>
                 </table>
                 <table width="100%" id="watchCountEditor">
+                    <tr>
+                        <td>
+                            Gesehen:
+                        </td>
+                    </tr>
                     <tr>
                         <td>
                             <button class="fab" id="watchSub" onclick="watchSub()">
@@ -179,6 +192,7 @@
                     </tr>
                 </table>
                 <p></p>
+                <hr>
                 <table width="100%" style="text-align: center;">
                     <tr>
                         <td>
@@ -195,6 +209,28 @@
                             <button class="fab" id="share" onclick="share()">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 551.13 551.13"><g><path d="m465.016 172.228h-51.668v34.446h34.446v310.011h-344.457v-310.011h34.446v-34.446h-51.669c-9.52 0-17.223 7.703-17.223 17.223v344.456c0 9.52 7.703 17.223 17.223 17.223h378.902c9.52 0 17.223-7.703 17.223-17.223v-344.456c0-9.52-7.703-17.223-17.223-17.223z" data-original="#000000" class="active-path" data-old_color="#000000" fill="#FFFFFF"/><path d="m258.342 65.931v244.08h34.446v-244.08l73.937 73.937 24.354-24.354-115.514-115.514-115.514 115.514 24.354 24.354z" data-original="#000000" class="active-path" data-old_color="#000000" fill="#FFFFFF"/></g> </svg>
                             </button>
+                        </td>
+                    </tr>
+                </table>
+                <table width="100%" class="dialog_control">
+                    <!-- <tr>
+                        <td>
+                            <button onclick="document.getElementById('detailView').style.transform = 'translateX(200%)'; saveDetails(); unblur()">Speichern</button>
+                        </td>
+                    </tr>
+                    <tr id="share">
+                        <td>
+                            <button onclick="document.getElementById('detailView').style.transform = 'translateX(200%)'; share(); unblur()">Teilen</button>
+                        </td>
+                    </tr>
+                    <tr id="del">
+                        <td>
+                            <button onclick="document.getElementById('detailView').style.transform = 'translateX(200%)'; del(); unblur()" style="color: #FF2626;">Löschen</button>
+                        </td>
+                    </tr> -->
+                    <tr>
+                        <td>
+                            <button onclick="document.getElementById('detailView').style.transform = 'translateX(200%)'; unblur()">Abbrechen</button>
                         </td>
                     </tr>
                 </table>
@@ -223,6 +259,14 @@
                             <button width="20px" class="small fab" id="shareFullWishList" onclick="shareFullWishList()" style="display: none;">
                                 <svg style="-webkit-transform: translateY(-2px);transform: translateY(-2px);" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 551.13 551.13"><g><path d="m465.016 172.228h-51.668v34.446h34.446v310.011h-344.457v-310.011h34.446v-34.446h-51.669c-9.52 0-17.223 7.703-17.223 17.223v344.456c0 9.52 7.703 17.223 17.223 17.223h378.902c9.52 0 17.223-7.703 17.223-17.223v-344.456c0-9.52-7.703-17.223-17.223-17.223z" data-original="#000000" class="active-path" data-old_color="#000000" fill="#FFFFFF"/><path d="m258.342 65.931v244.08h34.446v-244.08l73.937 73.937 24.354-24.354-115.514-115.514-115.514 115.514 24.354 24.354z" data-original="#000000" class="active-path" data-old_color="#000000" fill="#FFFFFF"/></g> </svg>
                             </button>
+                        </td>
+                    </tr>
+                </table>
+                <hr>
+                <table width="100%" class="dialog_control">
+                    <tr>
+                        <td>
+                            <button onclick="document.getElementById('wishlistView').style.transform = 'translateX(200%)'; unblur()"><b>OK</b></button>
                         </td>
                     </tr>
                 </table>
@@ -275,6 +319,14 @@
                         Fonts von Google
                     </p>
                 </div>
+                <hr>
+                <table width="100%" class="dialog_control">
+                    <tr>
+                        <td>
+                            <button onclick="document.getElementById('settingsView').style.transform = 'translateX(200%)'; unblur()"><b>OK</b></button>
+                        </td>
+                    </tr>
+                </table>
             </div>
         </div>
 

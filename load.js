@@ -42,6 +42,7 @@ switch (theme) {
     case "1":
         document.documentElement.style.setProperty('--main', colorPref[1].main);
         document.documentElement.style.setProperty('--accent', colorPref[1].accent);
+        document.documentElement.style.setProperty('--accent-transp', (String(colorPref[1].accent)+"F0"));
         document.documentElement.style.setProperty('--accent1', colorPref[1].accent1);
         document.documentElement.style.setProperty('--accent2', colorPref[1].accent2);
         break;
@@ -51,6 +52,7 @@ switch (theme) {
     case "0":
         document.documentElement.style.setProperty('--main', colorPref[0].main);
         document.documentElement.style.setProperty('--accent', colorPref[0].accent);
+        document.documentElement.style.setProperty('--accent-transp', (String(colorPref[0].accent)+"F0"));
         document.documentElement.style.setProperty('--accent1', colorPref[0].accent1);
         document.documentElement.style.setProperty('--accent2', colorPref[0].accent2);
         break;
@@ -74,6 +76,14 @@ function CreateList() {
         list += '</div>';
     }
     
+    list += '<div class="row">';
+    list += '<nobr>&#160;</nobr>';
+    list += '<br/>';
+    list += '<nobr>&#160;</nobr>';
+    list += '<br/>';
+    list += '<nobr>&#160;</nobr>';
+    list += '</div>';
+
     document.getElementById("list-view").innerHTML = list;
     
     if (listMode) {
@@ -365,19 +375,27 @@ loadWishlist();
 
 var updateAlphabeticalScroll = setInterval (()=>{
     var alphaLetters = document.getElementsByClassName("alphabeticalScrollLetter");
-    var alphaScrollLetterheight = Number(document.getElementById("list-view").offsetHeight - 30) / Number(alphaLetters.length)
-    var fs = 0;
-    if (alphaLetters.length > 15) {
-        fs = 14;
-    }
-    else if (alphaLetters.length > 20) {
-        fs = 10;
-    }
-    else {
-        fs = 16;
+    var alphaScrollLetterheight = Number(document.getElementById("list-view").offsetHeight - 80) / Number(alphaLetters.length)
+    var fs = (alphaScrollLetterheight/2)+2;
+    if (fs>18) {
+      fs=18;
     }
     for (var i=0; i<alphaLetters.length; i++) {
         alphaLetters[i].style.height = String(alphaScrollLetterheight)+"px";
         document.getElementsByClassName("alphabeticalScrollLetterTxt")[i].style.fontSize = String(fs)+"px";
     }
-    }, 500);
+}, 500);
+
+var height = 0;
+var updateDialogSize = setInterval (()=>{
+    if (height !== window.innerHeight) {
+        height = window.innerHeight;
+        var dialogs = document.getElementsByClassName("floatingChild2");
+        for (var i=0; i<dialogs.length; i++) {
+            dialogs[i].style.top = "";
+            if ((dialogs[i].offsetHeight + 48) > window.innerHeight ) {
+                dialogs[i].style.top = "24px";
+            }
+        }
+    }
+}, 500);
