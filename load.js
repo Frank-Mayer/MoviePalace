@@ -209,7 +209,7 @@ function send (head, table, body) {
         table = "-";
     }
     var str = head+'::'+table+'::'+body;
-    sendArr.push(str)
+    pushInterface(str);
 }
 
 function SortAlpha() {
@@ -392,10 +392,8 @@ var updateDialogSize = setInterval (()=>{
     updateDialogSizeFc();
 }, 500);
 
-var updateDialogSize = setInterval (()=>{
-    if (sendArr.length > 0) {
-        var str = sendArr[0];
-        sendArr.shift();
+function pushInterface(str){
+    if(location.hash === "#null") {
         console.log(str);
         if(history.pushState) {
             history.pushState(null, null, '#'+str);
@@ -403,22 +401,36 @@ var updateDialogSize = setInterval (()=>{
         else {
             location.hash = '#'+str;
         }
-
         setTimeout(function() {
-            if(history.pushState) {
-                history.pushState(null, null, '#null');
-            }
-            else {
-                location.hash = '#null';
+            if(location.hash !== "#null") {
+                resetInterface();
             }
         }, speed);
     }
     else {
-        if(history.pushState) {
-            history.pushState(null, null, '#null');
-        }
-        else {
-            location.hash = '#null';
-        }
+        sendArr.push(str);
+        console.log("[added] "+str)
     }
-}, speed);
+}
+
+function resetInterface(){
+    if(history.pushState) {
+        history.pushState(null, null, '#null');
+    }
+    else {
+        location.hash = '#null';
+    }
+}
+
+var updateDialogSize = setInterval (()=>{
+    if (sendArr.length > 0 && location.hash === "#null") {
+        pushInterface(sendArr[0]);
+        sendArr.shift();
+        setTimeout(function() {
+            resetInterface()
+        }, speed);
+    }
+}, Number(speed)*2);
+
+
+resetInterface();
