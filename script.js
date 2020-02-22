@@ -311,7 +311,6 @@ function findCover () {
             var data = JSON.parse(this.response);
             if (request.status >= 200 && request.status < 300) {
                 if (Number(data.searchInformation.totalResults) > 0) {
-                    console.log(data.items[0].displayLink)
                     document.getElementById("coverSelect1").src = (data.items[0].link).replace("http://", "https://");
                     document.getElementById("coverSelect2").src = (data.items[1].link).replace("http://", "https://");
                     document.getElementById("coverSelect3").src = (data.items[2].link).replace("http://", "https://");
@@ -323,7 +322,7 @@ function findCover () {
                     document.getElementById("coverSelect3Src").innerHTML = (data.items[2].displayLink);
                     document.getElementById("coverSelect4Src").innerHTML = (data.items[3].displayLink);
                     document.getElementById("coverSelect5Src").innerHTML = (data.items[4].displayLink);
-                    
+
                     document.getElementById("coverSelector").style.display = "block";
                 }
             }
