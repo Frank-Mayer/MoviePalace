@@ -390,7 +390,7 @@ var updateAlphabeticalScroll = setInterval (()=>{
 }, 500);
 
 var height = 0;
-var updateDialogSize = setInterval (()=>{
+function updateDialogSizeFc () {
     if (height !== window.innerHeight) {
         height = window.innerHeight;
         var dialogs = document.getElementsByClassName("floatingChild2");
@@ -401,4 +401,7 @@ var updateDialogSize = setInterval (()=>{
             }
         }
     }
+}
+var updateDialogSize = setInterval (()=>{
+    updateDialogSizeFc();
 }, 500);

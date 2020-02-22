@@ -18,6 +18,8 @@ function doBlur () {
     document.getElementById('alphabet').style.filter = 'blur(4px)';
     document.getElementById('alphabet').style.WebkitFilter = 'blur(4px)';
     blur = true;
+    height = 0;
+    updateDialogSizeFc();
 }
 
 function unblur () {
@@ -33,6 +35,8 @@ function unblur () {
     document.getElementById('alphabet').style.WebkitFilter = 'blur(0)';
     blur = false;
     document.getElementById("detailFavSwitch").checked = false;
+    height = 0;
+    updateDialogSizeFc();
 }
 
 // Get the elements with class="column"
@@ -299,44 +303,51 @@ function random () {
 }
 
 function findCover () {
-    try {
+    if (document.getElementById("coverSelector").style.display === "block") {
         document.getElementById("coverSelector").style.display = "none";
-        document.getElementById("coverSelect1").src = "";
-        document.getElementById("coverSelect2").src = "";
-        document.getElementById("coverSelect3").src = "";
+    }
+    else {
+        if (document.getElementById("detailTitle").value !== "") {
+            try {
+                document.getElementById("coverSelector").style.display = "none";
+                document.getElementById("coverSelect1").src = "";
+                document.getElementById("coverSelect2").src = "";
+                document.getElementById("coverSelect3").src = "";
 
-        var request = new XMLHttpRequest();
-        request.open('GET', googleApi.query(document.getElementById("detailTitle").value+" Movie Cover"), true);
-        request.onload = function () {
-            var data = JSON.parse(this.response);
-            if (request.status >= 200 && request.status < 300) {
-                if (Number(data.searchInformation.totalResults) > 0) {
-                    document.getElementById("coverSelect1").src = (data.items[0].link).replace("http://", "https://");
-                    document.getElementById("coverSelect2").src = (data.items[1].link).replace("http://", "https://");
-                    document.getElementById("coverSelect3").src = (data.items[2].link).replace("http://", "https://");
-                    document.getElementById("coverSelect4").src = (data.items[3].link).replace("http://", "https://");
-                    document.getElementById("coverSelect5").src = (data.items[4].link).replace("http://", "https://");
+                var request = new XMLHttpRequest();
+                request.open('GET', googleApi.query(document.getElementById("detailTitle").value+" Movie Cover"), true);
+                request.onload = function () {
+                    var data = JSON.parse(this.response);
+                    if (request.status >= 200 && request.status < 300) {
+                        if (Number(data.searchInformation.totalResults) > 0) {
+                            document.getElementById("coverSelect1").src = (data.items[0].link).replace("http://", "https://");
+                            document.getElementById("coverSelect2").src = (data.items[1].link).replace("http://", "https://");
+                            document.getElementById("coverSelect3").src = (data.items[2].link).replace("http://", "https://");
+                            document.getElementById("coverSelect4").src = (data.items[3].link).replace("http://", "https://");
+                            document.getElementById("coverSelect5").src = (data.items[4].link).replace("http://", "https://");
 
-                    document.getElementById("coverSelect1Src").innerHTML = (data.items[0].displayLink);
-                    document.getElementById("coverSelect2Src").innerHTML = (data.items[1].displayLink);
-                    document.getElementById("coverSelect3Src").innerHTML = (data.items[2].displayLink);
-                    document.getElementById("coverSelect4Src").innerHTML = (data.items[3].displayLink);
-                    document.getElementById("coverSelect5Src").innerHTML = (data.items[4].displayLink);
+                            document.getElementById("coverSelect1Src").innerHTML = (data.items[0].displayLink);
+                            document.getElementById("coverSelect2Src").innerHTML = (data.items[1].displayLink);
+                            document.getElementById("coverSelect3Src").innerHTML = (data.items[2].displayLink);
+                            document.getElementById("coverSelect4Src").innerHTML = (data.items[3].displayLink);
+                            document.getElementById("coverSelect5Src").innerHTML = (data.items[4].displayLink);
 
-                    document.getElementById("coverSelector").style.display = "block";
+                            document.getElementById("coverSelector").style.display = "block";
+                        }
+                    }
+                    else {
+                        RandomApiKey();
+                        console.error(data);
+                        document.getElementById("coverSelector").style.display = "none";
+                    }
                 }
+                request.send();
             }
-            else {
-                RandomApiKey();
-                console.error(data);
+            catch (e) {
+                console.error(e);
                 document.getElementById("coverSelector").style.display = "none";
             }
         }
-        request.send();
-    }
-    catch (e) {
-        console.error(e);
-        document.getElementById("coverSelector").style.display = "none";
     }
 }
 
