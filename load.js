@@ -432,5 +432,4 @@ var updateDialogSize = setInterval (()=>{
     }
 }, Number(speed)*2);
 
-
 resetInterface();
