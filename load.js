@@ -358,6 +358,8 @@ function createAlphaSeachString (libEl) {
 document.getElementById("themeSelect").value = theme;
 document.getElementById("quitAskSwitch").checked = (quitAsk === "true");
 
+lib = JSON.parse(JSON.stringify(lib).replace(/http:/gi, "https:"));
+
 sort();
 CreateList();
 loadWishlist();
