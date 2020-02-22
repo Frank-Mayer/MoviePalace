@@ -325,7 +325,7 @@ function findCover (img, searchQuery) {
 
 function share () {
     var detailsComp = new Object;
-    detailsComp.tiele=details.title;
+    detailsComp.title=details.title;
     detailsComp.cover=details.cover;
     console.log(details)
     console.log(detailsComp)
