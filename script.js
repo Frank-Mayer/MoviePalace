@@ -324,7 +324,12 @@ function findCover (img, searchQuery) {
 }
 
 function share () {
-    var cry = encodeURI(btoa(JSON.stringify(details)));
+    var detailsComp = new Object;
+    detailsComp.tiele=details.title;
+    detailsComp.cover=details.cover;
+    console.log(details)
+    console.log(detailsComp)
+    var cry = encodeURI(btoa(JSON.stringify(detailsComp)));
     send("shareMovieExt",details.title,cry);
     document.getElementById('detailView').style.transform = 'translateX(200%)'; unblur()
 }
