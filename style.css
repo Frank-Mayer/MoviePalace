@@ -9,8 +9,8 @@
 
 :root {
     --main: #121212;
+    --main-transp: #121212;
     --accent: #f5f5f5;
-    --accent-transp: #f5f5f5;
     --accent1: #333333;
     --accent2: #05386B;
     --accent3: #5CDB95;
@@ -89,7 +89,7 @@ input#search {
     border: none;
     border-radius: 4px;
     filter: grayscale(10%);
-    -webkit-backdrop-filter: grayscale(10%);
+    -webkit-filter: grayscale(10%);
 }
 
 #finder {
@@ -154,7 +154,7 @@ input#search {
     right: 24px;
     bottom: 24px;
     padding: 16px;
-    background-color: #F5F5F5F8;
+    background-color: #F5F5F5;
     border: none;
     border-radius: 16px;
     color: #212121;
@@ -184,9 +184,9 @@ input#search {
 
 .toolbar {
     height: 50px;
-    background-color: var(--accent-transp);
-    backdrop-filter: blur(16px);
+    background-color: var(--dark-transp);
     -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(16px);
     width: 100%;
     position: fixed;
     bottom:0;
@@ -196,7 +196,7 @@ input#search {
 }
 
 .ToolbarSubtitle {
-    color: var(--main);
+    color: #f5f5f5;
     padding: 0;
     margin: 0;
     transform: translateY(-5px);
@@ -207,6 +207,10 @@ svg, svg * {
     fill: var(--main);
     padding: 0;
     margin: 0;
+}
+
+.toolbar svg, .toolbar svg * {
+    fill: #f5f5f5;
 }
 
 svg.typeIcon, svg.typeIcon * {
