@@ -31,7 +31,7 @@ var create = false;
 var urlParams = new URLSearchParams(window.location.search);
 var speed = Number(urlParams.get('speed'));
 if (!(speed > 0)) {
-    speed  = 1000;
+    speed  = 500;
 }
 
 var theme = urlParams.get('theme');
@@ -403,11 +403,6 @@ function pushInterface(str){
         else {
             location.hash = '#'+str;
         }
-        setTimeout(function() {
-            if(location.hash !== "#null") {
-                resetInterface();
-            }
-        }, speed);
     }
     else {
         sendArr.push(str);
@@ -424,13 +419,25 @@ function resetInterface(){
     }
 }
 
+var his = location.hash;
 var updateDialogSize = setInterval (()=>{
-    if (sendArr.length > 0 && location.hash === "#null") {
-        pushInterface(sendArr[0]);
-        sendArr.shift();
-        setTimeout(function() {
-            resetInterface()
-        }, speed);
+    if (his === location.hash) {
+        if (sendArr.length > 0) {
+            if(history.pushState) {
+                history.pushState(null, null, '#'+sendArr[0]);
+            }
+            else {
+                location.hash = '#'+sendArr[0];
+            }
+            console.log(sendArr[0]);
+            sendArr.shift();
+        }
+        else {
+            resetInterface();
+        }
+    }
+    else {
+        his = location.hash;
     }
 }, Number(speed));
 
