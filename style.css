@@ -185,14 +185,24 @@ input#search {
 .toolbar {
     height: 50px;
     background-color: var(--dark-transp);
-    -webkit-backdrop-filter: blur(16px);
-    backdrop-filter: blur(16px);
     width: 100%;
     position: fixed;
     bottom:0;
     left:0;
     right:0;
     padding-bottom: 4px;
+}
+
+#toolbar-back {
+    background-color: transparent;
+    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(16px);
+    width: 100%;
+    position: fixed;
+    bottom:0;
+    height: 50px;
+    left:0;
+    right:0;
 }
 
 .ToolbarSubtitle {
