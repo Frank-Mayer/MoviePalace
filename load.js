@@ -41,7 +41,10 @@ switch (theme) {
     case "light":
     case "1":
         document.documentElement.style.setProperty('--main', colorPref[1].main);
-        document.documentElement.style.setProperty('--dark-transp', (String(colorPref[1].dark)+"F0"));
+        document.documentElement.style.setProperty('--dark-transp', (String(colorPref[0].main)+"C0"));
+        document.documentElement.style.setProperty('--dark', (String(colorPref[0].main)));
+        document.documentElement.style.setProperty('--light', (String(colorPref[1].main)));
+        document.documentElement.style.setProperty('--light-transp', (String(colorPref[1].main)+"C0"));
         document.documentElement.style.setProperty('--accent', colorPref[1].accent);
         document.documentElement.style.setProperty('--accent1', colorPref[1].accent1);
         document.documentElement.style.setProperty('--accent2', colorPref[1].accent2);
@@ -51,7 +54,10 @@ switch (theme) {
         theme = "0";
     case "0":
         document.documentElement.style.setProperty('--main', colorPref[0].main);
-        document.documentElement.style.setProperty('--dark-transp', (String(colorPref[0].dark)+"F0"));
+        document.documentElement.style.setProperty('--dark-transp', (String(colorPref[0].main)+"C0"));
+        document.documentElement.style.setProperty('--dark', (String(colorPref[0].main)));
+        document.documentElement.style.setProperty('--light', (String(colorPref[1].main)));
+        document.documentElement.style.setProperty('--light-transp', (String(colorPref[1].main)+"C0"));
         document.documentElement.style.setProperty('--accent', colorPref[0].accent);
         document.documentElement.style.setProperty('--accent1', colorPref[0].accent1);
         document.documentElement.style.setProperty('--accent2', colorPref[0].accent2);
