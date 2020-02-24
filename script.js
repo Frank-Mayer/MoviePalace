@@ -7,10 +7,8 @@ function search (q) {
 var blur = false;
 
 function doBlur () {
-    document.getElementById('movieCounterP').style.filter = 'blur(4px)';
-    document.getElementById('movieCounterP').style.WebkitFilter = 'blur(4px)';
-    document.getElementById('finder').style.filter = 'blur(4px)';
-    document.getElementById('finder').style.WebkitFilter = 'blur(4px)';
+    document.getElementById('topTools').style.filter = 'blur(4px)';
+    document.getElementById('topTools').style.WebkitFilter = 'blur(4px)';
     document.getElementById('list-view').style.filter = 'blur(4px)';
     document.getElementById('list-view').style.WebkitFilter = 'blur(4px)';
     document.getElementById('toolbar').style.filter = 'blur(4px)';
@@ -23,10 +21,8 @@ function doBlur () {
 }
 
 function unblur () {
-    document.getElementById('movieCounterP').style.filter = 'blur(0)';
-    document.getElementById('movieCounterP').style.WebkitFilter = 'blur(0)';
-    document.getElementById('finder').style.filter = 'blur(0)';
-    document.getElementById('finder').style.WebkitFilter = 'blur(0)';
+    document.getElementById('topTools').style.filter = 'blur(0)';
+    document.getElementById('topTools').style.WebkitFilter = 'blur(0)';
     document.getElementById('list-view').style.filter = 'blur(0)';
     document.getElementById('list-view').style.WebkitFilter = 'blur(0)';
     document.getElementById('toolbar').style.filter = 'blur(0)';
