@@ -74,16 +74,12 @@ input:checked + .slider:before {
     overflow-wrap: normal;
     overflow: hidden;
     color: var(--accent);
-    z-index: 200;
 }
 
 .column * {
     text-align: left;
 }
 
-.row {
-    z-index: 100;
-}
 
 /* Clear floats after the columns */
 .row:after {
@@ -200,12 +196,12 @@ select option {
 /***********************************************************************************************************/
 
 #alphabet {
+    z-index: 1;
     text-align: right;
     position: fixed;
     right: 0;
     height: calc(100% - 145px) !important;
     bottom: 50px !important;
-    z-index: 1;
     width: 25px;
     background: -webkit-linear-gradient(90deg, transparent 0%, var(--main) 75%, var(--main) 100%);
     background: linear-gradient(90deg, transparent 0%, var(--main) 75%, var(--main) 100%);
@@ -213,7 +209,6 @@ select option {
 
 .alphabeticalScrollLetter {
     width: 100%;
-    z-index: 500000;
     color: var(--accent);
     position: static;
     text-align: center;

@@ -307,6 +307,7 @@ function random () {
 }
 
 function findCover () {
+    document.getElementById("coverSelect1").scrollIntoView();
     if (document.getElementById("coverSelector").style.display === "block") {
         document.getElementById("coverSelector").style.display = "none";
     }

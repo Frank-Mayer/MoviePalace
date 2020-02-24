@@ -131,8 +131,9 @@ input#search {
 }
 
 .floating {
+    z-index: 2;
     background-color: var(--blurOverlay);
-    position: fixed;
+    position: absolute;
     Transform: translateX(200%);
     left: 0;
     right: 0;
@@ -141,17 +142,17 @@ input#search {
 }
 
 .floating .floatingChild1 {
-    position: fixed; left: 0;
+    position: absolute;
+    left: 0;
     right: 0;
     top: 0;
     bottom: 0;
-    background-color: transparent;
+    background-color: var(--main-transp);
     border-radius: 0;
-    z-index: 2;
 }
 
 .floating .floatingChild2 {
-    z-index: 100;
+    position: absolute;
     left: 24px;
     right: 24px;
     bottom: 24px;
@@ -160,9 +161,7 @@ input#search {
     border: none;
     border-radius: 16px;
     color: #212121;
-    position: fixed;
     overflow-y: scroll;
-    position: absolute;
 }
 
 #list-view {
@@ -199,11 +198,11 @@ input#search {
     height: 97px;
     background-color: var(--main-transp);
     width: 100%;
-    position: absolute;
+    position: fixed;
     top:0;
     left:0;
     right:0;
-    z-index: 100;
+    z-index: 1;
 }
 
 @supports (-webkit-backdrop-filter: blur(16px)) {
@@ -280,7 +279,7 @@ svg.typeIcon, svg.typeIcon * {
 
 #topToolHead {
     background-color: var(--main);
-    z-index: 10000;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     position: fixed;
     top: 0;
     width: 100%;
