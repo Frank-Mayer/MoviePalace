@@ -75,6 +75,11 @@ function CreateList() {
     document.getElementById("movieCounter").innerHTML = lib.length;
     document.getElementById("list-view").innerHTML = "";
     list = "";
+
+    list += '<div class="row">';
+    list += '<p>&#160;</p><p>&#160;</p>';
+    list += '</div>';
+
     newRow = true;
     letter = "";
     justFav = document.getElementById('favSwitch').checked;
@@ -376,7 +381,7 @@ loadWishlist();
 
 var updateAlphabeticalScroll = setInterval (()=>{
     var alphaLetters = document.getElementsByClassName("alphabeticalScrollLetter");
-    var alphaScrollLetterheight = Number(document.getElementById("list-view").offsetHeight - 174) / Number(alphaLetters.length)
+    var alphaScrollLetterheight = Number(document.getElementById("list-view").offsetHeight - 198) / Number(alphaLetters.length)
     var fs = (alphaScrollLetterheight/2)+2;
     if (fs>14) {
       fs=14;
