@@ -136,7 +136,7 @@ function saveDetails () {
                     sort();
                     CreateList();
                     send("insert","lib",JSON.stringify(details));
-                    document.getElementById(details.id).scrollIntoView({behavior: "smooth"});
+                    document.getElementById(details.id).scrollIntoView(scrollBehavior);
                 }
                 request.send();
             }
@@ -144,7 +144,7 @@ function saveDetails () {
                 console.error(e);
                 details.cover = '../cover/'+details.title+'.jpg';
                 send("insert","lib",JSON.stringify(details));
-                document.getElementById(details.id).scrollIntoView({behavior: "smooth"});
+                document.getElementById(details.id).scrollIntoView(scrollBehavior);
             }
         }
         else {
@@ -156,7 +156,7 @@ function saveDetails () {
             sort();
             CreateList();
             send("insert","lib",JSON.stringify(details));
-            document.getElementById(details.id).scrollIntoView({behavior: "smooth"});
+            document.getElementById(details.id).scrollIntoView(scrollBehavior);
         }
     }
     else {
@@ -169,7 +169,7 @@ function saveDetails () {
         sort();
         CreateList();
         send("update","lib",JSON.stringify(details));
-        document.getElementById(details.id).scrollIntoView({behavior: "smooth"});
+        document.getElementById(details.id).scrollIntoView(scrollBehavior);
     }
     create = false;
     document.getElementById('detailView').style.transform = 'translateX(200%)';
@@ -386,7 +386,7 @@ function getScrollPercent() {
 
 function scrollToLetter(letter) {
     if (!blur) {
-        document.getElementById(letter).scrollIntoView({behavior: "smooth"});
+        document.getElementById(letter).scrollIntoView(scrollBehavior);
     }
     else {
         var floatingChild1 = document.getElementsByClassName("floatingChild1");

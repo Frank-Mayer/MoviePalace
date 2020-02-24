@@ -1,3 +1,5 @@
+var scrollBehavior = {behavior: "smooth", block: "center", inline: "center"};
+
 var today = new Date();
 function generateID () {
     today = new Date();
