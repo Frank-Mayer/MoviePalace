@@ -154,7 +154,7 @@ input#search {
     right: 24px;
     bottom: 24px;
     padding: 16px;
-    background-color: #F5F5F5;
+    background-color: var(--light);
     border: none;
     border-radius: 16px;
     color: #212121;
@@ -184,15 +184,36 @@ input#search {
 
 .toolbar {
     height: 50px;
-    background-color: var(--dark-transp);
+    background-color: var(--dark);
     -webkit-backdrop-filter: blur(16px);
-    backdrop-filter: blur(16px);
     width: 100%;
     position: fixed;
     bottom:0;
     left:0;
     right:0;
     padding-bottom: 4px;
+}
+
+@supports (-webkit-backdrop-filter: blur(16px)) {
+    .toolbar {
+        background-color: var(--dark-transp);
+        -webkit-backdrop-filter: blur(16px);
+    }
+    .floating .floatingChild2 {
+        background-color: var(--light-transp);
+        -webkit-backdrop-filter: blur(16px);
+    }
+}
+
+@supports (backdrop-filter: blur(16px)) {
+    .toolbar {
+        background-color: var(--dark-transp);
+        backdrop-filter: blur(16px);
+    }
+    .floating .floatingChild2 {
+        background-color: var(--light-transp);
+        backdrop-filter: blur(16px);
+    }
 }
 
 .ToolbarSubtitle {
