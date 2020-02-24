@@ -220,9 +220,9 @@ function send (head, table, body) {
 
 function SortAlpha() {
     lib.sort((a, b) => {
-        if (a["alpha"] > b["alpha"])
+        if (a["alpha"].toLowerCase() > b["alpha"].toLowerCase())
             return 1;
-        if (a["alpha"] < b["alpha"])
+        if (a["alpha"].toLowerCase() < b["alpha"].toLowerCase())
             return -1;
         return 0;
     });
@@ -230,9 +230,9 @@ function SortAlpha() {
 
 function SortGroup() {
     lib.sort((a, b) => {
-        if ((a["group"]+a["episode"]) > (b["group"]+b["episode"]))
+        if ((a["group"]+a["episode"]).toLowerCase() > (b["group"]+b["episode"]).toLowerCase())
             return 1;
-        if ((a["group"]+a["episode"]) < (b["group"]+b["episode"]))
+        if ((a["group"]+a["episode"]).toLowerCase() < (b["group"]+b["episode"]).toLowerCase())
             return -1;
         return 0;
     });
