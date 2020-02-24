@@ -295,3 +295,8 @@ svg.typeIcon, svg.typeIcon * {
     overflow-x: scroll;
     width: 100%;
 }
+
+hr {
+    border: 1px solid var(--dark-transp);
+    border-radius: 5px;
+}
