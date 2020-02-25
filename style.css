@@ -21,10 +21,6 @@
     --typeVis: visible;
 }
 
-* {
-    overflow-x: hidden;
-}
-
 html, body {
     margin: 0;
     padding: 0;
@@ -38,6 +34,7 @@ html, body {
 	scroll-behavior: smooth;
     scrollbar-width: none;
     background-color: var(--main);
+    overflow-x: hidden;
 }
 
 #alpha {

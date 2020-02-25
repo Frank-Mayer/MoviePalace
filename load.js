@@ -383,7 +383,7 @@ loadWishlist();
 
 var updateAlphabeticalScroll = setInterval (()=>{
     var alphaLetters = document.getElementsByClassName("alphabeticalScrollLetter");
-    var alphaScrollLetterheight = Number(document.getElementById("list-view").offsetHeight - 198) / Number(alphaLetters.length)
+    var alphaScrollLetterheight = Number(document.getElementById("list-view").offsetHeight - 199) / Number(alphaLetters.length)
     var fs = (alphaScrollLetterheight/2)+2;
     if (fs>14) {
       fs=14;
