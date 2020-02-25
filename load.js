@@ -40,13 +40,14 @@ var theme = urlParams.get('theme');
 var quitAsk = urlParams.get('quitAsk');
 
 var transp = "A0";
+var transp1 = "75";
 
 switch (theme) {
     case "light":
     case "1":
         document.documentElement.style.setProperty('--main', colorPref[1].main);
-        document.documentElement.style.setProperty('--main-transp', (String(colorPref[1].main)+transp));
-        document.documentElement.style.setProperty('--dark-transp', (String(colorPref[0].main)+transp));
+        document.documentElement.style.setProperty('--main-transp', (String(colorPref[1].main)+transp1));
+        document.documentElement.style.setProperty('--dark-transp', (String(colorPref[0].main)+transp1));
         document.documentElement.style.setProperty('--dark', (String(colorPref[0].main)));
         document.documentElement.style.setProperty('--light', (String(colorPref[1].main)));
         document.documentElement.style.setProperty('--light-transp', (String(colorPref[1].main)+transp));
@@ -59,8 +60,8 @@ switch (theme) {
         theme = "0";
     case "0":
         document.documentElement.style.setProperty('--main', colorPref[0].main);
-        document.documentElement.style.setProperty('--main-transp', (String(colorPref[0].main)+transp));
-        document.documentElement.style.setProperty('--dark-transp', (String(colorPref[0].main)+transp));
+        document.documentElement.style.setProperty('--main-transp', (String(colorPref[0].main)+transp1));
+        document.documentElement.style.setProperty('--dark-transp', (String(colorPref[0].main)+transp1));
         document.documentElement.style.setProperty('--dark', (String(colorPref[0].main)));
         document.documentElement.style.setProperty('--light', (String(colorPref[1].main)));
         document.documentElement.style.setProperty('--light-transp', (String(colorPref[1].main)+transp));

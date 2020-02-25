@@ -209,37 +209,37 @@ input#search {
     z-index: 1;
 }
 
-@supports (-webkit-backdrop-filter: blur(16px)) {
+@supports (-webkit-backdrop-filter: blur(8px)) {
     .toolbar {
         background-color: var(--dark-transp);
         background: -webkit-linear-gradient(180deg, var(--dark-transp) 0%, var(--dark) 100%);
-        -webkit-backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(8px);
     }
     .floating .floatingChild2 {
         background-color: var(--light-transp);
-        -webkit-backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(8px);
     }
     #topTools {
         background: var(--main-transp);
         background: -webkit-linear-gradient(0deg, var(--main-transp) 0%, var(--main) 100%);
-        -webkit-backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(8px);
     }
 }
 
-@supports (backdrop-filter: blur(16px)) {
+@supports (backdrop-filter: blur(8px)) {
     .toolbar {
         background-color: var(--dark-transp);
         background: linear-gradient(180deg, var(--dark-transp) 0%, var(--dark) 100%);
-        backdrop-filter: blur(16px);
+        backdrop-filter: blur(8px);
     }
     .floating .floatingChild2 {
         background-color: var(--light-transp);
-        backdrop-filter: blur(16px);
+        backdrop-filter: blur(8px);
     }
     #topTools {
         background-color: var(--main-transp);
         background: linear-gradient(0deg, var(--main-transp) 0%, var(--main) 100%);
-        backdrop-filter: blur(16px);
+        backdrop-filter: blur(8px);
     }
 }
 
