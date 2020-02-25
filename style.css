@@ -212,7 +212,7 @@ input#search {
 @supports (-webkit-backdrop-filter: blur(16px)) {
     .toolbar {
         background-color: var(--dark-transp);
-        background: -webkit-linear-gradient(180deg, var(--main-transp) 0%, var(--main) 100%);
+        background: -webkit-linear-gradient(180deg, var(--dark-transp) 0%, var(--dark) 100%);
         -webkit-backdrop-filter: blur(16px);
     }
     .floating .floatingChild2 {
@@ -229,7 +229,7 @@ input#search {
 @supports (backdrop-filter: blur(16px)) {
     .toolbar {
         background-color: var(--dark-transp);
-        background: linear-gradient(180deg, var(--main-transp) 0%, var(--main) 100%);
+        background: linear-gradient(180deg, var(--dark-transp) 0%, var(--dark) 100%);
         backdrop-filter: blur(16px);
     }
     .floating .floatingChild2 {
