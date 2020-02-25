@@ -21,6 +21,10 @@
     --typeVis: visible;
 }
 
+* {
+    overflow-x: hidden;
+}
+
 html, body {
     margin: 0;
     padding: 0;
