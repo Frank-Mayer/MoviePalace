@@ -139,6 +139,7 @@ input#search {
     right: 0;
     top: 0;
     bottom: 0;
+    overflow: hidden;
 }
 
 .floating .floatingChild1 {
@@ -149,6 +150,7 @@ input#search {
     bottom: 0;
     background-color: var(--main-transp);
     border-radius: 0;
+    overflow: hidden;
 }
 
 .floating .floatingChild2 {
@@ -162,6 +164,7 @@ input#search {
     border-radius: 16px;
     color: #212121;
     overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 #list-view {
