@@ -303,6 +303,7 @@ svg.typeIcon, svg.typeIcon * {
 
 #coverSelector {
     overflow-x: scroll;
+    scroll-behavior: smooth;
     width: 100%;
 }
 
