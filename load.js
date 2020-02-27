@@ -460,7 +460,15 @@ var interfaceTimer = setInterval (()=>{
 }, Number(speed));
 
 window.addEventListener('popstate', function(event) {
-    pushInterface("quit");
+    if (blur) {
+        var floatingChild1 = document.getElementsByClassName("floatingChild1");
+        for (var i=0; i<floatingChild1.length; i++) {
+            eventFire(floatingChild1[i], 'click');
+        }
+    }
+    else {
+        pushInterface("quit");
+    }
 }, false);
 
 resetInterface();
