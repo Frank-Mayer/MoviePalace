@@ -460,15 +460,15 @@ var interfaceTimer = setInterval (()=>{
 }, Number(speed));
 
 window.addEventListener('popstate', function(event) {
-    if (blur) {
+    if (!blur || blur === undefined) {
+        doBlur();
+        document.getElementById('quitView').style.transform = 'translateX(0)';
+    }
+    else {
         var floatingChild1 = document.getElementsByClassName("floatingChild1");
         for (var i=0; i<floatingChild1.length; i++) {
             eventFire(floatingChild1[i], 'click');
         }
-    }
-    else {
-        document.getElementById('quitView').style.transform = 'translateX(0)';
-        doBlur();
     }
 }, false);
 
