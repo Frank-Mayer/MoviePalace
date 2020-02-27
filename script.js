@@ -4,7 +4,7 @@ function search (q) {
     CreateList();
 }
 
-var blur = false;
+var isBlur = false;
 
 function doBlur () {
     document.getElementById('topTools').style.filter = 'blur(4px)';
@@ -15,7 +15,7 @@ function doBlur () {
     document.getElementById('toolbar').style.WebkitFilter = 'blur(4px)';
     document.getElementById('alphabet').style.filter = 'blur(4px)';
     document.getElementById('alphabet').style.WebkitFilter = 'blur(4px)';
-    blur = true;
+    isBlur = true;
     height = 0;
     updateDialogSizeFc();
 }
@@ -29,7 +29,7 @@ function unblur () {
     document.getElementById('toolbar').style.WebkitFilter = 'blur(0)';
     document.getElementById('alphabet').style.filter = 'blur(0)';
     document.getElementById('alphabet').style.WebkitFilter = 'blur(0)';
-    blur = false;
+    isBlur = false;
     document.getElementById("detailFavSwitch").checked = false;
     height = 0;
     updateDialogSizeFc();
@@ -386,7 +386,7 @@ function getScrollPercent() {
 }
 
 function scrollToLetter(letter) {
-    if (!blur) {
+    if (!isBlur) {
         document.getElementById(letter).scrollIntoView(scrollBehavior);
     }
     else {

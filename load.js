@@ -459,8 +459,10 @@ var interfaceTimer = setInterval (()=>{
     }
 }, Number(speed));
 
+isBlur=false;
+
 window.addEventListener('popstate', function(event) {
-    if (blur==false || blur === undefined) {
+    if (isBlur==false || isBlur === undefined) {
         if (quitAsk === "true") {
             doBlur();
             document.getElementById('quitView').style.transform = 'translateX(0)';
