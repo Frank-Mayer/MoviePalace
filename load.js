@@ -467,7 +467,8 @@ window.addEventListener('popstate', function(event) {
         }
     }
     else {
-        pushInterface("quit");
+        document.getElementById('quitView').style.transform = 'translateX(0)';
+        doBlur();
     }
 }, false);
 

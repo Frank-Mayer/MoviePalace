@@ -368,6 +368,25 @@
             </div>
         </div>
 
+        <div id="quitView" class="floating">
+            <div class="floatingChild1" onclick="document.getElementById('quitView').style.transform = 'translateX(200%)'; unblur()"></div>
+            <div class="floatingChild2">
+                <b>Wirklich beenden?</b>
+                <br><br>
+                <hr>
+                <table width="100%" class="dialog_control">
+                    <tr>
+                        <td>
+                            <button onclick="document.getElementById('quitView').style.transform = 'translateX(200%)'; unblur()"><b>Abbrechen</b></button>
+                        </td>
+                        <td>
+                            <button onclick="pushInterface('quit')"><b>Beenden</b></button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
         <script src="./google.cse.js"></script>
         <script src="./colorPref.js"></script>
         <script src="./load.js"></script>
