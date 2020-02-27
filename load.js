@@ -461,8 +461,13 @@ var interfaceTimer = setInterval (()=>{
 
 window.addEventListener('popstate', function(event) {
     if (!blur || blur === undefined) {
-        doBlur();
-        document.getElementById('quitView').style.transform = 'translateX(0)';
+        if (quitAsk === "true") {
+            doBlur();
+            document.getElementById('quitView').style.transform = 'translateX(0)';
+        }
+        else {
+            pushInterface('quit');
+        }
     }
     else {
         var floatingChild1 = document.getElementsByClassName("floatingChild1");
