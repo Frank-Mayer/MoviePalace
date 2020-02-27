@@ -459,4 +459,8 @@ var interfaceTimer = setInterval (()=>{
     }
 }, Number(speed));
 
+window.addEventListener('popstate', function(event) {
+    pushInterface("quit");
+}, false);
+
 resetInterface();
