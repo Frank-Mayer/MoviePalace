@@ -367,6 +367,8 @@ function share () {
 
 function changeTheme() {
     send("settings","theme",document.getElementById("themeSelect").value);
+    theme = document.getElementById("themeSelect").value;
+    applyTheme();
 }
 
 function watchSub() {

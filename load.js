@@ -42,34 +42,38 @@ var quitAsk = urlParams.get('quitAsk');
 var transp = "A0";
 var transp1 = "75";
 
-switch (theme) {
-    case "light":
-    case "1":
-        document.documentElement.style.setProperty('--main', colorPref[1].main);
-        document.documentElement.style.setProperty('--main-transp', (String(colorPref[1].main)+transp1));
-        document.documentElement.style.setProperty('--dark-transp', (String(colorPref[0].main)+transp1));
-        document.documentElement.style.setProperty('--dark', (String(colorPref[0].main)));
-        document.documentElement.style.setProperty('--light', (String(colorPref[1].main)));
-        document.documentElement.style.setProperty('--light-transp', (String(colorPref[1].main)+transp));
-        document.documentElement.style.setProperty('--accent', colorPref[1].accent);
-        document.documentElement.style.setProperty('--accent1', colorPref[1].accent1);
-        document.documentElement.style.setProperty('--accent2', colorPref[1].accent2);
-        break;
-    default:
-    case "dark":
-        theme = "0";
-    case "0":
-        document.documentElement.style.setProperty('--main', colorPref[0].main);
-        document.documentElement.style.setProperty('--main-transp', (String(colorPref[0].main)+transp1));
-        document.documentElement.style.setProperty('--dark-transp', (String(colorPref[0].main)+transp1));
-        document.documentElement.style.setProperty('--dark', (String(colorPref[0].main)));
-        document.documentElement.style.setProperty('--light', (String(colorPref[1].main)));
-        document.documentElement.style.setProperty('--light-transp', (String(colorPref[1].main)+transp));
-        document.documentElement.style.setProperty('--accent', colorPref[0].accent);
-        document.documentElement.style.setProperty('--accent1', colorPref[0].accent1);
-        document.documentElement.style.setProperty('--accent2', colorPref[0].accent2);
-        break;
+function applyTheme() {
+    switch (theme) {
+        case "light":
+        case "1":
+            document.documentElement.style.setProperty('--main', colorPref[1].main);
+            document.documentElement.style.setProperty('--main-transp', (String(colorPref[1].main) + transp1));
+            document.documentElement.style.setProperty('--dark-transp', (String(colorPref[0].main) + transp1));
+            document.documentElement.style.setProperty('--dark', (String(colorPref[0].main)));
+            document.documentElement.style.setProperty('--light', (String(colorPref[1].main)));
+            document.documentElement.style.setProperty('--light-transp', (String(colorPref[1].main) + transp));
+            document.documentElement.style.setProperty('--accent', colorPref[1].accent);
+            document.documentElement.style.setProperty('--accent1', colorPref[1].accent1);
+            document.documentElement.style.setProperty('--accent2', colorPref[1].accent2);
+            break;
+        default:
+        case "dark":
+            theme = "0";
+        case "0":
+            document.documentElement.style.setProperty('--main', colorPref[0].main);
+            document.documentElement.style.setProperty('--main-transp', (String(colorPref[0].main) + transp1));
+            document.documentElement.style.setProperty('--dark-transp', (String(colorPref[0].main) + transp1));
+            document.documentElement.style.setProperty('--dark', (String(colorPref[0].main)));
+            document.documentElement.style.setProperty('--light', (String(colorPref[1].main)));
+            document.documentElement.style.setProperty('--light-transp', (String(colorPref[1].main) + transp));
+            document.documentElement.style.setProperty('--accent', colorPref[0].accent);
+            document.documentElement.style.setProperty('--accent1', colorPref[0].accent1);
+            document.documentElement.style.setProperty('--accent2', colorPref[0].accent2);
+            break;
+    }
 }
+                    
+applyTheme();
 
 function CreateList() {
     document.getElementById("alphabet").innerHTML = '';
