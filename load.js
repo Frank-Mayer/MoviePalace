@@ -467,10 +467,10 @@ function dialogOpen (){
     var floatingChild2 = document.getElementsByClassName("floatingChild2");
     for (var i=0; i<floatingChild2.length; i++) {
         if (floatingChild2[i].parentElement.style.transform == 'translateX(0px)' || floatingChild2[i].parentElement.style.transform == 'translateX(0)') {
-            return true;
+            return (true);
         }
     }
-    return false;
+    return (false);
 }
 
 window.addEventListener('popstate', function(event) {
