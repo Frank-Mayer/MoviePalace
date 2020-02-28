@@ -463,7 +463,7 @@ var interfaceTimer = setInterval (()=>{
     }
 }, Number(speed));
 
-function dialogOpen (){
+function dialogOpen(){
     var floatingChild2 = document.getElementsByClassName("floatingChild2");
     for (var i=0; i<floatingChild2.length; i++) {
         if (floatingChild2[i].parentElement.style.cssText != 'transform: translateX(200%);' && floatingChild2[i].parentElement.style.cssText != "") {
@@ -492,4 +492,5 @@ window.addEventListener('popstate', function(event) {
     }
 }, false);
 
+resetInterface();
 resetInterface();
