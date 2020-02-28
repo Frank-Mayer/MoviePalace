@@ -466,7 +466,8 @@ var interfaceTimer = setInterval (()=>{
 function dialogOpen (){
     var floatingChild2 = document.getElementsByClassName("floatingChild2");
     for (var i=0; i<floatingChild2.length; i++) {
-        if (floatingChild2[i].parentElement.style.transform == 'translateX(0px)' || floatingChild2[i].parentElement.style.transform == 'translateX(0)' || floatingChild2[i].parentElement.style.transform == '') {
+        console.log(floatingChild2[i].parentElement.style)
+        if (floatingChild2[i].parentElement.style.transform == 'translateX(0px)' || floatingChild2[i].parentElement.style.transform == 'translateX(0)' || floatingChild2[i].parentElement.style.transform == '' || floatingChild2[i].parentElement.style.webkitTransform == 'translateX(0px)' || floatingChild2[i].parentElement.style.webkitTransform == 'translateX(0)' || floatingChild2[i].parentElement.style.webkitTransform == '') {
             return (true);
         }
     }
