@@ -463,10 +463,18 @@ var interfaceTimer = setInterval (()=>{
     }
 }, Number(speed));
 
-isBlur=false;
+function dialogOpen (){
+    var floatingChild2 = document.getElementsByClassName("floatingChild2");
+    for (var i=0; i<floatingChild2.length; i++) {
+        if (floatingChild2[i].parentElement.style.transform == 'translateX(0px)' || floatingChild2[i].parentElement.style.transform == 'translateX(0)') {
+            return true;
+        }
+    }
+    return false;
+}
 
 window.addEventListener('popstate', function(event) {
-    if (isBlur==false || isBlur === undefined) {
+    if (!dialogOpen()) {
         if (quitAsk === "true") {
             doBlur();
             document.getElementById('quitView').style.transform = 'translateX(0)';
