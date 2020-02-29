@@ -189,11 +189,12 @@
                             </button>
                         </td>
                         <td>
-                            <input type="number" class="txtInput" id="detailWatchCounter" value="0" placeholder="Zähler" onchange="details.watchcount = this.value;">
+                            <input type="number" class="txtInput" id="detailWatchCounter" min="0" value="0" placeholder="Zähler" onchange="details.watchcount = this.value">
                         </td>
-                        <td><br /></td>
-                        <td><br /></td>
-                        <td><br /></td>
+                        <td><p>&#160;</p></td>
+                        <td><p>&#160;</p></td>
+                        <td><p>&#160;</p></td>
+                        <td><p>&#160;</p></td>
                         <td>
                             <button class="fab" id="watchAdd" onclick="watchAdd()">
                                 <svg version=1.1 viewBox="0 0 512 512" xml:space=preserve xmlns=http://www.w3.org/2000/svg xmlns:xlink=http://www.w3.org/1999/xlink><g><g><path d="M492,236H276V20c0-11.046-8.954-20-20-20c-11.046,0-20,8.954-20,20v216H20c-11.046,0-20,8.954-20,20s8.954,20,20,20h216 v216c0,11.046,8.954,20,20,20s20-8.954,20-20V276h216c11.046,0,20-8.954,20-20C512,244.954,503.046,236,492,236z" /></g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g></svg>
@@ -220,11 +221,15 @@
                             <select id="detailStatus" width="100%">
                                 <option value="0">Verfügbar</option>
                                 <option value="1">Verliehen</option>
+                                <option value="2">Ausgeliehen</option>
+                                <option value="3">Bestellt</option>
+                                <option value="4">Reserviert</option>
                             </select>
                             <br>
                             <select id="detailTyp" width="100%">
                                 <option value="0">Blu-ray Disc</option>
                                 <option value="1">DVD</option>
+                                <option value="2">Digital</option>
                             </select>
                         </td>
                     </tr>

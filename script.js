@@ -136,7 +136,12 @@ function saveDetails () {
                     sort();
                     CreateList();
                     send("insert","lib",JSON.stringify(details));
-                    document.getElementById(details.id).scrollIntoView(scrollBehavior);
+                    try {
+                        document.getElementById(details.id).scrollIntoViewIfNeeded(scrollBehavior);
+                    }
+                    catch {
+                        document.getElementById(details.id).scrollIntoView(scrollBehavior);
+                    }
                 }
                 request.send();
             }
@@ -144,7 +149,12 @@ function saveDetails () {
                 console.error(e);
                 details.cover = '../cover/'+details.title+'.jpg';
                 send("insert","lib",JSON.stringify(details));
-                document.getElementById(details.id).scrollIntoView(scrollBehavior);
+                try {
+                    document.getElementById(details.id).scrollIntoViewIfNeeded(scrollBehavior);
+                }
+                catch {
+                        document.getElementById(details.id).scrollIntoView(scrollBehavior);
+                }
             }
         }
         else {
@@ -156,7 +166,12 @@ function saveDetails () {
             sort();
             CreateList();
             send("insert","lib",JSON.stringify(details));
-            document.getElementById(details.id).scrollIntoView(scrollBehavior);
+            try {
+                document.getElementById(details.id).scrollIntoViewIfNeeded(scrollBehavior);
+            }
+            catch {
+                document.getElementById(details.id).scrollIntoView(scrollBehavior);
+            }
         }
     }
     else {
@@ -169,7 +184,12 @@ function saveDetails () {
         sort();
         CreateList();
         send("update","lib",JSON.stringify(details));
-        document.getElementById(details.id).scrollIntoView(scrollBehavior);
+        try {
+            document.getElementById(details.id).scrollIntoViewIfNeeded(scrollBehavior);
+        }
+        catch {
+            document.getElementById(details.id).scrollIntoView(scrollBehavior);
+        }
     }
     create = false;
     document.getElementById('detailView').style.transform = 'translateX(200%)';
@@ -307,8 +327,8 @@ function random () {
 }
 
 function findCover () {
-    document.getElementById("coverSelect1").scrollIntoView();
     if (document.getElementById("coverSelector").style.display === "block") {
+        document.getElementById("coverSelector").scrollTo(0, 0);
         document.getElementById("coverSelector").style.display = "none";
     }
     else {
@@ -338,6 +358,7 @@ function findCover () {
                             document.getElementById("coverSelect5Src").innerHTML = (data.items[4].displayLink);
 
                             document.getElementById("coverSelector").style.display = "block";
+                            document.getElementById("coverSelector").scrollTo(0, 0);
                         }
                     }
                     else {
@@ -372,7 +393,12 @@ function changeTheme() {
 }
 
 function watchSub() {
-    details.watchcount = String(Number(details.watchcount) - 1);
+    if (Number(details.watchcount)>0) {
+        details.watchcount = String(Number(details.watchcount) - 1);
+    }
+    else {
+        details.watchcount = "0";
+    }
     document.getElementById("detailWatchCounter").value = details.watchcount;
 }
 
@@ -389,7 +415,12 @@ function getScrollPercent() {
 
 function scrollToLetter(letter) {
     if (!isBlur) {
-        document.getElementById(letter).scrollIntoView(scrollBehavior);
+        try {
+            document.getElementById(letter).scrollIntoViewIfNeeded(scrollBehavior);
+        }
+        catch {
+            document.getElementById(letter).scrollIntoView(scrollBehavior);
+        }
     }
     else {
         var floatingChild1 = document.getElementsByClassName("floatingChild1");

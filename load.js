@@ -217,7 +217,7 @@ function addLetter (e) {
     list += '</div>';
 
     if (query == "") {
-        document.getElementById("alphabet").innerHTML += '<tr onmousemove="scrollToLetter(this.innerText)" id="scroll'+e+'" class="alphabeticalScrollLetter"><td class="alphabeticalScrollLetterTxt">'+e+'</td></tr>';
+        document.getElementById("alphabet").innerHTML += '<tr onmousemove="scrollToLetter(this.innerText)" id="scroll'+e+'" ontouchmove="scrollToLetter(this.innerText)" id="scroll'+e+'" class="alphabeticalScrollLetter"><td class="alphabeticalScrollLetterTxt">'+e+'</td></tr>';
         document.getElementById("alphabet").style.visibility = "visible";
     }
     else {
