@@ -97,7 +97,7 @@ function CreateList() {
         list +='<p></p>';
     }
     lib.forEach(element => fillList(element));
-    if ( ((list.match(/'<div'/g) || []).length) > ((list.match(/'<\/div>'/g) || []).length) ) {
+    if ( ((list.match(/<div/g) || []).length) > ((list.match(/<\/div>/g) || []).length) ) {
         list += '</div>';
     }
     
