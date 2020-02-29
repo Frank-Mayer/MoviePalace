@@ -493,4 +493,3 @@ window.addEventListener('popstate', function(event) {
 }, false);
 
 resetInterface();
-resetInterface();
