@@ -35,18 +35,19 @@ function unblur () {
     updateDialogSizeFc();
 }
 
-// Get the elements with class="column"
-var elements = document.getElementsByClassName("column");
+// Get the columns with class="column"
+var columns = document.getElementsByClassName("column");
 var listMode = (screen.availWidth < 500);
 var i = 0;
 
 // List View
 function listView() {
     listMode = true;
-    for (i = 0; i < elements.length; i++) {
-        elements[i].style.width = "calc(100% - 16px)";
-        elements[i].style.marginLeft = "8px";
-        elements[i].style.marginRight = "8px";
+    for (i = 0; i < columns.length; i++) {
+        columns[i].style.width = "calc(100% - 16px)";
+        columns[i].style.marginLeft = "8px";
+        columns[i].style.marginRight = "8px";
+        columns[i].style.height = "116px";
     }
     document.getElementById('gridSwitch').checked = false;
     document.documentElement.style.setProperty('--typeVis', "visible");
@@ -55,10 +56,11 @@ function listView() {
 // Grid View
 function gridView() {
     listMode = false;
-    for (i = 0; i < elements.length; i++) {
-        elements[i].style.width = "calc(50% - 12px)";
-        elements[i].style.marginLeft = "8px";
-        elements[i].style.marginRight = "0px";
+    for (i = 0; i < columns.length; i++) {
+        columns[i].style.width = "calc(50% - 12px)";
+        columns[i].style.marginLeft = "8px";
+        columns[i].style.marginRight = "0px";
+        columns[i].style.height = "164px";
     }
     document.getElementById('gridSwitch').checked = true;
     document.documentElement.style.setProperty('--typeVis', "collapse");
@@ -97,8 +99,8 @@ const capitalize = (s) => {
   }
 
 function saveDetails () {
-    details.title = capitalize(String(document.getElementById('detailTitle').value));
-    details.group = capitalize(String(document.getElementById('detailGroup').value));
+    details.title = capitalize(String(document.getElementById('detailTitle').value).replace('\'','`'));
+    details.group = capitalize(String(document.getElementById('detailGroup').value).replace('\'','`'));
     details.episode = String(document.getElementById('detailGroupEp').value);
     details.status = String(document.getElementById('detailStatus').value);
     details.typ = String(document.getElementById('detailTyp').value);
