@@ -81,11 +81,14 @@ function CreateList() {
 
     document.getElementById("movieCounter").innerHTML = lib.length;
     document.getElementById("list-view").innerHTML = "";
-    list = "";
 
-    list += '<div class="row">';
-    list += '<p>&#160;</p><p>&#160;</p>';
-    list += '</div>';
+    list += '<div class="row"><p>&#160;</p><p>&#160;</p></div>';
+
+    {
+        if (recommendation.count > 0) {
+            list += '<p></p><div class="row"><b>Empfehlungen</b><table id="recommendation">'+recommendation.html+'</table></div>';
+        }
+    }
 
     newRow = true;
     letter = "";
@@ -98,9 +101,7 @@ function CreateList() {
         list += '</div>';
     }
     
-    list += '<div class="row">';
-    list += '<p>&#160;</p>';
-    list += '<br/>';
+    list += '<div class="row"><p>&#160;</p><br/>';
     if (!listMode) {
         list += '<p>&#160;</p><p>&#160;</p><p>&#160;</p><p>&#160;</p><p>&#160;</p>';
     }
@@ -162,15 +163,6 @@ function fillList(item) {
         }
         addToList(item);
     }
-}
-
-function escapeHtml(unsafe) {
-    return unsafe
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
 }
 
 function addToList (e) {

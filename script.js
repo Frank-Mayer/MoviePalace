@@ -4,6 +4,15 @@ function search (q) {
     CreateList();
 }
 
+function escapeHtml(unsafe) {
+    return unsafe
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
+
 var isBlur = false;
 
 function doBlur () {

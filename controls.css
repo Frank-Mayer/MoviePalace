@@ -113,6 +113,29 @@ input:checked + .slider:before {
     color: var(--main);
 }
 
+#recommendation {
+    text-align: center;
+}
+
+#recommendation * {
+    color: var(--accent);
+    text-align: left;
+}
+
+#recommendation td {
+    text-align: center;
+    margin-left: 8px;
+}
+
+#recommendation td div {
+    border-radius: 100%;
+    margin-top: 8px;
+    height: 70px;
+    width: 70px;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
 /***********************************************************************************************************/
 
 .txtInput {
