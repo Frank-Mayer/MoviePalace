@@ -147,12 +147,7 @@ function saveDetails () {
                     sort();
                     CreateList();
                     send("insert","lib",JSON.stringify(details));
-                    try {
-                        document.getElementById(details.id).scrollIntoViewIfNeeded(scrollBehavior);
-                    }
-                    catch {
-                        document.getElementById(details.id).scrollIntoView(scrollBehavior);
-                    }
+                    document.getElementById(details.id).scrollIntoView(scrollBehavior);
                 }
                 request.send();
             }
@@ -160,12 +155,7 @@ function saveDetails () {
                 console.error(e);
                 details.cover = '../cover/'+details.title+'.jpg';
                 send("insert","lib",JSON.stringify(details));
-                try {
-                    document.getElementById(details.id).scrollIntoViewIfNeeded(scrollBehavior);
-                }
-                catch {
-                        document.getElementById(details.id).scrollIntoView(scrollBehavior);
-                }
+                document.getElementById(details.id).scrollIntoView(scrollBehavior);
             }
         }
         else {
@@ -177,12 +167,7 @@ function saveDetails () {
             sort();
             CreateList();
             send("insert","lib",JSON.stringify(details));
-            try {
-                document.getElementById(details.id).scrollIntoViewIfNeeded(scrollBehavior);
-            }
-            catch {
-                document.getElementById(details.id).scrollIntoView(scrollBehavior);
-            }
+            document.getElementById(details.id).scrollIntoView(scrollBehavior);
         }
     }
     else {
@@ -195,12 +180,7 @@ function saveDetails () {
         sort();
         CreateList();
         send("update","lib",JSON.stringify(details));
-        try {
-            document.getElementById(details.id).scrollIntoViewIfNeeded(scrollBehavior);
-        }
-        catch {
-            document.getElementById(details.id).scrollIntoView(scrollBehavior);
-        }
+        document.getElementById(details.id).scrollIntoView(scrollBehavior);
     }
     create = false;
     document.getElementById('detailView').style.transform = 'translateX(200%)';
@@ -426,12 +406,7 @@ function getScrollPercent() {
 
 function scrollToLetter(letter) {
     if (!isBlur) {
-        try {
-            document.getElementById(letter).scrollIntoViewIfNeeded(scrollBehavior);
-        }
-        catch {
-            document.getElementById(letter).scrollIntoView(scrollBehavior);
-        }
+        document.getElementById(letter).scrollIntoView(scrollBehavior);
     }
     else {
         var floatingChild1 = document.getElementsByClassName("floatingChild1");

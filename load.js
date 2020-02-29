@@ -76,6 +76,8 @@ function applyTheme() {
 applyTheme();
 
 function CreateList() {
+    list="";
+
     document.getElementById("alphabet").innerHTML = '';
     // document.getElementById("alphabetScroll").max = 0;
 
@@ -102,13 +104,10 @@ function CreateList() {
     }
     
     list += '<div class="row"><p>&#160;</p><br/>';
-    if (!listMode) {
-        list += '<p>&#160;</p><p>&#160;</p><p>&#160;</p><p>&#160;</p><p>&#160;</p>';
-    }
     list += '</div>';
 
     document.getElementById("list-view").innerHTML = list;
-    
+
     if (listMode) {
         listView();
     }
@@ -181,9 +180,7 @@ function addToList (e) {
     list += '<img src="'+e.cover+'" class="cover" id="'+id+'-cover">';
     list += '</td>';
     if (listMode) {
-        list += '<td style="width: 50%; text-align: left;">';
-        list += '<b style="font-size: 14px;" id="'+id+'-title">'+((e.fav=="true")?'<nobr>&#x2606;&#160;</nobr>':'')+decodeURI(e.title)+'</b><br>';
-        list += '</td>';
+        list += '<td style="width: 50%; text-align: left;"><b style="font-size: 14px;" id="'+id+'-title">'+((e.fav=="true")?'<nobr>&#x2606;&#160;</nobr>':'')+decodeURI(e.title)+'</b><br></td>';
     }
     list += '<td>';
     switch (e.typ) {
