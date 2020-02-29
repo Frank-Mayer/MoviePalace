@@ -8,9 +8,21 @@ var recommendation = {
         },
         {
             "from":229,
-            "to":326,
+            "to":324,
             "title":"Paul - Ein Alien auf der Flucht",
             "cover":"https://de.web.img3.acsta.net/medias/nmedia/18/79/96/08/19660553.jpg"
+        },
+        {
+            "from":229,
+            "to":326,
+            "title":"Knives Out",
+            "cover":"https://media-cache.cinematerial.com/p/500x/xsf7b61u/knives-out-movie-cover.jpg?v=1580267052"
+        },
+        {
+            "from":229,
+            "to":328,
+            "title":"Valerian – Die Stadt der tausend Planeten",
+            "cover":"https://de.web.img3.acsta.net/r_1280_720/pictures/17/03/24/14/15/316061.jpg"
         }
     ],
     "count":0,
