@@ -404,6 +404,7 @@ function updateStatistics() {
                     counter++;
                 }
             });
+            if (counter>0)
             statisticsHtml += '<tr><td>'+statiData.object[i].text+'</td><td style="width:100%;">'+getBarDiv(((counter/lib.length)*100), counter)+'</td></tr>';
         }
     });
