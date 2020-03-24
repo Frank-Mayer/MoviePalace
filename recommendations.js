@@ -33,7 +33,6 @@ var d = new Date();
 var day = Number(d.getDate())
 var month = Number(d.getMonth()+1)
 var comp=(month*100)+day;
-console.log(comp)
 
 recommendation.html += '<tr>';
 recommendation.data.forEach(e => {

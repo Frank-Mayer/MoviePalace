@@ -375,6 +375,52 @@ function createAlphaSeachString (libEl) {
     }
 }
 
+function updateStatistics() {
+    function getBarDiv(percent, count) {
+        let bgc;
+        if (percent>20) {
+            bgc = 'linear-gradient( to right, var(--accent3), var(--accent2))';
+        }
+        else {
+            bgc = 'var(--accent3)';
+        }
+        return ('<div style="width:'+String(Math.round(percent))+'%;background:'+bgc+';border-radius:16px;overflow:visible;">&#160;&#160;'+String(count)+'</div>');
+    }
+    statisticsHtml = ""
+
+    var statiDatas = [
+        {name:"Medien",object:document.getElementById("detailTyp").options,id:"typ"},
+        {name:"Stati",object:document.getElementById("detailStatus").options,id:"status"}
+    ];
+    statiDatas.forEach(statiData => {
+        if (statisticsHtml!=="") {
+            statisticsHtml += '<tr><td>&#160;</td></tr>';
+        }
+        statisticsHtml += '<tr><td><b>'+statiData.name+'</b></td></tr>';
+        for (let i=0; i<statiData.object.length; i++) {
+            let counter = 0;
+            lib.forEach(libEl => {
+                if (libEl[statiData.id] === String(i)) {
+                    counter++;
+                }
+            });
+            statisticsHtml += '<tr><td>'+statiData.object[i].text+'</td><td style="width:100%;">'+getBarDiv(((counter/lib.length)*100), counter)+'</td></tr>';
+        }
+    });
+
+    statisticsHtml += '<tr><td>&#160;</td></tr>';
+    
+    let counter = 0;
+    lib.forEach(libEl => {
+        if (libEl.fav === "true") {
+            counter++;
+        }
+    });
+    statisticsHtml += '<tr><td><b>Favoriten</b></td><td style="width:100%;">'+getBarDiv(((counter/lib.length)*100), counter)+'</td></tr>';
+
+    document.getElementById("statisticsTable").innerHTML = statisticsHtml;
+}
+
 /***********************************************************************************/
 
 document.getElementById("themeSelect").value = theme;
@@ -493,3 +539,4 @@ window.addEventListener('popstate', function(event) {
 }, false);
 
 resetInterface();
+

@@ -4,7 +4,7 @@
 		<title>MoviePalace</title>
 		<meta charset="UTF-8">
 		<meta name="google" content="notranslate">
-        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height" />
         <link async href="./style.css" type="text/css" rel="stylesheet">
         <link async href="./controls.css" type="text/css" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Assistant|IBM+Plex+Sans|Oxygen|Ubuntu&display=swap" rel="stylesheet">
@@ -39,19 +39,25 @@
         <div id="toolbar" class="toolbar">
             <table width="100%" style="padding-top: 5px; padding-bottom: 5px;">
                 <tr>
-                    <td style="width: 30%; text-align: center;">
+                    <td style="width: 25%; text-align: center;">
                         <div onclick="doBlur(); document.getElementById('wishlistView').style.transform = 'translateX(0)'; switchWishlistButton()">
                             <svg height="24px" viewBox="0 -7 512 512" xmlns="http://www.w3.org/2000/svg"><path d="m357 0c-37.589844 0-72.929688 13.183594-101 37.40625-28.070312-24.222656-63.410156-37.40625-101-37.40625-85.46875 0-155 69.53125-155 155 0 77.828125 24.605469 151.796875 71.15625 213.902344 22.390625 29.875 49.179688 55.964844 79.628906 77.546875 30.867188 21.875 64.777344 38.605469 100.789063 49.722656l4.425781 1.363281 4.425781-1.363281c36.011719-11.117187 69.921875-27.847656 100.789063-49.722656 30.449218-21.582031 57.238281-47.671875 79.628906-77.546875 46.550781-62.105469 71.15625-136.074219 71.15625-213.902344 0-85.46875-69.53125-155-155-155zm-101 466.105469c-135.378906-43.84375-226-168.28125-226-311.105469 0-68.925781 56.074219-125 125-125 34.351562 0 66.378906 13.652344 90.179688 38.445312l10.820312 11.273438 10.820312-11.273438c23.800782-24.792968 55.828126-38.445312 90.179688-38.445312 68.925781 0 125 56.074219 125 125 0 142.824219-90.621094 267.261719-226 311.105469zm0 0"/><path d="m256 293.917969c-25.363281 0-46-20.636719-46-46h-30c0 41.90625 34.09375 76 76 76s76-34.09375 76-76h-30c0 25.363281-20.636719 46-46 46zm0 0"/><path d="m180 172.917969h30v45h-30zm0 0"/><path d="m302 172.917969h30v45h-30zm0 0"/></svg>
                             <p class="ToolbarSubtitle">Wunschliste</p>
                         </div>
                     </td>
-                    <td style="width: 30%; text-align: center;">
+                    <td style="width: 25%; text-align: center;">
                         <div onclick="createDialog()">
                             <svg version="1.1" height="24px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 477.867 477.867" xml:space="preserve"><g><g><path d="M392.533,0h-307.2C38.228,0.056,0.056,38.228,0,85.333v307.2c0.056,47.105,38.228,85.277,85.333,85.333h307.2c47.105-0.056,85.277-38.228,85.333-85.333v-307.2C477.81,38.228,439.638,0.056,392.533,0z M443.733,392.533c0,28.277-22.923,51.2-51.2,51.2h-307.2c-28.277,0-51.2-22.923-51.2-51.2v-307.2c0-28.277,22.923-51.2,51.2-51.2h307.2c28.277,0,51.2,22.923,51.2,51.2V392.533z"/></g></g><g><g><path d="M324.267,221.867H256V153.6c0-9.426-7.641-17.067-17.067-17.067s-17.067,7.641-17.067,17.067v68.267H153.6c-9.426,0-17.067,7.641-17.067,17.067S144.174,256,153.6,256h68.267v68.267c0,9.426,7.641,17.067,17.067,17.067S256,333.692,256,324.267V256h68.267c9.426,0,17.067-7.641,17.067-17.067S333.692,221.867,324.267,221.867z"/></g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g></svg>
                             <p class="ToolbarSubtitle">Hinzufügen</p>
                         </div>
                     </td>
-                    <td style="width: 30%; text-align: center;">
+                    <td style="width: 25%; text-align: center;">
+                        <div onclick="doBlur(); updateStatistics(); document.getElementById('statistics').style.transform = 'translateX(0)';">
+                            <svg version="1.1" height="24px" xmlns="http://www.w3.org/2000/svg"xmlns:xlink="http://www.w3.org/1999/xlink"viewBox="0 0 512.099 512.099" xml:space="preserve"><g><g><path d="M496.783,209.002C464.567,126.813,386.714,71.524,298.5,68.187V8.58c0-4.713-3.82-8.533-8.533-8.533C129.898,0.228,0.181,129.944,0,290.013c0,4.713,3.82,8.533,8.533,8.533h59.607c3.4,88.181,58.693,165.981,140.853,198.185c82.161,32.205,175.594,12.702,238.01-49.681C509.453,384.657,528.998,291.191,496.783,209.002z M298.5,85.254c48.457,1.86,94.654,20.977,130.257,53.902L298.5,269.413V85.254z M17.283,281.48c4.66-143.911,120.239-259.49,264.15-264.15v264.15H17.283z M85.208,298.546h184.159L139.11,428.803C106.185,393.201,87.068,347.004,85.208,298.546z M151.177,440.87l138.79-138.79l138.79,138.79C350.294,513.016,229.639,513.016,151.177,440.87z M440.823,428.803L310.567,298.546h184.159C492.864,347.003,473.747,393.2,440.823,428.803z M310.567,281.48l130.257-130.257c32.924,35.603,52.041,81.8,53.902,130.257H310.567z"/></g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g></svg>
+                            <p class="ToolbarSubtitle">Statistik</p>
+                        </div>
+                    </td>
+                    <td style="width: 25%; text-align: center;">
                         <div onclick="doBlur(); document.getElementById('settingsView').style.transform = 'translateX(0)';">
                             <svg version="1.1" height="24px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 384.97 384.97" xml:space="preserve"><g><g><path d="M12.03,120.303h360.909c6.641,0,12.03-5.39,12.03-12.03c0-6.641-5.39-12.03-12.03-12.03H12.03c-6.641,0-12.03,5.39-12.03,12.03C0,114.913,5.39,120.303,12.03,120.303z"/><path d="M372.939,180.455H12.03c-6.641,0-12.03,5.39-12.03,12.03s5.39,12.03,12.03,12.03h360.909c6.641,0,12.03-5.39,12.03-12.03S379.58,180.455,372.939,180.455z"/><path d="M372.939,264.667H132.333c-6.641,0-12.03,5.39-12.03,12.03c0,6.641,5.39,12.03,12.03,12.03h240.606c6.641,0,12.03-5.39,12.03-12.03C384.97,270.056,379.58,264.667,372.939,264.667z"/></g><g></g><g></g><g></g><g></g><g></g><g></g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g></svg>
                             <p class="ToolbarSubtitle">Mehr</p>
@@ -341,7 +347,7 @@
                         Gehosted bei GitHub Pages
                     </p>
                     <p>
-                        Icons von "Becris", "Freepik", und "Pixel perfect" von flaticon.com
+                        Icons von "Becris", "Freepik", "Smashicons" und "Pixel perfect" von flaticon.com
                     </p>
                     <p>
                         Fonts von Google
@@ -382,6 +388,23 @@
                     <tr>
                         <td>
                             <button onclick="document.getElementById('recommendations').style.transform = 'translateX(200%)'; unblur();"><b>Abbrechen</b></button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div id="statistics" class="floating">
+            <div class="floatingChild1" onclick="document.getElementById('statistics').style.transform = 'translateX(200%)'; unblur()"></div>
+            <div class="floatingChild2">
+                <b>Statistik</b>
+                <br><br>
+                <table id="statisticsTable" style="width: 100%;"></table>
+                <hr>
+                <table width="100%" class="dialog_control">
+                    <tr>
+                        <td>
+                            <button onclick="document.getElementById('statistics').style.transform = 'translateX(200%)'; unblur()"><b>OK</b></button>
                         </td>
                     </tr>
                 </table>
