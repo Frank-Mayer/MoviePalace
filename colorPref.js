@@ -4,15 +4,15 @@ var colorPref = [
         "dark":"#121212",
         "main":"#121212",
         "accent":"#F5F5F5",
-        "accent1":"#3a3f3e",
-        "accent2":"#18665a"
+        "accent1":"#3f3a3a",
+        "accent2":"#743941"
     },
     {
         "light":"true",
         "dark":"#121212",
         "main":"#F5F5F5",
         "accent":"#242424",
-        "accent1":"#DDDDDD",
-        "accent2":"#a5d3b9"
+        "accent1":"#fff1f3",
+        "accent2":"#FFD6DC"
     }
 ]
