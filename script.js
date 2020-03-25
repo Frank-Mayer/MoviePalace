@@ -258,30 +258,37 @@ function addWishToDB () {
 }
 
 function sort() {
+    alphabet = document.getElementById("alphabet");
     switch (document.getElementById('sortSelect').value) {
         case "alpha":
             for (var i=0; i<lib.length; i++) {
                 lib[i].alpha = (createAlphaSeachString(lib[i]));
             }
             SortAlpha();
+            alphabet.style.display = "block";
             break;
         case "group":
             SortGroup();
+            alphabet.style.display = "block";
             break;
         case "new":
             SortNew();
+            alphabet.style.display = "none";
             break;
         case "old":
             SortOld();
+            alphabet.style.display = "none";
             break;
         case "seen much":
             SortSeenMuch();
+            alphabet.style.display = "none";
             break;
         case "seen less":
             SortSeenLess();
+            alphabet.style.display = "none";
             break;
     }
-
+    delete alphabet;
 }
 
 function createDialog () {
