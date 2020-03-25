@@ -175,6 +175,7 @@ input#search {
 #list-view {
     background-color: transparent;
     overflow-y: scroll;
+    overflow-x: hidden;
     position: fixed;
     height: 100%;
     top: 0;

@@ -114,7 +114,10 @@ input:checked + .slider:before {
 }
 
 #recommendation {
+    width: 200px;
+    overflow-x: scroll;
     text-align: center;
+    margin-left: 8px;
 }
 
 #recommendation * {
@@ -124,7 +127,6 @@ input:checked + .slider:before {
 
 #recommendation td {
     text-align: center;
-    margin-left: 8px;
 }
 
 #recommendation td div {
