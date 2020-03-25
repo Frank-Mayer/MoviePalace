@@ -2,18 +2,6 @@ var recommendation = {
     "data":[
         {
             "from":229,
-            "to":313,
-            "title":"Passengers",
-            "cover":"https://cdn.cinematerial.com/p/297x/cvwsathm/passengers-movie-poster-md.jpg?v=1478198394"
-        },
-        {
-            "from":229,
-            "to":324,
-            "title":"Paul - Ein Alien auf der Flucht",
-            "cover":"https://de.web.img3.acsta.net/medias/nmedia/18/79/96/08/19660553.jpg"
-        },
-        {
-            "from":229,
             "to":326,
             "title":"Knives Out",
             "cover":"https://media-cache.cinematerial.com/p/500x/xsf7b61u/knives-out-movie-cover.jpg?v=1580267052"
@@ -41,12 +29,6 @@ recommendation.data.forEach(e => {
         recommendation.html += '<td><div onclick="useRecommendation(\''+escapeHtml(JSON.stringify(e))+'\')" style=\'background-image: url("'+e.cover+'");\'><p>&#160;</p></img></div></td>';
     }
 });
-// recommendation.html += '</tr><tr>';
-// recommendation.data.forEach(e => {
-//     if (e.date.month >= month && e.date.day >= day) {
-//         recommendation.html += '<td><p>'+e.title.replace(/ /g, "<br>")+'</p></td>';
-//     }
-// });
 recommendation.html += '</tr>';
 
 var encRecTitle;

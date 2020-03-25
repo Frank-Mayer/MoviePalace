@@ -22,6 +22,63 @@ function resetDetails () {
     }
 } resetDetails();
 
+function increase_brightness(hex, percent){
+    // strip the leading # if it's there
+    hex = hex.replace(/^\s*#|\s*$/g, '');
+
+    // convert 3 char codes --> 6, e.g. `E0F` --> `EE00FF`
+    if(hex.length == 3){
+        hex = hex.replace(/(.)/g, '$1$1');
+    }
+
+    var r = parseInt(hex.substr(0, 2), 16),
+        g = parseInt(hex.substr(2, 2), 16),
+        b = parseInt(hex.substr(4, 2), 16);
+
+    return '#' +
+       ((0|(1<<8) + r + (256 - r) * percent / 100).toString(16)).substr(1) +
+       ((0|(1<<8) + g + (256 - g) * percent / 100).toString(16)).substr(1) +
+       ((0|(1<<8) + b + (256 - b) * percent / 100).toString(16)).substr(1);
+}
+
+function decrease_brightness(hex, percent){
+    // strip the leading # if it's there
+    hex = hex.replace(/^\s*#|\s*$/g, '');
+
+    // convert 3 char codes --> 6, e.g. `E0F` --> `EE00FF`
+    if(hex.length == 3){
+        hex = hex.replace(/(.)/g, '$1$1');
+    }
+
+    var r = parseInt(hex.substr(0, 2), 16),
+        g = parseInt(hex.substr(2, 2), 16),
+        b = parseInt(hex.substr(4, 2), 16);
+
+    function letter2 (el) {
+        let elLength = el.length;
+        if (elLength < 1) {
+            el = "00";
+        }
+        else if (elLength === 1) {
+            el = "0"+el;
+        }
+        else if (elLength >2) {
+            el = "FF";
+        }
+        return el;
+    }
+
+    r=letter2(Math.round(r * (percent / 100)).toString(16));
+    g=letter2(Math.round(g * (percent / 100)).toString(16));
+    b=letter2(Math.round(b * (percent / 100)).toString(16));
+    
+    let ret = ('#' +
+        (r) +
+        (g) +
+        (b)).toUpperCase();
+    return ret;
+}
+
 var query = "";
 var list = "";
 var wishList = "";
@@ -35,12 +92,26 @@ var speed = Number(urlParams.get('speed'));
 if (!(speed > 0)) {
     speed  = 500;
 }
+var color = urlParams.get('color');
+if (color === null || color === undefined) {
+    color = "#FF7591";
+}
+else {
+    color = '#'+color;
+}
+document.getElementById("colorSelector").value = color;
 
 var theme = urlParams.get('theme');
 var quitAsk = urlParams.get('quitAsk');
 
 var transp = "A0";
 var transp1 = "75";
+
+function colorChange () {
+    color = String(document.getElementById("colorSelector").value).toUpperCase();
+    send("settings","color",color);
+    applyTheme();
+}
 
 function applyTheme() {
     switch (theme) {
@@ -53,8 +124,8 @@ function applyTheme() {
             document.documentElement.style.setProperty('--light', (String(colorPref[1].main)));
             document.documentElement.style.setProperty('--light-transp', (String(colorPref[1].main) + transp));
             document.documentElement.style.setProperty('--accent', colorPref[1].accent);
-            document.documentElement.style.setProperty('--accent1', colorPref[1].accent1);
-            document.documentElement.style.setProperty('--accent2', colorPref[1].accent2);
+            document.documentElement.style.setProperty('--accent1', increase_brightness(decrease_brightness(color, 75), 80));
+            document.documentElement.style.setProperty('--accent2', increase_brightness(color, 50));
             break;
         default:
         case "dark":
@@ -67,10 +138,11 @@ function applyTheme() {
             document.documentElement.style.setProperty('--light', (String(colorPref[1].main)));
             document.documentElement.style.setProperty('--light-transp', (String(colorPref[1].main) + transp));
             document.documentElement.style.setProperty('--accent', colorPref[0].accent);
-            document.documentElement.style.setProperty('--accent1', colorPref[0].accent1);
-            document.documentElement.style.setProperty('--accent2', colorPref[0].accent2);
+            document.documentElement.style.setProperty('--accent1', decrease_brightness(increase_brightness(color, 75), 20));
+            document.documentElement.style.setProperty('--accent2', decrease_brightness(color, 20));
             break;
     }
+    document.documentElement.style.setProperty('--accent3', color);
 }
                     
 applyTheme();
@@ -88,7 +160,7 @@ function CreateList() {
 
     {
         if (recommendation.count > 0) {
-            list += '<p></p><div class="row"><b>Empfehlungen</b><table id="recommendation">'+recommendation.html+'</table></div>';
+            list += '<p></p><div class="row"><b style="color:var(--accent);">&#160;&#160;Empfehlungen</b><table id="recommendation">'+recommendation.html+'</table></div>';
         }
     }
 
@@ -508,7 +580,7 @@ var interfaceTimer = setInterval (()=>{
     else {
         his = location.hash;
     }
-}, Number(speed));
+}, Number(speed/2));
 
 function dialogOpen(){
     var floatingChild2 = document.getElementsByClassName("floatingChild2");
