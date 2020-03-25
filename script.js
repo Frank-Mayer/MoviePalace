@@ -171,7 +171,7 @@ function saveDetails () {
         }
     }
     else {
-        for (let i = 0; lib.length; i++) {
+        for (var i = 0; lib.length; i++) {
             if (lib[i].id == details.id) {
                 lib[i] = details;
                 break;
@@ -188,7 +188,7 @@ function saveDetails () {
 }
 
 function del () {
-    for( let i = 0; i < lib.length; i++){ 
+    for( var i = 0; i < lib.length; i++){ 
         if (lib[i].id == detailsID()) {
             lib.splice(i, 1); 
             break;
@@ -248,7 +248,7 @@ function shareWish (e) {
 }
 
 function addWishToDB () {
-    let e = {
+    var e = {
         "title": document.getElementById("addWish").value
     }
     wishlist.push(e);
@@ -261,7 +261,7 @@ function sort() {
     alphabet = document.getElementById("alphabet");
     switch (document.getElementById('sortSelect').value) {
         case "alpha":
-            for (let i=0; i<lib.length; i++) {
+            for (var i=0; i<lib.length; i++) {
                 lib[i].alpha = (createAlphaSeachString(lib[i]));
             }
             SortAlpha();
@@ -406,8 +406,8 @@ function watchAdd() {
 }
 
 function getScrollPercent() {
-    let containeR = document.getElementById("list-view");
-    let scrollPercentage = 100 * containeR.scrollTop / (containeR.scrollHeight-containeR.clientHeight);
+    var containeR = document.getElementById("list-view");
+    var scrollPercentage = 100 * containeR.scrollTop / (containeR.scrollHeight-containeR.clientHeight);
     return scrollPercentage;
 }
 
@@ -416,16 +416,16 @@ function scrollToLetter(letter) {
         document.getElementById(letter).scrollIntoView(scrollBehavior);
     }
     else {
-        let floatingChild1 = document.getElementsByClassName("floatingChild1");
-        for (let i=0; i<floatingChild1.length; i++) {
+        var floatingChild1 = document.getElementsByClassName("floatingChild1");
+        for (var i=0; i<floatingChild1.length; i++) {
             eventFire(floatingChild1[i], 'click');
         }
     }
 }
 
 function shareFullWishList() {
-    let strShareFullWishList = '🎬 Meine Wunschliste';
-    for (let i=0; i<wishlist.length; i++) {
+    var strShareFullWishList = '🎬 Meine Wunschliste';
+    for (var i=0; i<wishlist.length; i++) {
         strShareFullWishList += ('\n'+'•'+wishlist[i].title)
     }
     send("sharePlainText","",encodeURI(strShareFullWishList));
