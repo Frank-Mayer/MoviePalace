@@ -119,7 +119,7 @@ function applyTheme() {
             document.documentElement.style.setProperty('--light', (String(colorPref[1].main)));
             document.documentElement.style.setProperty('--light-transp', (String(colorPref[1].main) + transp));
             document.documentElement.style.setProperty('--accent', colorPref[1].accent);
-            document.documentElement.style.setProperty('--accent1', increase_brightness(decrease_brightness(color, 75), 80));
+            document.documentElement.style.setProperty('--accent1', increase_brightness(decrease_brightness(color, 60), 65));
             document.documentElement.style.setProperty('--accent2', increase_brightness(color, 50));
             break;
         default:
@@ -133,8 +133,8 @@ function applyTheme() {
             document.documentElement.style.setProperty('--light', (String(colorPref[1].main)));
             document.documentElement.style.setProperty('--light-transp', (String(colorPref[1].main) + transp));
             document.documentElement.style.setProperty('--accent', colorPref[0].accent);
-            document.documentElement.style.setProperty('--accent1', decrease_brightness(increase_brightness(color, 75), 20));
-            document.documentElement.style.setProperty('--accent2', decrease_brightness(color, 20));
+            document.documentElement.style.setProperty('--accent1', decrease_brightness(increase_brightness(color, 60), 40));
+            document.documentElement.style.setProperty('--accent2', decrease_brightness(color, 30));
             break;
     }
     document.documentElement.style.setProperty('--accent3', color);
