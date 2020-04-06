@@ -514,8 +514,6 @@ var hisAlphabetChildCount = 0;
 var updateAlphabeticalScroll = setInterval (()=>{
     if ((hisScreen.x !== innerWidth && hisScreen.y !== innerHeight) || (hisAlphabetChildCount !== document.getElementById("alphabet").childElementCount))
     {
-        console.log("update")
-
         hisScreen.x = innerWidth;
         hisScreen.y = innerHeight;
         hisAlphabetChildCount = document.getElementById("alphabet").childElementCount;
