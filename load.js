@@ -505,16 +505,31 @@ sort();
 CreateList();
 loadWishlist();
 
+var hisScreen = {
+    x:0,
+    y:0
+};
+var hisAlphabetChildCount = 0;
+
 var updateAlphabeticalScroll = setInterval (()=>{
-    var alphaLetters = document.getElementsByClassName("alphabeticalScrollLetter");
-    var alphaScrollLetterheight = Number(document.getElementById("list-view").offsetHeight - 199) / Number(alphaLetters.length)
-    var fs = (alphaScrollLetterheight/2)+2;
-    if (fs>14) {
-      fs=14;
-    }
-    for (var i=0; i<alphaLetters.length; i++) {
-        alphaLetters[i].style.height = String(alphaScrollLetterheight)+"px";
-        document.getElementsByClassName("alphabeticalScrollLetterTxt")[i].style.fontSize = String(fs)+"px";
+    if ((hisScreen.x !== innerWidth && hisScreen.y !== innerHeight) || (hisAlphabetChildCount !== document.getElementById("alphabet").childElementCount))
+    {
+        console.log("update")
+
+        hisScreen.x = innerWidth;
+        hisScreen.y = innerHeight;
+        hisAlphabetChildCount = document.getElementById("alphabet").childElementCount;
+
+        var alphaLetters = document.getElementsByClassName("alphabeticalScrollLetter");
+        var alphaScrollLetterheight = Number(document.getElementById("list-view").offsetHeight - 199) / Number(alphaLetters.length)
+        var fs = (alphaScrollLetterheight/2)+2;
+        if (fs>14) {
+        fs=14;
+        }
+        for (var i=0; i<alphaLetters.length; i++) {
+            alphaLetters[i].style.height = String(alphaScrollLetterheight)+"px";
+            document.getElementsByClassName("alphabeticalScrollLetterTxt")[i].style.fontSize = String(fs)+"px";
+        }
     }
 }, 500);
 
