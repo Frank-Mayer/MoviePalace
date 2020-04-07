@@ -43,7 +43,19 @@ if (color === null || color === undefined) {
 else {
     color = '#'+color;
 }
-document.getElementById("colorSelector").value = color;
+
+{
+function setColorSliderValue(el, val, div=1) {
+    el.value = val;
+    colorSliderBackgroundCalc(el, div)
+}
+colorHsl = hexToHSL(color);
+setColorSliderValue(document.getElementById("colorSelectorHue"), colorHsl.hue, 3.6);
+setColorSliderValue(document.getElementById("colorSelectorSaturation"), colorHsl.saturation);
+setColorSliderValue(document.getElementById("colorSelectorLightness"), colorHsl.lightness);
+delete setColorSliderValue;
+delete colorHsl;
+}
 
 var theme = urlParams.get('theme');
 var quitAsk = urlParams.get('quitAsk');
@@ -141,10 +153,14 @@ function applyTheme() {
 }
 applyTheme();
 
-function colorChange () {
-    color = String(document.getElementById("colorSelector").value).toUpperCase();
-    send("settings","color",color.replace("#",""));
-    applyTheme();
+function colorChange() {
+    var newColor = HSLToHex(document.getElementById("colorSelectorHue").value, document.getElementById("colorSelectorSaturation").value, document.getElementById("colorSelectorLightness").value);
+    if (color !== newColor) {
+        color = "#"+String(newColor);
+        console.log(color)
+        send("settings","color",color.replace("#",""));
+        applyTheme();
+    }
 }
 
 function CreateList() {

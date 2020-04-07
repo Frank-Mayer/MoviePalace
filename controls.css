@@ -303,3 +303,44 @@ hr {
 .dialog_control button {
     width: 100%;
 }
+
+.CSlider {
+    width:100%;
+    height:40px;
+    background: white;
+    outline: none;
+    opacity: 0.45;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+    border-radius: 10px;
+    cursor: pointer;
+    --percent1: 50%;
+    --percent2: 50.05%;
+    --left: white;
+    --right: rgba(0, 0, 0, 0.5);
+    background: linear-gradient(to right, var(--left) 0%, var(--left) var(--percent1), var(--right) var(--percent2) , var(--right) 100%);
+}
+
+
+.CSlider:hover {
+    opacity: 1;
+}
+
+.CSlider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    border: none;
+    width: 25px;
+    height: 25px;
+    background: transparent;
+}
+
+.CSlider::-moz-range-thumb {
+    border: none;
+    width: 25px;
+    height: 25px;
+    background: transparent;
+}
+
+#paintbrush, #paintbrush * {
+    fill: var(--newAccent);
+}
