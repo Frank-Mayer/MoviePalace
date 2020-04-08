@@ -4,7 +4,7 @@ var recommendation = {
             "from":408,
             "to":415,
             "title":"Die Insel der besonderen Kinder",
-            "cover":"https://static.kino.de/wp-content/uploads/2018/03/Die-Kaenguru-Chroniken-Poster-2020-rcm175x260u.jpg"
+            "cover":"https://is3-ssl.mzstatic.com/image/thumb/Video52/v4/00/a7/d9/00a7d984-a010-f420-6b37-5d224257cd36/MissPeregrines_2000x3000_DE.lsr/268x0w.png"
         },
         {
             "from":408,
