@@ -526,13 +526,14 @@ var hisScreen = {
     y:0
 };
 var hisAlphabetChildCount = 0;
-
+var toggleUpdateAlphaScroll = false;
 var updateAlphabeticalScroll = setInterval (()=>{
-    if ((hisScreen.x !== innerWidth && hisScreen.y !== innerHeight) || (hisAlphabetChildCount !== document.getElementById("alphabet").childElementCount))
+    if (toggleUpdateAlphaScroll || (hisScreen.x !== innerWidth && hisScreen.y !== innerHeight) || (hisAlphabetChildCount !== document.getElementById("alphabet").childElementCount))
     {
         hisScreen.x = innerWidth;
         hisScreen.y = innerHeight;
         hisAlphabetChildCount = document.getElementById("alphabet").childElementCount;
+        toggleUpdateAlphaScroll = false;
 
         var alphaLetters = document.getElementsByClassName("alphabeticalScrollLetter");
         var alphaScrollLetterheight = Number(document.getElementById("list-view").offsetHeight - 199) / Number(alphaLetters.length)
@@ -545,6 +546,9 @@ var updateAlphabeticalScroll = setInterval (()=>{
             document.getElementsByClassName("alphabeticalScrollLetterTxt")[i].style.fontSize = String(fs)+"px";
         }
     }
+    else if (!toggleUpdateAlphaScroll) {
+        toggleUpdateAlphaScroll = true;
+    } 
 }, 500);
 
 var height = 0;
