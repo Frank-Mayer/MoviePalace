@@ -46,7 +46,6 @@ input:checked + .slider:before {
     transform: translateX(26px);
 }
 
-/* Rounded sliders */
 .slider.round {
     border-radius: 34px;
 }
@@ -55,13 +54,10 @@ input:checked + .slider:before {
     border-radius: 50%;
 }
 
-/***********************************************************************************************************/
-
 * {
     box-sizing: border-box;
 }
 
-/* Create two equal columns that floats next to each other */
 .column {
     float: left;
     width: 50%;
@@ -80,15 +76,12 @@ input:checked + .slider:before {
     text-align: left;
 }
 
-
-/* Clear floats after the columns */
 .row:after {
     content: "";
     display: table;
     clear: both;
 }
 
-/* Style the buttons */
 .btn {
     border: none;
     outline: none;
@@ -138,8 +131,6 @@ input:checked + .slider:before {
     background-size: cover;
 }
 
-/***********************************************************************************************************/
-
 .txtInput {
     background-color: #121212;
     color: white;
@@ -165,8 +156,6 @@ input {
     -webkit-focus-ring-color: transparent !important; 
     outline: none !important;
 }
-
-/***********************************************************************************************************/
 
 select, select * {
     width: 100%;
@@ -196,8 +185,6 @@ select option {
     font-weight:normal;
 }
 
-/***********************************************************************************************************/
-
 .fab {
     width: 50px;
     height: 50px;
@@ -217,8 +204,6 @@ select option {
     width: 26px;
     height: 26px;
 }
-
-/***********************************************************************************************************/
 
 #alphabet {
     z-index: 1;
@@ -243,15 +228,11 @@ select option {
     transform: translateX(4px);
 }
 
-/***********************************************************************************************************/
-
 .wishlistButton, .wishlistButton * {
     fill: #121212;
     width: 25px;
     height: 25px;
 }
-
-/***********************************************************************************************************/
 
 #finder, #movieCounterP {
     overflow: hidden;
@@ -272,8 +253,6 @@ select option {
     height: 100%;
     z-index: 1000000;
 }
-
-/***********************************************************************************************************/
 
 hr {
     transform: scaleY(0.5);
@@ -304,37 +283,32 @@ hr {
     width: 100%;
 }
 
-/******************************************************************************************************************************/
-
 input[type=range] {
-    -webkit-appearance: none; /* Hides the slider so that custom slider can be made */
-    width: 100%; /* Specific width is required for Firefox. */
-    background: transparent; /* Otherwise white in Chrome */
+    -webkit-appearance: none;
+    width: 100%;
+    background: transparent;
 }
   
 input[type=range]::-webkit-slider-thumb {
     -webkit-appearance: none;
-  height: 36px;
-  width: 16px;
-  cursor: pointer;
-  background: transparent;
-  border: none;
+    height: 36px;
+    width: 16px;
+    cursor: pointer;
+    background: transparent;
+    border: none;
 }
   
 input[type=range]:focus {
-    outline: none; /* Removes the blue border. You should probably do some kind of focus styling for accessibility reasons though. */
+    outline: none;
 }
 
-/* All the same stuff for Firefox */
 input[type=range]::-moz-range-thumb {
-  height: 36px;
-  width: 16px;
-  cursor: pointer;
-  background: transparent;
-  border: none;
+    height: 36px;
+    width: 16px;
+    cursor: pointer;
+    background: transparent;
+    border: none;
 }
-
-/***/
 
 input[type=range]::-webkit-slider-runnable-track {
     width: 100%;

@@ -157,7 +157,6 @@ function colorChange() {
     var newColor = HSLToHex(document.getElementById("colorSelectorHue").value, document.getElementById("colorSelectorSaturation").value, document.getElementById("colorSelectorLightness").value);
     if (color !== newColor) {
         color = "#"+String(newColor);
-        console.log(color)
         send("settings","color",color.replace("#",""));
         applyTheme();
     }
@@ -167,7 +166,6 @@ function CreateList() {
     list="";
 
     document.getElementById("alphabet").innerHTML = '';
-    // document.getElementById("alphabetScroll").max = 0;
 
     document.getElementById("movieCounter").innerHTML = lib.length;
     document.getElementById("list-view").innerHTML = "";
@@ -510,8 +508,6 @@ function updateStatistics() {
     document.getElementById("statisticsTable").innerHTML = statisticsHtml;
 }
 
-/***********************************************************************************/
-
 document.getElementById("themeSelect").value = theme;
 document.getElementById("quitAskSwitch").checked = (quitAsk === "true");
 
@@ -653,4 +649,3 @@ window.addEventListener('popstate', function(event) {
 }, false);
 
 resetInterface();
-
