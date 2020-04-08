@@ -4,7 +4,7 @@ var recommendation = {
             "from":408,
             "to":415,
             "title":"Die Insel der besonderen Kinder",
-            "cover":"http://filmmusicreporter.com/wp-content/uploads/2016/09/miss-peregrines-home-for-peculiar-children.jpg"
+            "cover":"https://static.kino.de/wp-content/uploads/2018/03/Die-Kaenguru-Chroniken-Poster-2020-rcm175x260u.jpg"
         },
         {
             "from":408,
