@@ -1,22 +1,10 @@
 var recommendation = {
     "data":[
         {
-            "from":408,
-            "to":415,
-            "title":"Die Insel der besonderen Kinder",
-            "cover":"https://is3-ssl.mzstatic.com/image/thumb/Video52/v4/00/a7/d9/00a7d984-a010-f420-6b37-5d224257cd36/MissPeregrines_2000x3000_DE.lsr/268x0w.png"
-        },
-        {
-            "from":408,
-            "to":412,
-            "title":"Phantastische Tierwesen und wo sie zu finden sind",
-            "cover":"https://image.tmdb.org/t/p/w500/wtbpEoZMfzzgZxMdiFkCXQzqUjl.jpg"
-        },
-        {
-            "from":408,
-            "to":416,
-            "title":"Die Känguru Chroniken",
-            "cover":"https://static.kino.de/wp-content/uploads/2018/03/Die-Kaenguru-Chroniken-Poster-2020-rcm175x260u.jpg"
+            "from":423,
+            "to":501,
+            "title":"The Darkest Hour",
+            "cover":"https://s3.mzstatic.com/us/r30/Video/ab/e9/61/mzl.hzzzynrq.jpg"
         }
     ],
     "count":0,
