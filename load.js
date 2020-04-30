@@ -342,41 +342,37 @@ function SortGroup() {
 
 function SortNew() {
     lib.sort((a, b) => {
-        if (a["date"] < b["date"])
+        if (a["id"] < b["id"])
             return 1;
-        if (a["date"] > b["date"])
+        if (a["id"] > b["id"])
             return -1;
 
-        if (a["title"] > b["title"])
-            return 1;
-        if (a["title"] < b["title"])
-            return -1;
         return 0;
     });
 }
 
 function SortOld() {
     lib.sort((a, b) => {
-        if (a["date"] > b["date"])
+        if (a["id"] > b["id"])
             return 1;
-        if (a["date"] < b["date"])
+        if (a["id"] < b["id"])
             return -1;
 
-        if (a["title"] > b["title"])
-            return 1;
-        if (a["title"] < b["title"])
-            return -1;
         return 0;
     });
 }
 
 function SortSeenMuch() {
     lib.sort((a, b) => {
-        var aw = Number(a["watchcount"]);
+        var aw = 0;
+        if (a.hasOwnProperty("watchcount"))
+        aw = Number(a["watchcount"]);
         if (isNaN(aw)) {
             aw = 0;
         }
-        var bw = Number(b["watchcount"]);
+        var bw = 0;
+        if (b.hasOwnProperty("watchcount"))
+        bw = Number(b["watchcount"]);
         if (isNaN(bw)) {
             aw = 0;
         }
