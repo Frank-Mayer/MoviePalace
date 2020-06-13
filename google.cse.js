@@ -1,10 +1,11 @@
 var googleApi = {
     key: 'AIzaSyCv_kCFsLFw_kFmM1i_zMPx3wpJpkTZghE',
-    cx: ' 003230409370591094102:gzbxp412uzi',
+    cx: '003230409370591094102:gzbxp412uzi',
     url: 'https://www.googleapis.com/customsearch/v1?',
     altUrl: 'https://www.googleapis.com/customsearch/v1/siterestrict?',
     query(q) {
         var _url = (this.altUrl+'key='+this.key+'&cx='+this.cx+'&q='+encodeURI(q)+'&num=5&searchType=image');
+        console.log(_url);
         return (_url);
     }
 }
@@ -12,18 +13,18 @@ var googleApi = {
 RandomApiKey();
 
 function RandomApiKey() {
-    //if (Math.random() >= 0.5) {
+    // if (Math.random() >= 0.5) {
     //    googleApi.key = 'AIzaSyAESoLTiR2RvR8RqGAjSYm1v-_XPfUK0wQ';
-    //}
-    //else if (Math.random() >= 0.5) {
+    // }
+    // else if (Math.random() >= 0.5) {
     //    googleApi.key = 'AIzaSyA3cusDzE84DTiZ9UMLN00unuNhP5DEXpg';
-    //}
-    //else if (Math.random() >= 0.5) {
+    // }
+    // else if (Math.random() >= 0.5) {
     //    googleApi.key = 'AIzaSyCK5fpVyJ63Xc8wt199vFj3IcAbmWlocBc';
-    //}
-    //else if (Math.random() >= 0.5) {
+    // }
+    // else if (Math.random() >= 0.5) {
     //    googleApi.key = 'AIzaSyB6gBuLxAoLPlX969OOVedPD567vA25SDk';
-    //}
+    // }
 }
 
 function request (uri) {
