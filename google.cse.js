@@ -1,6 +1,6 @@
 var googleApi = {
-    key: 'AIzaSyB6gBuLxAoLPlX969OOVedPD567vA25SDk',
-    cx: '010303739914940808961:mavrshfxmwd',
+    key: 'AIzaSyCv_kCFsLFw_kFmM1i_zMPx3wpJpkTZghE',
+    cx: ' 003230409370591094102:gzbxp412uzi',
     url: 'https://www.googleapis.com/customsearch/v1?',
     altUrl: 'https://www.googleapis.com/customsearch/v1/siterestrict?',
     query(q) {
@@ -12,18 +12,18 @@ var googleApi = {
 RandomApiKey();
 
 function RandomApiKey() {
-    if (Math.random() >= 0.5) {
-        googleApi.key = 'AIzaSyAESoLTiR2RvR8RqGAjSYm1v-_XPfUK0wQ';
-    }
-    else if (Math.random() >= 0.5) {
-        googleApi.key = 'AIzaSyA3cusDzE84DTiZ9UMLN00unuNhP5DEXpg';
-    }
-    else if (Math.random() >= 0.5) {
-        googleApi.key = 'AIzaSyCK5fpVyJ63Xc8wt199vFj3IcAbmWlocBc';
-    }
-    else if (Math.random() >= 0.5) {
-        googleApi.key = 'AIzaSyB6gBuLxAoLPlX969OOVedPD567vA25SDk';
-    }
+    //if (Math.random() >= 0.5) {
+    //    googleApi.key = 'AIzaSyAESoLTiR2RvR8RqGAjSYm1v-_XPfUK0wQ';
+    //}
+    //else if (Math.random() >= 0.5) {
+    //    googleApi.key = 'AIzaSyA3cusDzE84DTiZ9UMLN00unuNhP5DEXpg';
+    //}
+    //else if (Math.random() >= 0.5) {
+    //    googleApi.key = 'AIzaSyCK5fpVyJ63Xc8wt199vFj3IcAbmWlocBc';
+    //}
+    //else if (Math.random() >= 0.5) {
+    //    googleApi.key = 'AIzaSyB6gBuLxAoLPlX969OOVedPD567vA25SDk';
+    //}
 }
 
 function request (uri) {
