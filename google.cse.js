@@ -1,6 +1,6 @@
 var googleApi = {
     key: 'AIzaSyCv_kCFsLFw_kFmM1i_zMPx3wpJpkTZghE',
-    cx: '003230409370591094102:gzbxp412uzi',
+    cx: '010303739914940808961:mavrshfxmwd',
     url: 'https://www.googleapis.com/customsearch/v1?',
     altUrl: 'https://www.googleapis.com/customsearch/v1/siterestrict?',
     query(q) {
@@ -10,22 +10,26 @@ var googleApi = {
     }
 }
 
-RandomApiKey();
-
 function RandomApiKey() {
-    // if (Math.random() >= 0.5) {
-    //    googleApi.key = 'AIzaSyAESoLTiR2RvR8RqGAjSYm1v-_XPfUK0wQ';
-    // }
-    // else if (Math.random() >= 0.5) {
-    //    googleApi.key = 'AIzaSyA3cusDzE84DTiZ9UMLN00unuNhP5DEXpg';
-    // }
-    // else if (Math.random() >= 0.5) {
-    //    googleApi.key = 'AIzaSyCK5fpVyJ63Xc8wt199vFj3IcAbmWlocBc';
-    // }
-    // else if (Math.random() >= 0.5) {
-    //    googleApi.key = 'AIzaSyB6gBuLxAoLPlX969OOVedPD567vA25SDk';
-    // }
-}
+    let i = Math.floor(Math.random()*4);
+    switch (i) {
+        case 0:
+            googleApi.key = 'AIzaSyCv_kCFsLFw_kFmM1i_zMPx3wpJpkTZghE';
+            break;
+        case 1:
+            googleApi.key = 'AIzaSyAESoLTiR2RvR8RqGAjSYm1v-_XPfUK0wQ';
+            break;
+        case 2:
+            googleApi.key = 'AIzaSyA3cusDzE84DTiZ9UMLN00unuNhP5DEXpg';
+            break;
+        case 3:
+            googleApi.key = 'AIzaSyCK5fpVyJ63Xc8wt199vFj3IcAbmWlocBc';
+            break;
+        case 4:
+            googleApi.key = 'AIzaSyB6gBuLxAoLPlX969OOVedPD567vA25SDk';
+            break;
+    }
+} RandomApiKey();
 
 function request (uri) {
     var request = new XMLHttpRequest();
