@@ -143,6 +143,7 @@ input:checked+.slider:before {
 
 #comment {
     margin: 0;
+    margin-bottom: 8px;
     width: calc(100% - 8px);
 }
 
