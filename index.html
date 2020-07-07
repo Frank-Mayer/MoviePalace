@@ -1,475 +1,839 @@
 ﻿<!DOCTYPE html>
 <html>
-    <head>
-		<title>Popcorn Box</title>
-		<meta charset="UTF-8">
-		<meta name="google" content="notranslate">
-        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height" />
-        <link async href="./style.css" type="text/css" rel="stylesheet">
-        <link async href="./controls.css" type="text/css" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=Assistant|IBM+Plex+Sans|Oxygen|Ubuntu&display=swap" rel="stylesheet">
-        <script type="text/javascript" src="./lib.js"></script>
-        <script type="text/javascript" src="./script.js"></script>
-    </head>
-    <body onload="doBlur();unblur();">
-        <div id="topTools">
-            <table id="finder" width="100%" cellspacing="8px">
-                <tr>
-                    <td>
-                        <nobr>&#160;</nobr>
-                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 513.28 513.28" xml:space="preserve"><g><g> <g> <path d="M495.04,404.48L410.56,320c15.36-30.72,25.6-66.56,25.6-102.4C436.16,97.28,338.88,0,218.56,0S0.96,97.28,0.96,217.6 s97.28,217.6,217.6,217.6c35.84,0,71.68-10.24,102.4-25.6l84.48,84.48c25.6,25.6,64,25.6,89.6,0 C518.08,468.48,518.08,430.08,495.04,404.48z M218.56,384c-92.16,0-166.4-74.24-166.4-166.4S126.4,51.2,218.56,51.2 s166.4,74.24,166.4,166.4S310.72,384,218.56,384z" data-original="#000000" class="active-path" fill="#000000"/> </g> </g></g> </svg>
-                        <input type="text" id="search" autocomplete="on" placeholder="Suchen" oninput="search(document.getElementById('search').value);">
-                    </td>
-                    <td width="45px" height="45px" style="text-align: center; padding: 0px, 8px;" onclick="random()">
-                        <svg style="height: 24px; width: 24px;" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" xml:space="preserve"><g><g><path d="M395.107,40.711l-256-12.826L0,243.174l116.893,228.116l256,12.826L512,268.826L395.107,40.711z M375.623,70.865l92.334,180.188l-202.215-10.131L173.409,60.735L375.623,70.865z M35.857,244.969L145.738,74.914l92.334,180.188L128.19,425.159L35.857,244.969z M356.52,452.164l-202.215-10.131l109.881-170.057l202.215,10.131L356.52,452.164z"/></g></g><g><g><circle cx="324.93" cy="151.75" r="18.14"/></g></g><g><g><circle cx="243.22" cy="401.69" r="18.14"/></g></g><g><g><circle cx="375.19" cy="328.45" r="18.14"/></g></g><g><g><circle cx="137.51" cy="173.43" r="18.14"/></g></g><g><g><circle cx="87.59" cy="249.81" r="18.14"/></g></g><g><g><circle cx="179.31" cy="256.03" r="18.14"/></g></g><g><g><circle cx="130.95" cy="328.45" r="18.14"/></g></g></svg>
-                    </td>
-                    <td width="45px" height="45px" style="text-align: center; padding: 0px, 8px;" onclick="doBlur(); document.getElementById('filter').style.transform = 'translateX(0)';">
-                        <svg style="height: 24px; width: 24px;" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="m272.066 512h-32.133c-25.989 0-47.134-21.144-47.134-47.133v-10.871c-11.049-3.53-21.784-7.986-32.097-13.323l-7.704 7.704c-18.659 18.682-48.548 18.134-66.665-.007l-22.711-22.71c-18.149-18.129-18.671-48.008.006-66.665l7.698-7.698c-5.337-10.313-9.792-21.046-13.323-32.097h-10.87c-25.988 0-47.133-21.144-47.133-47.133v-32.134c0-25.989 21.145-47.133 47.134-47.133h10.87c3.531-11.05 7.986-21.784 13.323-32.097l-7.704-7.703c-18.666-18.646-18.151-48.528.006-66.665l22.713-22.712c18.159-18.184 48.041-18.638 66.664.006l7.697 7.697c10.313-5.336 21.048-9.792 32.097-13.323v-10.87c0-25.989 21.144-47.133 47.134-47.133h32.133c25.989 0 47.133 21.144 47.133 47.133v10.871c11.049 3.53 21.784 7.986 32.097 13.323l7.704-7.704c18.659-18.682 48.548-18.134 66.665.007l22.711 22.71c18.149 18.129 18.671 48.008-.006 66.665l-7.698 7.698c5.337 10.313 9.792 21.046 13.323 32.097h10.87c25.989 0 47.134 21.144 47.134 47.133v32.134c0 25.989-21.145 47.133-47.134 47.133h-10.87c-3.531 11.05-7.986 21.784-13.323 32.097l7.704 7.704c18.666 18.646 18.151 48.528-.006 66.665l-22.713 22.712c-18.159 18.184-48.041 18.638-66.664-.006l-7.697-7.697c-10.313 5.336-21.048 9.792-32.097 13.323v10.871c0 25.987-21.144 47.131-47.134 47.131zm-106.349-102.83c14.327 8.473 29.747 14.874 45.831 19.025 6.624 1.709 11.252 7.683 11.252 14.524v22.148c0 9.447 7.687 17.133 17.134 17.133h32.133c9.447 0 17.134-7.686 17.134-17.133v-22.148c0-6.841 4.628-12.815 11.252-14.524 16.084-4.151 31.504-10.552 45.831-19.025 5.895-3.486 13.4-2.538 18.243 2.305l15.688 15.689c6.764 6.772 17.626 6.615 24.224.007l22.727-22.726c6.582-6.574 6.802-17.438.006-24.225l-15.695-15.695c-4.842-4.842-5.79-12.348-2.305-18.242 8.473-14.326 14.873-29.746 19.024-45.831 1.71-6.624 7.684-11.251 14.524-11.251h22.147c9.447 0 17.134-7.686 17.134-17.133v-32.134c0-9.447-7.687-17.133-17.134-17.133h-22.147c-6.841 0-12.814-4.628-14.524-11.251-4.151-16.085-10.552-31.505-19.024-45.831-3.485-5.894-2.537-13.4 2.305-18.242l15.689-15.689c6.782-6.774 6.605-17.634.006-24.225l-22.725-22.725c-6.587-6.596-17.451-6.789-24.225-.006l-15.694 15.695c-4.842 4.843-12.35 5.791-18.243 2.305-14.327-8.473-29.747-14.874-45.831-19.025-6.624-1.709-11.252-7.683-11.252-14.524v-22.15c0-9.447-7.687-17.133-17.134-17.133h-32.133c-9.447 0-17.134 7.686-17.134 17.133v22.148c0 6.841-4.628 12.815-11.252 14.524-16.084 4.151-31.504 10.552-45.831 19.025-5.896 3.485-13.401 2.537-18.243-2.305l-15.688-15.689c-6.764-6.772-17.627-6.615-24.224-.007l-22.727 22.726c-6.582 6.574-6.802 17.437-.006 24.225l15.695 15.695c4.842 4.842 5.79 12.348 2.305 18.242-8.473 14.326-14.873 29.746-19.024 45.831-1.71 6.624-7.684 11.251-14.524 11.251h-22.148c-9.447.001-17.134 7.687-17.134 17.134v32.134c0 9.447 7.687 17.133 17.134 17.133h22.147c6.841 0 12.814 4.628 14.524 11.251 4.151 16.085 10.552 31.505 19.024 45.831 3.485 5.894 2.537 13.4-2.305 18.242l-15.689 15.689c-6.782 6.774-6.605 17.634-.006 24.225l22.725 22.725c6.587 6.596 17.451 6.789 24.225.006l15.694-15.695c3.568-3.567 10.991-6.594 18.244-2.304z"/><path d="m256 367.4c-61.427 0-111.4-49.974-111.4-111.4s49.973-111.4 111.4-111.4 111.4 49.974 111.4 111.4-49.973 111.4-111.4 111.4zm0-192.8c-44.885 0-81.4 36.516-81.4 81.4s36.516 81.4 81.4 81.4 81.4-36.516 81.4-81.4-36.515-81.4-81.4-81.4z"/></svg>
-                    </td>
-                </tr>
+
+<head>
+  <title>Popcorn Box</title>
+  <meta charset="UTF-8">
+  <meta name="google" content="notranslate">
+  <meta name="viewport"
+    content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height" />
+  <link async href="./style.css" type="text/css" rel="stylesheet">
+  <link async href="./controls.css" type="text/css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Assistant|IBM+Plex+Sans|Oxygen|Ubuntu&display=swap"
+    rel="stylesheet">
+  <script type="text/javascript" src="./lib.js"></script>
+  <script type="text/javascript" src="./script.js"></script>
+</head>
+
+<body onload="doBlur();unblur();">
+  <div id="topTools">
+    <table id="finder" width="100%" cellspacing="8px">
+      <tr>
+        <td>
+          <nobr>&#160;</nobr>
+          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
+            viewBox="0 0 513.28 513.28" xml:space="preserve">
+            <g>
+              <g>
+                <g>
+                  <path
+                    d="M495.04,404.48L410.56,320c15.36-30.72,25.6-66.56,25.6-102.4C436.16,97.28,338.88,0,218.56,0S0.96,97.28,0.96,217.6 s97.28,217.6,217.6,217.6c35.84,0,71.68-10.24,102.4-25.6l84.48,84.48c25.6,25.6,64,25.6,89.6,0 C518.08,468.48,518.08,430.08,495.04,404.48z M218.56,384c-92.16,0-166.4-74.24-166.4-166.4S126.4,51.2,218.56,51.2 s166.4,74.24,166.4,166.4S310.72,384,218.56,384z"
+                    data-original="#000000" class="active-path" fill="#000000" />
+                </g>
+              </g>
+            </g>
+          </svg>
+          <input type="text" id="search" autocomplete="on" placeholder="Suchen"
+            oninput="search(document.getElementById('search').value);">
+        </td>
+        <td width="45px" height="45px" style="text-align: center; padding: 0px, 8px;" onclick="random()">
+          <svg style="height: 24px; width: 24px;" version="1.1" xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" xml:space="preserve">
+            <g>
+              <g>
+                <path
+                  d="M395.107,40.711l-256-12.826L0,243.174l116.893,228.116l256,12.826L512,268.826L395.107,40.711z M375.623,70.865l92.334,180.188l-202.215-10.131L173.409,60.735L375.623,70.865z M35.857,244.969L145.738,74.914l92.334,180.188L128.19,425.159L35.857,244.969z M356.52,452.164l-202.215-10.131l109.881-170.057l202.215,10.131L356.52,452.164z" />
+              </g>
+            </g>
+            <g>
+              <g>
+                <circle cx="324.93" cy="151.75" r="18.14" />
+              </g>
+            </g>
+            <g>
+              <g>
+                <circle cx="243.22" cy="401.69" r="18.14" />
+              </g>
+            </g>
+            <g>
+              <g>
+                <circle cx="375.19" cy="328.45" r="18.14" />
+              </g>
+            </g>
+            <g>
+              <g>
+                <circle cx="137.51" cy="173.43" r="18.14" />
+              </g>
+            </g>
+            <g>
+              <g>
+                <circle cx="87.59" cy="249.81" r="18.14" />
+              </g>
+            </g>
+            <g>
+              <g>
+                <circle cx="179.31" cy="256.03" r="18.14" />
+              </g>
+            </g>
+            <g>
+              <g>
+                <circle cx="130.95" cy="328.45" r="18.14" />
+              </g>
+            </g>
+          </svg>
+        </td>
+        <td width="45px" height="45px" style="text-align: center; padding: 0px, 8px;"
+          onclick="doBlur(); document.getElementById('filter').style.transform = 'translateX(0)';">
+          <svg style="height: 24px; width: 24px;" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="m272.066 512h-32.133c-25.989 0-47.134-21.144-47.134-47.133v-10.871c-11.049-3.53-21.784-7.986-32.097-13.323l-7.704 7.704c-18.659 18.682-48.548 18.134-66.665-.007l-22.711-22.71c-18.149-18.129-18.671-48.008.006-66.665l7.698-7.698c-5.337-10.313-9.792-21.046-13.323-32.097h-10.87c-25.988 0-47.133-21.144-47.133-47.133v-32.134c0-25.989 21.145-47.133 47.134-47.133h10.87c3.531-11.05 7.986-21.784 13.323-32.097l-7.704-7.703c-18.666-18.646-18.151-48.528.006-66.665l22.713-22.712c18.159-18.184 48.041-18.638 66.664.006l7.697 7.697c10.313-5.336 21.048-9.792 32.097-13.323v-10.87c0-25.989 21.144-47.133 47.134-47.133h32.133c25.989 0 47.133 21.144 47.133 47.133v10.871c11.049 3.53 21.784 7.986 32.097 13.323l7.704-7.704c18.659-18.682 48.548-18.134 66.665.007l22.711 22.71c18.149 18.129 18.671 48.008-.006 66.665l-7.698 7.698c5.337 10.313 9.792 21.046 13.323 32.097h10.87c25.989 0 47.134 21.144 47.134 47.133v32.134c0 25.989-21.145 47.133-47.134 47.133h-10.87c-3.531 11.05-7.986 21.784-13.323 32.097l7.704 7.704c18.666 18.646 18.151 48.528-.006 66.665l-22.713 22.712c-18.159 18.184-48.041 18.638-66.664-.006l-7.697-7.697c-10.313 5.336-21.048 9.792-32.097 13.323v10.871c0 25.987-21.144 47.131-47.134 47.131zm-106.349-102.83c14.327 8.473 29.747 14.874 45.831 19.025 6.624 1.709 11.252 7.683 11.252 14.524v22.148c0 9.447 7.687 17.133 17.134 17.133h32.133c9.447 0 17.134-7.686 17.134-17.133v-22.148c0-6.841 4.628-12.815 11.252-14.524 16.084-4.151 31.504-10.552 45.831-19.025 5.895-3.486 13.4-2.538 18.243 2.305l15.688 15.689c6.764 6.772 17.626 6.615 24.224.007l22.727-22.726c6.582-6.574 6.802-17.438.006-24.225l-15.695-15.695c-4.842-4.842-5.79-12.348-2.305-18.242 8.473-14.326 14.873-29.746 19.024-45.831 1.71-6.624 7.684-11.251 14.524-11.251h22.147c9.447 0 17.134-7.686 17.134-17.133v-32.134c0-9.447-7.687-17.133-17.134-17.133h-22.147c-6.841 0-12.814-4.628-14.524-11.251-4.151-16.085-10.552-31.505-19.024-45.831-3.485-5.894-2.537-13.4 2.305-18.242l15.689-15.689c6.782-6.774 6.605-17.634.006-24.225l-22.725-22.725c-6.587-6.596-17.451-6.789-24.225-.006l-15.694 15.695c-4.842 4.843-12.35 5.791-18.243 2.305-14.327-8.473-29.747-14.874-45.831-19.025-6.624-1.709-11.252-7.683-11.252-14.524v-22.15c0-9.447-7.687-17.133-17.134-17.133h-32.133c-9.447 0-17.134 7.686-17.134 17.133v22.148c0 6.841-4.628 12.815-11.252 14.524-16.084 4.151-31.504 10.552-45.831 19.025-5.896 3.485-13.401 2.537-18.243-2.305l-15.688-15.689c-6.764-6.772-17.627-6.615-24.224-.007l-22.727 22.726c-6.582 6.574-6.802 17.437-.006 24.225l15.695 15.695c4.842 4.842 5.79 12.348 2.305 18.242-8.473 14.326-14.873 29.746-19.024 45.831-1.71 6.624-7.684 11.251-14.524 11.251h-22.148c-9.447.001-17.134 7.687-17.134 17.134v32.134c0 9.447 7.687 17.133 17.134 17.133h22.147c6.841 0 12.814 4.628 14.524 11.251 4.151 16.085 10.552 31.505 19.024 45.831 3.485 5.894 2.537 13.4-2.305 18.242l-15.689 15.689c-6.782 6.774-6.605 17.634-.006 24.225l22.725 22.725c6.587 6.596 17.451 6.789 24.225.006l15.694-15.695c3.568-3.567 10.991-6.594 18.244-2.304z" />
+            <path
+              d="m256 367.4c-61.427 0-111.4-49.974-111.4-111.4s49.973-111.4 111.4-111.4 111.4 49.974 111.4 111.4-49.973 111.4-111.4 111.4zm0-192.8c-44.885 0-81.4 36.516-81.4 81.4s36.516 81.4 81.4 81.4 81.4-36.516 81.4-81.4-36.515-81.4-81.4-81.4z" />
+          </svg>
+        </td>
+      </tr>
+    </table>
+    <p id="movieCounterP">
+      <nobr>&#160;&#160;</nobr>
+      <nobr>Gesamte Filme: </nobr>
+      <nobr id="movieCounter">0</nobr>
+    </p>
+  </div>
+  <table style="color: white;" id="alphabet"></table>
+  <div id="list-view"></div>
+  <div id="toolbar" class="toolbar">
+    <table width="100%" style="padding-top: 5px; padding-bottom: 5px;">
+      <tr>
+        <td style="width: 25%; text-align: center;">
+          <div
+            onclick="doBlur(); document.getElementById('wishlistView').style.transform = 'translateX(0)'; switchWishlistButton()">
+            <svg height="24px" viewBox="0 -7 512 512" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="m357 0c-37.589844 0-72.929688 13.183594-101 37.40625-28.070312-24.222656-63.410156-37.40625-101-37.40625-85.46875 0-155 69.53125-155 155 0 77.828125 24.605469 151.796875 71.15625 213.902344 22.390625 29.875 49.179688 55.964844 79.628906 77.546875 30.867188 21.875 64.777344 38.605469 100.789063 49.722656l4.425781 1.363281 4.425781-1.363281c36.011719-11.117187 69.921875-27.847656 100.789063-49.722656 30.449218-21.582031 57.238281-47.671875 79.628906-77.546875 46.550781-62.105469 71.15625-136.074219 71.15625-213.902344 0-85.46875-69.53125-155-155-155zm-101 466.105469c-135.378906-43.84375-226-168.28125-226-311.105469 0-68.925781 56.074219-125 125-125 34.351562 0 66.378906 13.652344 90.179688 38.445312l10.820312 11.273438 10.820312-11.273438c23.800782-24.792968 55.828126-38.445312 90.179688-38.445312 68.925781 0 125 56.074219 125 125 0 142.824219-90.621094 267.261719-226 311.105469zm0 0" />
+              <path
+                d="m256 293.917969c-25.363281 0-46-20.636719-46-46h-30c0 41.90625 34.09375 76 76 76s76-34.09375 76-76h-30c0 25.363281-20.636719 46-46 46zm0 0" />
+              <path d="m180 172.917969h30v45h-30zm0 0" />
+              <path d="m302 172.917969h30v45h-30zm0 0" /></svg>
+            <p class="ToolbarSubtitle">Wunschliste</p>
+          </div>
+        </td>
+        <td style="width: 25%; text-align: center;">
+          <div onclick="createDialog()">
+            <svg version="1.1" height="24px" xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 477.867 477.867" xml:space="preserve">
+              <g>
+                <g>
+                  <path
+                    d="M392.533,0h-307.2C38.228,0.056,0.056,38.228,0,85.333v307.2c0.056,47.105,38.228,85.277,85.333,85.333h307.2c47.105-0.056,85.277-38.228,85.333-85.333v-307.2C477.81,38.228,439.638,0.056,392.533,0z M443.733,392.533c0,28.277-22.923,51.2-51.2,51.2h-307.2c-28.277,0-51.2-22.923-51.2-51.2v-307.2c0-28.277,22.923-51.2,51.2-51.2h307.2c28.277,0,51.2,22.923,51.2,51.2V392.533z" />
+                </g>
+              </g>
+              <g>
+                <g>
+                  <path
+                    d="M324.267,221.867H256V153.6c0-9.426-7.641-17.067-17.067-17.067s-17.067,7.641-17.067,17.067v68.267H153.6c-9.426,0-17.067,7.641-17.067,17.067S144.174,256,153.6,256h68.267v68.267c0,9.426,7.641,17.067,17.067,17.067S256,333.692,256,324.267V256h68.267c9.426,0,17.067-7.641,17.067-17.067S333.692,221.867,324.267,221.867z" />
+                </g>
+              </g>
+              <g></g>
+              <g></g>
+              <g></g>
+              <g></g>
+              <g></g>
+              <g></g>
+              <g></g>
+              <g></g>
+              <g></g>
+              <g></g>
+              <g></g>
+              <g></g>
+              <g></g>
+              <g></g>
+              <g></g>
+            </svg>
+            <p class="ToolbarSubtitle">Hinzufügen</p>
+          </div>
+        </td>
+        <td style="width: 25%; text-align: center;">
+          <div
+            onclick="doBlur(); updateStatistics(); document.getElementById('statistics').style.transform = 'translateX(0)';">
+            <svg version="1.1" height="24px" xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512.099 512.099" xml:space="preserve">
+              <g>
+                <g>
+                  <path
+                    d="M496.783,209.002C464.567,126.813,386.714,71.524,298.5,68.187V8.58c0-4.713-3.82-8.533-8.533-8.533C129.898,0.228,0.181,129.944,0,290.013c0,4.713,3.82,8.533,8.533,8.533h59.607c3.4,88.181,58.693,165.981,140.853,198.185c82.161,32.205,175.594,12.702,238.01-49.681C509.453,384.657,528.998,291.191,496.783,209.002z M298.5,85.254c48.457,1.86,94.654,20.977,130.257,53.902L298.5,269.413V85.254z M17.283,281.48c4.66-143.911,120.239-259.49,264.15-264.15v264.15H17.283z M85.208,298.546h184.159L139.11,428.803C106.185,393.201,87.068,347.004,85.208,298.546z M151.177,440.87l138.79-138.79l138.79,138.79C350.294,513.016,229.639,513.016,151.177,440.87z M440.823,428.803L310.567,298.546h184.159C492.864,347.003,473.747,393.2,440.823,428.803z M310.567,281.48l130.257-130.257c32.924,35.603,52.041,81.8,53.902,130.257H310.567z" />
+                </g>
+              </g>
+              <g></g>
+              <g></g>
+              <g></g>
+              <g></g>
+              <g></g>
+              <g></g>
+              <g></g>
+              <g></g>
+              <g></g>
+              <g></g>
+              <g></g>
+              <g></g>
+              <g></g>
+              <g></g>
+              <g></g>
+            </svg>
+            <p class="ToolbarSubtitle">Statistik</p>
+          </div>
+        </td>
+        <td style="width: 25%; text-align: center;">
+          <div onclick="doBlur(); document.getElementById('settingsView').style.transform = 'translateX(0)';">
+            <svg version="1.1" height="24px" xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 384.97 384.97" xml:space="preserve">
+              <g>
+                <g>
+                  <path
+                    d="M12.03,120.303h360.909c6.641,0,12.03-5.39,12.03-12.03c0-6.641-5.39-12.03-12.03-12.03H12.03c-6.641,0-12.03,5.39-12.03,12.03C0,114.913,5.39,120.303,12.03,120.303z" />
+                  <path
+                    d="M372.939,180.455H12.03c-6.641,0-12.03,5.39-12.03,12.03s5.39,12.03,12.03,12.03h360.909c6.641,0,12.03-5.39,12.03-12.03S379.58,180.455,372.939,180.455z" />
+                  <path
+                    d="M372.939,264.667H132.333c-6.641,0-12.03,5.39-12.03,12.03c0,6.641,5.39,12.03,12.03,12.03h240.606c6.641,0,12.03-5.39,12.03-12.03C384.97,270.056,379.58,264.667,372.939,264.667z" />
+                </g>
+                <g></g>
+                <g></g>
+                <g></g>
+                <g></g>
+                <g></g>
+                <g></g>
+              </g>
+              <g></g>
+              <g></g>
+              <g></g>
+              <g></g>
+              <g></g>
+              <g></g>
+              <g></g>
+              <g></g>
+              <g></g>
+              <g></g>
+              <g></g>
+              <g></g>
+              <g></g>
+              <g></g>
+              <g></g>
+            </svg>
+            <p class="ToolbarSubtitle">Mehr</p>
+          </div>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div id="filter" class="floating">
+    <div class="floatingChild1"
+      onclick="document.getElementById('filter').style.transform = 'translateX(200%)'; unblur()"></div>
+    <div class="floatingChild2">
+      <b>Filter</b>
+      <table width="100%">
+        <tr>
+          <td>
+            Nur Favoriten
+          </td>
+          <td style="text-align: right;">
+            <label class="switch">
+              <input id="favSwitch" type="checkbox" unchecked onchange="CreateList();">
+              <span class="slider round"></span>
+            </label>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Rasteransicht
+          </td>
+          <td style="text-align: right;">
+            <label class="switch">
+              <input id="gridSwitch" type="checkbox" unchecked
+                onchange="if(document.getElementById('gridSwitch').checked){gridView()}else{listView()};CreateList();">
+              <span class="slider round"></span>
+            </label>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Sortierung
+          </td>
+          <td style="text-align: right;">
+            <select width="100%" id="sortSelect" onchange="sort();CreateList();">
+              <option value="alpha">Alphabetisch</option>
+              <option value="group">Gruppen</option>
+              <option value="new">Neueste zuerst</option>
+              <option value="old">Älteste zuerst</option>
+              <option value="seen much">Meistgesehen</option>
+              <option value="seen less">Seltenst gesehen</option>
+            </select>
+          </td>
+        </tr>
+      </table>
+      <table width="100%" class="dialog_control">
+        <tr>
+          <td>
+            <button
+              onclick="document.getElementById('filter').style.transform = 'translateX(200%)'; unblur()"><b>OK</b></button>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div id="detailView" class="floating">
+    <div class="floatingChild1"
+      onclick="document.getElementById('detailView').style.transform = 'translateX(200%)'; unblur()"></div>
+    <div class="floatingChild2">
+      <b id="detailViewHeader">Bearbeiten</b>
+      <br><br>
+      <table width="98%">
+        <tr>
+          <td>
+            <img src="" class="cover" id="detailCover" onclick='findCover()'>
+          </td>
+          <td style="text-align: right; transform: translateX(-5px);">
+            <input type="text" class="txtInput" id="detailTitle" autocomplete="on" placeholder="Titel">
+            <br><br>
+            <table>
+              <tr>
+                <td>
+                  <input type="text" class="txtInput" id="detailGroup" autocomplete="on" placeholder="Gruppe">
+                </td>
+                <td>
+                  <input type="number" class="txtInput" id="detailGroupEp" placeholder="Folge">
+                </td>
+              </tr>
             </table>
-            <p id="movieCounterP">
-                <nobr>&#160;&#160;</nobr>
-                <nobr>Gesamte Filme: </nobr>
-                <nobr id="movieCounter">0</nobr>
-            </p>
-        </div>
-        <table style="color: white;" id="alphabet"></table>
-        <div id="list-view"></div>
-        <div id="toolbar" class="toolbar">
-            <table width="100%" style="padding-top: 5px; padding-bottom: 5px;">
-                <tr>
-                    <td style="width: 25%; text-align: center;">
-                        <div onclick="doBlur(); document.getElementById('wishlistView').style.transform = 'translateX(0)'; switchWishlistButton()">
-                            <svg height="24px" viewBox="0 -7 512 512" xmlns="http://www.w3.org/2000/svg"><path d="m357 0c-37.589844 0-72.929688 13.183594-101 37.40625-28.070312-24.222656-63.410156-37.40625-101-37.40625-85.46875 0-155 69.53125-155 155 0 77.828125 24.605469 151.796875 71.15625 213.902344 22.390625 29.875 49.179688 55.964844 79.628906 77.546875 30.867188 21.875 64.777344 38.605469 100.789063 49.722656l4.425781 1.363281 4.425781-1.363281c36.011719-11.117187 69.921875-27.847656 100.789063-49.722656 30.449218-21.582031 57.238281-47.671875 79.628906-77.546875 46.550781-62.105469 71.15625-136.074219 71.15625-213.902344 0-85.46875-69.53125-155-155-155zm-101 466.105469c-135.378906-43.84375-226-168.28125-226-311.105469 0-68.925781 56.074219-125 125-125 34.351562 0 66.378906 13.652344 90.179688 38.445312l10.820312 11.273438 10.820312-11.273438c23.800782-24.792968 55.828126-38.445312 90.179688-38.445312 68.925781 0 125 56.074219 125 125 0 142.824219-90.621094 267.261719-226 311.105469zm0 0"/><path d="m256 293.917969c-25.363281 0-46-20.636719-46-46h-30c0 41.90625 34.09375 76 76 76s76-34.09375 76-76h-30c0 25.363281-20.636719 46-46 46zm0 0"/><path d="m180 172.917969h30v45h-30zm0 0"/><path d="m302 172.917969h30v45h-30zm0 0"/></svg>
-                            <p class="ToolbarSubtitle">Wunschliste</p>
-                        </div>
-                    </td>
-                    <td style="width: 25%; text-align: center;">
-                        <div onclick="createDialog()">
-                            <svg version="1.1" height="24px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 477.867 477.867" xml:space="preserve"><g><g><path d="M392.533,0h-307.2C38.228,0.056,0.056,38.228,0,85.333v307.2c0.056,47.105,38.228,85.277,85.333,85.333h307.2c47.105-0.056,85.277-38.228,85.333-85.333v-307.2C477.81,38.228,439.638,0.056,392.533,0z M443.733,392.533c0,28.277-22.923,51.2-51.2,51.2h-307.2c-28.277,0-51.2-22.923-51.2-51.2v-307.2c0-28.277,22.923-51.2,51.2-51.2h307.2c28.277,0,51.2,22.923,51.2,51.2V392.533z"/></g></g><g><g><path d="M324.267,221.867H256V153.6c0-9.426-7.641-17.067-17.067-17.067s-17.067,7.641-17.067,17.067v68.267H153.6c-9.426,0-17.067,7.641-17.067,17.067S144.174,256,153.6,256h68.267v68.267c0,9.426,7.641,17.067,17.067,17.067S256,333.692,256,324.267V256h68.267c9.426,0,17.067-7.641,17.067-17.067S333.692,221.867,324.267,221.867z"/></g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g></svg>
-                            <p class="ToolbarSubtitle">Hinzufügen</p>
-                        </div>
-                    </td>
-                    <td style="width: 25%; text-align: center;">
-                        <div onclick="doBlur(); updateStatistics(); document.getElementById('statistics').style.transform = 'translateX(0)';">
-                            <svg version="1.1" height="24px" xmlns="http://www.w3.org/2000/svg"xmlns:xlink="http://www.w3.org/1999/xlink"viewBox="0 0 512.099 512.099" xml:space="preserve"><g><g><path d="M496.783,209.002C464.567,126.813,386.714,71.524,298.5,68.187V8.58c0-4.713-3.82-8.533-8.533-8.533C129.898,0.228,0.181,129.944,0,290.013c0,4.713,3.82,8.533,8.533,8.533h59.607c3.4,88.181,58.693,165.981,140.853,198.185c82.161,32.205,175.594,12.702,238.01-49.681C509.453,384.657,528.998,291.191,496.783,209.002z M298.5,85.254c48.457,1.86,94.654,20.977,130.257,53.902L298.5,269.413V85.254z M17.283,281.48c4.66-143.911,120.239-259.49,264.15-264.15v264.15H17.283z M85.208,298.546h184.159L139.11,428.803C106.185,393.201,87.068,347.004,85.208,298.546z M151.177,440.87l138.79-138.79l138.79,138.79C350.294,513.016,229.639,513.016,151.177,440.87z M440.823,428.803L310.567,298.546h184.159C492.864,347.003,473.747,393.2,440.823,428.803z M310.567,281.48l130.257-130.257c32.924,35.603,52.041,81.8,53.902,130.257H310.567z"/></g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g></svg>
-                            <p class="ToolbarSubtitle">Statistik</p>
-                        </div>
-                    </td>
-                    <td style="width: 25%; text-align: center;">
-                        <div onclick="doBlur(); document.getElementById('settingsView').style.transform = 'translateX(0)';">
-                            <svg version="1.1" height="24px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 384.97 384.97" xml:space="preserve"><g><g><path d="M12.03,120.303h360.909c6.641,0,12.03-5.39,12.03-12.03c0-6.641-5.39-12.03-12.03-12.03H12.03c-6.641,0-12.03,5.39-12.03,12.03C0,114.913,5.39,120.303,12.03,120.303z"/><path d="M372.939,180.455H12.03c-6.641,0-12.03,5.39-12.03,12.03s5.39,12.03,12.03,12.03h360.909c6.641,0,12.03-5.39,12.03-12.03S379.58,180.455,372.939,180.455z"/><path d="M372.939,264.667H132.333c-6.641,0-12.03,5.39-12.03,12.03c0,6.641,5.39,12.03,12.03,12.03h240.606c6.641,0,12.03-5.39,12.03-12.03C384.97,270.056,379.58,264.667,372.939,264.667z"/></g><g></g><g></g><g></g><g></g><g></g><g></g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g></svg>
-                            <p class="ToolbarSubtitle">Mehr</p>
-                        </div>
-                    </td>
-                </tr>
-            </table>
-        </div>
-        <div id="filter" class="floating">
-            <div class="floatingChild1" onclick="document.getElementById('filter').style.transform = 'translateX(200%)'; unblur()"></div>
-            <div class="floatingChild2">
-                <b>Filter</b>
-                <table width="100%">
-                    <tr>
-                        <td>
-                            Nur Favoriten
-                        </td>
-                        <td style="text-align: right;">
-                            <label class="switch">
-                                <input id="favSwitch" type="checkbox" unchecked onchange="CreateList();">
-                                <span class="slider round"></span>
-                            </label>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Rasteransicht
-                        </td>
-                        <td style="text-align: right;">
-                            <label class="switch">
-                                <input id="gridSwitch" type="checkbox" unchecked onchange="if(document.getElementById('gridSwitch').checked){gridView()}else{listView()};CreateList();">
-                                <span class="slider round"></span>
-                            </label>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Sortierung
-                        </td>
-                        <td style="text-align: right;">
-                            <select width="100%" id="sortSelect" onchange="sort();CreateList();">
-                                <option value="alpha">Alphabetisch</option>
-                                <option value="group">Gruppen</option>
-                                <option value="new">Neueste zuerst</option>
-                                <option value="old">Älteste zuerst</option>
-                                <option value="seen much">Meistgesehen</option>
-                                <option value="seen less">Seltenst gesehen</option>
-                            </select>
-                        </td>
-                    </tr>
-                </table>
-                <table width="100%" class="dialog_control">
-                    <tr>
-                        <td>
-                            <button onclick="document.getElementById('filter').style.transform = 'translateX(200%)'; unblur()"><b>OK</b></button>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-        </div>
+          </td>
+        </tr>
+      </table>
+      <table width="100%" style="text-align: center;" id="coverSelector">
+        <tr>
+          <td>
+            <img src="" id="coverSelect1" class="cover"
+              onclick='document.getElementById("detailCover").src=this.src; details.cover=this.src; document.getElementById("coverSelector").style.display = "none";'>
+          </td>
+          <td>
+            <img src="" id="coverSelect2" class="cover"
+              onclick='document.getElementById("detailCover").src=this.src; details.cover=this.src; document.getElementById("coverSelector").style.display = "none";'>
+          </td>
+          <td>
+            <img src="" id="coverSelect3" class="cover"
+              onclick='document.getElementById("detailCover").src=this.src; details.cover=this.src; document.getElementById("coverSelector").style.display = "none";'>
+          </td>
+          <td>
+            <img src="" id="coverSelect4" class="cover"
+              onclick='document.getElementById("detailCover").src=this.src; details.cover=this.src; document.getElementById("coverSelector").style.display = "none";'>
+          </td>
+          <td>
+            <img src="" id="coverSelect5" class="cover"
+              onclick='document.getElementById("detailCover").src=this.src; details.cover=this.src; document.getElementById("coverSelector").style.display = "none";'>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p id="coverSelect1Src" style="font-size: 12px;"></p>
+          </td>
+          <td>
+            <p id="coverSelect2Src" style="font-size: 12px;"></p>
+          </td>
+          <td>
+            <p id="coverSelect3Src" style="font-size: 12px;"></p>
+          </td>
+          <td>
+            <p id="coverSelect4Src" style="font-size: 12px;"></p>
+          </td>
+          <td>
+            <p id="coverSelect5Src" style="font-size: 12px;"></p>
+          </td>
+        </tr>
+      </table>
+      <input type="text" id="comment" placeholder="Notiz" class="txtInput">
+      <table width="100%" id="watchCountEditor">
+        <tr>
+          <td>
+            Gesehen:
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <button class="fab" id="watchSub" onclick="watchSub()">
+              <svg version=1.1 viewBox="0 0 512 512" xml:space=preserve xmlns=http://www.w3.org/2000/svg
+                xmlns:xlink=http://www.w3.org/1999/xlink> <g>
+                <g>
+                  <path
+                    d=M492,236H20c-11.046,0-20,8.954-20,20c0,11.046,8.954,20,20,20h472c11.046,0,20-8.954,20-20S503.046,236,492,236z />
+                </g>
+                </g>
+                <g></g>
+                <g></g>
+                <g></g>
+                <g></g>
+                <g></g>
+                <g></g>
+                <g></g>
+                <g></g>
+                <g></g>
+                <g></g>
+                <g></g>
+                <g></g>
+                <g></g>
+                <g></g>
+                <g></g>
+              </svg>
+            </button>
+          </td>
+          <td>
+            <input type="number" class="txtInput" id="detailWatchCounter" min="0" value="0" placeholder="Zähler"
+              onchange="details.watchcount = this.value">
+          </td>
+          <td>
+            <p>&#160;</p>
+          </td>
+          <td>
+            <p>&#160;</p>
+          </td>
+          <td>
+            <p>&#160;</p>
+          </td>
+          <td>
+            <p>&#160;</p>
+          </td>
+          <td>
+            <button class="fab" id="watchAdd" onclick="watchAdd()">
+              <svg version=1.1 viewBox="0 0 512 512" xml:space=preserve xmlns=http://www.w3.org/2000/svg
+                xmlns:xlink=http://www.w3.org/1999/xlink> <g>
+                <g>
+                  <path
+                    d="M492,236H276V20c0-11.046-8.954-20-20-20c-11.046,0-20,8.954-20,20v216H20c-11.046,0-20,8.954-20,20s8.954,20,20,20h216 v216c0,11.046,8.954,20,20,20s20-8.954,20-20V276h216c11.046,0,20-8.954,20-20C512,244.954,503.046,236,492,236z" />
+                </g>
+                </g>
+                <g></g>
+                <g></g>
+                <g></g>
+                <g></g>
+                <g></g>
+                <g></g>
+                <g></g>
+                <g></g>
+                <g></g>
+                <g></g>
+                <g></g>
+                <g></g>
+                <g></g>
+                <g></g>
+                <g></g>
+              </svg>
+            </button>
+          </td>
+        </tr>
+      </table>
+      <table width="100%" id="detailFavSwitchP">
+        <tr>
+          <td>
+            Als Favorit markieren
+          </td>
+          <td>
+            <label class="switch">
+              <input id="detailFavSwitch" type="checkbox" unchecked>
+              <span class="slider round"></span>
+            </label>
+          </td>
+        </tr>
+      </table>
+      <table width="100%">
+        <tr>
+          <td>
+            <select id="detailStatus" width="100%">
+              <option value="0">Verfügbar</option>
+              <option value="1">Verliehen</option>
+              <option value="2">Ausgeliehen</option>
+              <option value="3">Bestellt</option>
+              <option value="4">Reserviert</option>
+            </select>
+            <br>
+            <select id="detailTyp" width="100%">
+              <option value="0">Blu-ray Disc</option>
+              <option value="1">DVD</option>
+              <option value="2">Digital</option>
+            </select>
+          </td>
+        </tr>
+      </table>
+      <p></p>
+      <table width="100%" style="text-align: center;">
+        <tr>
+          <td>
+            <button class="fab" id="del" onclick="del()">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 551.13 551.13">
+                <g>
+                  <path
+                    d="m516.685 68.891h-137.783v-51.668c0-9.52-7.703-17.223-17.223-17.223h-172.228c-9.52 0-17.223 7.703-17.223 17.223v51.668h-137.782v34.446h34.446v413.348c0 19.006 15.457 34.446 34.446 34.446h344.456c18.989 0 34.446-15.44 34.446-34.446v-413.348h34.446v-34.446zm-310.011-34.445h137.783v34.446h-137.783zm241.153 482.239-.034 17.223v-17.223h-344.456v-413.348h344.456v413.348z"
+                    data-original="#000000" class="active-path" data-old_color="#000000" fill="#FFFFFF" />
+                </g>
+              </svg>
+            </button>
+          </td>
+          <td>
+            <button class="fab" onclick="saveDetails()">
+              <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="m453.332031 512h-394.664062c-32.363281 0-58.667969-26.304688-58.667969-58.667969v-394.664062c0-32.363281 26.304688-58.667969 58.667969-58.667969h330.835937c21.054688 0 41.683594 8.535156 56.554688 23.445312l42.496094 42.496094c15.125 15.125 23.445312 35.222656 23.445312 56.574219v330.816406c0 32.363281-26.304688 58.667969-58.667969 58.667969zm-394.664062-480c-14.699219 0-26.667969 11.96875-26.667969 26.667969v394.664062c0 14.699219 11.96875 26.667969 26.667969 26.667969h394.664062c14.699219 0 26.667969-11.96875 26.667969-26.667969v-330.816406c0-12.820313-4.992188-24.871094-14.058594-33.941406l-42.496094-42.496094c-8.9375-8.957031-21.289062-14.078125-33.941406-14.078125zm0 0" />
+                <path
+                  d="m325.332031 149.332031h-224c-8.832031 0-16-7.167969-16-16v-117.332031c0-8.832031 7.167969-16 16-16s16 7.167969 16 16v101.332031h192v-101.332031c0-8.832031 7.167969-16 16-16s16 7.167969 16 16v117.332031c0 8.832031-7.167969 16-16 16zm0 0" />
+                <path
+                  d="m256 416c-52.929688 0-96-43.070312-96-96s43.070312-96 96-96 96 43.070312 96 96-43.070312 96-96 96zm0-160c-35.285156 0-64 28.714844-64 64s28.714844 64 64 64 64-28.714844 64-64-28.714844-64-64-64zm0 0" />
+              </svg>
+            </button>
+          </td>
+          <td>
+            <button class="fab" id="share" onclick="share()">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 551.13 551.13">
+                <g>
+                  <path
+                    d="m465.016 172.228h-51.668v34.446h34.446v310.011h-344.457v-310.011h34.446v-34.446h-51.669c-9.52 0-17.223 7.703-17.223 17.223v344.456c0 9.52 7.703 17.223 17.223 17.223h378.902c9.52 0 17.223-7.703 17.223-17.223v-344.456c0-9.52-7.703-17.223-17.223-17.223z"
+                    data-original="#000000" class="active-path" data-old_color="#000000" fill="#FFFFFF" />
+                  <path
+                    d="m258.342 65.931v244.08h34.446v-244.08l73.937 73.937 24.354-24.354-115.514-115.514-115.514 115.514 24.354 24.354z"
+                    data-original="#000000" class="active-path" data-old_color="#000000" fill="#FFFFFF" />
+                </g>
+              </svg>
+            </button>
+          </td>
+        </tr>
+      </table>
+      <table width="100%" class="dialog_control">
+        <tr>
+          <td>
+            <button
+              onclick="document.getElementById('detailView').style.transform = 'translateX(200%)'; unblur()">Abbrechen</button>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
 
-        <div id="detailView" class="floating">
-            <div class="floatingChild1" onclick="document.getElementById('detailView').style.transform = 'translateX(200%)'; unblur()"></div>
-            <div class="floatingChild2">
-                <b id="detailViewHeader">Bearbeiten</b>
-                <br><br>
-                <table width="98%">
-                    <tr>
-                        <td>
-                            <img src="" class="cover" id="detailCover" onclick='findCover()'>
-                        </td>
-                        <td style="text-align: right; transform: translateX(-5px);">
-                            <input type="text" class="txtInput" id="detailTitle" autocomplete="on" placeholder="Titel">
-                            <br><br>
-                            <table>
-                                <tr>
-                                    <td>
-                                        <input type="text" class="txtInput" id="detailGroup" autocomplete="on" placeholder="Gruppe">
-                                    </td>
-                                    <td>
-                                        <input type="number" class="txtInput" id="detailGroupEp" placeholder="Folge">
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                </table>
-                <table width="100%" style="text-align: center;" id="coverSelector">
-                    <tr>
-                        <td>
-                            <img src="" id="coverSelect1" class="cover" onclick='document.getElementById("detailCover").src=this.src; details.cover=this.src; document.getElementById("coverSelector").style.display = "none";'>
-                        </td>
-                        <td>
-                            <img src="" id="coverSelect2" class="cover" onclick='document.getElementById("detailCover").src=this.src; details.cover=this.src; document.getElementById("coverSelector").style.display = "none";'>
-                        </td>
-                        <td>
-                            <img src="" id="coverSelect3" class="cover" onclick='document.getElementById("detailCover").src=this.src; details.cover=this.src; document.getElementById("coverSelector").style.display = "none";'>
-                        </td>
-                        <td>
-                            <img src="" id="coverSelect4" class="cover" onclick='document.getElementById("detailCover").src=this.src; details.cover=this.src; document.getElementById("coverSelector").style.display = "none";'>
-                        </td>
-                        <td>
-                            <img src="" id="coverSelect5" class="cover" onclick='document.getElementById("detailCover").src=this.src; details.cover=this.src; document.getElementById("coverSelector").style.display = "none";'>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <p id="coverSelect1Src" style="font-size: 12px;"></p>
-                        </td>
-                        <td>
-                            <p id="coverSelect2Src" style="font-size: 12px;"></p>
-                        </td>
-                        <td>
-                            <p id="coverSelect3Src" style="font-size: 12px;"></p>
-                        </td>
-                        <td>
-                            <p id="coverSelect4Src" style="font-size: 12px;"></p>
-                        </td>
-                        <td>
-                            <p id="coverSelect5Src" style="font-size: 12px;"></p>
-                        </td>
-                    </tr>
-                </table>
-                <table width="100%" id="watchCountEditor">
-                    <tr>
-                        <td>
-                            Gesehen:
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <button class="fab" id="watchSub" onclick="watchSub()">
-                                <svg version=1.1 viewBox="0 0 512 512" xml:space=preserve xmlns=http://www.w3.org/2000/svg xmlns:xlink=http://www.w3.org/1999/xlink ><g><g><path d=M492,236H20c-11.046,0-20,8.954-20,20c0,11.046,8.954,20,20,20h472c11.046,0,20-8.954,20-20S503.046,236,492,236z /></g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g></svg>
-                            </button>
-                        </td>
-                        <td>
-                            <input type="number" class="txtInput" id="detailWatchCounter" min="0" value="0" placeholder="Zähler" onchange="details.watchcount = this.value">
-                        </td>
-                        <td><p>&#160;</p></td>
-                        <td><p>&#160;</p></td>
-                        <td><p>&#160;</p></td>
-                        <td><p>&#160;</p></td>
-                        <td>
-                            <button class="fab" id="watchAdd" onclick="watchAdd()">
-                                <svg version=1.1 viewBox="0 0 512 512" xml:space=preserve xmlns=http://www.w3.org/2000/svg xmlns:xlink=http://www.w3.org/1999/xlink><g><g><path d="M492,236H276V20c0-11.046-8.954-20-20-20c-11.046,0-20,8.954-20,20v216H20c-11.046,0-20,8.954-20,20s8.954,20,20,20h216 v216c0,11.046,8.954,20,20,20s20-8.954,20-20V276h216c11.046,0,20-8.954,20-20C512,244.954,503.046,236,492,236z" /></g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g></svg>
-                            </button>
-                        </td>
-                    </tr>
-                </table>
-                <table width="100%" id="detailFavSwitchP">
-                    <tr>
-                        <td>
-                            Als Favorit markieren
-                        </td>
-                        <td>
-                            <label class="switch">
-                                <input id="detailFavSwitch" type="checkbox" unchecked>
-                                <span class="slider round"></span>
-                            </label>
-                        </td>
-                    </tr>
-                </table>
-                <table width="100%">
-                    <tr>
-                        <td>
-                            <select id="detailStatus" width="100%">
-                                <option value="0">Verfügbar</option>
-                                <option value="1">Verliehen</option>
-                                <option value="2">Ausgeliehen</option>
-                                <option value="3">Bestellt</option>
-                                <option value="4">Reserviert</option>
-                            </select>
-                            <br>
-                            <select id="detailTyp" width="100%">
-                                <option value="0">Blu-ray Disc</option>
-                                <option value="1">DVD</option>
-                                <option value="2">Digital</option>
-                            </select>
-                        </td>
-                    </tr>
-                </table>
-                <p></p>
-                <table width="100%" style="text-align: center;">
-                    <tr>
-                        <td>
-                            <button class="fab" id="del" onclick="del()">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 551.13 551.13"><g><path d="m516.685 68.891h-137.783v-51.668c0-9.52-7.703-17.223-17.223-17.223h-172.228c-9.52 0-17.223 7.703-17.223 17.223v51.668h-137.782v34.446h34.446v413.348c0 19.006 15.457 34.446 34.446 34.446h344.456c18.989 0 34.446-15.44 34.446-34.446v-413.348h34.446v-34.446zm-310.011-34.445h137.783v34.446h-137.783zm241.153 482.239-.034 17.223v-17.223h-344.456v-413.348h344.456v413.348z" data-original="#000000" class="active-path" data-old_color="#000000" fill="#FFFFFF"/></g> </svg>
-                            </button>
-                        </td>
-                        <td>
-                            <button class="fab" onclick="saveDetails()">
-                                <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="m453.332031 512h-394.664062c-32.363281 0-58.667969-26.304688-58.667969-58.667969v-394.664062c0-32.363281 26.304688-58.667969 58.667969-58.667969h330.835937c21.054688 0 41.683594 8.535156 56.554688 23.445312l42.496094 42.496094c15.125 15.125 23.445312 35.222656 23.445312 56.574219v330.816406c0 32.363281-26.304688 58.667969-58.667969 58.667969zm-394.664062-480c-14.699219 0-26.667969 11.96875-26.667969 26.667969v394.664062c0 14.699219 11.96875 26.667969 26.667969 26.667969h394.664062c14.699219 0 26.667969-11.96875 26.667969-26.667969v-330.816406c0-12.820313-4.992188-24.871094-14.058594-33.941406l-42.496094-42.496094c-8.9375-8.957031-21.289062-14.078125-33.941406-14.078125zm0 0"/><path d="m325.332031 149.332031h-224c-8.832031 0-16-7.167969-16-16v-117.332031c0-8.832031 7.167969-16 16-16s16 7.167969 16 16v101.332031h192v-101.332031c0-8.832031 7.167969-16 16-16s16 7.167969 16 16v117.332031c0 8.832031-7.167969 16-16 16zm0 0"/><path d="m256 416c-52.929688 0-96-43.070312-96-96s43.070312-96 96-96 96 43.070312 96 96-43.070312 96-96 96zm0-160c-35.285156 0-64 28.714844-64 64s28.714844 64 64 64 64-28.714844 64-64-28.714844-64-64-64zm0 0"/></svg>
-                            </button>
-                        </td>
-                        <td>
-                            <button class="fab" id="share" onclick="share()">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 551.13 551.13"><g><path d="m465.016 172.228h-51.668v34.446h34.446v310.011h-344.457v-310.011h34.446v-34.446h-51.669c-9.52 0-17.223 7.703-17.223 17.223v344.456c0 9.52 7.703 17.223 17.223 17.223h378.902c9.52 0 17.223-7.703 17.223-17.223v-344.456c0-9.52-7.703-17.223-17.223-17.223z" data-original="#000000" class="active-path" data-old_color="#000000" fill="#FFFFFF"/><path d="m258.342 65.931v244.08h34.446v-244.08l73.937 73.937 24.354-24.354-115.514-115.514-115.514 115.514 24.354 24.354z" data-original="#000000" class="active-path" data-old_color="#000000" fill="#FFFFFF"/></g> </svg>
-                            </button>
-                        </td>
-                    </tr>
-                </table>
-                <table width="100%" class="dialog_control">
-                    <tr>
-                        <td>
-                            <button onclick="document.getElementById('detailView').style.transform = 'translateX(200%)'; unblur()">Abbrechen</button>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-        </div>
+  <div id="wishlistView" class="floating">
+    <div class="floatingChild1"
+      onclick="document.getElementById('wishlistView').style.transform = 'translateX(200%)'; unblur()"></div>
+    <div class="floatingChild2">
+      <b>Wunschliste</b>
+      <br><br>
+      <div id="wishList-view"></div>
+      <br>
+      <table width="100%" height="40px" style="padding: 0; margin: 0;">
+        <tr>
+          <td>
+            <input type="text" id="addWish" autocomplete="on" placeholder="Hinzufügen" oninput="switchWishlistButton()">
+          </td>
+          <td>
+            <br>
+          </td>
+          <td>
+            <button width="20px" class="small fab" id="addWishToDB" onclick="addWishToDB();switchWishlistButton();"
+              style="display: block;">
+              <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="m453.332031 512h-394.664062c-32.363281 0-58.667969-26.304688-58.667969-58.667969v-394.664062c0-32.363281 26.304688-58.667969 58.667969-58.667969h330.835937c21.054688 0 41.683594 8.535156 56.554688 23.445312l42.496094 42.496094c15.125 15.125 23.445312 35.222656 23.445312 56.574219v330.816406c0 32.363281-26.304688 58.667969-58.667969 58.667969zm-394.664062-480c-14.699219 0-26.667969 11.96875-26.667969 26.667969v394.664062c0 14.699219 11.96875 26.667969 26.667969 26.667969h394.664062c14.699219 0 26.667969-11.96875 26.667969-26.667969v-330.816406c0-12.820313-4.992188-24.871094-14.058594-33.941406l-42.496094-42.496094c-8.9375-8.957031-21.289062-14.078125-33.941406-14.078125zm0 0" />
+                <path
+                  d="m325.332031 149.332031h-224c-8.832031 0-16-7.167969-16-16v-117.332031c0-8.832031 7.167969-16 16-16s16 7.167969 16 16v101.332031h192v-101.332031c0-8.832031 7.167969-16 16-16s16 7.167969 16 16v117.332031c0 8.832031-7.167969 16-16 16zm0 0" />
+                <path
+                  d="m256 416c-52.929688 0-96-43.070312-96-96s43.070312-96 96-96 96 43.070312 96 96-43.070312 96-96 96zm0-160c-35.285156 0-64 28.714844-64 64s28.714844 64 64 64 64-28.714844 64-64-28.714844-64-64-64zm0 0" />
+              </svg>
+            </button>
+            <button width="20px" class="small fab" id="shareFullWishList" onclick="shareFullWishList()"
+              style="display: none;">
+              <svg style="-webkit-transform: translateY(-2px);transform: translateY(-2px);"
+                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 551.13 551.13">
+                <g>
+                  <path
+                    d="m465.016 172.228h-51.668v34.446h34.446v310.011h-344.457v-310.011h34.446v-34.446h-51.669c-9.52 0-17.223 7.703-17.223 17.223v344.456c0 9.52 7.703 17.223 17.223 17.223h378.902c9.52 0 17.223-7.703 17.223-17.223v-344.456c0-9.52-7.703-17.223-17.223-17.223z"
+                    data-original="#000000" class="active-path" data-old_color="#000000" fill="#FFFFFF" />
+                  <path
+                    d="m258.342 65.931v244.08h34.446v-244.08l73.937 73.937 24.354-24.354-115.514-115.514-115.514 115.514 24.354 24.354z"
+                    data-original="#000000" class="active-path" data-old_color="#000000" fill="#FFFFFF" />
+                </g>
+              </svg>
+            </button>
+          </td>
+        </tr>
+      </table>
+      <table width="100%" class="dialog_control">
+        <tr>
+          <td>
+            <button
+              onclick="document.getElementById('wishlistView').style.transform = 'translateX(200%)'; unblur()"><b>OK</b></button>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
 
-        <div id="wishlistView" class="floating">
-            <div class="floatingChild1" onclick="document.getElementById('wishlistView').style.transform = 'translateX(200%)'; unblur()"></div>
-            <div class="floatingChild2">
-                <b>Wunschliste</b>
-                <br><br>
-                <div id="wishList-view"></div>
-                <br>
-                <table width="100%" height="40px" style="padding: 0; margin: 0;">
-                    <tr>
-                        <td>
-                            <input type="text" id="addWish" autocomplete="on" placeholder="Hinzufügen" oninput="switchWishlistButton()">
-                        </td>
-                        <td>
-                            <br>
-                        </td>
-                        <td>
-                            <button width="20px" class="small fab" id="addWishToDB" onclick="addWishToDB();switchWishlistButton();" style="display: block;">
-                                <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="m453.332031 512h-394.664062c-32.363281 0-58.667969-26.304688-58.667969-58.667969v-394.664062c0-32.363281 26.304688-58.667969 58.667969-58.667969h330.835937c21.054688 0 41.683594 8.535156 56.554688 23.445312l42.496094 42.496094c15.125 15.125 23.445312 35.222656 23.445312 56.574219v330.816406c0 32.363281-26.304688 58.667969-58.667969 58.667969zm-394.664062-480c-14.699219 0-26.667969 11.96875-26.667969 26.667969v394.664062c0 14.699219 11.96875 26.667969 26.667969 26.667969h394.664062c14.699219 0 26.667969-11.96875 26.667969-26.667969v-330.816406c0-12.820313-4.992188-24.871094-14.058594-33.941406l-42.496094-42.496094c-8.9375-8.957031-21.289062-14.078125-33.941406-14.078125zm0 0"/><path d="m325.332031 149.332031h-224c-8.832031 0-16-7.167969-16-16v-117.332031c0-8.832031 7.167969-16 16-16s16 7.167969 16 16v101.332031h192v-101.332031c0-8.832031 7.167969-16 16-16s16 7.167969 16 16v117.332031c0 8.832031-7.167969 16-16 16zm0 0"/><path d="m256 416c-52.929688 0-96-43.070312-96-96s43.070312-96 96-96 96 43.070312 96 96-43.070312 96-96 96zm0-160c-35.285156 0-64 28.714844-64 64s28.714844 64 64 64 64-28.714844 64-64-28.714844-64-64-64zm0 0"/></svg>
-                            </button>
-                            <button width="20px" class="small fab" id="shareFullWishList" onclick="shareFullWishList()" style="display: none;">
-                                <svg style="-webkit-transform: translateY(-2px);transform: translateY(-2px);" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 551.13 551.13"><g><path d="m465.016 172.228h-51.668v34.446h34.446v310.011h-344.457v-310.011h34.446v-34.446h-51.669c-9.52 0-17.223 7.703-17.223 17.223v344.456c0 9.52 7.703 17.223 17.223 17.223h378.902c9.52 0 17.223-7.703 17.223-17.223v-344.456c0-9.52-7.703-17.223-17.223-17.223z" data-original="#000000" class="active-path" data-old_color="#000000" fill="#FFFFFF"/><path d="m258.342 65.931v244.08h34.446v-244.08l73.937 73.937 24.354-24.354-115.514-115.514-115.514 115.514 24.354 24.354z" data-original="#000000" class="active-path" data-old_color="#000000" fill="#FFFFFF"/></g> </svg>
-                            </button>
-                        </td>
-                    </tr>
-                </table>
-                <table width="100%" class="dialog_control">
-                    <tr>
-                        <td>
-                            <button onclick="document.getElementById('wishlistView').style.transform = 'translateX(200%)'; unblur()"><b>OK</b></button>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-        </div>
+  <div id="settingsView" class="floating">
+    <div class="floatingChild1"
+      onclick="document.getElementById('settingsView').style.transform = 'translateX(200%)'; unblur()"></div>
+    <div class="floatingChild2">
+      <b>Mehr</b>
+      <br><br>
+      <div style="box-shadow: none;">
+        <table width="100%">
+          <tr>
+            <td>
+              Theme
+            </td>
+            <td>
+              <select id="themeSelect" style="transform: translateX(10px);" width="100%" onchange='changeTheme()'>
+                <option value="0">Dunkel</option>
+                <option value="1">Hell</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Fragen bevor<br>schließen
+            </td>
+            <td style="text-align: right;">
+              <label class="switch">
+                <input id="quitAskSwitch" type="checkbox" unchecked
+                  onchange='send("settings","quitAsk",String(this.checked));quitAsk=this.checked?"true":"false";'>
+                <span class="slider round"></span>
+              </label>
+            </td>
+          </tr>
+        </table>
+        <p>
+          Farbe
+          <svg id="paintbrush" version="1.1" width="25px" xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 469.333 469.333" xml:space="preserve">
+            <g>
+              <g>
+                <g>
+                  <path
+                    d="M401.781,0c-21.156,0-41.365,10.104-54.24,27.292l-78.906,112.302c-8.417,11.24-26.771,12.542-36.677,2.615l-22.167-22.167c-8.625-8.625-20.094-13.375-32.292-13.375h-3c-12.198,0-23.667,4.75-32.292,13.375l-32.417,32.417c-4.167,4.167-4.167,10.917,0,15.083l192,192c2.083,2.083,4.813,3.125,7.542,3.125c2.729,0,5.458-1.042,7.542-3.125l32.417-32.417c8.625-8.625,13.375-20.094,13.375-32.292v-3c0-12.198-4.75-23.667-13.375-32.292l-22.167-22.167c-4.531-4.531-7.125-10.802-7.125-17.208c0-7.615,3.635-14.896,9.469-19.271l112.833-79.302c16.927-12.677,27.031-32.885,27.031-54.042C469.333,30.302,439.031,0,401.781,0z M405.333,85.333C393.573,85.333,384,75.76,384,64c0-11.76,9.573-21.333,21.333-21.333S426.667,52.24,426.667,64C426.667,75.76,417.094,85.333,405.333,85.333z" />
+                  <path
+                    d="M104.083,192c-4.167-4.167-10.917-4.167-15.083,0l-76.5,76.5C4.437,276.562,0,287.271,0,298.667s4.438,22.104,12.5,30.167l16.385,16.396c3.354,3.365,8.573,4.104,12.719,1.781l37.604-20.885l-20.885,37.604c-2.313,4.156-1.583,9.354,1.781,12.719l80.396,80.385c8.063,8.063,18.771,12.5,30.167,12.5s22.104-4.438,30.167-12.5l76.5-76.5c4.167-4.167,4.167-10.917,0-15.083L104.083,192z" />
+                </g>
+              </g>
+            </g>
+            <g></g>
+            <g></g>
+            <g></g>
+            <g></g>
+            <g></g>
+            <g></g>
+            <g></g>
+            <g></g>
+            <g></g>
+            <g></g>
+            <g></g>
+            <g></g>
+            <g></g>
+            <g></g>
+            <g></g>
+          </svg>
+        </p>
+        <table width="100%">
+          <tr>
+            <td>
+              Farbton
+            </td>
+            <td class="sliderParent">
+              <input type="range" min="0" max="360" value="50" class="CSlider" id="colorSelectorHue"
+                oninput='colorSliderBackgroundCalc(this, 3.6)' onchange='colorSliderBackgroundCalc(this, 3.6)'>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Sättigung
+            </td>
+            <td class="sliderParent">
+              <input type="range" min="0" max="100" value="50" class="CSlider" id="colorSelectorSaturation"
+                oninput='colorSliderBackgroundCalc(this)' onchange='colorSliderBackgroundCalc(this)'>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Helligkeit
+            </td>
+            <td class="sliderParent">
+              <input type="range" min="0" max="100" value="50" class="CSlider" id="colorSelectorLightness"
+                oninput='colorSliderBackgroundCalc(this)' onchange='colorSliderBackgroundCalc(this)'>
+            </td>
+          </tr>
+        </table>
+        <p>
+          Entwickler: Frank Mayer
+        </p>
+        <table>
+          <tr>
+            <td>&nbsp;&nbsp;</td>
+            <td>
+              Drittanbieter:
+            </td>
+          </tr>
+          <tr>
+            <td>&nbsp;&nbsp;</td>
+            <td>
+              Microsoft GitHub Pages
+            </td>
+          </tr>
+          <tr>
+            <td>&nbsp;&nbsp;</td>
+            <td>
+              "Becris", "Freepik", "Smashicons", "those-icons" und "Pixel perfect" von flaticon.com
+            </td>
+          </tr>
+        </table>
+      </div>
+      <table width="100%" class="dialog_control">
+        <tr>
+          <td>
+            <button
+              onclick="colorChange(); document.getElementById('settingsView').style.transform = 'translateX(200%)'; unblur();"><b>OK</b></button>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
 
-        <div id="settingsView" class="floating">
-            <div class="floatingChild1" onclick="document.getElementById('settingsView').style.transform = 'translateX(200%)'; unblur()"></div>
-            <div class="floatingChild2">
-                <b>Mehr</b>
-                <br><br>
-                <div style="box-shadow: none;">
-                    <table width="100%">
-                        <tr>
-                            <td>
-                                Theme
-                            </td>
-                            <td>
-                                <select id="themeSelect" style="transform: translateX(10px);" width="100%" onchange='changeTheme()'>
-                                    <option value="0">Dunkel</option>
-                                    <option value="1">Hell</option>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                Fragen bevor<br>schließen
-                            </td>
-                            <td style="text-align: right;">
-                                <label class="switch">
-                                    <input id="quitAskSwitch" type="checkbox" unchecked onchange='send("settings","quitAsk",String(this.checked));quitAsk=this.checked?"true":"false";'>
-                                    <span class="slider round"></span>
-                                </label>
-                            </td>
-                        </tr>
-                    </table>
-                    <p>
-                        Farbe
-                        <svg id="paintbrush" version="1.1" width="25px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 469.333 469.333" xml:space="preserve"><g><g><g><path d="M401.781,0c-21.156,0-41.365,10.104-54.24,27.292l-78.906,112.302c-8.417,11.24-26.771,12.542-36.677,2.615l-22.167-22.167c-8.625-8.625-20.094-13.375-32.292-13.375h-3c-12.198,0-23.667,4.75-32.292,13.375l-32.417,32.417c-4.167,4.167-4.167,10.917,0,15.083l192,192c2.083,2.083,4.813,3.125,7.542,3.125c2.729,0,5.458-1.042,7.542-3.125l32.417-32.417c8.625-8.625,13.375-20.094,13.375-32.292v-3c0-12.198-4.75-23.667-13.375-32.292l-22.167-22.167c-4.531-4.531-7.125-10.802-7.125-17.208c0-7.615,3.635-14.896,9.469-19.271l112.833-79.302c16.927-12.677,27.031-32.885,27.031-54.042C469.333,30.302,439.031,0,401.781,0z M405.333,85.333C393.573,85.333,384,75.76,384,64c0-11.76,9.573-21.333,21.333-21.333S426.667,52.24,426.667,64C426.667,75.76,417.094,85.333,405.333,85.333z"/><path d="M104.083,192c-4.167-4.167-10.917-4.167-15.083,0l-76.5,76.5C4.437,276.562,0,287.271,0,298.667s4.438,22.104,12.5,30.167l16.385,16.396c3.354,3.365,8.573,4.104,12.719,1.781l37.604-20.885l-20.885,37.604c-2.313,4.156-1.583,9.354,1.781,12.719l80.396,80.385c8.063,8.063,18.771,12.5,30.167,12.5s22.104-4.438,30.167-12.5l76.5-76.5c4.167-4.167,4.167-10.917,0-15.083L104.083,192z"/></g></g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g></svg>
-                    </p>
-                    <table width="100%">
-                        <tr>
-                            <td>
-                                Farbton
-                            </td>
-                            <td class="sliderParent">
-                                <input type="range" min="0" max="360" value="50" class="CSlider" id="colorSelectorHue" oninput='colorSliderBackgroundCalc(this, 3.6)' onchange='colorSliderBackgroundCalc(this, 3.6)'>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                Sättigung
-                            </td>
-                            <td class="sliderParent">
-                                <input type="range" min="0" max="100" value="50" class="CSlider" id="colorSelectorSaturation" oninput='colorSliderBackgroundCalc(this)' onchange='colorSliderBackgroundCalc(this)'>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                Helligkeit
-                            </td>
-                            <td class="sliderParent">
-                                <input type="range" min="0" max="100" value="50" class="CSlider" id="colorSelectorLightness" oninput='colorSliderBackgroundCalc(this)' onchange='colorSliderBackgroundCalc(this)'>
-                            </td>
-                        </tr>
-                    </table>
-                    <p>
-                        Entwickler: Frank Mayer
-                    </p>
-                    <table>
-                        <tr>
-                            <td>&nbsp;&nbsp;</td>
-                            <td>
-                                Drittanbieter:
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>&nbsp;&nbsp;</td>
-                            <td>
-                                Microsoft GitHub Pages
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>&nbsp;&nbsp;</td>
-                            <td>
-                                "Becris", "Freepik", "Smashicons", "those-icons" und "Pixel perfect" von flaticon.com
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-                <table width="100%" class="dialog_control">
-                    <tr>
-                        <td>
-                            <button onclick="colorChange(); document.getElementById('settingsView').style.transform = 'translateX(200%)'; unblur();"><b>OK</b></button>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-        </div>
+  <div id="recommendations" class="floating">
+    <div class="floatingChild1"
+      onclick="document.getElementById('recommendations').style.transform = 'translateX(200%)'; unblur()"></div>
+    <div class="floatingChild2">
+      <b>Empfehlung</b>
+      <br><br>
+      <div style="width: 100%; text-align: center;">
+        <img id="recommendationCover" width="140px" height="200px" src="./tv.svg">
+        <p id="recommendationTitle"></p>
+      </div>
+      <table width="100%" class="dialog_control">
+        <tr>
+          <td>
+            <button
+              onclick='var e = {"title": encRecTitle};wishlist.push(e);loadWishlist();send("insert","wishlist",JSON.stringify(e));document.getElementById("recommendations").style.transform = "translateX(200%)"; unblur();'><b>Auf
+                die Wunschliste</b></button>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <button
+              onclick="buyRec();document.getElementById('recommendations').style.transform = 'translateX(200%)'; unblur()"><b>Kaufen</b></button>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <button
+              onclick="document.getElementById('recommendations').style.transform = 'translateX(200%)'; unblur();"><b>Abbrechen</b></button>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
 
-        <div id="recommendations" class="floating">
-            <div class="floatingChild1" onclick="document.getElementById('recommendations').style.transform = 'translateX(200%)'; unblur()"></div>
-            <div class="floatingChild2">
-                <b>Empfehlung</b>
-                <br><br>
-                <div style="width: 100%; text-align: center;">
-                    <img id="recommendationCover" width="140px" height="200px" src="./tv.svg">
-                    <p id="recommendationTitle"></p>
-                </div>
-                <table width="100%" class="dialog_control">
-                    <tr>
-                        <td>
-                            <button onclick='var e = {"title": encRecTitle};wishlist.push(e);loadWishlist();send("insert","wishlist",JSON.stringify(e));document.getElementById("recommendations").style.transform = "translateX(200%)"; unblur();'><b>Auf die Wunschliste</b></button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <button onclick="buyRec();document.getElementById('recommendations').style.transform = 'translateX(200%)'; unblur()"><b>Kaufen</b></button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <button onclick="document.getElementById('recommendations').style.transform = 'translateX(200%)'; unblur();"><b>Abbrechen</b></button>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-        </div>
+  <div id="statistics" class="floating">
+    <div class="floatingChild1"
+      onclick="document.getElementById('statistics').style.transform = 'translateX(200%)'; unblur()"></div>
+    <div class="floatingChild2">
+      <b>Statistik</b>
+      <br><br>
+      <table id="statisticsTable" style="width: 100%;"></table>
+      <table width="100%" class="dialog_control">
+        <tr>
+          <td>
+            <button
+              onclick="document.getElementById('statistics').style.transform = 'translateX(200%)'; unblur()"><b>OK</b></button>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
 
-        <div id="statistics" class="floating">
-            <div class="floatingChild1" onclick="document.getElementById('statistics').style.transform = 'translateX(200%)'; unblur()"></div>
-            <div class="floatingChild2">
-                <b>Statistik</b>
-                <br><br>
-                <table id="statisticsTable" style="width: 100%;"></table>
-                <table width="100%" class="dialog_control">
-                    <tr>
-                        <td>
-                            <button onclick="document.getElementById('statistics').style.transform = 'translateX(200%)'; unblur()"><b>OK</b></button>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-        </div>
+  <div id="quitView" class="floating">
+    <div class="floatingChild1"
+      onclick="document.getElementById('quitView').style.transform = 'translateX(200%)'; unblur()"></div>
+    <div class="floatingChild2">
+      <b>Wirklich beenden?</b>
+      <br><br>
+      <table width="100%" class="dialog_control">
+        <tr>
+          <td>
+            <button
+              onclick="document.getElementById('quitView').style.transform = 'translateX(200%)'; unblur()"><b>Abbrechen</b></button>
+          </td>
+          <td>
+            <button onclick="pushInterface('quit')"><b>Beenden</b></button>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
 
-        <div id="quitView" class="floating">
-            <div class="floatingChild1" onclick="document.getElementById('quitView').style.transform = 'translateX(200%)'; unblur()"></div>
-            <div class="floatingChild2">
-                <b>Wirklich beenden?</b>
-                <br><br>
-                <table width="100%" class="dialog_control">
-                    <tr>
-                        <td>
-                            <button onclick="document.getElementById('quitView').style.transform = 'translateX(200%)'; unblur()"><b>Abbrechen</b></button>
-                        </td>
-                        <td>
-                            <button onclick="pushInterface('quit')"><b>Beenden</b></button>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-        </div>
+  <script src="https://cse.google.com/cse.js?cx=003230409370591094102:gzbxp412uzi"></script>
+  <script src="./google.cse.js"></script>
+  <script src="./colorPref.js"></script>
+  <script src="./recommendations.js"></script>
+  <script src="./colorCalc.js"></script>
+  <script src="./load.js"></script>
+  <script src="./confetti.js"></script>
+  <script>
+    var startConfetti, stopConfetti, toggleConfetti, removeConfetti, maxParticleCount = 150,
+      particleSpeed = 2;
+    ! function () {
+      startConfetti = a, stopConfetti = l, toggleConfetti = function () {
+        e ? l() : a()
+      }, removeConfetti = function () {
+        stopConfetti(), i = []
+      };
+      var t = ["DodgerBlue", "OliveDrab", "Gold", "Pink", "SlateBlue", "LightBlue", "Violet", "PaleGreen", "SteelBlue",
+          "SandyBrown", "Chocolate", "Crimson"
+        ],
+        e = !1,
+        n = null,
+        i = [],
+        o = 0;
 
-        <script src="https://cse.google.com/cse.js?cx=003230409370591094102:gzbxp412uzi"></script>
-        <script src="./google.cse.js"></script>
-        <script src="./colorPref.js"></script>
-        <script src="./recommendations.js"></script>
-        <script src="./colorCalc.js"></script>
-        <script src="./load.js"></script>
-        <script src="./confetti.js"></script>
-        <script>
-            var startConfetti,stopConfetti,toggleConfetti,removeConfetti,maxParticleCount=150,particleSpeed=2;!function(){startConfetti=a,stopConfetti=l,toggleConfetti=function(){e?l():a()},removeConfetti=function(){stopConfetti(),i=[]};var t=["DodgerBlue","OliveDrab","Gold","Pink","SlateBlue","LightBlue","Violet","PaleGreen","SteelBlue","SandyBrown","Chocolate","Crimson"],e=!1,n=null,i=[],o=0;function r(e,n,i){return e.color=t[Math.random()*t.length|0],e.x=Math.random()*n,e.y=Math.random()*i-i,e.diameter=10*Math.random()+5,e.tilt=10*Math.random()-10,e.tiltAngleIncrement=.07*Math.random()+.05,e.tiltAngle=0,e}function a(){var t=window.innerWidth,a=window.innerHeight;window.requestAnimFrame=window.requestAnimationFrame||window.webkitRequestAnimationFrame||window.mozRequestAnimationFrame||window.oRequestAnimationFrame||window.msRequestAnimationFrame||function(t){return window.setTimeout(t,16.6666667)};var l=document.getElementById("confetti-canvas");null===l&&((l=document.createElement("canvas")).setAttribute("id","confetti-canvas"),l.setAttribute("style","display:block;z-index:999999;pointer-events:none"),document.body.appendChild(l),l.width=t,l.height=a,window.addEventListener("resize",function(){l.width=window.innerWidth,l.height=window.innerHeight},!0));for(var d=l.getContext("2d");i.length<maxParticleCount;)i.push(r({},t,a));e=!0,null===n&&function t(){d.clearRect(0,0,window.innerWidth,window.innerHeight),0===i.length?n=null:(!function(){var t,n=window.innerWidth,a=window.innerHeight;o+=.01;for(var l=0;l<i.length;l++)t=i[l],!e&&t.y<-15?t.y=a+100:(t.tiltAngle+=t.tiltAngleIncrement,t.x+=Math.sin(o),t.y+=.5*(Math.cos(o)+t.diameter+particleSpeed),t.tilt=15*Math.sin(t.tiltAngle)),(t.x>n+20||t.x<-20||t.y>a)&&(e&&i.length<=maxParticleCount?r(t,n,a):(i.splice(l,1),l--))}(),function(t){for(var e,n,o=0;o<i.length;o++)e=i[o],t.beginPath(),t.lineWidth=e.diameter,t.strokeStyle=e.color,n=e.x+e.tilt,t.moveTo(n+e.diameter/2,e.y),t.lineTo(n,e.y+e.tilt+e.diameter/2),t.stroke()}(d),n=requestAnimFrame(t))}()}function l(){e=!1}}();
-        </script>
-    </body>
+      function r(e, n, i) {
+        return e.color = t[Math.random() * t.length | 0], e.x = Math.random() * n, e.y = Math.random() * i - i, e
+          .diameter = 10 * Math.random() + 5, e.tilt = 10 * Math.random() - 10, e.tiltAngleIncrement = .07 * Math
+          .random() + .05, e.tiltAngle = 0, e
+      }
+
+      function a() {
+        var t = window.innerWidth,
+          a = window.innerHeight;
+        window.requestAnimFrame = window.requestAnimationFrame || window.webkitRequestAnimationFrame || window
+          .mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame || function (t) {
+            return window.setTimeout(t, 16.6666667)
+          };
+        var l = document.getElementById("confetti-canvas");
+        null === l && ((l = document.createElement("canvas")).setAttribute("id", "confetti-canvas"), l.setAttribute(
+            "style", "display:block;z-index:999999;pointer-events:none"), document.body.appendChild(l), l.width = t, l
+          .height = a, window.addEventListener("resize", function () {
+            l.width = window.innerWidth, l.height = window.innerHeight
+          }, !0));
+        for (var d = l.getContext("2d"); i.length < maxParticleCount;) i.push(r({}, t, a));
+        e = !0, null === n && function t() {
+          d.clearRect(0, 0, window.innerWidth, window.innerHeight), 0 === i.length ? n = null : (! function () {
+            var t, n = window.innerWidth,
+              a = window.innerHeight;
+            o += .01;
+            for (var l = 0; l < i.length; l++) t = i[l], !e && t.y < -15 ? t.y = a + 100 : (t.tiltAngle += t
+              .tiltAngleIncrement, t.x += Math.sin(o), t.y += .5 * (Math.cos(o) + t.diameter + particleSpeed), t
+              .tilt = 15 * Math.sin(t.tiltAngle)), (t.x > n + 20 || t.x < -20 || t.y > a) && (e && i.length <=
+              maxParticleCount ? r(t, n, a) : (i.splice(l, 1), l--))
+          }(), function (t) {
+            for (var e, n, o = 0; o < i.length; o++) e = i[o], t.beginPath(), t.lineWidth = e.diameter, t
+              .strokeStyle = e.color, n = e.x + e.tilt, t.moveTo(n + e.diameter / 2, e.y), t.lineTo(n, e.y + e
+                .tilt + e.diameter / 2), t.stroke()
+          }(d), n = requestAnimFrame(t))
+        }()
+      }
+
+      function l() {
+        e = !1
+      }
+    }();
+  </script>
+</body>
+
 </html>
