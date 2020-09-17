@@ -1,0 +1,19 @@
+@keyframes slideUp {
+  from {
+    transform: translateY(50vh);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes blurFadeIn {
+  from {
+    backdrop-filter: blur(0);
+    background-color: #0000;
+  }
+  to {
+    backdrop-filter: blur(8px);
+    background-color: #0007;
+  }
+}

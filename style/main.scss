@@ -1,0 +1,26 @@
+body {
+  background-image: url("/img/wallpaper.webp");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100%;
+}
+
+* {
+  font-family: sans-serif;
+  font-size: 18px;
+}
+
+.blur {
+  animation: blurFadeIn 200ms ease-in-out;
+  backdrop-filter: blur(8px);
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 4;
+  background-color: #0007;
+}

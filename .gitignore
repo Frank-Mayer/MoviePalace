@@ -1,2 +1,10 @@
-.VS*/
-.vs*/
+#files
+*.css
+*.map
+*.js
+firebase-debug.log
+.DS_Store
+
+#filders
+.firebase/
+www/

@@ -1,0 +1,21 @@
+ul.searchResults {
+  min-height: 0;
+  max-height: 50vh;
+  overflow-y: scroll;
+  li {
+    margin-bottom: 8px;
+    padding: 4px;
+    background-color: rgb(44, 44, 46);
+    border-radius: 8px;
+    img {
+      display: inline-block;
+      width: 10%;
+      margin-right: 8px;
+    }
+    span {
+      width: calc(90% - 8px);
+      display: inline-block;
+      color: whitesmoke;
+    }
+  }
+}

@@ -1,0 +1,53 @@
+.buttomBar {
+  background: linear-gradient(#00000025, #000f);
+  backdrop-filter: blur(16px);
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: calc(100vh - 50px);
+  height: 50px;
+  text-align: justify;
+  z-index: 2;
+  padding: 0 8vw;
+  .toolbarIcon {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    display: inline-block;
+    width: 50px;
+    height: calc(100% - 16px);
+    margin: 8px;
+  }
+  #wishlistButton {
+    background-image: url("/img/wishlist.webp");
+  }
+  #addButton {
+    background-image: url("/img/add.webp");
+  }
+  #searchButton {
+    background-image: url("/img/search_white.webp");
+  }
+  #statisticsButton {
+    background-image: url("/img/statistics.webp");
+  }
+}
+
+.buttomBar:after {
+  content: "";
+  width: 100%; /* Ensures justification for single lines */
+  display: inline-block;
+}
+
+// #parent {
+//   text-align: justify;
+//   font-size: 0.1px; /* IE 9/10 fix */
+// }
+// #parent li {
+//   display: inline-block;
+// }
+// #parent:after {
+//   content: "";
+//   width: 100%; /* Ensures justification for single lines */
+//   display: inline-block;
+// }
