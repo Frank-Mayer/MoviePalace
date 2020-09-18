@@ -10,8 +10,8 @@
     "trailingSlash": false,
     "rewrites": [
       {
-        "source": "**",
-        "destination": "/index.html"
+        "source": "/share",
+        "destination": "/view.html"
       }
     ],
     "headers": [

@@ -1,6 +1,6 @@
 .buttomBar {
   background: linear-gradient(#00000025, #000f);
-  backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px) saturate(1.8);
   position: absolute;
   left: 0;
   right: 0;
@@ -35,19 +35,6 @@
 
 .buttomBar:after {
   content: "";
-  width: 100%; /* Ensures justification for single lines */
+  width: 100%;
   display: inline-block;
 }
-
-// #parent {
-//   text-align: justify;
-//   font-size: 0.1px; /* IE 9/10 fix */
-// }
-// #parent li {
-//   display: inline-block;
-// }
-// #parent:after {
-//   content: "";
-//   width: 100%; /* Ensures justification for single lines */
-//   display: inline-block;
-// }

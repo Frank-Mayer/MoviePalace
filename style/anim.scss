@@ -9,11 +9,11 @@
 
 @keyframes blurFadeIn {
   from {
-    backdrop-filter: blur(0);
+    backdrop-filter: blur(0) saturate(1);
     background-color: #0000;
   }
   to {
-    backdrop-filter: blur(8px);
+    backdrop-filter: blur(16px) saturate(1.8);
     background-color: #0007;
   }
 }

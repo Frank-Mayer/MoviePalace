@@ -3,7 +3,7 @@ const anim = {
     let el = document.getElementById(id);
     if (el) {
       el.style.transition = "all 200ms ease-in-out";
-      el.style.setProperty("backdrop-filter", "blur(0)");
+      el.style.setProperty("backdrop-filter", "blur(0) saturate(1)");
       let ch = <HTMLElement>el.firstElementChild;
       ch.style.transition = "all 200ms ease-in-out";
       ch.style.transform = "translateY(50vh)";

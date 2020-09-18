@@ -8,10 +8,10 @@ const movieList = {
     let newMovieList = "";
     for (const el of database.movies.storage) {
       let li = document.createElement("li");
-      let cover = cache.img(el.image);
+      let cover = cache.img(el.cover);
       li.appendChild(cover);
       let title = document.createElement("span");
-      title.innerHTML = `<b>${el.title}</b><br/>${el.description}`;
+      title.innerHTML = `<b>${el.title}</b><br/>${el.info}`;
       li.appendChild(title);
       newMovieList += li.outerHTML;
     }
