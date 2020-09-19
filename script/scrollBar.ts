@@ -1,14 +1,14 @@
 async function scrollBarUpdate(ev: TouchEvent | MouseEvent) {
-  let x =
-    (ev instanceof TouchEvent ? ev.changedTouches[0].clientX : ev.clientX) /
-    window.innerWidth;
+  // let x =
+  //   (ev instanceof TouchEvent ? ev.changedTouches[0].clientX : ev.clientX) /
+  //   window.innerWidth;
   let y =
     (ev instanceof TouchEvent ? ev.changedTouches[0].clientY : ev.clientY) /
     window.innerHeight;
-  if (x > 1 - 20 / window.innerWidth && y < 1 - 50 / window.innerHeight) {
+  if (y < 1 - 50 / window.innerHeight) {
     let scroll: string | undefined = undefined;
     let highestVal: number = -1;
-    for await (const el of scrollBar.childNodes) {
+    for (const el of scrollBar.childNodes) {
       let letter = <HTMLLIElement>el;
       let rect = letter.getBoundingClientRect();
       let val = 1 - Math.abs(rect.top / window.innerHeight - y);
@@ -19,16 +19,16 @@ async function scrollBarUpdate(ev: TouchEvent | MouseEvent) {
       letter.style.color = "white";
       letter.style.setProperty(
         "--pos-x",
-        `-${Math.floor(Math.pow(50, val)).toString()}px`
+        `-${Math.floor(Math.pow(100, val)).toString()}px`
       );
     }
-    if (scroll) {
+    if (scroll && cache.lastScrollLetter !== scroll) {
+      cache.lastScrollLetter = scroll;
       let scrollToEl = document.getElementById("letter" + scroll);
       if (scrollToEl) {
         scrollToEl.scrollIntoView({
           behavior: "smooth",
           block: "start",
-          inline: "nearest",
         });
       }
     }
@@ -43,9 +43,15 @@ let addEventListenerOptions: AddEventListenerOptions = {
   passive: true,
 };
 addEventListener("mousemove", scrollBarUpdate);
-addEventListener("touchstart", async () => {
-  addEventListener("touchmove", scrollBarUpdate);
+
+addEventListener("touchstart", async (ev) => {
+  if (
+    ev.target === scrollBar ||
+    (<HTMLElement>ev.target).parentNode === scrollBar
+  )
+    addEventListener("touchmove", scrollBarUpdate);
 });
+
 addEventListener("touchend", async () => {
   removeEventListener("touchmove", scrollBarUpdate);
   for await (const el of scrollBar.childNodes) {

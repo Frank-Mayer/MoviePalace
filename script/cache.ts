@@ -11,4 +11,5 @@ const cache = {
       return img;
     }
   },
+  lastScrollLetter: "\0",
 };
