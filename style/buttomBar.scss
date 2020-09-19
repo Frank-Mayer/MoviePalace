@@ -15,21 +15,21 @@
     background-repeat: no-repeat;
     background-size: contain;
     display: inline-block;
-    width: 50px;
+    width: var(--icon-size);
     height: calc(100% - 16px);
     margin: 8px;
   }
   #wishlistButton {
-    background-image: url("/img/wishlist.webp");
+    background-image: url("/img/wishlist.svg");
   }
   #addButton {
-    background-image: url("/img/add.webp");
+    background-image: url("/img/add.svg");
   }
   #searchButton {
-    background-image: url("/img/search_white.webp");
+    background-image: url("/img/search_white.svg");
   }
   #statisticsButton {
-    background-image: url("/img/statistics.webp");
+    background-image: url("/img/statistics.svg");
   }
 }
 

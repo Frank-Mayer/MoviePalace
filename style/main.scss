@@ -1,3 +1,8 @@
+:root {
+  --line-height: 18px;
+  --icon-size: 40px;
+}
+
 body {
   background-image: url("/img/wallpaper.webp");
   background-position: center;
@@ -9,7 +14,7 @@ body {
 * {
   color: white;
   font-family: sans-serif;
-  font-size: 18px;
+  font-size: var(--line-height);
   -webkit-font-smoothing: antialiased;
   scroll-behavior: smooth;
 }

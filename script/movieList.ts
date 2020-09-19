@@ -13,7 +13,9 @@ const movieList = {
       li.id = el.title + Math.round(Math.random() * 100).toString();
       let id = JSON.stringify(li.id);
       let clicker = document.createElement("section");
-      let cover = cache.img(el.cover);
+      let cover = document.createElement("img");
+      cover.src = el.cover;
+      cover.classList.add("cover");
       clicker.appendChild(cover);
       let title = document.createElement("span");
       title.classList.add("title");
@@ -37,10 +39,10 @@ const movieList = {
         genres.innerText = "Genres: " + el.genres.join(", ");
         li.appendChild(genres);
       }
-      let close = document.createElement("button");
+      let close = document.createElement("img");
+      close.src = "img/back.svg";
       close.setAttribute("onclick", `anim.movieList.close(${id})`);
       close.classList.add("closeBtn");
-      close.innerText = "Schließen";
       li.appendChild(close);
       newMovieList += li.outerHTML;
     }
