@@ -3,7 +3,20 @@
   height: 100vh;
   overflow-y: auto;
   padding-bottom: 64px;
-  li {
+  li.letter {
+    width: 100%;
+    text-align: center;
+    padding: 4px;
+    margin-top: 8px;
+    box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(
+      175deg,
+      rgb(46, 44, 44, 0.65),
+      rgb(46, 44, 44, 0.85)
+    );
+    backdrop-filter: blur(16px) saturate(1.8);
+  }
+  li.movie {
     transition: all 200ms ease-in-out;
     transition-delay: 150ms;
     * {
@@ -11,10 +24,11 @@
     }
     margin: 8px 8px 0 8px;
     padding: 8px;
+    box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.3);
     background: linear-gradient(
       175deg,
-      rgb(44, 44, 46, 0.65),
-      rgb(44, 44, 46, 0.85)
+      rgb(46, 44, 44, 0.65),
+      rgb(46, 44, 44, 0.85)
     );
     backdrop-filter: blur(16px) saturate(1.8);
     border-radius: 8px;
@@ -66,11 +80,11 @@
   li.open {
     background: linear-gradient(
       175deg,
-      rgb(44, 44, 46, 0.75),
-      rgb(44, 44, 46, 0.95)
+      rgb(46, 44, 44, 0.75),
+      rgb(46, 44, 44, 0.95)
     );
     position: absolute;
-    z-index: 2;
+    z-index: 3;
     top: 8px;
     right: 8px;
     bottom: 8px;
