@@ -1,7 +1,7 @@
 ul.searchResults {
   min-height: 0;
   max-height: 50vh;
-  overflow-y: scroll;
+  overflow-y: auto;
   li {
     margin-bottom: 8px;
     padding: 4px;

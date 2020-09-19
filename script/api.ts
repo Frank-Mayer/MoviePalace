@@ -1,4 +1,3 @@
 const api = {
-  omdb: "c9c45890",
-  imdb: "k_S38lvSJ7",
+  tmdb: "3f43edeb84d241b315fe4a921bb9b74a",
 };

@@ -13,13 +13,14 @@ from shutil import rmtree
 
 rmtree('./www', ignore_errors=True)
 
-os.system("tsc -p " + "./tsconfig.json --pretty")
+print("tsconfig.json")
+os.system("tsc -p ./tsconfig.json --pretty")
 
 scss = list(Path(".").rglob("*.scss"))
 for file in scss:
     print(file)
     compiledFile = os.path.basename(file).replace(".scss", ".css")
-    os.system("sass "+str(file)+" www/style/" + compiledFile)
+    os.system("sass "+str(file)+" www/style/" + compiledFile + " --style compressed")
     pass
 
 html = list(Path(".").rglob("*.html"))

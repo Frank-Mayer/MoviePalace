@@ -1,5 +1,5 @@
 const cache = {
-  imdb: new Map<string, imdbSearchResEl>(),
+  tmdb: new Map<number, tmdb.search.result>(),
   imgList: new Map<string, HTMLImageElement>(),
   img(src: string): HTMLImageElement {
     if (this.imgList.has(src)) {
