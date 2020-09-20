@@ -42,14 +42,16 @@ async function scrollBarUpdate(ev: TouchEvent | MouseEvent) {
 let addEventListenerOptions: AddEventListenerOptions = {
   passive: true,
 };
-addEventListener("mousemove", scrollBarUpdate);
+// addEventListener("mousemove", scrollBarUpdate);
 
 addEventListener("touchstart", async (ev) => {
   if (
     ev.target === scrollBar ||
     (<HTMLElement>ev.target).parentNode === scrollBar
-  )
+  ) {
+    console.debug(ev.target);
     addEventListener("touchmove", scrollBarUpdate);
+  }
 });
 
 addEventListener("touchend", async () => {
