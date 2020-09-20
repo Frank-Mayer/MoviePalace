@@ -44,7 +44,7 @@
       width: calc(80% - 8px);
       display: inline-block;
       color: whitesmoke;
-      font-size: 24px;
+      font-size: min(6.5vw, 24px);
     }
     .info {
       max-height: 25vh;
@@ -85,10 +85,11 @@
     );
     position: absolute;
     z-index: 3;
-    top: 8px;
-    right: 8px;
-    bottom: 8px;
-    left: 8px;
+    border-radius: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
     margin: 0;
     overflow-y: auto;
     .cover {

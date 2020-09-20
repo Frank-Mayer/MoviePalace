@@ -34,6 +34,15 @@ const database = {
         // });
         this.storage.push(new Movie(<tmdb.search.result>cache.tmdb.get(id)));
         movieList.update();
+        setTimeout(() => {
+          (<HTMLElement>(
+            document.getElementById("M" + id.toString())
+          )).scrollIntoView({
+            behavior: "smooth",
+            block: "center",
+            inline: "nearest",
+          });
+        }, 500);
       }
     },
   },

@@ -1,9 +1,3 @@
-const scrollIntoViewOptions: ScrollIntoViewOptions = {
-  behavior: "smooth",
-  block: "center",
-  inline: "nearest",
-};
-
 const anim = {
   popup: {
     close(id: string) {
@@ -39,7 +33,11 @@ const anim = {
       let el = document.getElementById(id);
       if (el) {
         el.classList.remove("open");
-        el.scrollIntoView(scrollIntoViewOptions);
+        el.scrollIntoView({
+          behavior: "smooth",
+          block: "center",
+          inline: "nearest",
+        });
         if (this.shouldBeClosed === id) {
           this.shouldBeClosed = "";
         }

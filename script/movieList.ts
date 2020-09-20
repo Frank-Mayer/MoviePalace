@@ -24,7 +24,7 @@ const movieList = {
       }
       let li = document.createElement("li");
       li.classList.add("movie");
-      li.id = el.title + Math.round(Math.random() * 100).toString();
+      li.id = "M" + el.id.toString();
       let id = JSON.stringify(li.id);
 
       let clicker = document.createElement("section");
@@ -62,11 +62,13 @@ const movieList = {
       newMovieList += li.outerHTML;
     }
     listView.innerHTML = newMovieList;
+    let newScrollBar = "";
     for (const letter of leterList) {
       let li = document.createElement("li");
       li.innerText = letter;
       li.style.height = `${Math.round(99 / leterList.length)}%`;
-      scrollBar.appendChild(li);
+      newScrollBar += li.outerHTML;
     }
+    scrollBar.innerHTML = newScrollBar;
   },
 };

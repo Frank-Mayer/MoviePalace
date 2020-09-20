@@ -8,7 +8,7 @@
   z-index: 2;
   li {
     color: transparent;
-    transition: color 200ms ease-in-out;
+    transition: color 100ms ease-in-out;
     transform: translateY(calc(50% - var(--line-height)))
       translateX(var(--pos-x));
     z-index: 2;
