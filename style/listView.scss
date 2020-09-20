@@ -46,9 +46,19 @@
       color: whitesmoke;
       font-size: min(6.5vw, 24px);
     }
+    // .info {
+    //   max-height: 25vh;
+    //   overflow-y: auto;
+    // }
     .info {
-      max-height: 25vh;
-      overflow-y: auto;
+      max-height: 10vh;
+      overflow: hidden;
+      opacity: 0.5;
+      transition: opacity height 200ms ease-in-out;
+    }
+    .info:hover {
+      max-height: unset;
+      opacity: unset;
     }
     .info,
     .closeBtn,

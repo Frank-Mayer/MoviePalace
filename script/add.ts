@@ -6,6 +6,7 @@ addButton.addEventListener("click", () => {
   let name = document.createElement("input");
   name.type = "text";
   name.placeholder = "Titel suchen";
+  name.autofocus = true;
   view.appendChild(name);
   let resultList = document.createElement("ul");
   resultList.classList.add("searchResults");
