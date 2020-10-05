@@ -18,10 +18,9 @@ async function scrollBarUpdate(ev: TouchEvent | MouseEvent) {
       "--pos-x",
       `-${Math.floor(Math.pow(100, val)).toString()}px`
     );
-    console.debug(val.toFixed(2).toString());
     letter.style.setProperty(
       "color",
-      `rgba(255,255,255, ${val.toFixed(2).toString()})`
+      `rgba(255,255,255, ${(Math.pow(25, val) / 25).toFixed(2).toString()})`
     );
   }
   if (scroll && cache.lastScrollLetter !== scroll) {
@@ -41,7 +40,6 @@ addEventListener("touchstart", async (ev) => {
     ev.target === scrollBar ||
     (<HTMLElement>ev.target).parentNode === scrollBar
   ) {
-    console.debug(ev.target);
     addEventListener("touchmove", scrollBarUpdate);
   }
 });

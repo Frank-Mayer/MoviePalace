@@ -17,6 +17,7 @@
     backdrop-filter: blur(16px) saturate(1.8);
   }
   li.movie {
+    // animation: blurFadeIn 200ms ease-in-out;
     transition: all 200ms ease-in-out;
     transition-delay: 150ms;
     * {

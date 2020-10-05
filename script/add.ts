@@ -63,4 +63,5 @@ addButton.addEventListener("click", () => {
     }
   });
   document.body.appendChild(blur);
+  view.focus();
 });
