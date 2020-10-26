@@ -1,3 +1,5 @@
+/// <reference path="version.ts"/>
+
 class Movie {
   cover: string;
   title: string;
@@ -20,7 +22,54 @@ class Movie {
   }
 }
 
+enum dbStoreNames {
+  shelf = "shelf",
+  wishlist = "wishlist",
+}
+
 const database = {
+  idb: indexedDB.open("library", version),
+  dbRef: <IDBDatabase>(<unknown>null),
+  loadFullDB() {
+    if (this.dbRef) {
+      const tx = this.dbRef.transaction(dbStoreNames.shelf, "readonly");
+      const shelf = tx.objectStore(dbStoreNames.shelf);
+      const request = shelf.openCursor();
+      if (request) {
+        (<IDBRequest<IDBCursorWithValue>>request).onsuccess = (ev) => {
+          const cursor = <IDBCursorWithValue>(<any>ev.target).result;
+          if (cursor) {
+            database.movies.storage.push(cursor.value);
+            movieList.update();
+            cursor.continue();
+          }
+        };
+      }
+    }
+  },
+  addToShelf(a: Movie) {
+    if (this.dbRef) {
+      const tx = this.dbRef.transaction(dbStoreNames.shelf, "readwrite");
+      tx.onerror = (ev) => {
+        alert((<any>ev.target).error);
+        console.error(ev);
+      };
+      const shelf = tx.objectStore(dbStoreNames.shelf);
+      shelf.add(a);
+    }
+  },
+  addToWishList(a: Movie) {
+    if (this.dbRef) {
+      const tx = this.dbRef.transaction(dbStoreNames.wishlist, "readwrite");
+      tx.onerror = (ev) => {
+        alert((<any>ev.target).error);
+        console.error(ev);
+      };
+      const wishlist = tx.objectStore(dbStoreNames.wishlist);
+      wishlist.add(a);
+    }
+  },
+  wishlist: indexedDB.open(dbStoreNames.shelf, version),
   movies: {
     storage: new Array<Movie>(),
     add(id: number) {
@@ -32,7 +81,9 @@ const database = {
         // ).then((v) => {
         //   console.log(v);
         // });
-        this.storage.push(new Movie(<tmdb.search.result>cache.tmdb.get(id)));
+        const nm = new Movie(<tmdb.search.result>cache.tmdb.get(id));
+        database.addToShelf(nm);
+        this.storage.push(nm);
         movieList.update();
         setTimeout(() => {
           (<HTMLElement>(
@@ -46,4 +97,25 @@ const database = {
       }
     },
   },
+};
+
+database.idb.onupgradeneeded = (e) => {
+  let t = e.target;
+  if (t) {
+    database.dbRef = (<any>t).result;
+    database.dbRef.createObjectStore(dbStoreNames.shelf, { keyPath: "id" });
+    database.dbRef.createObjectStore(dbStoreNames.wishlist, { keyPath: "id" });
+  }
+  console.debug(e);
+};
+database.idb.onsuccess = (e) => {
+  let t = e.target;
+  if (t) {
+    database.dbRef = (<any>t).result;
+  }
+  console.debug(e);
+  database.loadFullDB();
+};
+database.idb.onerror = (e) => {
+  console.error(e);
 };
