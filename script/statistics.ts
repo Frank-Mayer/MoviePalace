@@ -48,7 +48,7 @@ statisticsButton.addEventListener(
       return 0;
     });
 
-    md.appendWithLinebreak("\tsection Actors");
+    md.appendWithLinebreak("\tsection Schauspieler");
     const actors = new Array<{ name: string; count: number }>();
     actorCounter.forEach((count, actor) => {
       actors.push({ name: actor, count: count });

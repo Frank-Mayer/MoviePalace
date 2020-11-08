@@ -3,14 +3,18 @@ const movieList = {
     database.movies.storage.sort((A, B) => {
       let a: string;
       if (A.collection) {
-        a = collectionName(A.collection.name.toLowerCase()) + A.id;
+        a =
+          collectionName(A.collection.name.toLowerCase()) +
+          A.id.toString().padStart(15, "0");
       } else {
         a = A.title.toLowerCase();
       }
 
       let b: string;
       if (B.collection) {
-        b = collectionName(B.collection.name.toLowerCase()) + B.id;
+        b =
+          collectionName(B.collection.name.toLowerCase()) +
+          B.id.toString().padStart(15, "0");
       } else {
         b = B.title.toLowerCase();
       }
