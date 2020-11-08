@@ -39,6 +39,9 @@
       margin-right: 8px;
     }
     .title {
+      > i {
+        font-size: 12px;
+      }
       position: fixed;
       top: 50%;
       transform: translateY(-50%);
@@ -64,6 +67,7 @@
     .info,
     .closeBtn,
     .adult,
+    .cast,
     .genres {
       display: none;
     }
@@ -84,7 +88,8 @@
       color: white;
       padding: 2px 4px;
     }
-    .genres {
+    .genres,
+    .cast {
       margin-top: var(--line-height);
     }
   }
@@ -110,11 +115,15 @@
     }
     .title {
       color: transparent;
+      > * {
+        display: none;
+      }
     }
     .adult,
     .info,
     .closeBtn,
-    .genres {
+    .genres,
+    .cast {
       display: block;
     }
   }

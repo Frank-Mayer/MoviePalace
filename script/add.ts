@@ -1,14 +1,17 @@
 /// <reference path="ui.ts"/>
-addButton.addEventListener("click", () => {
-  let view = document.createElement("div");
-  view.classList.add("AddTitleView");
+/// <reference path="tmdb.ts"/>
 
-  let name = document.createElement("input");
+addButton.addEventListener("click", (): void => {
+  const view = document.createElement("div");
+  view.classList.add("AddTitleView");
+  view.classList.add("popup");
+
+  const name = document.createElement("input");
   name.type = "text";
   name.placeholder = "Titel suchen";
   name.autofocus = true;
   view.appendChild(name);
-  let resultList = document.createElement("ul");
+  const resultList = document.createElement("ul");
   resultList.classList.add("searchResults");
   view.appendChild(resultList);
   let nameChangeTimeout: number | undefined;
@@ -26,16 +29,16 @@ addButton.addEventListener("click", () => {
             name.value
           )}&include_adult=true&region=de`
         ).then((v) => {
-          let response = <tmdb.search.multi>JSON.parse(v);
-          if (response.results.length > 0) {
-            let mov = response.results;
-            for (let el of mov) {
+          const response = <tmdb.search.multi>JSON.parse(v);
+          if (response.results && response.results.length > 0) {
+            const mov = response.results;
+            for (const el of mov) {
               if (el.media_type === "movie" || el.media_type === "tv") {
                 cache.tmdb.set(el.id, el);
-                let li = document.createElement("li");
-                let cover = cache.img(getPosterUrlBypath(el.poster_path));
+                const li = document.createElement("li");
+                const cover = cache.img(getPosterUrlBypath(el.poster_path));
                 li.appendChild(cover);
-                let title = document.createElement("span");
+                const title = document.createElement("span");
                 title.innerHTML = `<b>${el.title ? el.title : el.name}</b>`;
                 li.appendChild(title);
                 li.setAttribute(
@@ -53,7 +56,7 @@ addButton.addEventListener("click", () => {
     }, 750);
   };
 
-  let blur = document.createElement("div");
+  const blur = document.createElement("div");
   blur.classList.add("blur");
   blur.appendChild(view);
   blur.id = "addMovieDialog";
@@ -63,5 +66,5 @@ addButton.addEventListener("click", () => {
     }
   });
   document.body.appendChild(blur);
-  view.focus();
+  name.focus();
 });

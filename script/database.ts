@@ -7,7 +7,13 @@ class Movie {
   adult: boolean;
   genres: Array<string>;
   id: number;
+  cast: Array<tmdb.Cast>;
+  crew: Array<tmdb.Crew>;
+  collection: tmdb.collection | null;
   constructor(data: tmdb.search.result) {
+    this.collection = null;
+    this.cast = new Array<tmdb.Cast>();
+    this.crew = new Array<tmdb.Crew>();
     this.cover = getPosterUrlBypath(data.poster_path);
     this.title = data.title ? data.title : data.name ? data.name : "";
     this.info = data.overview;
@@ -69,31 +75,71 @@ const database = {
       wishlist.add(a);
     }
   },
-  wishlist: indexedDB.open(dbStoreNames.shelf, version),
   movies: {
     storage: new Array<Movie>(),
     add(id: number) {
       if (cache.tmdb.has(id)) {
-        // httpGet(
-        //   `https://api.themoviedb.org/3/movie/${id.toString()}?api_key=${
-        //     api.tmdb
-        //   }`
-        // ).then((v) => {
-        //   console.log(v);
-        // });
         const nm = new Movie(<tmdb.search.result>cache.tmdb.get(id));
-        database.addToShelf(nm);
-        this.storage.push(nm);
-        movieList.update();
-        setTimeout(() => {
-          (<HTMLElement>(
-            document.getElementById("M" + id.toString())
-          )).scrollIntoView({
-            behavior: "smooth",
-            block: "center",
-            inline: "nearest",
+        httpGet(
+          `https://api.themoviedb.org/3/movie/${id.toString()}?api_key=${
+            api.tmdb
+          }&language=de`,
+          true
+        )
+          .then((r) => {
+            if (r) {
+              const obj = JSON.parse(r);
+              console.debug(obj);
+              nm.collection = obj.belongs_to_collection;
+            }
+          })
+          .catch((e) => {
+            console.error(e);
+          })
+          .finally(() => {
+            httpGet(
+              `https://api.themoviedb.org/3/movie/${id.toString()}/credits?api_key=${
+                api.tmdb
+              }&language=de`,
+              true
+            )
+              .catch((e) => {
+                console.error(e);
+              })
+              .then((r) => {
+                if (r) {
+                  const obj = JSON.parse(r);
+                  if (obj.cast) {
+                    for (const actor of obj.cast) {
+                      if (actor.order < 10) {
+                        nm.cast.push(actor);
+                      }
+                    }
+                  }
+                  if (obj.crew) {
+                    for (const actor of obj.crew) {
+                      if (actor.order < 5) {
+                        nm.crew.push(actor);
+                      }
+                    }
+                  }
+                }
+              })
+              .finally(() => {
+                database.addToShelf(nm);
+                this.storage.push(nm);
+                movieList.update();
+                setTimeout(() => {
+                  (<HTMLElement>(
+                    document.getElementById("M" + id.toString())
+                  )).scrollIntoView({
+                    behavior: "smooth",
+                    block: "center",
+                    inline: "nearest",
+                  });
+                }, 500);
+              });
           });
-        }, 500);
       }
     },
   },
@@ -106,14 +152,12 @@ database.idb.onupgradeneeded = (e) => {
     database.dbRef.createObjectStore(dbStoreNames.shelf, { keyPath: "id" });
     database.dbRef.createObjectStore(dbStoreNames.wishlist, { keyPath: "id" });
   }
-  console.debug(e);
 };
 database.idb.onsuccess = (e) => {
   let t = e.target;
   if (t) {
     database.dbRef = (<any>t).result;
   }
-  console.debug(e);
   database.loadFullDB();
 };
 database.idb.onerror = (e) => {

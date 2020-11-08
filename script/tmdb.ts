@@ -4,6 +4,27 @@ declare namespace tmdb {
     status_message: string;
     success: boolean;
   }
+  class collection {
+    "id": number;
+    "name": string;
+    "poster_path": string;
+    "backdrop_path": string;
+  }
+  class Cast {
+    cast_id: number;
+    character: string;
+    gender: number | null;
+    name: string;
+    profile_path: string | null;
+  }
+  class Crew {
+    cast_id: number;
+    department: string;
+    gender: number | null;
+    job: string;
+    name: string;
+    profile_path: string | null;
+  }
   namespace search {
     class result {
       vote_count: number;

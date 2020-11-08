@@ -13,9 +13,9 @@ body {
 }
 
 * {
-  text-rendering: optimizeSpeed;
-  image-rendering: optimizeSpeed;
-  shape-rendering: optimizeSpeed;
+  text-rendering: optimizeSpeed !important;
+  image-rendering: optimizeSpeed !important;
+  shape-rendering: optimizeSpeed !important;
   color: white;
   font-family: sans-serif;
   font-size: var(--line-height);
