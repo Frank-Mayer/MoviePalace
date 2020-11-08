@@ -39,7 +39,7 @@
       margin-right: 8px;
     }
     .title {
-      position: absolute;
+      position: fixed;
       top: 50%;
       transform: translateY(-50%);
       width: calc(80% - 8px);
@@ -68,7 +68,7 @@
       display: none;
     }
     .closeBtn {
-      position: absolute;
+      position: fixed;
       top: var(--line-height);
       left: var(--line-height);
       right: calc(100% - var(--icon-size));
@@ -94,7 +94,7 @@
       rgb(46, 44, 44, 0.75),
       rgb(46, 44, 44, 0.95)
     );
-    position: absolute;
+    position: fixed;
     z-index: 3;
     border-radius: 0;
     top: 0;

@@ -1,5 +1,5 @@
 #scrollBar {
-  position: absolute;
+  position: fixed;
   right: 0;
   top: 0;
   bottom: 50px;
@@ -11,6 +11,8 @@
     transform: translateY(calc(50% - var(--line-height)))
       translateX(var(--pos-x));
     z-index: 2;
+    -webkit-filter: drop-shadow(5px 4px 8px black);
+    filter: drop-shadow(5px 4px 8px black);
   }
 }
 
