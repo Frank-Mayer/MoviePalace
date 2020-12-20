@@ -139,6 +139,7 @@
           for (const actor of data.actorList) {
             let li = document.createElement("li");
             let img = document.createElement("img");
+            img.loading = "lazy";
             img.src = actor.image;
             img.height = 32;
             li.appendChild(img);
@@ -152,6 +153,7 @@
           genres.id = "genres";
 
           let cover = document.createElement("img");
+          cover.loading = "lazy";
           cover.src = data.image;
           cover.id = "cover";
 

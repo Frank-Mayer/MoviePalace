@@ -74,9 +74,11 @@ statisticsButton.addEventListener(
     htmlList.append('<ol type="1">');
     for (let i = 0; i < actors.length && i < 5; i++) {
       htmlList.append(
-        `<li><img src="${getPosterUrlBypath(actors[i].image)}"/>`
+        `<li><img loading="lazy" src="${getPosterUrlBypath(actors[i].image)}"/>`
       );
-      htmlList.append(`${actors[i].name} (${actors[i].count} Filme)</li>`);
+      htmlList.append(
+        `&nbsp;${actors[i].name} (${actors[i].count} Filme)</li>`
+      );
     }
     htmlList.append("</ol>");
     htmlList.append("<h3>Lieblingsgenres</h3>");

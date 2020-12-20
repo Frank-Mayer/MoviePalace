@@ -1,15 +1,25 @@
 /// <reference path="ui.ts"/>
 /// <reference path="tmdb.ts"/>
 
-function popupSearchLi(el: tmdb.search.result | Movie): HTMLLIElement {
+function popupSearchLi(
+  el: tmdb.search.result | Movie,
+  wishlist: boolean = false
+): HTMLLIElement {
   const li = document.createElement("li");
   let cover;
   if (Object.keys(el).includes("cover")) {
     cover = cache.img((<Movie>el).cover);
-    li.setAttribute(
-      "onclick",
-      `anim.movieList.scrollToMovie(${el.id}, true);anim.popup.close("searchMovieDialog");`
-    );
+    if (wishlist) {
+      li.setAttribute(
+        "onclick",
+        `database.movies.addFromWishlist(${el.id});anim.popup.close("addMovieDialog");`
+      );
+    } else {
+      li.setAttribute(
+        "onclick",
+        `anim.movieList.scrollToMovie(${el.id}, true);anim.popup.close("searchMovieDialog");`
+      );
+    }
   } else {
     cover = cache.img(getPosterUrlBypath((<tmdb.search.result>el).poster_path));
     li.setAttribute(
@@ -33,7 +43,7 @@ searchButton.addEventListener("click", (): void => {
 
   const name = document.createElement("input");
   name.type = "text";
-  name.placeholder = "Titel suchen";
+  name.placeholder = "Regal durchsuchen";
   name.autofocus = true;
   view.appendChild(name);
   const resultList = document.createElement("ul");

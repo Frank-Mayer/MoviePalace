@@ -9,7 +9,7 @@ addButton.addEventListener("click", (): void => {
 
   const name = document.createElement("input");
   name.type = "text";
-  name.placeholder = "Titel suchen";
+  name.placeholder = "Neuen Titel suchen";
   name.autofocus = true;
   view.appendChild(name);
   const resultList = document.createElement("ul");
@@ -26,18 +26,23 @@ addButton.addEventListener("click", (): void => {
             name.value
           )}&include_adult=true&region=de`,
           true
-        ).then((v) => {
+        ).then(async (v) => {
           const response = <tmdb.search.multi>JSON.parse(v);
           if (response.results && response.results.length > 0) {
             const mov = response.results;
             for (const el of mov) {
-              if (el.media_type === "movie" || el.media_type === "tv") {
-                cache.tmdb.set(el.id, el);
+              if (
+                (el.media_type === "movie" || el.media_type === "tv") &&
+                !(await database.movies.has(el.id))
+              ) {
+                if (!cache.tmdb.has(el.id)) {
+                  cache.tmdb.set(el.id, el);
+                }
                 resultList.appendChild(popupSearchLi(el));
               }
             }
           } else {
-            console.error("Something went wrong\n\n" + v);
+            console.log("No movies found\n" + v);
           }
         });
       }

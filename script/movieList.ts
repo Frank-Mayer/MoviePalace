@@ -45,12 +45,16 @@ const movieList = {
       }
       let li = document.createElement("li");
       li.classList.add("movie");
+      if (el.fav) {
+        li.classList.add("fav");
+      }
       li.id = "M" + el.id.toString();
       let id = JSON.stringify(li.id);
 
       let clicker = document.createElement("section");
       let cover = document.createElement("img");
       cover.src = el.cover;
+      lazyLoad(cover);
       cover.classList.add("cover");
       clicker.appendChild(cover);
       let title = document.createElement("span");
@@ -87,9 +91,13 @@ const movieList = {
         cast.classList.add("cast");
         const castNameList = new Array<string>();
         el.cast.forEach((actor) => {
-          castNameList.push(actor.name);
+          if (actor.character) {
+            castNameList.push(`\t${actor.name}: ${actor.character}`);
+          } else {
+            castNameList.push(`\t${actor.name}`);
+          }
         });
-        cast.innerText = "Cast: " + castNameList.join(", ");
+        cast.innerText = "Cast: \n" + castNameList.join("\n");
         li.appendChild(cast);
       }
       let close = document.createElement("img");
@@ -104,6 +112,12 @@ const movieList = {
         tsx("span", {
           innerHTML: "Entfernen",
           onclick: `database.movies.remove(${el.id})`,
+        })
+      );
+      control.appendChild(
+        tsx("span", {
+          innerHTML: "Favorit",
+          onclick: `database.movies.toggleFav(${el.id})`,
         })
       );
       li.appendChild(control);

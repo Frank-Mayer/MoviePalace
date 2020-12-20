@@ -9,3 +9,26 @@
   padding: 8px;
   animation: slideUp 200ms ease-in-out;
 }
+
+#confirmDialog > .popup {
+  > p,
+  > button {
+    font-size: 24px;
+  }
+  > p {
+    margin-bottom: 16px;
+  }
+  > button {
+    border-radius: 8px;
+    padding: 4px 8px;
+  }
+  > button.n {
+    border: 2px solid white;
+    background-color: transparent;
+  }
+  > button.y {
+    float: right;
+    background-color: white;
+    color: black;
+  }
+}

@@ -35,6 +35,7 @@
     border-radius: 8px;
     .cover {
       display: inline-block;
+      border-radius: 8px;
       width: max(min(20%, 75px), 30px);
       margin-right: 8px;
     }
@@ -105,6 +106,14 @@
         margin: 2px 4px;
       }
     }
+  }
+  li.movie.fav:not(.open) {
+    border: 2px solid gold;
+    background: linear-gradient(
+      175deg,
+      rgb(36, 34, 34, 0.65),
+      rgb(36, 34, 34, 0.85)
+    );
   }
   li.open {
     .control {

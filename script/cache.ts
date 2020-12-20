@@ -7,6 +7,7 @@ const cache = {
     } else {
       let img = document.createElement("img");
       img.src = src;
+      lazyLoad(img);
       this.imgList.set(src, img);
       return img;
     }
