@@ -1,5 +1,6 @@
 /// <reference path="ui.ts"/>
 /// <reference path="tmdb.ts"/>
+/// <reference path="search.ts"/>
 
 addButton.addEventListener("click", (): void => {
   const view = document.createElement("div");
@@ -14,20 +15,17 @@ addButton.addEventListener("click", (): void => {
   const resultList = document.createElement("ul");
   resultList.classList.add("searchResults");
   view.appendChild(resultList);
-  let nameChangeTimeout: number | undefined;
   name.oninput = () => {
     resultList.innerHTML = "";
-    if (nameChangeTimeout) {
-      clearTimeout(nameChangeTimeout);
-    }
-    nameChangeTimeout = window.setTimeout(() => {
+    retriggerableDelay("addInput", 750, () => {
       if (name.value.length > 0) {
         httpGet(
           `https://api.themoviedb.org/3/search/multi?api_key=${
             api.tmdb
           }&language=de&query=${encodeURIComponent(
             name.value
-          )}&include_adult=true&region=de`
+          )}&include_adult=true&region=de`,
+          true
         ).then((v) => {
           const response = <tmdb.search.multi>JSON.parse(v);
           if (response.results && response.results.length > 0) {
@@ -35,17 +33,7 @@ addButton.addEventListener("click", (): void => {
             for (const el of mov) {
               if (el.media_type === "movie" || el.media_type === "tv") {
                 cache.tmdb.set(el.id, el);
-                const li = document.createElement("li");
-                const cover = cache.img(getPosterUrlBypath(el.poster_path));
-                li.appendChild(cover);
-                const title = document.createElement("span");
-                title.innerHTML = `<b>${el.title ? el.title : el.name}</b>`;
-                li.appendChild(title);
-                li.setAttribute(
-                  "onclick",
-                  `database.movies.add(${el.id.toString()});anim.popup.close("addMovieDialog");`
-                );
-                resultList.appendChild(li);
+                resultList.appendChild(popupSearchLi(el));
               }
             }
           } else {
@@ -53,7 +41,7 @@ addButton.addEventListener("click", (): void => {
           }
         });
       }
-    }, 750);
+    });
   };
 
   const blur = document.createElement("div");

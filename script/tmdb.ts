@@ -56,8 +56,11 @@ const getPosterUrlBypath = function (
   path: string | undefined,
   size: string = "w500"
 ) {
-  if (path) return `https://image.tmdb.org/t/p/${size}${path}`;
-  else return "img/popcorn.webp";
+  if (path && path.length > 0) {
+    return `https://image.tmdb.org/t/p/${size}${path}`;
+  } else {
+    return "img/popcorn.webp";
+  }
 };
 
 const genreIDs = new Map<number, string>([

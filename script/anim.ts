@@ -43,5 +43,23 @@ const anim = {
         }
       }
     },
+    scrollToMovie(id: number, open: boolean = false) {
+      const mId = `M${id}`;
+      const mEl = document.getElementById(mId);
+      if (mEl) {
+        mEl.scrollIntoView({
+          behavior: "smooth",
+          block: "center",
+          inline: "nearest",
+        });
+        if (open) {
+          setTimeout(() => {
+            this.open(mId);
+          }, 500);
+        }
+      } else {
+        console.error(`Movie id ${id} not found`);
+      }
+    },
   },
 };

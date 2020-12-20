@@ -23,7 +23,7 @@ const movieList = {
       else if (a < b) return -1;
       else return 0;
     });
-    let newMovieList = "";
+    let newMovieList = new StringBuilder();
     let leterList = new Array<string>();
     for (const el of database.movies.storage) {
       let firstLetter: string;
@@ -41,7 +41,7 @@ const movieList = {
         li.classList.add("letter");
         li.id = "letter" + firstLetter;
         li.innerText = firstLetter;
-        newMovieList += li.outerHTML;
+        newMovieList.append(li.outerHTML);
       }
       let li = document.createElement("li");
       li.classList.add("movie");
@@ -63,6 +63,7 @@ const movieList = {
         title.innerText = el.title;
       }
       clicker.setAttribute("onclick", `anim.movieList.open(${id})`);
+      clicker.setAttribute("oncontextmenu", `database.movies.context(${id})`);
       clicker.appendChild(title);
       li.appendChild(clicker);
       if (el.adult) {
@@ -96,9 +97,19 @@ const movieList = {
       close.setAttribute("onclick", `anim.movieList.close(${id})`);
       close.classList.add("closeBtn");
       li.appendChild(close);
-      newMovieList += li.outerHTML;
+      const control = document.createElement("section");
+      control.classList.add("control");
+      control.style.display = "none";
+      control.appendChild(
+        tsx("span", {
+          innerHTML: "Entfernen",
+          onclick: `database.movies.remove(${el.id})`,
+        })
+      );
+      li.appendChild(control);
+      newMovieList.append(li.outerHTML);
     }
-    listView.innerHTML = newMovieList;
+    listView.innerHTML = newMovieList.toString();
     let newScrollBar = "";
     for (const letter of leterList) {
       let li = document.createElement("li");

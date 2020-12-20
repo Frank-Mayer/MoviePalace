@@ -1,4 +1,6 @@
 /// <reference path="version.ts"/>
+/// <reference path="lib/rocket.ts"/>
+/// <reference path="ui.ts"/>
 
 class Movie {
   cover: string;
@@ -34,49 +36,53 @@ enum dbStoreNames {
 }
 
 const database = {
-  idb: indexedDB.open("library", version),
-  dbRef: <IDBDatabase>(<unknown>null),
+  idb: {
+    shelf: new IDB("shelf", version),
+    wishlist: new IDB("wishlist", version),
+  },
   loadFullDB() {
-    if (this.dbRef) {
-      const tx = this.dbRef.transaction(dbStoreNames.shelf, "readonly");
-      const shelf = tx.objectStore(dbStoreNames.shelf);
-      const request = shelf.openCursor();
-      if (request) {
-        (<IDBRequest<IDBCursorWithValue>>request).onsuccess = (ev) => {
-          const cursor = <IDBCursorWithValue>(<any>ev.target).result;
-          if (cursor) {
-            database.movies.storage.push(cursor.value);
-            movieList.update();
-            cursor.continue();
-          }
-        };
-      }
+    if (this.idb.shelf) {
+      this.idb.shelf.select<Movie>((cursor) => {
+        database.movies.storage.push(cursor.value);
+        movieList.update();
+      });
     }
   },
   addToShelf(a: Movie) {
-    if (this.dbRef) {
-      const tx = this.dbRef.transaction(dbStoreNames.shelf, "readwrite");
-      tx.onerror = (ev) => {
-        alert((<any>ev.target).error);
-        console.error(ev);
-      };
-      const shelf = tx.objectStore(dbStoreNames.shelf);
-      shelf.add(a);
+    if (this.idb.shelf) {
+      this.idb.shelf.set(a.id.toString(), a);
     }
   },
   addToWishList(a: Movie) {
-    if (this.dbRef) {
-      const tx = this.dbRef.transaction(dbStoreNames.wishlist, "readwrite");
-      tx.onerror = (ev) => {
-        alert((<any>ev.target).error);
-        console.error(ev);
-      };
-      const wishlist = tx.objectStore(dbStoreNames.wishlist);
-      wishlist.add(a);
+    if (this.idb.wishlist) {
+      this.idb.wishlist.set(a.id.toString(), a);
     }
   },
   movies: {
     storage: new Array<Movie>(),
+    context(id: number) {
+      const controls = document.getElementsByClassName("control");
+      for (let i = 0; i < controls.length; i++) {
+        (<HTMLElement>controls[i]).style.display = "none";
+      }
+      const movieLiEl = document.getElementById(id.toString());
+      if (movieLiEl) {
+        const contr = movieLiEl.getElementsByClassName("control");
+        if (contr.length === 1) {
+          (<HTMLElement>contr[0]).style.display = "block";
+        }
+      }
+    },
+    async remove(id: number): Promise<void> {
+      for (let i = 0; i < this.storage.length; i++) {
+        if (this.storage[i].id == id) {
+          database.movies.storage.splice(i, 1);
+          await database.idb.shelf.delete(id.toString());
+          movieList.update();
+          break;
+        }
+      }
+    },
     add(id: number) {
       if (cache.tmdb.has(id)) {
         const nm = new Movie(<tmdb.search.result>cache.tmdb.get(id));
@@ -145,21 +151,4 @@ const database = {
   },
 };
 
-database.idb.onupgradeneeded = (e) => {
-  let t = e.target;
-  if (t) {
-    database.dbRef = (<any>t).result;
-    database.dbRef.createObjectStore(dbStoreNames.shelf, { keyPath: "id" });
-    database.dbRef.createObjectStore(dbStoreNames.wishlist, { keyPath: "id" });
-  }
-};
-database.idb.onsuccess = (e) => {
-  let t = e.target;
-  if (t) {
-    database.dbRef = (<any>t).result;
-  }
-  database.loadFullDB();
-};
-database.idb.onerror = (e) => {
-  console.error(e);
-};
+database.loadFullDB();

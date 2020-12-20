@@ -3,11 +3,10 @@
 statisticsButton.addEventListener(
   "click",
   async (): Promise<void> => {
-    const md = new StringBuilder();
-    md.appendWithLinebreak("gantt");
-    md.appendWithLinebreak("\ttitle Statistik");
     const genreCounter = new Map<string, number>();
     const actorCounter = new Map<string, number>();
+    const actorImages = new Map<string, string>();
+
     for await (const movie of database.movies.storage) {
       if (movie.cast) {
         for await (const actor of movie.cast) {
@@ -18,6 +17,9 @@ statisticsButton.addEventListener(
             );
           } else {
             actorCounter.set(actor.name, 1);
+            if (actor.profile_path) {
+              actorImages.set(actor.name, actor.profile_path);
+            }
           }
         }
       }
@@ -29,14 +31,10 @@ statisticsButton.addEventListener(
         }
       }
     }
-    md.appendWithLinebreak("\tsection Genres");
+
     const genres = new Array<{ name: string; count: number }>();
     genreCounter.forEach((count, genre) => {
       genres.push({ name: genre, count: count });
-      const pct = count / database.movies.storage.length;
-      if (pct > 0.05) {
-        md.appendWithLinebreak(`\t${genre}:0,${count}d`);
-      }
     });
     genres.sort((a, b) => {
       if (a.count > b.count) {
@@ -48,10 +46,17 @@ statisticsButton.addEventListener(
       return 0;
     });
 
-    md.appendWithLinebreak("\tsection Schauspieler");
-    const actors = new Array<{ name: string; count: number }>();
+    const actors = new Array<{ name: string; count: number; image: string }>();
     actorCounter.forEach((count, actor) => {
-      actors.push({ name: actor, count: count });
+      if (actorImages.has(actor)) {
+        actors.push({
+          name: actor,
+          count: count,
+          image: <string>actorImages.get(actor),
+        });
+      } else {
+        actors.push({ name: actor, count: count, image: "" });
+      }
     });
     actors.sort((a, b) => {
       if (a.count > b.count) {
@@ -62,24 +67,38 @@ statisticsButton.addEventListener(
       }
       return 0;
     });
+
+    const htmlList = new StringBuilder();
+    htmlList.append("<h1>Statistik</h1>");
+    htmlList.append("<h3>Lieblingsschauspieler</h3>");
+    htmlList.append('<ol type="1">');
     for (let i = 0; i < actors.length && i < 5; i++) {
-      md.appendWithLinebreak(`\t${actors[i].name}:0,${actors[i].count}d`);
+      htmlList.append(
+        `<li><img src="${getPosterUrlBypath(actors[i].image)}"/>`
+      );
+      htmlList.append(`${actors[i].name} (${actors[i].count} Filme)</li>`);
     }
-    mermaid.render("stat_genre", md.toString(), (svg: string) => {
-      const view = document.createElement("div");
-      view.id = "stat";
-      view.classList.add("AddTitleView");
-      view.innerHTML += svg;
-      const blur = document.createElement("div");
-      blur.classList.add("blur");
-      blur.appendChild(view);
-      blur.id = "statisticsDialog";
-      blur.addEventListener("click", (ev: MouseEvent) => {
-        if (ev.target && (<HTMLElement>ev.target).id === "statisticsDialog") {
-          anim.popup.close("statisticsDialog");
-        }
-      });
-      document.body.appendChild(blur);
+    htmlList.append("</ol>");
+    htmlList.append("<h3>Lieblingsgenres</h3>");
+    htmlList.append('<ol type="1">');
+    for (let i = 0; i < genres.length && i < 5; i++) {
+      htmlList.append(`<li>${genres[i].name} (${genres[i].count} Filme)</li>`);
+    }
+    htmlList.append("</ol>");
+
+    const view = document.createElement("div");
+    view.id = "stat";
+    view.classList.add("AddTitleView");
+    view.innerHTML += htmlList.toString();
+    const blur = document.createElement("div");
+    blur.classList.add("blur");
+    blur.appendChild(view);
+    blur.id = "statisticsDialog";
+    blur.addEventListener("click", (ev: MouseEvent) => {
+      if (ev.target && (<HTMLElement>ev.target).id === "statisticsDialog") {
+        anim.popup.close("statisticsDialog");
+      }
     });
+    document.body.appendChild(blur);
   }
 );

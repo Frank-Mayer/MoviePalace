@@ -1,13 +1,20 @@
 #stat {
-  max-height: 75vh;
-  overflow: auto;
-  > svg {
-    filter: saturate(200%);
-    text {
-      fill: whitesmoke !important;
-    }
-    .tick {
-      display: none;
+  h3 {
+    padding: 8px 0 0 0;
+  }
+  ol,
+  ul {
+    padding: 0 0 0 8px;
+  }
+  li {
+    list-style: decimal !important;
+    list-style-type: decimal !important;
+    padding: 8px 0 0 32px !important;
+    img {
+      max-height: 64px;
+      max-width: 64px;
     }
   }
+  max-height: 75vh;
+  overflow: auto;
 }
