@@ -9,13 +9,31 @@
       content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height"
     />
     <link href="style.css" rel="preload stylesheet" as="style" />
-    <script
+    <!-- <script
       rel="preload"
       as="script"
       src="https://frank-mayer.tk/cdn/jscomp.js"
+    ></script> -->
+    <script
+      defer
+      src="https://www.gstatic.com/firebasejs/8.0.1/firebase.js"
     ></script>
-    <!-- <script defer src="/__/firebase/7.20.0/firebase-app.js"></script> -->
-    <!-- <script defer src="/__/firebase/7.20.0/firebase-database.js"></script> -->
+    <script
+      defer
+      src="https://www.gstatic.com/firebasejs/8.0.1/firebase-app.js"
+    ></script>
+    <script
+      defer
+      src="https://www.gstatic.com/firebasejs/8.0.1/firebase-database.js"
+    ></script>
+    <script
+      defer
+      src="https://www.gstatic.com/firebasejs/8.0.1/firebase-auth.js"
+    ></script>
+    <script
+      defer
+      src="https://popcorn-box-app.web.app/__/firebase/init.js"
+    ></script>
   </head>
   <body>
     <div id="app">
@@ -29,6 +47,7 @@
       <ul id="scrollBar"></ul>
     </div>
     <!-- <script defer src="/__/firebase/init.js"></script> -->
+    <script defer type="text/javascript" src="legacy.js"></script>
     <script defer type="text/javascript" src="app.js"></script>
   </body>
 </html>

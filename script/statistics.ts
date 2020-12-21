@@ -77,7 +77,7 @@ statisticsButton.addEventListener(
         `<li><img loading="lazy" src="${getPosterUrlBypath(actors[i].image)}"/>`
       );
       htmlList.append(
-        `&nbsp;${actors[i].name} (${actors[i].count} Filme)</li>`
+        `&nbsp;${htmlEscaper(actors[i].name)} (${actors[i].count} Filme)</li>`
       );
     }
     htmlList.append("</ol>");

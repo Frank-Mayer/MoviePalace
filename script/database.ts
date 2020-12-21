@@ -1,6 +1,8 @@
 /// <reference path="version.ts"/>
 /// <reference path="lib/rocket.ts"/>
 /// <reference path="ui.ts"/>
+/// <reference path="url.ts"/>
+/// <reference path="firebase.ts"/>
 
 enum MediaType {
   "Blu-Ray",
@@ -27,7 +29,9 @@ class Movie {
   typ: MediaType = MediaType["Blu-Ray"];
   status: OwningStatus = OwningStatus["Verfügbar"];
   cover: string;
+  mediaType: string;
   title: string;
+  original: string;
   info: string;
   adult: boolean;
   genres: Array<string>;
@@ -35,12 +39,16 @@ class Movie {
   cast: Array<tmdb.Cast>;
   crew: Array<tmdb.Crew>;
   collection: tmdb.collection | null;
+  backdropPath: string;
   constructor(data: tmdb.search.result) {
     this.collection = null;
     this.cast = new Array<tmdb.Cast>();
     this.crew = new Array<tmdb.Crew>();
     this.cover = getPosterUrlBypath(data.poster_path);
+    this.mediaType = data.media_type;
     this.title = data.title ? data.title : data.name ? data.name : "";
+    this.backdropPath = data.backdrop_path;
+    this.original = data.original_title;
     this.info = data.overview;
     this.adult = data.adult === true;
     this.genres = new Array<string>();
@@ -60,15 +68,20 @@ const database = {
   },
   loadFullDB() {
     if (this.idb.shelf) {
+      database.movies.storage = new Array<Movie>();
       this.idb.shelf.select((cursor) => {
         database.movies.storage.push(cursor.value);
         movieList.update();
       });
     }
     if (this.idb.wishlist) {
+      database.movies.wishlist = new Array<Movie>();
       this.idb.wishlist.select((cursor) => {
         database.movies.wishlist.push(cursor.value);
       });
+    }
+    if (Url.usr && Url.pwd) {
+      backup(Url.usr, Url.pwd);
     }
   },
   addToShelf(a: Movie) {
@@ -227,7 +240,7 @@ const database = {
         }
       }
     },
-    add(id: number) {
+    add(id: number, dontAsk?: number, callback?: (mov: Movie) => void) {
       if (cache.tmdb.has(id)) {
         const nm = new Movie(<tmdb.search.result>cache.tmdb.get(id));
         httpGet(
@@ -275,23 +288,40 @@ const database = {
                 }
               })
               .finally(() => {
-                confirm(
-                  `Willst Du '${nm.title}' direkt in dein Regal stellen oder auf die Wunschliste setzen?`,
-                  "In das Regal",
-                  "Auf die Wunschliste"
-                ).then((v) => {
-                  if (v == 1) {
-                    database.addToShelf(nm);
-                    this.storage.push(nm);
-                    movieList.update();
-                    setTimeout(() => {
-                      anim.movieList.scrollToMovie(id);
-                    }, 500);
-                  } else if (v == 0) {
-                    database.addToWishList(nm);
-                    this.wishlist.push(nm);
+                if (dontAsk == 0 || dontAsk == 1) {
+                  if (callback) {
+                    callback(nm);
                   }
-                });
+                  switch (dontAsk) {
+                    case 1:
+                      database.addToShelf(nm);
+                      this.storage.push(nm);
+                      movieList.update();
+                      break;
+                    case 0:
+                      database.addToWishList(nm);
+                      this.wishlist.push(nm);
+                      break;
+                  }
+                } else {
+                  confirm(
+                    `Willst Du '${nm.title}' direkt in dein Regal stellen oder auf die Wunschliste setzen?`,
+                    "In das Regal",
+                    "Auf die Wunschliste"
+                  ).then((v) => {
+                    if (v == 1) {
+                      database.addToShelf(nm);
+                      this.storage.push(nm);
+                      movieList.update();
+                      setTimeout(() => {
+                        anim.movieList.scrollToMovie(id);
+                      }, 500);
+                    } else if (v == 0) {
+                      database.addToWishList(nm);
+                      this.wishlist.push(nm);
+                    }
+                  });
+                }
               });
           });
       }

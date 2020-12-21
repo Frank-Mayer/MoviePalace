@@ -5,6 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>PopcornBox Share</title>
     <link rel="icon" type="image/webp" href="img/popcorn.webp" />
+    <script
+      defer
+      src="https://www.gstatic.com/firebasejs/8.0.1/firebase.js"
+    ></script>
+    <script
+      defer
+      src="https://www.gstatic.com/firebasejs/8.0.1/firebase-app.js"
+    ></script>
+    <script
+      defer
+      src="https://www.gstatic.com/firebasejs/8.0.1/firebase-database.js"
+    ></script>
+    <script defer src="https://popcornbox.web.app/__/firebase/init.js"></script>
   </head>
 
   <body>
@@ -130,7 +143,9 @@
             img.src = actor.image;
             img.height = 32;
             li.appendChild(img);
-            li.innerHTML += `<span>${actor.name} - ${actor.asCharacter}</span>`;
+            li.innerHTML += `<span>${htmlEscaper(actor.name)} - ${htmlEscaper(
+              actor.asCharacter
+            )}</span>`;
             actorList.appendChild(li);
           }
           actorList.id = "actorList";

@@ -1,4 +1,5 @@
 #scrollBar {
+  --line-height: 14px;
   position: fixed;
   right: 0;
   top: 0;
@@ -7,12 +8,13 @@
   overflow: visible !important;
   z-index: 2;
   li {
+    font-size: var(--line-height);
     color: transparent;
     transform: translateY(calc(50% - var(--line-height)))
       translateX(var(--pos-x));
     z-index: 2;
-    -webkit-filter: drop-shadow(5px 4px 8px black);
-    filter: drop-shadow(5px 4px 8px black);
+    -webkit-filter: drop-shadow(2px 2px 8px black);
+    filter: drop-shadow(2px 2px 8px black);
   }
 }
 

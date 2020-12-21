@@ -18,7 +18,7 @@
   }
   li.movie {
     // animation: blurFadeIn 200ms ease-in-out;
-    transition: all 200ms ease-in-out;
+    transition: position 200ms ease-in-out;
     transition-delay: 150ms;
     * {
       transition: all 200ms ease-in-out;
@@ -70,6 +70,7 @@
     .cast,
     .genres,
     .WatchCounter,
+    a,
     select {
       display: none;
     }
@@ -117,21 +118,28 @@
     .cast {
       margin-top: var(--line-height);
     }
+    a {
+      font-size: 28px;
+      border: 2px solid white;
+      border-radius: 8px;
+      padding: 4px 8px;
+      margin-bottom: 8px;
+      text-decoration: none;
+      width: fit-content;
+    }
     .control {
       padding: 12px 0;
       margin-top: 32px;
       span {
         font-size: 28px;
         border: 2px solid white;
-        // background-color: white;
-        // color: black;
         border-radius: 8px;
         padding: 4px 8px;
         margin: 2px 4px;
       }
     }
   }
-  li.movie.collection:not(.open) {
+  li.movie.backdrop:not(.open) {
     background: linear-gradient(
         175deg,
         rgb(46, 44, 44, 0.75),
@@ -139,8 +147,9 @@
       ),
       var(--backdrop-path);
     background-repeat: no-repeat;
-    background-size: cover;
-    background-position: top;
+    background-size: 100%;
+    background-position-x: center;
+    background-position-y: top;
   }
   li.open {
     .control {
@@ -180,6 +189,7 @@
     .genres,
     .WatchCounter,
     .cast,
+    a,
     select {
       display: block;
     }

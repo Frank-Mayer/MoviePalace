@@ -12,5 +12,6 @@ const cache = {
       return img;
     }
   },
+  collectionNames: new Map<number, string>(),
   lastScrollLetter: "\0",
 };

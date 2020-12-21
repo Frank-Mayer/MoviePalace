@@ -3,18 +3,14 @@ const movieList = {
     database.movies.storage.sort((A, B) => {
       let a: string;
       if (A.collection) {
-        a =
-          collectionName(A.collection.name.toLowerCase()) +
-          A.id.toString().padStart(15, "0");
+        a = collectionName(A.collection) + A.id.toString().padStart(15, "0");
       } else {
         a = A.title.toLowerCase();
       }
 
       let b: string;
       if (B.collection) {
-        b =
-          collectionName(B.collection.name.toLowerCase()) +
-          B.id.toString().padStart(15, "0");
+        b = collectionName(B.collection) + B.id.toString().padStart(15, "0");
       } else {
         b = B.title.toLowerCase();
       }
@@ -26,9 +22,11 @@ const movieList = {
     let newMovieList = new StringBuilder();
     let leterList = new Array<string>();
     for (const el of database.movies.storage) {
+      let elCollectionName = "";
       let firstLetter: string;
       if (el.collection) {
-        firstLetter = el.collection.name[0].toUpperCase();
+        elCollectionName = collectionName(el.collection);
+        firstLetter = elCollectionName[0].toUpperCase();
       } else {
         firstLetter = el.title[0].toUpperCase();
       }
@@ -49,7 +47,13 @@ const movieList = {
           "--backdrop-path",
           `url(${getPosterUrlBypath(el.collection.backdrop_path)})`
         );
-        li.classList.add("collection");
+        li.classList.add("backdrop");
+      } else if (el.backdropPath && el.backdropPath.length > 0) {
+        li.style.setProperty(
+          "--backdrop-path",
+          `url(${getPosterUrlBypath(el.backdropPath)})`
+        );
+        li.classList.add("backdrop");
       }
       li.classList.add("movie");
       if (el.fav) {
@@ -67,9 +71,9 @@ const movieList = {
       let title = document.createElement("span");
       title.classList.add("title");
       if (el.collection) {
-        title.innerHTML = `<i>${collectionName(el.collection.name)}</i><br/>${
-          el.title
-        }`;
+        title.innerHTML = `<i>${htmlEscaper(
+          elCollectionName
+        )}</i><br/>${htmlEscaper(el.title)}`;
       } else {
         title.innerText = el.title;
       }
@@ -83,6 +87,17 @@ const movieList = {
         adult.classList.add("adult");
         li.appendChild(adult);
       }
+
+      li.appendChild(
+        tsx("a", {
+          innerHTML: "&#9654; Ansehen",
+          className: "play",
+          target: "_blank",
+          href: `https://www.themoviedb.org/${el.mediaType}/${
+            el.id
+          }-${watchTitle(el.original, el.title)}/watch`,
+        })
+      );
 
       const Type = SelectFromEnum(MediaType, el.typ);
       Type.setAttribute(
@@ -113,6 +128,8 @@ const movieList = {
         watchInp.min = "0";
         if (el.watchcount) {
           watchInp.setAttribute("value", Math.max(0, el.watchcount).toString());
+        } else {
+          watchInp.setAttribute("value", "0");
         }
         watchInp.id = "WC" + el.id.toString();
         watchInp.setAttribute(
@@ -157,7 +174,10 @@ const movieList = {
       }
       const close = document.createElement("img");
       close.src = "img/back.svg";
-      close.setAttribute("onclick", `anim.movieList.close(${id})`);
+      close.setAttribute(
+        "onclick",
+        `anim.movieList.close(${id});history.back();`
+      );
       close.classList.add("closeBtn");
       li.appendChild(close);
       const control = document.createElement("section");

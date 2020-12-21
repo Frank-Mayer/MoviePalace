@@ -26,6 +26,7 @@ const anim = {
           remEl.classList.remove("open");
         }
         (<HTMLElement>el).classList.add("open");
+        pushState(id);
         this.shouldBeClosed = id;
       }
     },

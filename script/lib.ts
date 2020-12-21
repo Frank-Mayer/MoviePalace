@@ -1,17 +1,13 @@
-function collectionName(name: string): string {
-  let repl: string;
-  if (/Filmreihe/i.test(name)) {
-    repl = "";
-  } else {
-    repl = "Filmreihe";
-  }
-  return name
-    .replace(/collection/i, repl)
-    .replace(/trilogie/i, repl)
-    .replace(/trilogy/i, repl)
-    .replace("-", "")
-    .replace(/\s+/, " ")
-    .trim();
+function collectionName(collection: tmdb.collection): string {
+  const name: string = ((): string => {
+    if (cache.collectionNames.has(collection.id)) {
+      return <string>cache.collectionNames.get(collection.id);
+    } else {
+      cache.collectionNames.set(collection.id, collection.name);
+      return collection.name;
+    }
+  })();
+  return name.replace(/\s+/, " ").trim();
 }
 
 function lazyLoad(el: HTMLImageElement) {
@@ -38,7 +34,7 @@ async function confirm(
     view.appendChild(p);
 
     const b2 = document.createElement("button");
-    b2.innerHTML = n;
+    b2.innerText = n;
     b2.classList.add("n");
     b2.onclick = () => {
       anim.popup.close("confirmDialog");
@@ -47,7 +43,7 @@ async function confirm(
     view.appendChild(b2);
 
     const b1 = document.createElement("button");
-    b1.innerHTML = y;
+    b1.innerText = y;
     b1.classList.add("y");
     b1.onclick = () => {
       anim.popup.close("confirmDialog");
@@ -67,4 +63,38 @@ async function confirm(
     });
     document.body.appendChild(blur);
   });
+}
+
+function watchTitle(title: string, alt?: string): string {
+  if (!title && alt) {
+    title = alt;
+  }
+  title = title.replace(/[^0-9a-zA-Z-]+/g, "-");
+  while (title[0] == "-") {
+    title = title.slice(1, title.length - 1);
+  }
+  while (title[title.length] == "-") {
+    title = title.slice(0, title.length - 1);
+  }
+  return title;
+}
+
+function htmlEscaper(text?: string): string {
+  if (text) {
+    return text
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot")
+      .replace(/&/g, "&amp;");
+  } else {
+    return "";
+  }
+}
+
+function pushState(state: string) {
+  if (history.pushState) {
+    history.pushState(null, state, "#" + state);
+  } else {
+    location.hash = "#" + state;
+  }
 }

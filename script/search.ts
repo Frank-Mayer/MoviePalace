@@ -32,9 +32,9 @@ function popupSearchLi(
   }
   li.appendChild(cover);
   const title = document.createElement("span");
-  title.innerHTML = `<b>${
+  title.innerHTML = `<b>${htmlEscaper(
     el.title ? el.title : (<tmdb.search.result>el).name
-  }</b>`;
+  )}</b>`;
   li.appendChild(title);
   return li;
 }
