@@ -6,6 +6,9 @@ function popupSearchLi(
   wishlist: boolean = false
 ): HTMLLIElement {
   const li = document.createElement("li");
+  if ((<Movie>el).fav) {
+    li.classList.add("fav");
+  }
   let cover;
   if (Object.keys(el).includes("cover")) {
     cover = cache.img((<Movie>el).cover);

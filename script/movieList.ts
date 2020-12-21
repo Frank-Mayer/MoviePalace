@@ -44,6 +44,13 @@ const movieList = {
         newMovieList.append(li.outerHTML);
       }
       let li = document.createElement("li");
+      if (el.collection && el.collection.backdrop_path) {
+        li.style.setProperty(
+          "--backdrop-path",
+          `url(${getPosterUrlBypath(el.collection.backdrop_path)})`
+        );
+        li.classList.add("collection");
+      }
       li.classList.add("movie");
       if (el.fav) {
         li.classList.add("fav");
@@ -76,6 +83,53 @@ const movieList = {
         adult.classList.add("adult");
         li.appendChild(adult);
       }
+
+      const Type = SelectFromEnum(MediaType, el.typ);
+      Type.setAttribute(
+        "onchange",
+        `database.movies.setType(${el.id}, Number(this.value))`
+      );
+      li.appendChild(Type);
+
+      const Status = SelectFromEnum(OwningStatus);
+      Status.setAttribute(
+        "onchange",
+        `database.movies.setStatus(${el.id}, Number(this.value))`
+      );
+      li.appendChild(Status);
+
+      const watchCounter = document.createElement("div");
+      {
+        watchCounter.classList.add("WatchCounter");
+        const substract = document.createElement("span");
+        substract.innerHTML = "-";
+        substract.setAttribute(
+          "onclick",
+          `database.movies.addWatchCount(${el.id}, -1)`
+        );
+        watchCounter.appendChild(substract);
+        const watchInp = document.createElement("input");
+        watchInp.type = "number";
+        watchInp.min = "0";
+        if (el.watchcount) {
+          watchInp.setAttribute("value", Math.max(0, el.watchcount).toString());
+        }
+        watchInp.id = "WC" + el.id.toString();
+        watchInp.setAttribute(
+          "oninput",
+          `database.movies.setWatchCount(${el.id}, this.value)`
+        );
+        watchCounter.appendChild(watchInp);
+        const add = document.createElement("span");
+        add.innerHTML = "+";
+        add.setAttribute(
+          "onclick",
+          `database.movies.addWatchCount(${el.id}, 1)`
+        );
+        watchCounter.appendChild(add);
+        li.appendChild(watchCounter);
+      }
+
       let info = document.createElement("p");
       info.classList.add("info");
       info.innerText = el.info;
@@ -86,6 +140,7 @@ const movieList = {
         genres.innerText = "Genres: " + el.genres.join(", ");
         li.appendChild(genres);
       }
+
       if (el.cast && el.cast.length > 0) {
         let cast = document.createElement("p");
         cast.classList.add("cast");
@@ -100,7 +155,7 @@ const movieList = {
         cast.innerText = "Cast: \n" + castNameList.join("\n");
         li.appendChild(cast);
       }
-      let close = document.createElement("img");
+      const close = document.createElement("img");
       close.src = "img/back.svg";
       close.setAttribute("onclick", `anim.movieList.close(${id})`);
       close.classList.add("closeBtn");

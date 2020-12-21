@@ -49,7 +49,7 @@
       width: calc(80% - 8px);
       display: inline-block;
       color: whitesmoke;
-      font-size: min(6.5vw, 24px);
+      font-size: min(6.5vw, 28px);
     }
     // .info {
     //   max-height: 25vh;
@@ -67,9 +67,10 @@
     }
     .info,
     .closeBtn,
-    .adult,
     .cast,
-    .genres {
+    .genres,
+    .WatchCounter,
+    select {
       display: none;
     }
     .closeBtn {
@@ -80,7 +81,30 @@
       height: var(--icon-size);
       width: var(--icon-size);
     }
+    .WatchCounter {
+      * {
+        font-size: 28px;
+        background-color: transparent;
+        text-align: center;
+        display: inline-block;
+      }
+      span {
+        vertical-align: middle;
+        padding-bottom: 8px;
+        border: 2px solid white;
+        border-radius: 50%;
+        width: 28px;
+        height: 28px;
+        font-size: 20px;
+      }
+      input {
+        vertical-align: middle;
+        width: 128px;
+      }
+    }
     .adult {
+      width: fit-content;
+      display: inline-block;
       background-color: transparent;
       border: white 2px solid;
       border-radius: 4px;
@@ -97,7 +121,7 @@
       padding: 12px 0;
       margin-top: 32px;
       span {
-        font-size: 24px;
+        font-size: 28px;
         border: 2px solid white;
         // background-color: white;
         // color: black;
@@ -107,13 +131,16 @@
       }
     }
   }
-  li.movie.fav:not(.open) {
-    border: 2px solid gold;
+  li.movie.collection:not(.open) {
     background: linear-gradient(
-      175deg,
-      rgb(36, 34, 34, 0.65),
-      rgb(36, 34, 34, 0.85)
-    );
+        175deg,
+        rgb(46, 44, 44, 0.75),
+        rgb(46, 44, 44, 0.95)
+      ),
+      var(--backdrop-path);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: top;
   }
   li.open {
     .control {
@@ -151,8 +178,18 @@
     .info,
     .closeBtn,
     .genres,
-    .cast {
+    .WatchCounter,
+    .cast,
+    select {
       display: block;
     }
+    select {
+      margin-bottom: 8px;
+    }
   }
+}
+
+li.movie.fav:not(.open),
+li.fav:not(.movie) {
+  border: 2px solid gold !important;
 }

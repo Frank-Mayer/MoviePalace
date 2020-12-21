@@ -21,6 +21,7 @@ body {
   font-size: var(--line-height);
   -webkit-font-smoothing: antialiased;
   scroll-behavior: smooth;
+  outline: none !important;
 }
 
 .blur {
@@ -35,4 +36,16 @@ body {
   left: 0;
   z-index: 4;
   background-color: #0007;
+}
+
+select {
+  font-size: 28px;
+  background-color: transparent;
+  border: 2px solid white;
+  border-radius: 8px;
+  option {
+    font-size: 24px;
+    color: white;
+    background-color: transparent;
+  }
 }

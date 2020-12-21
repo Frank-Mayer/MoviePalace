@@ -2,8 +2,30 @@
 /// <reference path="lib/rocket.ts"/>
 /// <reference path="ui.ts"/>
 
+enum MediaType {
+  "Blu-Ray",
+  "DVD",
+  "Prime Video",
+  "Google Play",
+  "Apple TV",
+  "Vudu",
+  "Sonstiges",
+}
+
+enum OwningStatus {
+  "Verfügbar",
+  "Verliehen",
+  "Ausgeliehen",
+  "Bestellt",
+  "Reserviert",
+}
+
 class Movie {
-  fav?: boolean;
+  fav: boolean = false;
+  date: string = new Date().toJSON();
+  watchcount: number = 0;
+  typ: MediaType = MediaType["Blu-Ray"];
+  status: OwningStatus = OwningStatus["Verfügbar"];
   cover: string;
   title: string;
   info: string;
@@ -29,11 +51,6 @@ class Movie {
     }
     this.id = data.id;
   }
-}
-
-enum dbStoreNames {
-  shelf = "shelf",
-  wishlist = "wishlist",
 }
 
 const database = {
@@ -67,6 +84,18 @@ const database = {
   movies: {
     storage: new Array<Movie>(),
     wishlist: new Array<Movie>(),
+    getMovieById(id: number): Promise<Movie | null> {
+      return new Promise<Movie | null>(async (resolve, reject) => {
+        for await (const mov of this.storage) {
+          if (mov.id == id) {
+            resolve(mov);
+            return;
+            break;
+          }
+        }
+        reject(`Movie '${id}' not found`);
+      });
+    },
     async context(id: number) {
       const controls = document.getElementsByClassName("control");
       for (let i = 0; i < controls.length; i++) {
@@ -119,6 +148,42 @@ const database = {
           movieList.update();
           break;
         }
+      }
+    },
+    setType(id: number, value: MediaType): void {
+      this.getMovieById(id).then((mov) => {
+        if (mov) {
+          mov.typ = value;
+          database.idb.shelf.update(id.toString(), "typ", value);
+        }
+      });
+    },
+    setStatus(id: number, value: OwningStatus): void {
+      this.getMovieById(id).then((mov) => {
+        if (mov) {
+          mov.status = value;
+          database.idb.shelf.update(id.toString(), "status", value);
+        }
+      });
+    },
+    setWatchCount(id: number, value: number) {
+      if (value >= 0) {
+        this.getMovieById(id).then((mov) => {
+          if (mov) {
+            mov.watchcount = value;
+          }
+        });
+        database.idb.shelf.update(id.toString(), "watchcount", value);
+      }
+    },
+    addWatchCount(id: number, amount: -1 | 1): void {
+      const wc = <HTMLInputElement>(
+        document.getElementById("WC" + id.toString())
+      );
+      if (wc) {
+        const nv = Math.max(0, Number(wc.value) + amount);
+        wc.value = nv.toString();
+        this.setWatchCount(id, nv);
       }
     },
     async addFromWishlist(id: number) {
