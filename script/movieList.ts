@@ -106,7 +106,7 @@ const movieList = {
       );
       li.appendChild(Type);
 
-      const Status = SelectFromEnum(OwningStatus);
+      const Status = SelectFromEnum(OwningStatus, el.status);
       Status.setAttribute(
         "onchange",
         `database.movies.setStatus(${el.id}, Number(this.value))`
