@@ -1,7 +1,7 @@
 /// <reference path="version.ts"/>
 /// <reference path="lib/rocket.ts"/>
 /// <reference path="ui.ts"/>
-/// <reference path="url.ts"/>
+/// <reference path="login.ts"/>
 /// <reference path="firebase.ts"/>
 
 enum MediaType {
@@ -44,11 +44,11 @@ class Movie {
     this.cast = new Array<tmdb.Cast>();
     this.crew = new Array<tmdb.Crew>();
     this.cover = getPosterUrlBypath(data.poster_path);
-    this.mediaType = data.media_type;
+    this.mediaType = data.media_type ? data.media_type : "movie";
     this.title = data.title ? data.title : data.name ? data.name : "";
-    this.backdropPath = data.backdrop_path;
-    this.original = data.original_title;
-    this.info = data.overview;
+    this.backdropPath = data.backdrop_path ? data.backdrop_path : "";
+    this.original = data.original_title ? data.original_title : this.title;
+    this.info = data.overview ? data.overview : "";
     this.adult = data.adult === true;
     this.genres = new Array<string>();
     for (const genreId of data.genre_ids) {
@@ -64,13 +64,14 @@ const database = {
   idb: {
     shelf: new IDB<Movie>("shelf", version),
     wishlist: new IDB<Movie>("wishlist", version),
+    pref: new IDB<number>("pref", version),
   },
   loadFullDB() {
     if (this.idb.shelf) {
       database.movies.storage = new Array<Movie>();
       this.idb.shelf.select((cursor) => {
         database.movies.storage.push(cursor.value);
-        movieList.update();
+        retriggerableDelay("loadFullDB", 500, movieList.update);
       });
     }
     if (this.idb.wishlist) {
@@ -79,18 +80,17 @@ const database = {
         database.movies.wishlist.push(cursor.value);
       });
     }
-    if (Url.usr && Url.pwd) {
-      backup(Url.usr, Url.pwd);
-    }
   },
   addToShelf(a: Movie) {
     if (this.idb.shelf) {
       this.idb.shelf.set(a.id.toString(), a);
+      fb.addToShelf(a.id.toString(), a);
     }
   },
   addToWishList(a: Movie) {
     if (this.idb.wishlist) {
       this.idb.wishlist.set(a.id.toString(), a);
+      fb.addToWishlist(a.id.toString(), a);
     }
   },
   movies: {
@@ -135,6 +135,7 @@ const database = {
           ) {
             database.movies.storage.splice(i, 1);
             await database.idb.shelf.delete(id.toString());
+            await fb.deleteShelf(id.toString());
             movieList.update();
           }
           break;
@@ -157,16 +158,18 @@ const database = {
             id.toString(),
             database.movies.storage[i]
           );
+          await fb.addToShelf(id.toString(), database.movies.storage[i]);
           movieList.update();
           break;
         }
       }
     },
     setType(id: number, value: MediaType): void {
-      this.getMovieById(id).then((mov) => {
+      this.getMovieById(id).then(async (mov) => {
         if (mov) {
           mov.typ = value;
-          database.idb.shelf.update(id.toString(), "typ", value);
+          await database.idb.shelf.update(id.toString(), "typ", value);
+          await fb.updateShelf(id.toString(), "typ", value);
           const movEl = document.getElementById("M" + mov.id.toString());
           if (movEl) {
             const typIcon = <HTMLCollectionOf<HTMLImageElement>>(
@@ -200,21 +203,23 @@ const database = {
       });
     },
     setStatus(id: number, value: OwningStatus): void {
-      this.getMovieById(id).then((mov) => {
+      this.getMovieById(id).then(async (mov) => {
         if (mov) {
           mov.status = value;
-          database.idb.shelf.update(id.toString(), "status", value);
+          await database.idb.shelf.update(id.toString(), "status", value);
+          await fb.updateShelf(id.toString(), "status", value);
         }
       });
     },
-    setWatchCount(id: number, value: number) {
+    async setWatchCount(id: number, value: number) {
       if (value >= 0) {
         this.getMovieById(id).then((mov) => {
           if (mov) {
             mov.watchcount = value;
           }
         });
-        database.idb.shelf.update(id.toString(), "watchcount", value);
+        await database.idb.shelf.update(id.toString(), "watchcount", value);
+        await fb.updateShelf(id.toString(), "watchcount", value);
       }
     },
     addWatchCount(id: number, amount: -1 | 1): void {
@@ -228,6 +233,12 @@ const database = {
       }
     },
     async addFromWishlist(id: number) {
+      if (!fb.loggedIn) {
+        confirm(
+          "Es konnte keine Verbindung zu einer Datenbank hergestellt werden. Entweder ist die Anmeldung fehlgeschlagen oder du bist offline. "
+        );
+        return;
+      }
       const nm = await database.idb.wishlist.get(id.toString());
       if (nm) {
         switch (
@@ -244,15 +255,17 @@ const database = {
                 break;
               }
             }
-            database.idb.shelf.set(id.toString(), nm);
+            await database.idb.shelf.set(id.toString(), nm);
+            await fb.addToShelf(id.toString(), nm);
             database.movies.storage.push(nm);
             movieList.update();
             setTimeout(() => {
               anim.movieList.scrollToMovie(id);
             }, 500);
-            database.idb.wishlist
-              .delete(id.toString())
-              .catch((e) => console.error);
+            await database.idb.wishlist.delete(id.toString()).catch((e) => {
+              console.error(e);
+            });
+            await fb.deleteWishlist(id.toString());
             break;
           case 0:
             for (let i = 0; i < database.movies.wishlist.length; i++) {
@@ -261,9 +274,10 @@ const database = {
                 break;
               }
             }
-            database.idb.wishlist
-              .delete(id.toString())
-              .catch((e) => console.error);
+            await database.idb.wishlist.delete(id.toString()).catch((e) => {
+              console.error(e);
+            });
+            await fb.deleteWishlist(id.toString());
             break;
         }
       }
@@ -323,6 +337,7 @@ const database = {
                   switch (dontAsk) {
                     case 1:
                       database.addToShelf(nm);
+
                       this.storage.push(nm);
                       movieList.update();
                       break;
@@ -357,4 +372,10 @@ const database = {
   },
 };
 
-database.loadFullDB();
+if (loginData.usr && loginData.pwd) {
+  fb.exchange(loginData.usr, loginData.pwd).finally(() => {
+    database.loadFullDB();
+  });
+} else {
+  database.loadFullDB();
+}

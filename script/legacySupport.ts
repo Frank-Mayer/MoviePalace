@@ -93,9 +93,9 @@ setTimeout(() => {
               date = date.reverse();
               mov.date = date.join("-");
               mov.fav = legMov.fav.toLowerCase() == "true";
-              mov.status = Number(legMov.status);
-              mov.typ = Number(legMov.typ);
-              mov.watchcount = Number(legMov.watchcount);
+              mov.status = forceNumber(legMov.status);
+              mov.typ = forceNumber(legMov.typ);
+              mov.watchcount = forceNumber(legMov.watchcount);
             });
           }
         }

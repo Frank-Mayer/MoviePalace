@@ -1,14 +1,12 @@
 const movieList = {
   update() {
-    for (let i = 0; i < 3; i++) {
-      database.movies.storage.sort((A, B) => {
-        let a = sortValue(A);
-        let b = sortValue(B);
-        if (a > b) return 1;
-        else if (a < b) return -1;
-        else return 0;
-      });
-    }
+    database.movies.storage.sort((A, B) => {
+      let a = sortValue(A);
+      let b = sortValue(B);
+      if (a > b) return 1;
+      else if (a < b) return -1;
+      else return 0;
+    });
     let newMovieList = new StringBuilder();
     let leterList = new Array<string>();
     for (const el of database.movies.storage) {
@@ -29,13 +27,14 @@ const movieList = {
         newMovieList.append(li.outerHTML);
       }
       let li = document.createElement("li");
-      if (el.collection && el.collection.backdrop_path) {
-        li.style.setProperty(
-          "--backdrop-path",
-          `url(${getPosterUrlBypath(el.collection.backdrop_path)})`
-        );
-        li.classList.add("backdrop");
-      } else if (el.backdropPath && el.backdropPath.length > 0) {
+      // if (el.collection && el.collection.backdrop_path) {
+      //   li.style.setProperty(
+      //     "--backdrop-path",
+      //     `url(${getPosterUrlBypath(el.collection.backdrop_path)})`
+      //   );
+      //   li.classList.add("backdrop");
+      // } else
+      if (el.backdropPath && el.backdropPath.length > 0) {
         li.style.setProperty(
           "--backdrop-path",
           `url(${getPosterUrlBypath(el.backdropPath)})`

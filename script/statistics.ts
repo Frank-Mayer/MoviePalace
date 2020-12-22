@@ -6,8 +6,14 @@ statisticsButton.addEventListener(
     const genreCounter = new Map<string, number>();
     const actorCounter = new Map<string, number>();
     const actorImages = new Map<string, string>();
+    let watchCounter = -1;
+    let mostWatchedMovie = "";
 
     for await (const movie of database.movies.storage) {
+      if (movie.watchcount > watchCounter) {
+        watchCounter = movie.watchcount;
+        mostWatchedMovie = movie.title;
+      }
       if (movie.cast) {
         for await (const actor of movie.cast) {
           if (actorCounter.has(actor.name)) {
@@ -87,20 +93,34 @@ statisticsButton.addEventListener(
       htmlList.append(`<li>${genres[i].name} (${genres[i].count} Filme)</li>`);
     }
     htmlList.append("</ol>");
+    htmlList.append("<h3>Meist gesehener Film</h3>");
+    htmlList.append(`<p>${mostWatchedMovie} (${watchCounter} mal gesehen)</p>`);
 
     const view = document.createElement("div");
     view.id = "stat";
     view.classList.add("AddTitleView");
-    view.innerHTML += htmlList.toString();
+    view.innerHTML = htmlList.toString();
+
     const blur = document.createElement("div");
     blur.classList.add("blur");
-    blur.appendChild(view);
     blur.id = "statisticsDialog";
     blur.addEventListener("click", (ev: MouseEvent) => {
       if (ev.target && (<HTMLElement>ev.target).id === "statisticsDialog") {
         anim.popup.close("statisticsDialog");
       }
     });
+
+    const close = document.createElement("img");
+    close.src = "img/back.svg";
+    close.setAttribute(
+      "onclick",
+      `anim.popup.close("statisticsDialog");history.back();`
+    );
+    close.classList.add("closeBtn");
+
+    blur.appendChild(close);
+    blur.appendChild(view);
     document.body.appendChild(blur);
+    pushState("statistics");
   }
 );

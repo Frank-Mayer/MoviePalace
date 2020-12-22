@@ -10,7 +10,13 @@ window.addEventListener(
         }
       }
     } else {
-      history.go(-1);
+      const blur = document.getElementsByClassName("blur");
+      if (blur.length > 0) {
+        event.preventDefault();
+        anim.popup.close("statisticsDialog");
+      } else {
+        history.go(-1);
+      }
     }
   },
   false

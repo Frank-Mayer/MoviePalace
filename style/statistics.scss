@@ -1,21 +1,30 @@
-#stat {
-  h3 {
-    padding: 8px 0 0 0;
+#statisticsDialog {
+  .closeBtn {
+    margin: var(--line-height) 0 0 var(--line-height);
   }
-  ol,
-  ul {
-    padding: 0 0 0 8px;
-  }
-  li {
-    list-style: decimal !important;
-    list-style-type: decimal !important;
-    padding: 8px 0 0 32px !important;
-    img {
-      max-height: 64px;
-      max-width: 64px;
-      border-radius: 8px;
+  #stat {
+    padding: 8px;
+    h1 {
+      font-size: 24px;
     }
+    h3 {
+      padding: 8px 0 0 0;
+    }
+    ol,
+    ul {
+      padding: 0 0 0 8px;
+    }
+    li {
+      list-style: decimal !important;
+      list-style-type: decimal !important;
+      padding: 8px 0 0 32px !important;
+      img {
+        max-height: 64px;
+        max-width: 64px;
+        border-radius: 8px;
+      }
+    }
+    max-height: calc(100% - 40px - var(--line-height));
+    overflow: auto;
   }
-  max-height: 75vh;
-  overflow: auto;
 }

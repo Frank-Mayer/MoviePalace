@@ -3,6 +3,12 @@
 /// <reference path="search.ts"/>
 
 addButton.addEventListener("click", (): void => {
+  if (!fb.loggedIn) {
+    confirm(
+      "Es konnte keine Verbindung zu einer Datenbank hergestellt werden. Entweder ist die Anmeldung fehlgeschlagen oder du bist offline. "
+    );
+    return;
+  }
   const view = document.createElement("div");
   view.classList.add("AddTitleView");
   view.classList.add("popup");

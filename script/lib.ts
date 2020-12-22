@@ -114,3 +114,11 @@ function sortValue(mov: Movie, firstLetter: boolean = false): string {
   }
   return a.toLowerCase();
 }
+
+function forceNumber(number: string): number {
+  const n = Number(number);
+  if (isNaN(n) || !n) {
+    return 0;
+  }
+  return n;
+}
