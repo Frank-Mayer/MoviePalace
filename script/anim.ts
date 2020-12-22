@@ -31,14 +31,19 @@ const anim = {
       }
     },
     close(id: string) {
-      let el = document.getElementById(id);
+      const el = document.getElementById(id);
       if (el) {
         el.classList.remove("open");
-        el.scrollIntoView({
-          behavior: "smooth",
-          block: "center",
-          inline: "nearest",
-        });
+        setTimeout(() => {
+          const el = document.getElementById(id);
+          if (el) {
+            el.scrollIntoView({
+              behavior: "smooth",
+              block: "center",
+              inline: "nearest",
+            });
+          }
+        }, 250);
         if (this.shouldBeClosed === id) {
           this.shouldBeClosed = "";
         }
