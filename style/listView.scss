@@ -32,11 +32,7 @@
     );
     backdrop-filter: blur(16px) saturate(1.5);
     border-radius: 8px;
-    .clicker {
-      height: 100px;
-    }
     .cover {
-      height: 100px;
       display: inline-block;
       margin-right: 8px;
     }
@@ -143,6 +139,12 @@
   }
   li.movie:not(.open) {
     overflow: hidden !important;
+    .cover {
+      height: 100px;
+    }
+    .clicker {
+      height: 100px;
+    }
   }
   li.movie.backdrop:not(.open) {
     background: linear-gradient(
