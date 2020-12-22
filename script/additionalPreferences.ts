@@ -1,7 +1,7 @@
 /// <reference path="database.ts" />
 
 setTimeout(async () => {
-  await database.idb.pref.set("navBarHeight", 50);
+  // await database.idb.pref.set("navBarHeight", 45);
   database.idb.pref
     .get("navBarHeight")
     .then((val) => {

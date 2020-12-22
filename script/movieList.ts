@@ -49,6 +49,7 @@ const movieList = {
       let id = JSON.stringify(li.id);
 
       let clicker = document.createElement("section");
+      clicker.classList.add("clicker");
       let cover = document.createElement("img");
       cover.src = el.cover;
       lazyLoad(cover);

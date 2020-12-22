@@ -18,8 +18,9 @@
     background-size: contain;
     display: inline-block;
     width: var(--icon-size);
-    height: calc(100% - 16px - var(--nav-nar-height));
-    margin: 8px;
+    height: var(--icon-size);
+    // height: calc(100% - 16px - var(--nav-nar-height));
+    padding-top: 4px;
     padding-bottom: var(--nav-nar-height);
   }
   #wishlistButton {
