@@ -377,5 +377,22 @@ if (loginData.usr && loginData.pwd) {
     database.loadFullDB();
   });
 } else {
+  confirm("Du musst dich anmelden um alle Funktionen nutzen zu können").then(
+    (v) => {
+      if (v == 1) {
+        const newUsr = prompt("Nutzername");
+        if (newUsr) {
+          const newPwd = prompt("Passwort");
+          if (newPwd) {
+            loginData.usr = newUsr;
+            loginData.pwd = newPwd;
+            fb.exchange(loginData.usr, loginData.pwd).finally(() => {
+              database.loadFullDB();
+            });
+          }
+        }
+      }
+    }
+  );
   database.loadFullDB();
 }
