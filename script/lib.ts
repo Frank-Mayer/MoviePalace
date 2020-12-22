@@ -98,3 +98,19 @@ function pushState(state: string) {
     location.hash = "#" + state;
   }
 }
+
+function sortValue(mov: Movie, firstLetter: boolean = false): string {
+  let a: string;
+  if (mov.collection) {
+    if (firstLetter) {
+      return collectionName(mov.collection)[0].toUpperCase();
+    }
+    a = collectionName(mov.collection) + mov.id.toString().padStart(16, "0");
+  } else {
+    if (firstLetter) {
+      return mov.title[0].toUpperCase();
+    }
+    a = mov.title;
+  }
+  return a.toLowerCase();
+}

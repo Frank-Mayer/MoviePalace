@@ -1,38 +1,25 @@
 const movieList = {
   update() {
-    database.movies.storage.sort((A, B) => {
-      let a: string;
-      if (A.collection) {
-        a = collectionName(A.collection) + A.id.toString().padStart(15, "0");
-      } else {
-        a = A.title.toLowerCase();
-      }
-
-      let b: string;
-      if (B.collection) {
-        b = collectionName(B.collection) + B.id.toString().padStart(15, "0");
-      } else {
-        b = B.title.toLowerCase();
-      }
-
-      if (a > b) return 1;
-      else if (a < b) return -1;
-      else return 0;
-    });
+    for (let i = 0; i < 3; i++) {
+      database.movies.storage.sort((A, B) => {
+        let a = sortValue(A);
+        let b = sortValue(B);
+        if (a > b) return 1;
+        else if (a < b) return -1;
+        else return 0;
+      });
+    }
     let newMovieList = new StringBuilder();
     let leterList = new Array<string>();
     for (const el of database.movies.storage) {
       let elCollectionName = "";
-      let firstLetter: string;
+      let firstLetter = sortValue(el, true);
       if (el.collection) {
         elCollectionName = collectionName(el.collection);
-        firstLetter = elCollectionName[0].toUpperCase();
-      } else {
-        firstLetter = el.title[0].toUpperCase();
       }
       if (
         leterList.length === 0 ||
-        leterList[leterList.length - 1] !== firstLetter
+        leterList[leterList.length - 1] != firstLetter
       ) {
         leterList.push(firstLetter);
         let li = document.createElement("li");
