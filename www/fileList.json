@@ -1,5 +1,6 @@
 [
   { "file": "popcorn.webp", "path": "img/" },
+  { "file": "popcorn.svg", "path": "img/" },
   { "file": "index.html", "path": "" },
   { "file": "app.js", "path": "" },
   { "file": "style.css", "path": "" },
@@ -8,5 +9,10 @@
   { "file": "search_black.svg", "path": "img/" },
   { "file": "search_white.svg", "path": "img/" },
   { "file": "statistics.svg", "path": "img/" },
-  { "file": "wishlist.svg", "path": "img/" }
+  { "file": "wishlist.svg", "path": "img/" },
+  { "file": "appletv.svg", "path": "img/" },
+  { "file": "bluray.svg", "path": "img/" },
+  { "file": "dvd.svg", "path": "img/" },
+  { "file": "googleplay.svg", "path": "img/" },
+  { "file": "prime.svg", "path": "img/" }
 ]

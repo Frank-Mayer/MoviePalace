@@ -86,12 +86,35 @@ const movieList = {
         })
       );
 
-      const Type = SelectFromEnum(MediaType, el.typ);
-      Type.setAttribute(
+      const typIcon = document.createElement("img");
+      switch (el.typ) {
+        case MediaType["Blu-Ray"]:
+          typIcon.src = "img/bluray.svg";
+          break;
+        case MediaType["DVD"]:
+          typIcon.src = "img/dvd.svg";
+          break;
+        case MediaType["Prime Video"]:
+          typIcon.src = "img/prime.svg";
+          break;
+        case MediaType["Google Play"]:
+          typIcon.src = "img/googleplay.svg";
+          break;
+        case MediaType["Apple TV"]:
+          typIcon.src = "img/appletv.svg";
+          break;
+        default:
+          typIcon.src = "img/popcorn.svg";
+          break;
+      }
+      typIcon.classList.add("typIcon");
+
+      const type = SelectFromEnum(MediaType, el.typ);
+      type.setAttribute(
         "onchange",
         `database.movies.setType(${el.id}, Number(this.value))`
       );
-      li.appendChild(Type);
+      li.appendChild(type);
 
       const Status = SelectFromEnum(OwningStatus, el.status);
       Status.setAttribute(
@@ -138,6 +161,9 @@ const movieList = {
       info.classList.add("info");
       info.innerText = el.info;
       li.appendChild(info);
+
+      li.appendChild(typIcon);
+
       if (el.genres && el.genres.length > 0) {
         let genres = document.createElement("p");
         genres.classList.add("genres");

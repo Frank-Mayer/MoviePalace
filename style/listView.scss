@@ -60,11 +60,18 @@
       max-height: unset;
       opacity: unset;
     }
+    .typIcon {
+      display: block;
+      max-width: 100%;
+      max-height: 32px;
+      filter: brightness(1.45);
+    }
     .info,
     .closeBtn,
     .cast,
     .genres,
     .WatchCounter,
+    .typIcon,
     a,
     select {
       display: none;
@@ -185,6 +192,7 @@
     .genres,
     .WatchCounter,
     .cast,
+    .typIcon,
     a,
     select {
       display: block;

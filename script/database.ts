@@ -10,7 +10,6 @@ enum MediaType {
   "Prime Video",
   "Google Play",
   "Apple TV",
-  "Vudu",
   "Sonstiges",
 }
 
@@ -168,6 +167,35 @@ const database = {
         if (mov) {
           mov.typ = value;
           database.idb.shelf.update(id.toString(), "typ", value);
+          const movEl = document.getElementById("M" + mov.id.toString());
+          if (movEl) {
+            const typIcon = <HTMLCollectionOf<HTMLImageElement>>(
+              movEl.getElementsByClassName("typIcon")
+            );
+            if (typIcon.length > 0) {
+              typIcon[0];
+              switch (mov.typ) {
+                case MediaType["Blu-Ray"]:
+                  typIcon[0].src = "img/bluray.svg";
+                  break;
+                case MediaType["DVD"]:
+                  typIcon[0].src = "img/dvd.svg";
+                  break;
+                case MediaType["Prime Video"]:
+                  typIcon[0].src = "img/prime.svg";
+                  break;
+                case MediaType["Google Play"]:
+                  typIcon[0].src = "img/googleplay.svg";
+                  break;
+                case MediaType["Apple TV"]:
+                  typIcon[0].src = "img/appletv.svg";
+                  break;
+                default:
+                  typIcon[0].src = "img/popcorn.svg";
+                  break;
+              }
+            }
+          }
         }
       });
     },
