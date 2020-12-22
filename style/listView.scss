@@ -1,0 +1,216 @@
+#listView {
+  padding-top: 32px;
+  z-index: 1;
+  height: 100vh;
+  overflow-y: auto;
+  padding-bottom: calc(58px + var(--nav-nar-height));
+  li.letter {
+    width: 100%;
+    text-align: center;
+    padding: 4px;
+    margin-top: 8px;
+    box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(
+      175deg,
+      rgba(26, 24, 24, 0.65),
+      rgba(26, 24, 24, 0.85)
+    );
+  }
+  li.movie {
+    min-height: 106.8px;
+    // animation: blurFadeIn 200ms ease-in-out;
+    transition: position 200ms ease-in-out;
+    transition-delay: 150ms;
+    * {
+      transition: all 200ms ease-in-out;
+    }
+    margin: 8px 8px 0 8px;
+    padding: 8px;
+    box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(
+      175deg,
+      rgba(26, 24, 24, 0.65),
+      rgba(26, 24, 24, 0.85)
+    );
+    backdrop-filter: blur(16px) saturate(1.5);
+    border-radius: 8px;
+    .cover {
+      min-height: 102.8px;
+      display: inline-block;
+      border-radius: 8px;
+      width: max(min(20%, 75px), 30px);
+      margin-right: 8px;
+    }
+    .title {
+      > i {
+        font-size: 12px;
+      }
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      width: calc(80% - 8px);
+      display: inline-block;
+      color: whitesmoke;
+      font-size: min(6.5vw, 28px);
+    }
+    .info {
+      max-height: 10vh;
+      overflow: hidden;
+      opacity: 0.5;
+      transition: opacity height 200ms ease-in-out;
+    }
+    .info:hover {
+      max-height: unset;
+      opacity: unset;
+    }
+    .typIcon {
+      display: block;
+      max-width: 100%;
+      max-height: 32px;
+      filter: brightness(1.45);
+    }
+    .info,
+    .closeBtn,
+    .cast,
+    .genres,
+    .WatchCounter,
+    .typIcon,
+    a,
+    select {
+      display: none;
+    }
+    .closeBtn {
+      position: fixed;
+      top: var(--line-height);
+      left: var(--line-height);
+      right: calc(100% - var(--icon-size));
+    }
+    .WatchCounter {
+      * {
+        font-size: 28px;
+        background-color: transparent;
+        text-align: center;
+        display: inline-block;
+      }
+      span {
+        vertical-align: middle;
+        padding-bottom: 8px;
+        border: 2px solid white;
+        border-radius: 50%;
+        width: 28px;
+        height: 28px;
+        font-size: 20px;
+      }
+      input {
+        vertical-align: middle;
+        width: 128px;
+      }
+    }
+    .adult {
+      width: fit-content;
+      display: inline-block;
+      background-color: transparent;
+      border: white 2px solid;
+      border-radius: 4px;
+      font-family: Arial, Helvetica, sans-serif;
+      font-weight: bold;
+      color: white;
+      padding: 2px 4px;
+    }
+    .genres,
+    .cast {
+      margin-top: var(--line-height);
+    }
+    a {
+      font-size: 28px;
+      border: 2px solid white;
+      border-radius: 8px;
+      padding: 4px 8px;
+      margin-bottom: 8px;
+      text-decoration: none;
+      width: fit-content;
+    }
+    .control {
+      padding: 12px 0;
+      margin-top: 32px;
+      span {
+        font-size: 28px;
+        border: 2px solid white;
+        border-radius: 8px;
+        padding: 4px 8px;
+        margin: 2px 4px;
+      }
+    }
+  }
+  li.movie.backdrop:not(.open) {
+    background: linear-gradient(
+        175deg,
+        rgba(26, 24, 24, 0.65),
+        rgba(26, 24, 24, 0.75)
+      ),
+      var(--backdrop-path);
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position-x: center;
+    background-position-y: top;
+  }
+  li.open {
+    .control {
+      display: none !important;
+      * {
+        display: none !important;
+      }
+    }
+    background: linear-gradient(
+      175deg,
+      rgba(26, 24, 24, 0.65),
+      rgba(26, 24, 24, 0.85)
+    );
+    padding-top: 32px;
+    position: fixed;
+    z-index: 3;
+    border-radius: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: 0;
+    overflow-y: auto;
+    .cover {
+      display: block;
+      width: min(50%, 150px);
+      margin: 0 auto var(--line-height) auto;
+    }
+    .title {
+      color: transparent;
+      display: none;
+      > * {
+        display: none;
+      }
+    }
+    .adult,
+    .info,
+    .closeBtn,
+    .genres,
+    .WatchCounter,
+    .cast,
+    .typIcon,
+    a,
+    select {
+      display: block;
+    }
+    select {
+      margin-bottom: 8px;
+    }
+  }
+}
+
+li.movie.fav:not(.open),
+li.fav:not(.movie) {
+  border: 2px solid gold !important;
+}
+
+.closeBtn {
+  height: var(--icon-size);
+  width: var(--icon-size);
+}

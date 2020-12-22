@@ -1,0 +1,50 @@
+:root {
+  --line-height: 18px;
+  --icon-size: 40px;
+}
+
+body {
+  background: linear-gradient(225deg, #480612, #870a22);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100%;
+}
+
+* {
+  text-rendering: optimizeSpeed !important;
+  image-rendering: optimizeSpeed !important;
+  shape-rendering: optimizeSpeed !important;
+  color: white;
+  font-family: sans-serif;
+  font-size: var(--line-height);
+  -webkit-font-smoothing: antialiased;
+  scroll-behavior: smooth;
+  outline: none !important;
+}
+
+.blur {
+  animation: blurFadeIn 200ms ease-in-out;
+  backdrop-filter: blur(16px) saturate(1.8);
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 4;
+  background-color: #0007;
+}
+
+select {
+  font-size: 28px;
+  background-color: transparent;
+  border: 2px solid white;
+  border-radius: 8px;
+  option {
+    font-size: 24px;
+    color: white;
+    background-color: transparent;
+  }
+}

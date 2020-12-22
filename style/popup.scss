@@ -1,0 +1,35 @@
+.popup {
+  position: fixed;
+  top: 32px;
+  left: 8px;
+  right: 8px;
+  background-color: rgb(28, 28, 30);
+  border-radius: 8px;
+  z-index: 5;
+  padding: 8px;
+  animation: slideUp 200ms ease-in-out;
+}
+
+#confirmDialog > .popup {
+  > p,
+  > button {
+    font-size: 28px;
+  }
+  > p {
+    margin-bottom: 16px;
+  }
+  > button {
+    border-radius: 8px;
+    padding: 4px 8px;
+  }
+  > button.n {
+    border: 2px solid white;
+    background-color: transparent;
+  }
+  > button.y {
+    margin-top: 8px;
+    float: right;
+    background-color: white;
+    color: black;
+  }
+}

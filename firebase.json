@@ -1,0 +1,29 @@
+{
+  "database": {
+    "rules": "database.rules.json"
+  },
+  "hosting": {
+    "site": "popcornbox",
+    "public": "www",
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+    "cleanUrls": true,
+    "trailingSlash": false,
+    "rewrites": [
+      {
+        "source": "/share",
+        "destination": "/view.html"
+      }
+    ],
+    "headers": [
+      {
+        "source": "**/*.@(webp|css|svg)",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "max-age=1000000"
+          }
+        ]
+      }
+    ]
+  }
+}

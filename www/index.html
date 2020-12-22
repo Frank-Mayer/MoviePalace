@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <title>Popcorn Box</title>
+    <link rel="icon" type="image/webp" href="img/popcorn.webp" />
+    <link rel="icon" type="image/svg" href="img/popcorn.svg" />
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height"
+    />
+    <link href="style.css" rel="preload stylesheet" as="style" />
+    <!-- <script
+      rel="preload"
+      as="script"
+      src="https://frank-mayer.tk/cdn/jscomp.js"
+    ></script> -->
+    <script
+      defer
+      src="https://www.gstatic.com/firebasejs/8.0.1/firebase.js"
+    ></script>
+    <script
+      defer
+      src="https://www.gstatic.com/firebasejs/8.0.1/firebase-app.js"
+    ></script>
+    <script
+      defer
+      src="https://www.gstatic.com/firebasejs/8.0.1/firebase-database.js"
+    ></script>
+    <script
+      defer
+      src="https://www.gstatic.com/firebasejs/8.0.1/firebase-auth.js"
+    ></script>
+    <script
+      defer
+      src="https://popcorn-box-app.web.app/__/firebase/init.js"
+    ></script>
+  </head>
+  <body>
+    <div id="app">
+      <ul class="buttomBar">
+        <li class="toolbarIcon" id="wishlistButton"></li>
+        <li class="toolbarIcon" id="addButton"></li>
+        <li class="toolbarIcon" id="searchButton"></li>
+        <li class="toolbarIcon" id="statisticsButton"></li>
+      </ul>
+      <ul id="listView"></ul>
+      <ul id="scrollBar"></ul>
+    </div>
+    <!-- <script defer src="/__/firebase/init.js"></script> -->
+    <script defer type="text/javascript" src="login.js"></script>
+    <script defer type="text/javascript" src="info.js"></script>
+    <script defer type="text/javascript" src="legacy.js"></script>
+    <script defer type="text/javascript" src="app.js"></script>
+  </body>
+</html>
