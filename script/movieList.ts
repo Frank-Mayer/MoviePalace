@@ -187,10 +187,7 @@ const movieList = {
       }
       const close = document.createElement("img");
       close.src = "img/back.svg";
-      close.setAttribute(
-        "onclick",
-        `anim.movieList.close(${id});history.back();`
-      );
+      close.setAttribute("onclick", `anim.movieList.close(${id});`);
       close.classList.add("closeBtn");
       li.appendChild(close);
       const control = document.createElement("section");
