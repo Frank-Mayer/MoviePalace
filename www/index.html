@@ -38,11 +38,19 @@
   </head>
   <body>
     <div id="app">
-      <ul class="buttomBar">
+      <ul id="bottomBar">
         <li class="toolbarIcon" id="wishlistButton"></li>
         <li class="toolbarIcon" id="addButton"></li>
         <li class="toolbarIcon" id="searchButton"></li>
         <li class="toolbarIcon" id="statisticsButton"></li>
+        <li>
+          <ul id="preferences">
+            <li>
+              <label for="navBar">Platzhalter für Navigationsleiste</label>
+              <input type="range" min="0" max="100" name="navBar" id="navBar" />
+            </li>
+          </ul>
+        </li>
       </ul>
       <ul id="listView"></ul>
       <ul id="scrollBar"></ul>

@@ -17,7 +17,7 @@
     );
   }
   li.movie {
-    transition: position 200ms ease-in-out;
+    transition: all 200ms ease-in-out;
     transition-delay: 150ms;
     * {
       transition: all 200ms ease-in-out;
