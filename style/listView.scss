@@ -222,11 +222,11 @@
   }
 }
 
-#listview:not(.placeholder) {
+#listView:not(.placeholder) {
   overflow-y: auto;
 }
 
-#listview.placeholder {
+#listView.placeholder {
   overflow: hidden !important;
 }
 
