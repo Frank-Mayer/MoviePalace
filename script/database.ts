@@ -373,6 +373,7 @@ const database = {
 };
 
 if (loginData.usr && loginData.pwd) {
+  database.loadFullDB();
   fb.exchange(loginData.usr, loginData.pwd).finally(() => {
     database.loadFullDB();
   });
