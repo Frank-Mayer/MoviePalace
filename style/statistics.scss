@@ -1,6 +1,6 @@
 #statisticsDialog {
   .closeBtn {
-    margin: var(--line-height) 0 0 var(--line-height);
+    margin: calc(var(--line-height) * 2) 0 0 var(--line-height);
   }
   #stat {
     padding: 8px;

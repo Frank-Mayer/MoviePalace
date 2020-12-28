@@ -1,6 +1,6 @@
 /// <reference path="database.ts" />
 
-setTimeout(async () => {
+setTimeout(() => {
   const navBar = <HTMLInputElement | null>document.getElementById("navBar");
   database.idb.pref
     .get("navBarHeight")

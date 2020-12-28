@@ -5,7 +5,7 @@ async function scrollBarUpdate(ev: TouchEvent | MouseEvent) {
 
   let scroll: string | undefined = undefined;
   let highestVal: number = -1;
-  for (const el of scrollBar.childNodes) {
+  for await (const el of scrollBar.childNodes) {
     let letter = <HTMLLIElement>el;
     let rect = letter.getBoundingClientRect();
     let val = 1 - Math.abs(rect.top / window.innerHeight - y);
@@ -35,7 +35,7 @@ async function scrollBarUpdate(ev: TouchEvent | MouseEvent) {
   }
 }
 
-addEventListener("touchstart", async (ev) => {
+addEventListener("touchstart", (ev) => {
   if (
     ev.target === scrollBar ||
     (<HTMLElement>ev.target).parentNode === scrollBar

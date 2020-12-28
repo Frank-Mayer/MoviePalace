@@ -6,6 +6,7 @@ statisticsButton.addEventListener(
     const genreCounter = new Map<string, number>();
     const actorCounter = new Map<string, number>();
     const actorImages = new Map<string, string>();
+    const typeCounter = new Array<number>();
     let watchCounter = -1;
     let mostWatchedMovie = "";
 
@@ -28,6 +29,11 @@ statisticsButton.addEventListener(
             }
           }
         }
+      }
+      if (typeCounter[movie[1].typ]) {
+        typeCounter[movie[1].typ]++;
+      } else {
+        typeCounter[movie[1].typ] = 1;
       }
       for await (const genre of movie[1].genres) {
         if (genreCounter.has(genre)) {
@@ -76,6 +82,15 @@ statisticsButton.addEventListener(
 
     const htmlList = new StringBuilder();
     htmlList.append("<h1>Statistik</h1>");
+    htmlList.append(
+      `<h3>Aktuell ${database.movies.storage.size} im Regal</h3><ol>`
+    );
+    for (let t = 0; t < Object.keys(MediaType).length / 2; t++) {
+      if (typeCounter[t]) {
+        htmlList.append(`<li>${typeCounter[t]} × ${MediaType[t]}</li>`);
+      }
+    }
+    htmlList.append("</ol>");
     htmlList.append("<h3>Lieblingsschauspieler</h3>");
     htmlList.append('<ol type="1">');
     for (let i = 0; i < actors.length && i < 5; i++) {
@@ -94,7 +109,9 @@ statisticsButton.addEventListener(
     }
     htmlList.append("</ol>");
     htmlList.append("<h3>Meist gesehener Film</h3>");
-    htmlList.append(`<p>${mostWatchedMovie} (${watchCounter} mal gesehen)</p>`);
+    htmlList.append(
+      `<ol><li>${mostWatchedMovie} (${watchCounter} mal gesehen)</li></ol>`
+    );
 
     const view = document.createElement("div");
     view.id = "stat";

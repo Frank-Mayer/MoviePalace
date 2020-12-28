@@ -2,7 +2,7 @@ declare const appInfo: {
   version: string;
 };
 if (appInfo) {
-  const newestVersion = "3.2";
+  const newestVersion = "3.3";
   if (appInfo && appInfo.version != newestVersion) {
     confirm(
       `Ein Update ist verfügbar\nDu hast ${appInfo.version}, aktualisiere jetzt auf ${newestVersion}`,
@@ -10,7 +10,8 @@ if (appInfo) {
       "Später erinnern"
     ).then((v) => {
       if (v == 1) {
-        location.href = "https://frank-mayer.tk/download/PopcornBox";
+        location.href =
+          "https://play.google.com/store/apps/details?id=io.frankmayer.library";
       }
     });
   }

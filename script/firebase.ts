@@ -124,7 +124,7 @@ const fb = {
               }
             }
             const deleteList = new Set<string>();
-            database.idb.wishlist.select(async (c) => {
+            await database.idb.wishlist.select(async (c) => {
               const id = (<number>c.value.id).toString();
               if (!deleteList.has(id) && !impList.has(id)) {
                 deleteList.add(id);

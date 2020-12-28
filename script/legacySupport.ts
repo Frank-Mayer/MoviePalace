@@ -26,7 +26,7 @@ setTimeout(() => {
       `Es wurde ein Backup von ${legacy.lib.length} Filmen gefunden, soll soll es importiert werden? Vorhandene werden nicht überschrieben.`,
       "Importieren",
       "Abbrechen"
-    ).then(async (v) => {
+    ).then((v) => {
       if (v == 1) {
         const imported = new Set<string>();
         const findMovie = async (

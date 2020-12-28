@@ -101,7 +101,7 @@ const database = {
     pushMovie(mov: Movie) {
       this.storage.set(mov.id, mov);
     },
-    async context(id: number) {
+    context(id: number) {
       const controls = document.getElementsByClassName("control");
       for (let i = 0; i < controls.length; i++) {
         (<HTMLElement>controls[i]).style.display = "none";
@@ -113,8 +113,9 @@ const database = {
         );
         if (contr.length === 1) {
           contr[0].style.display = "block";
-          await delay(4000);
-          contr[0].style.display = "none";
+          setTimeout(() => {
+            contr[0].style.display = "none";
+          });
         }
       }
     },
@@ -125,8 +126,10 @@ const database = {
         (await confirm(`Willst Du '${mov.title}' wirklich entfernen?`)) == 1
       ) {
         this.storage.delete(id);
-        await database.idb.shelf.delete(id.toString());
-        await fb.deleteShelf(id.toString());
+        const awaitIdb = database.idb.shelf.delete(id.toString());
+        const awaitFb = fb.deleteShelf(id.toString());
+        await awaitIdb;
+        await awaitFb;
         movieList.update();
       }
     },
@@ -196,14 +199,14 @@ const database = {
         await fb.updateShelf(id.toString(), "watchcount", value);
       }
     },
-    addWatchCount(id: number, amount: -1 | 1): void {
+    async addWatchCount(id: number, amount: -1 | 1): Promise<void> {
       const wc = <HTMLInputElement>(
         document.getElementById("WC" + id.toString())
       );
       if (wc) {
         const nv = Math.max(0, Number(wc.value) + amount);
         wc.value = nv.toString();
-        this.setWatchCount(id, nv);
+        await this.setWatchCount(id, nv);
       }
     },
     async addFromWishlist(id: number) {
