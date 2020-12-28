@@ -10,12 +10,12 @@ statisticsButton.addEventListener(
     let mostWatchedMovie = "";
 
     for await (const movie of database.movies.storage) {
-      if (movie.watchcount > watchCounter) {
-        watchCounter = movie.watchcount;
-        mostWatchedMovie = movie.title;
+      if (movie[1].watchcount > watchCounter) {
+        watchCounter = movie[1].watchcount;
+        mostWatchedMovie = movie[1].title;
       }
-      if (movie.cast) {
-        for await (const actor of movie.cast) {
+      if (movie[1].cast) {
+        for await (const actor of movie[1].cast) {
           if (actorCounter.has(actor.name)) {
             actorCounter.set(
               actor.name,
@@ -29,7 +29,7 @@ statisticsButton.addEventListener(
           }
         }
       }
-      for await (const genre of movie.genres) {
+      for await (const genre of movie[1].genres) {
         if (genreCounter.has(genre)) {
           genreCounter.set(genre, <number>genreCounter.get(genre) + 1);
         } else {

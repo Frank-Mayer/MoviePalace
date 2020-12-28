@@ -1,17 +1,19 @@
 const movieList = {
   update() {
-    database.movies.storage.sort((A, B) => {
-      let a = sortValue(A);
-      let b = sortValue(B);
-      if (a > b) return 1;
-      else if (a < b) return -1;
-      else return 0;
-    });
-    let newMovieList = new StringBuilder();
-    let leterList = new Array<string>();
+    const sorter = new SortedList<{ id: number; alpha: string }>("alpha");
     for (const el of database.movies.storage) {
+      sorter.add({ id: el[0], alpha: sortValue(el[1]) });
+    }
+
+    const newMovieList = new StringBuilder();
+    const leterList = new Array<string>();
+    for (const sortMovEl of sorter) {
       let elCollectionName = "";
-      let firstLetter = sortValue(el, true);
+      const firstLetter = sortMovEl.alpha[0].toUpperCase();
+      const el = database.movies.storage.get(sortMovEl.id);
+      if (!el) {
+        continue;
+      }
       if (el.collection) {
         elCollectionName = collectionName(el.collection);
       }
@@ -209,6 +211,7 @@ const movieList = {
       newMovieList.append(li.outerHTML);
     }
     listView.innerHTML = newMovieList.toString();
+    listView.classList.remove("placeholder");
     let newScrollBar = "";
     for (const letter of leterList) {
       let li = document.createElement("li");

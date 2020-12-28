@@ -80,7 +80,7 @@ const fb = {
   async exchange(u: string, p: string) {
     try {
       if (u.length === 0 || p.length === 0) {
-        throw new Error("Login failed");
+        throw new Error("No login data");
       }
       const login = await firebase
         .auth()

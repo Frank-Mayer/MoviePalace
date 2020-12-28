@@ -48,7 +48,7 @@ setTimeout(() => {
               for (const el of response.results) {
                 if (
                   (el.media_type === "movie" || el.media_type === "tv") &&
-                  !(await database.movies.has(el.id))
+                  !database.movies.storage.has(el.id)
                 ) {
                   if (!cache.tmdb.has(el.id)) {
                     cache.tmdb.set(el.id, el);
@@ -64,7 +64,6 @@ setTimeout(() => {
                   const ncName = name
                     .toLowerCase()
                     .replace(/[^0-9a-zA-Z]+/g, "");
-                  console.debug(foundName + "\n" + ncName);
                   if (
                     (level == 0 && ncName === foundName) ||
                     (level == 1 &&

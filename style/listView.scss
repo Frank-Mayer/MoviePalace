@@ -2,7 +2,6 @@
   padding-top: 32px;
   z-index: 1;
   height: 100vh;
-  overflow-y: auto;
   padding-bottom: calc(58px + var(--nav-nar-height));
   li.letter {
     width: 100%;
@@ -208,6 +207,27 @@
       margin-bottom: 8px;
     }
   }
+  li.placeholder {
+    height: 107px;
+    margin: 8px 8px 0 8px;
+    padding: 0 8px 0 0;
+    box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(
+      175deg,
+      rgba(26, 24, 24, 0.65),
+      rgba(26, 24, 24, 0.85)
+    );
+    backdrop-filter: blur(16px) saturate(1.5);
+    border-radius: 8px;
+  }
+}
+
+#listview:not(.placeholder) {
+  overflow-y: auto;
+}
+
+#listview.placeholder {
+  overflow: hidden !important;
 }
 
 li.movie.fav:not(.open),

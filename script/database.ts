@@ -68,10 +68,12 @@ const database = {
   },
   loadFullDB() {
     if (this.idb.shelf) {
-      database.movies.storage = new Array<Movie>();
+      database.movies.storage.clear();
       this.idb.shelf.select((cursor) => {
-        database.movies.storage.push(cursor.value);
-        retriggerableDelay("loadFullDB", 500, movieList.update);
+        database.movies.pushMovie(cursor.value);
+        retriggerableDelay("loadFullDB", 450, () => {
+          movieList.update();
+        });
       });
     }
     if (this.idb.wishlist) {
@@ -94,19 +96,10 @@ const database = {
     }
   },
   movies: {
-    storage: new Array<Movie>(),
+    storage: new Map<number, Movie>(),
     wishlist: new Array<Movie>(),
-    getMovieById(id: number): Promise<Movie | null> {
-      return new Promise<Movie | null>(async (resolve, reject) => {
-        for await (const mov of this.storage) {
-          if (mov.id == id) {
-            resolve(mov);
-            return;
-            break;
-          }
-        }
-        reject(`Movie '${id}' not found`);
-      });
+    pushMovie(mov: Movie) {
+      this.storage.set(mov.id, mov);
     },
     async context(id: number) {
       const controls = document.getElementsByClassName("control");
@@ -126,98 +119,79 @@ const database = {
       }
     },
     async remove(id: number): Promise<void> {
-      for (let i = 0; i < this.storage.length; i++) {
-        if (this.storage[i].id == id) {
-          if (
-            (await confirm(
-              `Willst Du '${this.storage[i].title}' wirklich entfernen?`
-            )) == 1
-          ) {
-            database.movies.storage.splice(i, 1);
-            await database.idb.shelf.delete(id.toString());
-            await fb.deleteShelf(id.toString());
-            movieList.update();
-          }
-          break;
-        }
+      const mov = this.storage.get(id);
+      if (
+        mov &&
+        (await confirm(`Willst Du '${mov.title}' wirklich entfernen?`)) == 1
+      ) {
+        this.storage.delete(id);
+        await database.idb.shelf.delete(id.toString());
+        await fb.deleteShelf(id.toString());
+        movieList.update();
       }
-    },
-    async has(id: number): Promise<boolean> {
-      for await (const mov of this.storage) {
-        if (mov.id == id) {
-          return true;
-        }
-      }
-      return false;
     },
     async toggleFav(id: number): Promise<void> {
-      for (let i = 0; i < this.storage.length; i++) {
-        if (this.storage[i].id == id) {
-          database.movies.storage[i].fav = !database.movies.storage[i].fav;
-          await database.idb.shelf.set(
-            id.toString(),
-            database.movies.storage[i]
-          );
-          await fb.addToShelf(id.toString(), database.movies.storage[i]);
-          movieList.update();
-          break;
-        }
+      const mov = this.storage.get(id);
+      if (mov) {
+        mov.fav = !mov.fav;
+        const awaitIdb = database.idb.shelf.set(id.toString(), mov);
+        const awaitFB = fb.addToShelf(id.toString(), mov);
+        await awaitIdb;
+        await awaitFB;
+        movieList.update();
       }
     },
-    setType(id: number, value: MediaType): void {
-      this.getMovieById(id).then(async (mov) => {
-        if (mov) {
-          mov.typ = value;
-          await database.idb.shelf.update(id.toString(), "typ", value);
-          await fb.updateShelf(id.toString(), "typ", value);
-          const movEl = document.getElementById("M" + mov.id.toString());
-          if (movEl) {
-            const typIcon = <HTMLCollectionOf<HTMLImageElement>>(
-              movEl.getElementsByClassName("typIcon")
-            );
-            if (typIcon.length > 0) {
-              typIcon[0];
-              switch (mov.typ) {
-                case MediaType["Blu-Ray"]:
-                  typIcon[0].src = "img/bluray.svg";
-                  break;
-                case MediaType["DVD"]:
-                  typIcon[0].src = "img/dvd.svg";
-                  break;
-                case MediaType["Prime Video"]:
-                  typIcon[0].src = "img/prime.svg";
-                  break;
-                case MediaType["Google Play"]:
-                  typIcon[0].src = "img/googleplay.svg";
-                  break;
-                case MediaType["Apple TV"]:
-                  typIcon[0].src = "img/appletv.svg";
-                  break;
-                default:
-                  typIcon[0].src = "img/popcorn.svg";
-                  break;
-              }
+    async setType(id: number, value: MediaType): Promise<void> {
+      const mov = this.storage.get(id);
+      if (mov) {
+        mov.typ = value;
+        await database.idb.shelf.update(id.toString(), "typ", value);
+        await fb.updateShelf(id.toString(), "typ", value);
+        const movEl = document.getElementById("M" + mov.id.toString());
+        if (movEl) {
+          const typIcon = <HTMLCollectionOf<HTMLImageElement>>(
+            movEl.getElementsByClassName("typIcon")
+          );
+          if (typIcon.length > 0) {
+            typIcon[0];
+            switch (mov.typ) {
+              case MediaType["Blu-Ray"]:
+                typIcon[0].src = "img/bluray.svg";
+                break;
+              case MediaType["DVD"]:
+                typIcon[0].src = "img/dvd.svg";
+                break;
+              case MediaType["Prime Video"]:
+                typIcon[0].src = "img/prime.svg";
+                break;
+              case MediaType["Google Play"]:
+                typIcon[0].src = "img/googleplay.svg";
+                break;
+              case MediaType["Apple TV"]:
+                typIcon[0].src = "img/appletv.svg";
+                break;
+              default:
+                typIcon[0].src = "img/popcorn.svg";
+                break;
             }
           }
         }
-      });
+      }
     },
-    setStatus(id: number, value: OwningStatus): void {
-      this.getMovieById(id).then(async (mov) => {
-        if (mov) {
-          mov.status = value;
-          await database.idb.shelf.update(id.toString(), "status", value);
-          await fb.updateShelf(id.toString(), "status", value);
-        }
-      });
+    async setStatus(id: number, value: OwningStatus): Promise<void> {
+      const mov = this.storage.get(id);
+      if (mov) {
+        mov.status = value;
+        await database.idb.shelf.update(id.toString(), "status", value);
+        await fb.updateShelf(id.toString(), "status", value);
+      }
     },
     async setWatchCount(id: number, value: number) {
       if (value >= 0) {
-        this.getMovieById(id).then((mov) => {
-          if (mov) {
-            mov.watchcount = value;
-          }
-        });
+        const mov = this.storage.get(id);
+        if (mov) {
+          mov.watchcount = value;
+        }
         await database.idb.shelf.update(id.toString(), "watchcount", value);
         await fb.updateShelf(id.toString(), "watchcount", value);
       }
@@ -257,7 +231,7 @@ const database = {
             }
             await database.idb.shelf.set(id.toString(), nm);
             await fb.addToShelf(id.toString(), nm);
-            database.movies.storage.push(nm);
+            database.movies.pushMovie(nm);
             movieList.update();
             setTimeout(() => {
               anim.movieList.scrollToMovie(id);
@@ -338,7 +312,7 @@ const database = {
                     case 1:
                       database.addToShelf(nm);
 
-                      this.storage.push(nm);
+                      this.pushMovie(nm);
                       movieList.update();
                       break;
                     case 0:
@@ -354,7 +328,7 @@ const database = {
                   ).then((v) => {
                     if (v == 1) {
                       database.addToShelf(nm);
-                      this.storage.push(nm);
+                      this.pushMovie(nm);
                       movieList.update();
                       setTimeout(() => {
                         anim.movieList.scrollToMovie(id);

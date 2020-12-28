@@ -59,7 +59,7 @@ searchButton.addEventListener("click", (): void => {
       const searchRegExp = new RegExp(search, "i");
       for (const movie of database.movies.storage) {
         if (searchRegExp.test(JSON.stringify(movie))) {
-          resultList.appendChild(popupSearchLi(movie));
+          resultList.appendChild(popupSearchLi(movie[1]));
         }
       }
     }
