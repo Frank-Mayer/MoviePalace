@@ -6,4 +6,5 @@ const statisticsButton = <HTMLElement>(
   document.getElementById("statisticsButton")
 );
 const listView = <HTMLUListElement>document.getElementById("listView");
+const shelfUi = <HTMLUListElement>document.getElementById("shelf");
 const scrollBar = <HTMLUListElement>document.getElementById("scrollBar");

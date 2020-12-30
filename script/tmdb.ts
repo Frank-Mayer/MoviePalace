@@ -52,6 +52,16 @@ declare namespace tmdb {
   }
 }
 
+const getTitle = function (movie: tmdb.search.result) {
+  return movie.title
+    ? movie.title
+    : movie.name
+    ? movie.name
+    : movie.original_title
+    ? movie.original_title
+    : "";
+};
+
 const getPosterUrlBypath = function (
   path: string | undefined,
   size: string = "w500"

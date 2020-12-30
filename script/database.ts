@@ -45,7 +45,7 @@ class Movie {
     this.crew = new Array<tmdb.Crew>();
     this.cover = getPosterUrlBypath(data.poster_path);
     this.mediaType = data.media_type ? data.media_type : "movie";
-    this.title = data.title ? data.title : data.name ? data.name : "";
+    this.title = getTitle(data);
     this.backdropPath = data.backdrop_path ? data.backdrop_path : "";
     this.original = data.original_title ? data.original_title : this.title;
     this.info = data.overview ? data.overview : "";
@@ -73,6 +73,18 @@ const database = {
         database.movies.pushMovie(cursor.value);
         retriggerableDelay("loadFullDB", 450, () => {
           movieList.update();
+          doOnce(() => {
+            setTimeout(() => {
+              const recommendations = document.getElementById(
+                "recommendations"
+              );
+              if (recommendations) {
+                getRecommendations().then((ul) => {
+                  recommendations.appendChild(ul);
+                });
+              }
+            }, 1000);
+          });
         });
       });
     }
@@ -102,7 +114,7 @@ const database = {
       this.storage.set(mov.id, mov);
     },
     context(id: number) {
-      const controls = document.getElementsByClassName("control");
+      const controls = shelfUi.getElementsByClassName("control");
       for (let i = 0; i < controls.length; i++) {
         (<HTMLElement>controls[i]).style.display = "none";
       }
@@ -115,7 +127,7 @@ const database = {
           contr[0].style.display = "block";
           setTimeout(() => {
             contr[0].style.display = "none";
-          });
+          }, 3000);
         }
       }
     },

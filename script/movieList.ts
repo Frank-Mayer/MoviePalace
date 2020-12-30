@@ -210,7 +210,7 @@ const movieList = {
       li.appendChild(control);
       newMovieList.append(li.outerHTML);
     }
-    listView.innerHTML = newMovieList.toString();
+    shelfUi.innerHTML = newMovieList.toString();
     listView.classList.remove("placeholder");
     let newScrollBar = "";
     for (const letter of leterList) {
