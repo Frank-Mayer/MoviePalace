@@ -145,7 +145,7 @@ const fb = {
               const id = (<number>c.value.id).toString();
               if (!deleteList.has(id) && !impList.has(id)) {
                 deleteList.add(id);
-                retriggerableDelay("deleteFromFB", 1000, () => {
+                retriggerableDelay("deleteFromFB", 750, () => {
                   confirm(
                     "Es wurde" +
                       (deleteList.size > 1 ? "n " : " ") +

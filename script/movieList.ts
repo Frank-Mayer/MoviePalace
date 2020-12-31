@@ -90,6 +90,31 @@ const movieList = {
         })
       );
 
+      const rating = document.createElement("label");
+      rating.classList.add("rating");
+      rating.innerText = "Deine Wertung: ";
+      rating.setAttribute("for", `R${el.id}`);
+      const ratingSlider = document.createElement("input");
+      ratingSlider.name = `R${el.id}`;
+      ratingSlider.id = `R${el.id}`;
+      ratingSlider.type = "range";
+      ratingSlider.min = "0";
+      if (typeof el.rating == "number") {
+        ratingSlider.value = el.rating.toString();
+        ratingSlider.defaultValue = el.rating.toString();
+      } else {
+        ratingSlider.value = "50";
+        ratingSlider.defaultValue = "50";
+      }
+      ratingSlider.max = "100";
+      ratingSlider.step = "10";
+      ratingSlider.setAttribute(
+        "onchange",
+        `database.movies.setRating(${el.id})`
+      );
+      rating.appendChild(ratingSlider);
+      li.appendChild(rating);
+
       const typIcon = document.createElement("img");
       switch (el.typ) {
         case MediaType["Blu-Ray"]:

@@ -24,6 +24,7 @@ enum OwningStatus {
 
 class Movie {
   fav: boolean = false;
+  rating: number = 50;
   date: string = new Date().toJSON();
   watchcount: number = 0;
   typ: MediaType = MediaType["Blu-Ray"];
@@ -84,7 +85,7 @@ const database = {
                   recommendations.appendChild(ul);
                 });
               }
-            }, 1000);
+            }, 750);
           });
         });
       });
@@ -204,7 +205,7 @@ const database = {
     },
     setWatchCount(id: number, value: number): void {
       if (value >= 0) {
-        retriggerableDelay("setWatchCount", 1000, async () => {
+        retriggerableDelay("setWatchCount", 750, async () => {
           const mov = this.storage.get(id);
           if (mov) {
             mov.watchcount = value;
@@ -223,6 +224,23 @@ const database = {
         wc.value = nv.toString();
         this.setWatchCount(id, nv);
       }
+    },
+    setRating(id: number): void {
+      retriggerableDelay(
+        `setRating${id}`,
+        750,
+        async (elId: string = `R${id}`) => {
+          const slider = <HTMLInputElement | null>document.getElementById(elId);
+          if (slider) {
+            await database.idb.shelf.update(
+              id.toString(),
+              "rating",
+              Number(slider.value)
+            );
+            await fb.updateShelf(id.toString(), "rating", Number(slider.value));
+          }
+        }
+      );
     },
     async addFromWishlist(id: number) {
       if (!fb.loggedIn) {

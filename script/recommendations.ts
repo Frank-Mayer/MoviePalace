@@ -41,7 +41,10 @@ async function getRecommendations(): Promise<HTMLUListElement> {
           mov: Movie | tmdb.search.result
         ): Array<number> | null => {
           const ident = new Array<number>();
-          if (typeof (<Movie>mov).genres !== "undefined") {
+          if (
+            typeof (<Movie>mov).genres !== "undefined" &&
+            (<Movie>mov).genres
+          ) {
             for (let i = 0; i < (<Movie>mov).genres.length && i < 5; i++) {
               const gId = genreIDs.findKeyByValue((<Movie>mov).genres[i]);
               ident.push(gId);
@@ -82,18 +85,17 @@ async function getRecommendations(): Promise<HTMLUListElement> {
         for await (const mov of database.movies.storage) {
           const trainingData = getTrainingIdent(mov[1]);
           if (trainingData) {
+            const rating =
+              Math.clamp(mov[1].watchcount / 11, 0, 0.5) +
+              (mov[1].fav ? 1.25 : 0.75) *
+                Math.pow(mov[1].rating ? mov[1].rating / 100 : 0.5, 2);
             data.push({
               input: trainingData,
-              output: [
-                Math.clamp(
-                  (mov[1].watchcount / 10) * (mov[1].fav ? 1.25 : 0.75),
-                  0.25,
-                  1
-                ),
-              ],
+              output: [rating],
             });
           }
         }
+
         const net = new brain.NeuralNetwork();
         net.train(data);
 
@@ -122,7 +124,6 @@ async function getRecommendations(): Promise<HTMLUListElement> {
         const nowYear = now.getFullYear();
         for (let year = nowYear; year > nowYear - 4; year--) {
           for (let page = 1; page < 4; page++) {
-            console.debug(`year ${year}, page ${page}`);
             const json = await httpGet(
               `https://api.themoviedb.org/3/trending/movie/week?api_key=${api.tmdb}&page=${page}&year=${year}&language=de&include_adult=true&region=de`,
               false

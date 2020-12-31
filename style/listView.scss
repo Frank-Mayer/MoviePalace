@@ -70,6 +70,7 @@ ul#listView {
       .genres,
       .WatchCounter,
       .typIcon,
+      .rating,
       a,
       select {
         display: none;
@@ -200,12 +201,29 @@ ul#listView {
       .WatchCounter,
       .cast,
       .typIcon,
+      .rating,
       a,
       select {
         display: block;
       }
-      select {
+      select,
+      .play {
         margin-bottom: 8px;
+        width: 100%;
+      }
+      .rating {
+        width: 100%;
+        input[type="range"] {
+          width: 100%;
+          height: calc(var(--line-height) * 2);
+        }
+        input[type="range"]::-webkit-slider-thumb {
+          -webkit-appearance: none;
+          background-image: url("img/thumbs-up.svg");
+          background-position: center;
+          opacity: 1;
+          width: 32px;
+        }
       }
     }
     li.placeholder {
