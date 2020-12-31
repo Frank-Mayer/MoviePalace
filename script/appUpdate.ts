@@ -10,8 +10,7 @@ if (appInfo) {
       "Später erinnern"
     ).then((v) => {
       if (v == 1) {
-        location.href =
-          "https://play.google.com/store/apps/details?id=io.frankmayer.library";
+        location.href = `https://frank-mayer.tk/download/PopcornBox#${newestVersion}`;
       }
     });
   }
