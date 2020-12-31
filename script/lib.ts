@@ -20,10 +20,11 @@ function lazyLoad(el: HTMLImageElement) {
  * @param n Text for contradict button
  * @returns 1=Yes, 0=No, -1=Aborted
  */
-async function confirm(
+function confirm(
   message: string = "",
   y: string = "Ok",
-  n: string = "Abbrechen"
+  n: string = "Abbrechen",
+  noThirdOption: boolean = false
 ): Promise<0 | 1 | -1> {
   return new Promise<0 | 1 | -1>((resolve) => {
     const view = document.createElement("div");
@@ -55,12 +56,14 @@ async function confirm(
     blur.classList.add("blur");
     blur.appendChild(view);
     blur.id = "confirmDialog";
-    blur.addEventListener("click", (ev: MouseEvent) => {
-      if (ev.target && (<HTMLElement>ev.target).id === "confirmDialog") {
-        anim.popup.close("confirmDialog");
-        resolve(-1);
-      }
-    });
+    if (!noThirdOption) {
+      blur.addEventListener("click", (ev: MouseEvent) => {
+        if (ev.target && (<HTMLElement>ev.target).id === "confirmDialog") {
+          anim.popup.close("confirmDialog");
+          resolve(-1);
+        }
+      });
+    }
     document.body.appendChild(blur);
   });
 }
