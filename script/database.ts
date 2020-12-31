@@ -201,24 +201,26 @@ const database = {
         await fb.updateShelf(id.toString(), "status", value);
       }
     },
-    async setWatchCount(id: number, value: number) {
+    setWatchCount(id: number, value: number): void {
       if (value >= 0) {
-        const mov = this.storage.get(id);
-        if (mov) {
-          mov.watchcount = value;
-        }
-        await database.idb.shelf.update(id.toString(), "watchcount", value);
-        await fb.updateShelf(id.toString(), "watchcount", value);
+        retriggerableDelay("setWatchCount", 1000, async () => {
+          const mov = this.storage.get(id);
+          if (mov) {
+            mov.watchcount = value;
+          }
+          await database.idb.shelf.update(id.toString(), "watchcount", value);
+          await fb.updateShelf(id.toString(), "watchcount", value);
+        });
       }
     },
-    async addWatchCount(id: number, amount: -1 | 1): Promise<void> {
+    addWatchCount(id: number, amount: -1 | 1): void {
       const wc = <HTMLInputElement>(
         document.getElementById("WC" + id.toString())
       );
       if (wc) {
         const nv = Math.max(0, Number(wc.value) + amount);
         wc.value = nv.toString();
-        await this.setWatchCount(id, nv);
+        this.setWatchCount(id, nv);
       }
     },
     async addFromWishlist(id: number) {
