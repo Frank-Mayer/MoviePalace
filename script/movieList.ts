@@ -1,3 +1,5 @@
+/// <reference path="additionalPreferences.ts"/>
+
 const movieList = {
   update() {
     const sorter = new SortedList<{ id: number; alpha: string }>("alpha");

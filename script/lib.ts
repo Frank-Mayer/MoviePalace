@@ -104,7 +104,10 @@ function pushState(state: string) {
 
 function sortValue(mov: Movie, firstLetter: boolean = false): string {
   let a: string;
-  if (mov.collection) {
+  if (
+    mov.collection &&
+    (typeof Preferences == "undefined" || Preferences.sortMode == 0)
+  ) {
     if (firstLetter) {
       return collectionName(mov.collection)[0].toUpperCase();
     }

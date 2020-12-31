@@ -3,6 +3,7 @@
 /// <reference path="ui.ts"/>
 /// <reference path="login.ts"/>
 /// <reference path="firebase.ts"/>
+/// <reference path="movieList.ts"/>
 
 enum MediaType {
   "Blu-Ray",

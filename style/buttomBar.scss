@@ -54,12 +54,16 @@
     content: "Einstellungen";
     font-size: 28px;
     display: block;
+    margin-bottom: 16px;
   }
   > li > ul#preferences {
-    label,
-    input {
-      display: inline-block;
-      width: 48%;
+    > li {
+      margin-bottom: 16px;
+      label,
+      input {
+        display: inline-block;
+        width: 48%;
+      }
     }
   }
   > li.toolbarIcon {
