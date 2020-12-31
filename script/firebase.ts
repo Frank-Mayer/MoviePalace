@@ -145,7 +145,28 @@ const fb = {
               const id = (<number>c.value.id).toString();
               if (!deleteList.has(id) && !impList.has(id)) {
                 deleteList.add(id);
-                await database.idb.shelf.delete(id);
+                retriggerableDelay("deleteFromFB", 1000, () => {
+                  confirm(
+                    "Es wurde" +
+                      (deleteList.size > 1 ? "n " : " ") +
+                      deleteList.size.toString() +
+                      " Film" +
+                      (deleteList.size > 1 ? "e " : " ") +
+                      "auf einem anderen Gerät gelöscht, übernehmen?",
+                    "Löschen",
+                    "Wiederherstellen",
+                    true
+                  ).then(async (select) => {
+                    if (select != 0) {
+                      for (const id of deleteList) {
+                        await database.idb.shelf.delete(id);
+                      }
+                      await database.loadFullDB();
+                    } else {
+                      await fb.addToShelf(id, await database.idb.shelf.get(id));
+                    }
+                  });
+                });
               }
             });
           }
