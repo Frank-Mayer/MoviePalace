@@ -2,7 +2,7 @@ declare const appInfo: {
   version: string;
 };
 if (appInfo) {
-  const newestVersion = "3.3";
+  const newestVersion = "3.5";
   if (appInfo && appInfo.version != newestVersion) {
     confirm(
       `Ein Update ist verfügbar\nDu hast ${appInfo.version}, aktualisiere jetzt auf ${newestVersion}`,
