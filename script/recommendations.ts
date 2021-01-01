@@ -137,18 +137,20 @@ async function getRecommendations(): Promise<HTMLUListElement> {
                     (<unknown>net.run(getTrainingIdent(newMov)))
                   ))[0];
                   if (prc > 0.05) {
-                    likes.add({
-                      title: getTitle(newMov),
-                      cover: getPosterUrlBypath(newMov.poster_path),
-                      id: newMov.id,
-                      like: Math.round(prc * 200),
-                      uri: `https://www.themoviedb.org/${newMov.media_type}/${
-                        newMov.id
-                      }-${watchTitle(
-                        newMov.original_title,
-                        getTitle(newMov)
-                      )}/watch`,
-                    });
+                    if (!database.movies.storage.has(newMov.id)) {
+                      likes.add({
+                        title: getTitle(newMov),
+                        cover: getPosterUrlBypath(newMov.poster_path),
+                        id: newMov.id,
+                        like: Math.round(prc * 200),
+                        uri: `https://www.themoviedb.org/${newMov.media_type}/${
+                          newMov.id
+                        }-${watchTitle(
+                          newMov.original_title,
+                          getTitle(newMov)
+                        )}/watch`,
+                      });
+                    }
                   }
                 }
               }
@@ -159,7 +161,7 @@ async function getRecommendations(): Promise<HTMLUListElement> {
         const saveLikeList = new Array<RecommendationData>();
         for (let i = likes.length - 1; i >= likes.length - 5 && i >= 0; i--) {
           const like = likes.getAt(i);
-          if (like && !database.movies.storage.has(like.id)) {
+          if (like) {
             const li = document.createElement("li");
             li.style.backgroundImage = `url("${like.cover}")`;
             li.onclick = () => {
