@@ -159,7 +159,7 @@ async function getRecommendations(): Promise<HTMLUListElement> {
         const saveLikeList = new Array<RecommendationData>();
         for (let i = likes.length - 1; i >= likes.length - 5 && i >= 0; i--) {
           const like = likes.getAt(i);
-          if (like) {
+          if (like && !database.movies.storage.has(like.id)) {
             const li = document.createElement("li");
             li.style.backgroundImage = `url("${like.cover}")`;
             li.onclick = () => {
