@@ -28,7 +28,7 @@ async function scrollBarUpdate(ev: TouchEvent | MouseEvent) {
     let scrollToEl = document.getElementById("letter" + scroll);
     if (scrollToEl) {
       scrollToEl.scrollIntoView({
-        behavior: "smooth",
+        behavior: "auto",
         block: "start",
       });
     }
