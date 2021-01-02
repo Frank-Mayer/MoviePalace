@@ -136,21 +136,19 @@ async function getRecommendations(): Promise<HTMLUListElement> {
                   const prc = (<Float32Array>(
                     (<unknown>net.run(getTrainingIdent(newMov)))
                   ))[0];
-                  if (prc > 0.05) {
-                    if (!database.movies.storage.has(newMov.id)) {
-                      likes.add({
-                        title: getTitle(newMov),
-                        cover: getPosterUrlBypath(newMov.poster_path),
-                        id: newMov.id,
-                        like: Math.round(prc * 200),
-                        uri: `https://www.themoviedb.org/${newMov.media_type}/${
-                          newMov.id
-                        }-${watchTitle(
-                          newMov.original_title,
-                          getTitle(newMov)
-                        )}/watch`,
-                      });
-                    }
+                  if (prc > 0.1 && !database.movies.storage.has(newMov.id)) {
+                    likes.add({
+                      title: getTitle(newMov),
+                      cover: getPosterUrlBypath(newMov.poster_path),
+                      id: newMov.id,
+                      like: Math.round(prc * 200),
+                      uri: `https://www.themoviedb.org/${newMov.media_type}/${
+                        newMov.id
+                      }-${watchTitle(
+                        newMov.original_title,
+                        getTitle(newMov)
+                      )}/watch`,
+                    });
                   }
                 }
               }
@@ -159,17 +157,14 @@ async function getRecommendations(): Promise<HTMLUListElement> {
         }
 
         const saveLikeList = new Array<RecommendationData>();
-        for (let i = likes.length - 1; i >= likes.length - 5 && i >= 0; i--) {
-          const like = likes.getAt(i);
-          if (like) {
-            const li = document.createElement("li");
-            li.style.backgroundImage = `url("${like.cover}")`;
-            li.onclick = () => {
-              window.open(like.uri)?.focus();
-            };
-            ul.appendChild(li);
-            saveLikeList.push(like);
-          }
+        for (const like of likes.pop(5)) {
+          const li = document.createElement("li");
+          li.style.backgroundImage = `url("${like.cover}")`;
+          li.onclick = () => {
+            window.open(like.uri)?.focus();
+          };
+          ul.appendChild(li);
+          saveLikeList.push(like);
         }
         save.set("rec", { date: today, likes: saveLikeList });
       } else {
