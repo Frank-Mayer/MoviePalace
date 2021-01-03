@@ -10,9 +10,11 @@
   animation: slideUp 200ms ease-in-out;
 }
 
+#promptDialog > .popup,
 #confirmDialog > .popup {
   > p,
-  > button {
+  > button,
+  input {
     font-size: 28px;
   }
   > p {
@@ -31,5 +33,16 @@
     float: right;
     background-color: white;
     color: black;
+  }
+  input {
+    display: block;
+    width: 100%;
+    margin-bottom: 8px;
+    padding: 4px 8px;
+    user-select: text;
+    border-radius: 4px;
+    background-color: white;
+    color: black;
+    cursor: text;
   }
 }

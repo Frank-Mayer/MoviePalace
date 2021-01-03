@@ -68,6 +68,75 @@ function confirm(
   });
 }
 
+function prompt(
+  message: string = "",
+  confirm: string = "Ok",
+  noAbort: boolean = false,
+  value?: string,
+  password: boolean = false,
+  placeholder?: string
+): Promise<string> {
+  return new Promise<string>((resolve) => {
+    const view = document.createElement("div");
+    view.classList.add("popup");
+
+    const p = document.createElement("p");
+    p.innerText = message;
+    view.appendChild(p);
+
+    const input = document.createElement("input");
+    input.autofocus = true;
+    if (placeholder) {
+      input.placeholder = placeholder;
+    }
+    if (password) {
+      const form = document.createElement("form");
+      if (value) {
+        const usrNam = document.createElement("input");
+        usrNam.defaultValue = value;
+        usrNam.value = value;
+        usrNam.autocomplete = "username";
+        usrNam.style.display = "none";
+        form.appendChild(usrNam);
+      }
+      input.type = "password";
+      input.autocomplete = "current-password";
+      form.appendChild(input);
+      view.appendChild(form);
+    } else {
+      input.type = "text";
+      if (value) {
+        input.defaultValue = value;
+        input.value = value;
+      }
+      view.appendChild(input);
+    }
+
+    const b = document.createElement("button");
+    b.innerText = confirm;
+    b.classList.add("y");
+    b.onclick = () => {
+      anim.popup.close("promptDialog");
+      resolve(input.value);
+    };
+    view.appendChild(b);
+
+    const blur = document.createElement("div");
+    blur.classList.add("blur");
+    blur.appendChild(view);
+    blur.id = "promptDialog";
+    if (!noAbort) {
+      blur.addEventListener("click", (ev: MouseEvent) => {
+        if (ev.target && (<HTMLElement>ev.target).id === "promptDialog") {
+          anim.popup.close("promptDialog");
+          resolve("");
+        }
+      });
+    }
+    document.body.appendChild(blur);
+  });
+}
+
 function watchTitle(title: string, alt?: string): string {
   if (!title && alt) {
     title = alt;

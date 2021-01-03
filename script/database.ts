@@ -183,29 +183,43 @@ const database = {
     async makeCollection(id: number): Promise<void> {
       const mov = this.storage.get(id);
       if (mov && mov.collection) {
-        const collection = new Movie(mov);
-        collection.backdropPath = mov.collection.backdrop_path;
-        collection.id = mov.collection.id;
-        const cId = mov.collection.id;
-        const cIdS = cId.toString();
-        collection.title = mov.collection.name;
-        collection.cover = getPosterUrlBypath(mov.collection.poster_path);
-        for (const el of this.storage) {
-          if (el[1].collection && el[1].collection.id == cId) {
-            this.storage.delete(el[1].id);
-            const idS = el[1].id.toString();
-            await parallel(database.idb.shelf.delete(idS), fb.deleteShelf(idS));
-          }
-        }
-        await parallel(
-          database.idb.shelf.set(cIdS, collection),
-          fb.addToShelf(id.toString(), collection)
+        const info = await prompt(
+          "Titelzusatz",
+          "Ok",
+          false,
+          "",
+          false,
+          'z.B. "Teil 1 & 2"'
         );
-        this.storage.set(cId, collection);
-        movieList.update();
-        setTimeout(() => {
-          anim.movieList.scrollToMovie(cId);
-        }, 500);
+        if (info.length > 0) {
+          const collection = new Movie(mov);
+          collection.backdropPath = mov.collection.backdrop_path;
+          collection.id = mov.collection.id;
+          const cId = mov.collection.id;
+          const cIdS = cId.toString();
+          collection.title = `${mov.collection.name} (${info})`;
+          collection.info = info;
+          collection.cover = getPosterUrlBypath(mov.collection.poster_path);
+          // for (const el of this.storage) {
+          //   if (el[1].collection && el[1].collection.id == cId) {
+          //     this.storage.delete(el[1].id);
+          //     const idS = el[1].id.toString();
+          //     await parallel(
+          //       database.idb.shelf.delete(idS),
+          //       fb.deleteShelf(idS)
+          //     );
+          //   }
+          // }
+          await parallel(
+            database.idb.shelf.set(cIdS, collection),
+            fb.addToShelf(id.toString(), collection)
+          );
+          this.storage.set(cId, collection);
+          movieList.update();
+          setTimeout(() => {
+            anim.movieList.scrollToMovie(cId);
+          }, 500);
+        }
       }
     },
     async setType(id: number, value: MediaType): Promise<void> {
@@ -451,11 +465,11 @@ if (loginData.usr && loginData.pwd) {
   });
 } else {
   confirm("Du musst dich anmelden um alle Funktionen nutzen zu können").then(
-    (v) => {
+    async (v) => {
       if (v == 1) {
-        const newUsr = prompt("Nutzername");
+        const newUsr = await prompt("Nutzername", "Ok", true);
         if (newUsr) {
-          const newPwd = prompt("Passwort");
+          const newPwd = await prompt("Passwort", "Ok", true, newUsr, true);
           if (newPwd) {
             loginData.usr = newUsr;
             loginData.pwd = newPwd;
