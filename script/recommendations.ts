@@ -136,7 +136,7 @@ async function getRecommendations(): Promise<HTMLUListElement> {
                   const prc = (<Float32Array>(
                     (<unknown>net.run(getTrainingIdent(newMov)))
                   ))[0];
-                  if (prc > 0.1 && !database.movies.storage.has(newMov.id)) {
+                  if (prc > 0.05 && !database.movies.storage.has(newMov.id)) {
                     likes.add({
                       title: getTitle(newMov),
                       cover: getPosterUrlBypath(newMov.poster_path),
