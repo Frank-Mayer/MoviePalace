@@ -10,13 +10,13 @@ const movieList = {
     const newMovieList = new StringBuilder();
     const leterList = new Array<string>();
     for (const sortMovEl of sorter) {
-      let elCollectionName = "";
+      let elCollectionName: string | null = null;
       const firstLetter = sortMovEl.alpha[0].toUpperCase();
       const el = database.movies.storage.get(sortMovEl.id);
       if (!el) {
         continue;
       }
-      if (el.collection) {
+      if (el.collection && el.collection.id != el.id) {
         elCollectionName = collectionName(el.collection);
       }
       if (
@@ -61,7 +61,7 @@ const movieList = {
       clicker.appendChild(cover);
       let title = document.createElement("span");
       title.classList.add("title");
-      if (el.collection) {
+      if (elCollectionName) {
         title.innerHTML = `<i>${htmlEscaper(
           elCollectionName
         )}</i><br/>${htmlEscaper(el.title)}`;
@@ -233,7 +233,7 @@ const movieList = {
           onclick: `database.movies.toggleFav(${el.id})`,
         })
       );
-      if (el.collection) {
+      if (elCollectionName) {
         control.appendChild(
           tsx("span", {
             innerHTML: "Ganze Reihe",
