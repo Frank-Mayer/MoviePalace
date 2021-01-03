@@ -221,7 +221,6 @@ const movieList = {
       li.appendChild(close);
       const control = document.createElement("section");
       control.classList.add("control");
-      control.style.display = "none";
       control.appendChild(
         tsx("span", {
           innerHTML: "Entfernen",
@@ -234,6 +233,14 @@ const movieList = {
           onclick: `database.movies.toggleFav(${el.id})`,
         })
       );
+      if (el.collection) {
+        control.appendChild(
+          tsx("span", {
+            innerHTML: "Ganze Reihe",
+            onclick: `database.movies.makeCollection(${el.id})`,
+          })
+        );
+      }
       li.appendChild(control);
       newMovieList.append(li.outerHTML);
     }

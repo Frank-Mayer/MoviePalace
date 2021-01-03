@@ -1,0 +1,26 @@
+.movie.context:not(.open) {
+  .title {
+    top: unset !important;
+    transform: unset !important;
+  }
+  .control {
+    display: block !important;
+    padding: 12px 0;
+    span {
+      display: inline-block;
+      font-size: 28px;
+      border: 2px solid white;
+      border-radius: 8px;
+      padding: 4px 8px;
+      margin: 2px 4px;
+    }
+  }
+}
+
+.movie.open .control,
+.movie:not(.context) .control {
+  display: none !important;
+  * {
+    display: none !important;
+  }
+}

@@ -35,28 +35,52 @@ class Movie {
   original: string;
   info: string;
   adult: boolean;
-  genres: Array<string>;
+  genres: Array<string> = new Array<string>();
   id: number;
-  cast: Array<tmdb.Cast>;
-  crew: Array<tmdb.Crew>;
-  collection: tmdb.collection | null;
+  cast: Array<tmdb.Cast> = new Array<tmdb.Cast>();
+  crew: Array<tmdb.Crew> = new Array<tmdb.Crew>();
+  collection: tmdb.collection | null = null;
   backdropPath: string;
-  constructor(data: tmdb.search.result) {
-    this.collection = null;
-    this.cast = new Array<tmdb.Cast>();
-    this.crew = new Array<tmdb.Crew>();
-    this.cover = getPosterUrlBypath(data.poster_path);
-    this.mediaType = data.media_type ? data.media_type : "movie";
-    this.title = getTitle(data);
-    this.backdropPath = data.backdrop_path ? data.backdrop_path : "";
-    this.original = data.original_title ? data.original_title : this.title;
-    this.info = data.overview ? data.overview : "";
-    this.adult = data.adult === true;
-    this.genres = new Array<string>();
-    for (const genreId of data.genre_ids) {
-      if (genreIDs.has(genreId)) {
-        this.genres.push(<string>genreIDs.get(genreId));
+  constructor(data: tmdb.search.result | Movie) {
+    if (typeof (<tmdb.search.result>data).original_title != "undefined") {
+      this.cover = getPosterUrlBypath((<tmdb.search.result>data).poster_path);
+      this.mediaType = (<tmdb.search.result>data).media_type
+        ? (<tmdb.search.result>data).media_type
+        : "movie";
+      this.title = getTitle(<tmdb.search.result>data);
+      this.backdropPath = (<tmdb.search.result>data).backdrop_path
+        ? (<tmdb.search.result>data).backdrop_path
+        : "";
+      this.original = (<tmdb.search.result>data).original_title
+        ? (<tmdb.search.result>data).original_title
+        : this.title;
+      this.info = (<tmdb.search.result>data).overview
+        ? (<tmdb.search.result>data).overview
+        : "";
+      this.adult = data.adult === true;
+      for (const genreId of (<tmdb.search.result>data).genre_ids) {
+        if (genreIDs.has(genreId)) {
+          this.genres.push(<string>genreIDs.get(genreId));
+        }
       }
+    } else {
+      this.adult = (<Movie>data).adult;
+      this.backdropPath = (<Movie>data).backdropPath;
+      this.cast = (<Movie>data).cast;
+      this.collection = (<Movie>data).collection;
+      this.cover = (<Movie>data).cover;
+      this.crew = (<Movie>data).crew;
+      this.date = (<Movie>data).date;
+      this.fav = (<Movie>data).fav;
+      this.genres = (<Movie>data).genres;
+      this.info = (<Movie>data).info;
+      this.mediaType = (<Movie>data).mediaType;
+      this.original = (<Movie>data).original;
+      this.rating = (<Movie>data).rating;
+      this.status = (<Movie>data).status;
+      this.title = (<Movie>data).title;
+      this.typ = (<Movie>data).typ;
+      this.watchcount = (<Movie>data).watchcount;
     }
     this.id = data.id;
   }
@@ -116,22 +140,20 @@ const database = {
       this.storage.set(mov.id, mov);
     },
     context(id: number) {
-      const controls = shelfUi.getElementsByClassName("control");
+      const controls = shelfUi.getElementsByClassName("movie");
       for (let i = 0; i < controls.length; i++) {
-        (<HTMLElement>controls[i]).style.display = "none";
-      }
-      const movieLiEl = document.getElementById(id.toString());
-      if (movieLiEl) {
-        const contr = <HTMLCollectionOf<HTMLElement>>(
-          movieLiEl.getElementsByClassName("control")
-        );
-        if (contr.length === 1) {
-          contr[0].style.display = "block";
-          setTimeout(() => {
-            contr[0].style.display = "none";
-          }, 3000);
+        if ((<HTMLElement>controls[i]).id == id.toString()) {
+          (<HTMLElement>controls[i]).classList.add("context");
+        } else {
+          (<HTMLElement>controls[i]).classList.remove("context");
         }
       }
+      retriggerableDelay("contextClose", 4000, () => {
+        const controls = shelfUi.getElementsByClassName("movie");
+        for (let i = 0; i < controls.length; i++) {
+          (<HTMLElement>controls[i]).classList.remove("context");
+        }
+      });
     },
     async remove(id: number): Promise<void> {
       const mov = this.storage.get(id);
@@ -156,6 +178,34 @@ const database = {
         await awaitIdb;
         await awaitFB;
         movieList.update();
+      }
+    },
+    async makeCollection(id: number): Promise<void> {
+      const mov = this.storage.get(id);
+      if (mov && mov.collection) {
+        const collection = new Movie(mov);
+        collection.backdropPath = mov.collection.backdrop_path;
+        collection.id = mov.collection.id;
+        const cId = mov.collection.id;
+        const cIdS = cId.toString();
+        collection.title = mov.collection.name;
+        collection.cover = getPosterUrlBypath(mov.collection.poster_path);
+        for (const el of this.storage) {
+          if (el[1].collection && el[1].collection.id == cId) {
+            this.storage.delete(el[1].id);
+            const idS = el[1].id.toString();
+            await parallel(database.idb.shelf.delete(idS), fb.deleteShelf(idS));
+          }
+        }
+        await parallel(
+          database.idb.shelf.set(cIdS, collection),
+          fb.addToShelf(id.toString(), collection)
+        );
+        this.storage.set(cId, collection);
+        movieList.update();
+        setTimeout(() => {
+          anim.movieList.scrollToMovie(cId);
+        }, 500);
       }
     },
     async setType(id: number, value: MediaType): Promise<void> {
@@ -199,8 +249,10 @@ const database = {
       const mov = this.storage.get(id);
       if (mov) {
         mov.status = value;
-        await database.idb.shelf.update(id.toString(), "status", value);
-        await fb.updateShelf(id.toString(), "status", value);
+        await parallel(
+          database.idb.shelf.update(id.toString(), "status", value),
+          fb.updateShelf(id.toString(), "status", value)
+        );
       }
     },
     setWatchCount(id: number, value: number): void {
@@ -210,8 +262,10 @@ const database = {
           if (mov) {
             mov.watchcount = value;
           }
-          await database.idb.shelf.update(id.toString(), "watchcount", value);
-          await fb.updateShelf(id.toString(), "watchcount", value);
+          await parallel(
+            database.idb.shelf.update(id.toString(), "watchcount", value),
+            fb.updateShelf(id.toString(), "watchcount", value)
+          );
         });
       }
     },
@@ -232,12 +286,14 @@ const database = {
         async (elId: string = `R${id}`) => {
           const slider = <HTMLInputElement | null>document.getElementById(elId);
           if (slider) {
-            await database.idb.shelf.update(
-              id.toString(),
-              "rating",
-              Number(slider.value)
+            await parallel(
+              database.idb.shelf.update(
+                id.toString(),
+                "rating",
+                Number(slider.value)
+              ),
+              fb.updateShelf(id.toString(), "rating", Number(slider.value))
             );
-            await fb.updateShelf(id.toString(), "rating", Number(slider.value));
           }
         }
       );
@@ -265,17 +321,21 @@ const database = {
                 break;
               }
             }
-            await database.idb.shelf.set(id.toString(), nm);
-            await fb.addToShelf(id.toString(), nm);
+            await parallel(
+              database.idb.shelf.set(id.toString(), nm),
+              fb.addToShelf(id.toString(), nm)
+            );
             database.movies.pushMovie(nm);
             movieList.update();
             setTimeout(() => {
               anim.movieList.scrollToMovie(id);
             }, 500);
-            await database.idb.wishlist.delete(id.toString()).catch((e) => {
-              console.error(e);
-            });
-            await fb.deleteWishlist(id.toString());
+            await parallel(
+              database.idb.wishlist.delete(id.toString()).catch((e) => {
+                console.error(e);
+              }),
+              fb.deleteWishlist(id.toString())
+            );
             break;
           case 0:
             for (let i = 0; i < database.movies.wishlist.length; i++) {
@@ -284,10 +344,12 @@ const database = {
                 break;
               }
             }
-            await database.idb.wishlist.delete(id.toString()).catch((e) => {
-              console.error(e);
-            });
-            await fb.deleteWishlist(id.toString());
+            await parallel(
+              database.idb.wishlist.delete(id.toString()).catch((e) => {
+                console.error(e);
+              }),
+              fb.deleteWishlist(id.toString())
+            );
             break;
         }
       }

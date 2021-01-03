@@ -118,7 +118,11 @@ function sortValue(mov: Movie, firstLetter: boolean = false): string {
     }
     a = mov.title;
   }
-  return a.toLowerCase();
+  if (a) {
+    return a.toLowerCase();
+  } else {
+    throw new Error(JSON.stringify(mov));
+  }
 }
 
 function forceNumber(number: string): number {

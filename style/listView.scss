@@ -127,17 +127,6 @@ ul#listView {
         text-decoration: none;
         width: fit-content;
       }
-      .control {
-        padding: 12px 0;
-        margin-top: 32px;
-        span {
-          font-size: 28px;
-          border: 2px solid white;
-          border-radius: 8px;
-          padding: 4px 8px;
-          margin: 2px 4px;
-        }
-      }
     }
     li.movie:not(.open) {
       overflow: hidden !important;
@@ -161,12 +150,6 @@ ul#listView {
       background-position-y: center;
     }
     li.open {
-      .control {
-        display: none !important;
-        * {
-          display: none !important;
-        }
-      }
       background: linear-gradient(
         175deg,
         rgba(26, 24, 24, 0.65),

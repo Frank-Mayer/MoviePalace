@@ -16,6 +16,7 @@ const fb = {
   },
   async addToShelf(id: string, mov: Movie) {
     if (this.loggedIn) {
+      nullAllUndefined(mov);
       await (<Promise<void>>(
         firebase.database().ref(`users/${loginData.usr}/shelf/${id}`)?.set(mov)
       ));
@@ -66,6 +67,7 @@ const fb = {
   },
   addToWishlist(id: string, mov: Movie) {
     if (this.loggedIn) {
+      nullAllUndefined(mov);
       this.updateTimestamp();
       return <Promise<void>>(
         firebase
