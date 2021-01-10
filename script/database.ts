@@ -139,6 +139,28 @@ const database = {
     pushMovie(mov: Movie) {
       this.storage.set(mov.id, mov);
     },
+    checkBroken() {
+      const brokenIds = new Array<number>();
+      for (const st of this.storage) {
+        if (Object.keys(st[1]).length < 7) {
+          brokenIds.push(st[0]);
+        }
+      }
+      if (brokenIds.length > 0) {
+        for (const id of brokenIds) {
+          this.storage.delete(id);
+          database.idb.shelf.delete(id.toString());
+          fb.deleteShelf(id.toString());
+        }
+        confirm(
+          `Es wurden ${
+            brokenIds.length
+          } kaputte Einträge gefunden (${brokenIds.join(
+            ", "
+          )}). Diese wurden entfernt. `
+        );
+      }
+    },
     context(id: number) {
       const controls = shelfUi.getElementsByClassName("movie");
       for (let i = 0; i < controls.length; i++) {
@@ -227,7 +249,8 @@ const database = {
       if (mov) {
         mov.typ = value;
         await database.idb.shelf.update(id.toString(), "typ", value);
-        await fb.updateShelf(id.toString(), "typ", value);
+        await fb.addToShelf(id.toString(), mov);
+        // await fb.updateShelf(id.toString(), "typ", value);
         const movEl = document.getElementById("M" + mov.id.toString());
         if (movEl) {
           const typIcon = <HTMLCollectionOf<HTMLImageElement>>(
@@ -265,7 +288,8 @@ const database = {
         mov.status = value;
         await parallel(
           database.idb.shelf.update(id.toString(), "status", value),
-          fb.updateShelf(id.toString(), "status", value)
+          fb.addToShelf(id.toString(), mov)
+          // fb.updateShelf(id.toString(), "status", value)
         );
       }
     },
@@ -275,11 +299,12 @@ const database = {
           const mov = this.storage.get(id);
           if (mov) {
             mov.watchcount = value;
+            await parallel(
+              database.idb.shelf.update(id.toString(), "watchcount", value),
+              fb.addToShelf(id.toString(), mov)
+              // fb.updateShelf(id.toString(), "watchcount", value)
+            );
           }
-          await parallel(
-            database.idb.shelf.update(id.toString(), "watchcount", value),
-            fb.updateShelf(id.toString(), "watchcount", value)
-          );
         });
       }
     },
@@ -300,14 +325,18 @@ const database = {
         async (elId: string = `R${id}`) => {
           const slider = <HTMLInputElement | null>document.getElementById(elId);
           if (slider) {
-            await parallel(
-              database.idb.shelf.update(
-                id.toString(),
-                "rating",
-                Number(slider.value)
-              ),
-              fb.updateShelf(id.toString(), "rating", Number(slider.value))
-            );
+            const mov = this.storage.get(id);
+            if (mov) {
+              await parallel(
+                database.idb.shelf.update(
+                  id.toString(),
+                  "rating",
+                  Number(slider.value)
+                ),
+                fb.addToShelf(id.toString(), mov)
+                // fb.updateShelf(id.toString(), "rating", Number(slider.value))
+              );
+            }
           }
         }
       );
@@ -416,40 +445,46 @@ const database = {
                 }
               })
               .finally(() => {
-                if (dontAsk == 0 || dontAsk == 1) {
-                  if (callback) {
-                    callback(nm);
-                  }
-                  switch (dontAsk) {
-                    case 1:
-                      database.addToShelf(nm);
-
-                      this.pushMovie(nm);
-                      movieList.update();
-                      break;
-                    case 0:
-                      database.addToWishList(nm);
-                      this.wishlist.push(nm);
-                      break;
-                  }
-                } else {
+                if (Object.keys(nm).length < 7) {
                   confirm(
-                    `Willst Du '${nm.title}' direkt in dein Regal stellen oder auf die Wunschliste setzen?`,
-                    "In das Regal",
-                    "Auf die Wunschliste"
-                  ).then((v) => {
-                    if (v == 1) {
-                      database.addToShelf(nm);
-                      this.pushMovie(nm);
-                      movieList.update();
-                      setTimeout(() => {
-                        anim.movieList.scrollToMovie(id);
-                      }, 500);
-                    } else if (v == 0) {
-                      database.addToWishList(nm);
-                      this.wishlist.push(nm);
+                    "Oh nein :(\nDa ist etwas schief gelaufen!\nBitte versuche es erneut"
+                  );
+                } else {
+                  if (dontAsk == 0 || dontAsk == 1) {
+                    if (callback) {
+                      callback(nm);
                     }
-                  });
+                    switch (dontAsk) {
+                      case 1:
+                        database.addToShelf(nm);
+
+                        this.pushMovie(nm);
+                        movieList.update();
+                        break;
+                      case 0:
+                        database.addToWishList(nm);
+                        this.wishlist.push(nm);
+                        break;
+                    }
+                  } else {
+                    confirm(
+                      `Willst Du '${nm.title}' direkt in dein Regal stellen oder auf die Wunschliste setzen?`,
+                      "In das Regal",
+                      "Auf die Wunschliste"
+                    ).then((v) => {
+                      if (v == 1) {
+                        database.addToShelf(nm);
+                        this.pushMovie(nm);
+                        movieList.update();
+                        setTimeout(() => {
+                          anim.movieList.scrollToMovie(id);
+                        }, 500);
+                      } else if (v == 0) {
+                        database.addToWishList(nm);
+                        this.wishlist.push(nm);
+                      }
+                    });
+                  }
                 }
               });
           });

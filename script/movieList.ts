@@ -2,6 +2,8 @@
 
 const movieList = {
   update() {
+    database.movies.checkBroken();
+
     const sorter = new SortedList<{ id: number; alpha: string }>("alpha");
     for (const el of database.movies.storage) {
       sorter.add({ id: el[0], alpha: sortValue(el[1]) });

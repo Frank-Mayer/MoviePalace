@@ -25,6 +25,7 @@ const fb = {
       throw new Error("Database update not allowed!");
     }
   },
+  /** @deprecated use addToShelf instead */
   async updateShelf<K extends keyof Movie, V extends Movie[K]>(
     id: string,
     key: K,
